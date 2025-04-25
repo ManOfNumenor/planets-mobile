@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> Planet Orbits </title>
+    </head>
+    <body>
+        <h1>planet orbits</h1>
+        <canvas id="gameCanvas" 
+            height="400" 
+            width="320">
+        </canvas>
+        <button onclick="endTurn()">
+            End Turn
+        </button>
+        <input type="range"
+               min="1"
+               max="100"
+               value="50"
+               id="scaleFactorInput"
+               />
+        <p id="pointerDebug"></p>
+        <details id="debug">
+            <summary> Debug </summary>
+        </details>
+    </body>
+</html>
+
+<script src="js/error-handling.js"></script>
+<script src="js/graphics-common.js"></script>
+<script src="js/input.js"></script>
+<script src="js/planets.js"></script>
+<script src="js/fleets.js"></script>
+<script src="js/main.js"></script>
+
+<style>
+html,body {
+    color: white;
+    background-color: #030303;
+}
+
+canvas {
+    border: 1px solid cyan;
+}
+#debug { 
+    border: solid 1px lime;
+    font-size: 0.8rem;
+    /* min-height: 200px; */
+}
+p#pointerDebug { 
+    border: solid 1px #ff00ff;
+    font-size: 0.7rem;
+    height: 4rem;
+    overflow: hidden;
+}
+</style>
+
