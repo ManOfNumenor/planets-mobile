@@ -2,14 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- prevent default browser pinch-to-zoom -->
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title> Planet Orbits </title>
     </head>
     <body>
         <h1>planet orbits</h1>
-        <canvas id="gameCanvas" 
-            height="400" 
-            width="320">
+        <canvas id="gameCanvas" >
+            <!-- height="400" --> 
+            <!-- width="320"> -->
         </canvas>
         <button onclick="endTurn()">
             End Turn
@@ -38,21 +40,38 @@
 html,body {
     color: white;
     background-color: #030303;
+
+    /* prevent pull-down-refresh on touch devices */
+    /* see: https://stackoverflow.com/a/48417352 */
+    overscroll-behavior-y: contain;
 }
 
 canvas {
     border: 1px solid cyan;
+    height: 70vh;
+    width: 90vw;
+
+    /* prevent aspect-ratio shifting */
+    /* see: https://www.reddit.com/r/HTML/comments/fss1zo/how_to_solve_blurry_or_distorted_html_canvases/ */
+    object-fit: contain;
 }
 #debug { 
     border: solid 1px lime;
     font-size: 0.8rem;
     /* min-height: 200px; */
+    position: fixed;
+    top: 2rem;
+    right: 0;
 }
 p#pointerDebug { 
     border: solid 1px #ff00ff;
     font-size: 0.7rem;
     height: 4rem;
     overflow: hidden;
+
+    position: fixed;
+    bottom: 2rem;
 }
+
 </style>
 

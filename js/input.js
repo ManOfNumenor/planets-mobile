@@ -1,4 +1,4 @@
-const TWO_TOUCH_ZOOM_FACTOR = 0.5;
+const TWO_TOUCH_ZOOM_FACTOR = 0.01;
 // var draggingTouchId = null;
 var dragStartEvt = null;
 var startingSunCoords = null;
@@ -8,12 +8,12 @@ var currentPointerEvents = [];
 var pointerDebugMode = true;
 
 function setupInput() {
-    canvas.addEventListener('pointerdown', pointerdownHandler);
-    canvas.addEventListener('pointerup', pointerupHandler);
-    canvas.addEventListener('pointermove', pointermoveHandler);
-    canvas.addEventListener('pointercancel', pointercancelHandler);
-    canvas.addEventListener('pointerout', pointerupHandler);
-    canvas.addEventListener('pointerleave', pointerupHandler);
+    canvas.addEventListener('pointerdown', pointerdownHandler,{passive: false});
+    canvas.addEventListener('pointerup', pointerupHandler,{passive: false});
+    canvas.addEventListener('pointermove', pointermoveHandler,{passive: false});
+    canvas.addEventListener('pointercancel', pointercancelHandler,{passive: false});
+    canvas.addEventListener('pointerout', pointerupHandler,{passive: false});
+    // canvas.addEventListener('pointerleave', pointerupHandler);
     // cancel normal touch events on canvas
     // canvas.addEventListener('touchstart', (evt) => evr.preventDefault());
 
@@ -38,9 +38,9 @@ function setupInput() {
 //  - one pointer down/up quickly  without movement
 
 function pointerdownHandler(evt) {
+    evt.preventDefault();
     debug('pointerdown');
     console.log('pointerdown evt', evt);
-    evt.preventDefault();
 
     currentPointerEvents.push(evt);
     console.log('currentPointerEvents', currentPointerEvents);
@@ -129,6 +129,7 @@ function pointerupHandler(evt) {
 
     if(currentPointerEvents.length < 2) {
         // stop zooming
+        debug('clearingZoomDiff');
         currentZoomDiff = -1;
     }
 
@@ -184,6 +185,7 @@ function pointerupHandler(evt) {
 
 
 function pointercancelHandler(evt) {
+    evt.preventDefault();
     debug('pointercancel');
 
     removePointer(evt);
@@ -214,6 +216,7 @@ function removePointer(evt) {
         }
     }
     console.log('after', currentPointerEvents);
+     prevZoomDiff = -1;
 }
 
 // function mousedownHandler(evt) {

@@ -9,6 +9,7 @@ window.onload = function() {
 
     setupInput();
     setupSun();
+    resizeCanvas();
 
     let framesPerSecond = 30;
     setInterval(updateEverything, 1000/framesPerSecond);
@@ -48,4 +49,13 @@ function endTurn() {
     turnNumber++;
     // debug("turn "+turnNumber);
     // logThisRound = true;
+}
+
+function resizeCanvas() {
+    debug('canvas height: ' + canvas.height);
+    let canvasRect = canvas.getBoundingClientRect();
+    canvas.height = canvasRect.height;
+    canvas.width = canvasRect.width;
+    debug('height updated: ' + canvas.height);
+
 }
