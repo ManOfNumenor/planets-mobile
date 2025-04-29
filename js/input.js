@@ -29,12 +29,12 @@ function setupInput() {
         });
 }
 
-// TODO: are we:
-// 1. dragging the map around 
+// The question here is, are we:
+// 1. dragging the map around?
 //  - one pointer with movement
 // 2. pinching to zoom?
 //  - two pointers moving closer or further apart
-// 3. tapping to select a planet
+// 3. tapping to select a planet?
 //  - one pointer down/up quickly  without movement
 
 function pointerdownHandler(evt) {
@@ -72,7 +72,7 @@ function pointermoveHandler(evt) {
         }
     }
 
-    if(evt.pointerId == dragStartEvt.pointerId) {
+    if(dragStartEvt && evt.pointerId == dragStartEvt.pointerId) {
         // update dragging positions
         let diffX = evt.clientX - dragStartEvt.clientX;
         let diffY = evt.clientY - dragStartEvt.clientY;
