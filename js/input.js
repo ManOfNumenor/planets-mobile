@@ -1,4 +1,6 @@
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
+const MIN_DIST_TO_COUNT_DRAG = 10;
+
 // var draggingTouchId = null;
 var dragStartEvt = null;
 var startingSunCoords = null;
@@ -35,7 +37,7 @@ function setupInput() {
 // 2. pinching to zoom?
 //  - two pointers moving closer or further apart
 // 3. tapping to select a planet?
-//  - one pointer down/up quickly  without movement
+//  - one pointer down/up ~quickly~ without movement
 
 function pointerdownHandler(evt) {
     evt.preventDefault();
@@ -118,14 +120,30 @@ function pointerupHandler(evt) {
     debug('pointerup');
     evt.preventDefault();
 
-    removePointer(evt);
+    // check if this was a tap
+    if(dragStartEvt) {
+        let diffX = evt.clientX - dragStartEvt.clientX;
+        let diffY = evt.clientY - dragStartEvt.clientY;
 
+        if(Math.abs(diffX) < MIN_DIST_TO_COUNT_DRAG &&
+            Math.abs(diffY) < MIN_DIST_TO_COUNT_DRAG) {
+
+            // we're in a tap, do tappy things
+            let touchPos = calculateMousePos(evt);
+            selectedEntity = tryToSelectEntityAt(touchPos);
+        }
+    }
+
+
+    // check if we need to stop dragging
     if(dragStartEvt &&
         evt.pointerId == dragStartEvt.pointerId) {
         // stop dragging
         dragStartEvt = null;
         startingSunCoords = null;
     }
+
+    removePointer(evt);
 
     if(currentPointerEvents.length < 2) {
         // stop zooming
@@ -216,7 +234,7 @@ function removePointer(evt) {
         }
     }
     console.log('after', currentPointerEvents);
-     prevZoomDiff = -1;
+    prevZoomDiff = -1;
 }
 
 // function mousedownHandler(evt) {
@@ -236,9 +254,12 @@ function calculateMousePos(evt) {
     let rect = canvas.getBoundingClientRect();
     let root = document.documentElement;
 
-    // account for the margins, canvas position on   page, scroll amount, etc.
-    let mouseX = evt.clientX - rect.left - root.     scrollLeft;
-    let mouseY = evt.clientY - rect.top - root.      scrollTop;
+    // account for the margins, canvas position on
+    // page, scroll amount, etc.
+    let mouseX = evt.clientX - rect.left - 
+        root.scrollLeft;
+    let mouseY = evt.clientY - rect.top - 
+        root.scrollTop;
     // let mouseLevelX = mouseX + camPanX;
     // let mouseLevelY = mouseY + camPanY;
     //console.log( "x: "+ mouseX, "y: " + mouseY);

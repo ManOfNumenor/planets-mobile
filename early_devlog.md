@@ -69,3 +69,10 @@ Worth thinking about.
 # 2025-04-06
 
 TODO: limit scale factor so the orbit radiai never get negative
+
+# 2025-04-29
+
+Next steps:
+√ handle taps on canvas properly
+- fullscreen / exit fullscreen buttons
+- canvas resize on window resize trigger
