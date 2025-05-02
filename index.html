@@ -8,7 +8,7 @@
         <title> Planet Orbits </title>
     </head>
     <body>
-        <h1>planet orbits</h1>
+        <!-- <h1>planet orbits</h1> -->
         <canvas id="gameCanvas" >
             <!-- height="400" --> 
             <!-- width="320"> -->
@@ -16,16 +16,19 @@
         <button onclick="endTurn()">
             End Turn
         </button>
+        <!--
         <input type="range"
                min="1"
                max="100"
                value="50"
                id="scaleFactorInput"
                />
+        -->
         <p id="pointerDebug"></p>
-        <details id="debug">
-            <summary> Debug </summary>
-        </details>
+        <dialog id="debugDialog">
+            <p id="debug">
+            </p>
+        </dialog>
     </body>
 </html>
 
@@ -48,7 +51,7 @@ html,body {
 
 canvas {
     border: 1px solid cyan;
-    height: 70vh;
+    height: 85vh;
     width: 90vw;
 
     /* prevent aspect-ratio shifting */
@@ -56,9 +59,12 @@ canvas {
     object-fit: contain;
 }
 #debug { 
+    display: none;
     border: solid 1px lime;
     font-size: 0.8rem;
     /* min-height: 200px; */
+    max-height: 50vh;
+    overflow: scroll;
     position: fixed;
     top: 2rem;
     right: 0;
@@ -71,6 +77,8 @@ p#pointerDebug {
 
     position: fixed;
     bottom: 7rem;
+
+    pointer-events: none;
 }
 
 </style>

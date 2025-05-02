@@ -1,5 +1,7 @@
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
 const MIN_DIST_TO_COUNT_DRAG = 10;
+const MIN_SCALE_FACTOR = 0.5;
+const MAX_SCALE_FACTOR = 2.5;
 
 // var draggingTouchId = null;
 var dragStartEvt = null;
@@ -23,12 +25,12 @@ function setupInput() {
     // canvas.addEventListener('mouseup', mouseupHandler);
     document.addEventListener('keyup', keyupHandler);
 
-    let scaleFactorInput = document.getElementById('scaleFactorInput');
-    scaleFactorInput.addEventListener('input',
-        (evt) => {
-            scaleFactor = Math.max( 0, evt.target.value / 50 );
-            // never go less than 0 or map drawing math breaks
-        });
+    // let scaleFactorInput = document.getElementById('scaleFactorInput');
+    // scaleFactorInput.addEventListener('input',
+    //     (evt) => {
+    //         scaleFactor = Math.max( 0, evt.target.value / 50 );
+    //         // never go less than 0 or map drawing math breaks
+    //     });
 }
 
 // The question here is, are we:
@@ -102,11 +104,22 @@ function pointermoveHandler(evt) {
         if(prevZoomDiff > 0) {
             diffOfDiffs = currentZoomDiff - 
                 prevZoomDiff;
-            scaleFactor = Math.max(
-                0,
-                scaleFactor +
-                (diffOfDiffs * TWO_TOUCH_ZOOM_FACTOR)
+
+            let newScaleFactor = scaleFactor +
+                (diffOfDiffs * TWO_TOUCH_ZOOM_FACTOR);
+
+            // apply min/max constraints
+            newScaleFactor = Math.max(
+                MIN_SCALE_FACTOR,
+                newScaleFactor
             );
+
+            newScaleFactor = Math.min(
+                MAX_SCALE_FACTOR,
+                newScaleFactor
+            );
+
+            scaleFactor = newScaleFactor;
         }
 
         // update prevZoomDiff for next move event

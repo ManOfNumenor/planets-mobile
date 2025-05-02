@@ -70,9 +70,17 @@ Worth thinking about.
 
 TODO: limit scale factor so the orbit radiai never get negative
 
-# 2025-04-29
+# 2025-05-01
+Done:
+√ handle taps on canvas properly
 
 Next steps:
-√ handle taps on canvas properly
-- fullscreen / exit fullscreen buttons
+- orbits separated from planets
+- figure out movement space adjacecy problem
+- can move fleet from place to place
+
+Do Later:
 - canvas resize on window resize trigger
+- trigger scale factor update on mouse wheel scroll
+- constrain sun position so that it never gets too far off screen. Constraint distance should depend on scale factor.
+⧗ fullscreen / exit fullscreen buttons ?
