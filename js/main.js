@@ -59,3 +59,23 @@ function resizeCanvas() {
     debug('height updated: ' + canvas.height);
 
 }
+
+function distAngAndOriginToXY(dist, angRadiants,
+    origin) {
+    // note: origin _must_ have `x` and `y`
+    // properties
+
+    // debug('dist: '+dist+', angRadiants: '+angRadiants+', origin:'+origin.x+' '+origin.y);
+
+    // let angDegrees = radiantsToDegrees(angRadiants);
+    // debug('angDegrees: '+angDegrees);
+    let xOffset = Math.cos(angRadiants) * dist;
+    let yOffset = Math.sin(angRadiants) * dist;
+    // TODO: debug func & output 'planet' func
+    // debug('x: ' + xOffset +', y: ' + yOffset);
+
+    return {
+        x: origin.x + xOffset,
+        y: origin.y + yOffset,
+    };
+}

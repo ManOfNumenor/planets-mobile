@@ -80,6 +80,7 @@ Next steps:
 - can move fleet from place to place
 
 Do Later:
+- make a 'utilities' file for stuff like coord conversion functions
 - canvas resize on window resize trigger
 - trigger scale factor update on mouse wheel scroll
 - constrain sun position so that it never gets too far off screen. Constraint distance should depend on scale factor.
