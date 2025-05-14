@@ -1,15 +1,3 @@
-var sun = null;
-var scaleFactor = 1.0;
-
-function setupSun() {
-    sun = {
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        color: 'yellow',
-        radius: 30,
-    };
-}
-
 var planets = [
     {
         orbitRadius: 50,

@@ -75,7 +75,13 @@ Done:
 √ handle taps on canvas properly
 
 Next steps:
-- orbits separated from planets
+~ orbits separated from planets
+    √ make orbit file
+    √ draw orbits funk
+    √ include orbit file & draw func
+    √ sun init before orbit init
+    - planets get orbit info from orbit file
+    - stop drawing orbits in planet file
 - figure out movement space adjacecy problem
 - can move fleet from place to place
 

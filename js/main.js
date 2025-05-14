@@ -2,6 +2,7 @@ var canvas, canvasContext;
 var turnNumber = 0;
 var logThisRound = true;
 var selectedEntity = null;
+var scaleFactor = 1.0;
 
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
@@ -29,6 +30,8 @@ function moveEverything() {
 function drawEverything() {
     // background
     colorRect(0,0, canvas.width,canvas.height, 'black');
+
+    drawOrbits();
     drawPlanets();
     drawFleets();
 
