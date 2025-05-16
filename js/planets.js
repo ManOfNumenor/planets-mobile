@@ -2,6 +2,7 @@ var planets = [
     {
         orbitRadius: 50,
         orbitSteps: 2,
+        orbitIdx: 0,
         color: 'red',
         radius: 10,
         x: null,
@@ -10,6 +11,7 @@ var planets = [
     {
         orbitRadius: 80,
         orbitSteps: 3,
+        orbitIdx: 1,
         color: '#ff00ff',
         radius: 12,
         x: null,
@@ -18,6 +20,7 @@ var planets = [
     {
         orbitRadius: 120,
         orbitSteps: 15,
+        orbitIdx: 2,
         color: 'lime',
         radius: 18,
         x: null,
@@ -34,8 +37,9 @@ function movePlanets() {
     for(const planet of planets) {
         let currentStepAng = 
             getCurrentStepAng(planet);
+        let orbit = orbits[planet.orbitIdx];
         let planetCoords = distAngAndOriginToXY(
-            planet.orbitRadius * scaleFactor,
+            orbit.radius * scaleFactor,
             currentStepAng,
             sun);
 
@@ -50,27 +54,27 @@ function drawPlanets() {
 
     for(const planet of planets) {
         // draw orbit path
-        let arcLength = (2 * Math.PI)/
-            planet.orbitSteps;
-        let gapLength = 0.1;
+        // let arcLength = (2 * Math.PI)/
+        //     planet.orbitSteps;
+        // let gapLength = 0.1;
 
-        for(let i=0;i<planet.orbitSteps;i++) {
-            let startAng = (i * arcLength); // -
-                // (Math.PI/2);
-            // subtract PI/2 to start at 'North'
-            // instead of 'East'
+        // for(let i=0;i<planet.orbitSteps;i++) {
+        //     let startAng = (i * arcLength); // -
+        //         // (Math.PI/2);
+        //     // subtract PI/2 to start at 'North'
+        //     // instead of 'East'
 
-            let endAng = (startAng + arcLength) -
-                gapLength;
+        //     let endAng = (startAng + arcLength) -
+        //         gapLength;
 
-            canvasContext.strokeStyle = 'white';
-            canvasContext.beginPath();
-            canvasContext.arc(sun.x, sun.y,
-                planet.orbitRadius * scaleFactor,
-                startAng, endAng);
-            canvasContext.stroke();
+        //     canvasContext.strokeStyle = 'white';
+        //     canvasContext.beginPath();
+        //     canvasContext.arc(sun.x, sun.y,
+        //         planet.orbitRadius * scaleFactor,
+        //         startAng, endAng);
+        //     canvasContext.stroke();
 
-        }
+        // }
 
         // draw planet itself
         let currentStepAng = 
@@ -90,14 +94,17 @@ function drawPlanets() {
             sun);
             */
 
-        let selectedPlanetHighlightRadius = 5;
-        if(selectedEntity == planet) {
-            colorCircle(planet.x,
-                planet.y,
-                (planet.radius + selectedPlanetHighlightRadius) *
-                scaleFactor, 
-                'cyan');
-        }
+        // planets are no longer selectable, but 
+        // leaving this here just in case that 
+        // changes later on
+        // let selectedPlanetHighlightRadius = 5;
+        // if(selectedEntity == planet) {
+        //     colorCircle(planet.x,
+        //         planet.y,
+        //         (planet.radius + selectedPlanetHighlightRadius) *
+        //         scaleFactor, 
+        //         'cyan');
+        // }
 
         colorCircle(planet.x, planet.y,
             planet.radius * scaleFactor, planet.color);
@@ -110,12 +117,15 @@ function drawPlanets() {
 
 
 function getCurrentStepAng(planet) {
+    let orbit = orbits[planet.orbitIdx];
+
     let planetArcLength = (2 * Math.PI)/
-        planet.orbitSteps;
+        orbit.stepCount;
     let currentStepNumber = turnNumber % 
-        planet.orbitSteps;
+        orbit.stepCount;
     let currentStepAng = (currentStepNumber *
-        planetArcLength); // - (Math.PI/2);
+        planetArcLength) + orbit.rotation; 
+    // - (Math.PI/2);
     // subtract PI/2 to start at 'North'
     // instead of 'East'
 

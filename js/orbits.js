@@ -6,16 +6,19 @@ var orbits = [
         radius: 50,
         stepCount: 2,
         centerObj: sun,
+        rotation: 0,
     },
     {
         radius: 80,
-        stepCount: 3,
+        stepCount: 4,
         centerObj: sun,
+        rotation: Math.PI / 4,
     },
     {
         radius: 120,
         stepCount: 15,
         centerObj: sun,
+        rotation: 0,
     },
 ];
 
@@ -39,7 +42,8 @@ function drawOrbits() {
             // let gapLength = 0.1;
 
             for(let i=0;i<orbit.stepCount;i++) {
-                let stepAng = (i * arcLength); // -
+                let stepAng = (i * arcLength) + 
+                    orbit.rotation; // -
                 // (Math.PI/2);
                 // subtract PI/2 to start at 'North'
                 // instead of 'East'
