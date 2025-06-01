@@ -73,3 +73,10 @@ function colorTriangle(centerX, centerY, size,angle, fillColor) {
     canvasContext.restore(); // undo the translation movement and rotation since save()
 }
 
+function colorLine(startX, startY, endX, endY, lineColor) {
+    canvasContext.strokeStyle = lineColor;
+    canvasContext.beginPath();
+    canvasContext.moveTo(startX, startY);
+    canvasContext.lineTo(endX, endY);
+    canvasContext.stroke();
+}

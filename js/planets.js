@@ -1,7 +1,7 @@
 var planets = [
     {
-        orbitRadius: 50,
-        orbitSteps: 2,
+        // orbitRadius: 50,
+        // orbitSteps: 2,
         orbitIdx: 0,
         color: 'red',
         radius: 10,
@@ -9,8 +9,8 @@ var planets = [
         y: null,
     },
     {
-        orbitRadius: 80,
-        orbitSteps: 3,
+        // orbitRadius: 80,
+        // orbitSteps: 3,
         orbitIdx: 1,
         color: '#ff00ff',
         radius: 12,
@@ -18,8 +18,8 @@ var planets = [
         y: null,
     },
     {
-        orbitRadius: 120,
-        orbitSteps: 15,
+        // orbitRadius: 120,
+        // orbitSteps: 15,
         orbitIdx: 2,
         color: 'lime',
         radius: 18,

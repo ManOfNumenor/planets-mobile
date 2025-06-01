@@ -80,9 +80,13 @@ Next steps:
     √ draw orbits funk
     √ include orbit file & draw func
     √ sun init before orbit init
-    - planets get orbit info from orbit file
-    - stop drawing orbits in planet file
+    √ planets get orbit info from orbit file
+    √ stop drawing orbits in planet file
 - figure out movement space adjacecy problem
+    - I think instead of complex distance calculations,
+    I'm just gonna keep an array of [orbitAIdx, orbitBIdx]
+    values and look it up when I need to check for adjacency
+- swap to trello from here
 - can move fleet from place to place
 
 Do Later:

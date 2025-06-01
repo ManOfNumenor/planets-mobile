@@ -9,7 +9,6 @@ var startingSunCoords = null;
 var prevZoomDiff = -1;
 // var zooming = false;
 var currentPointerEvents = [];
-var pointerDebugMode = true;
 
 function setupInput() {
     canvas.addEventListener('pointerdown', pointerdownHandler,{passive: false});
@@ -361,7 +360,7 @@ function distBetween(pointA, pointB) {
 }
 
 function pointerDebug() {
-    if(pointerDebugMode) {
+    if(gameOptions.showPointerDebugInfo) {
         let pointerDebugP = document.getElementById('pointerDebug');
         pointerDebugP.innerHTML = `
         pointer events: 
