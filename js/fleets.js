@@ -3,9 +3,16 @@ var allFleets = [
     {
         x: null,
         y: null,
-        planetIdx: 0,
         ships: 10,
-        // TODO: orbit slot index
+
+        // should be at _either_ a planet
+        // (& therefore moving with the planet)
+        planetIdx: 0,
+
+        // OR at an orbit & idx point
+        // (& therefore not moving with planets)
+        orbitIdx: null,
+        stepIdx: null,
     }
 ];
 

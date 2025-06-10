@@ -2,7 +2,7 @@ var sun = {
     x: 1,
     y: 1,
     color: 'yellow',
-    radius: 30,
+    radius: 42,
 };
 
 function setupSun() {

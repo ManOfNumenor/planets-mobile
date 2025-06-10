@@ -1,4 +1,5 @@
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
+const MAX_ENTITY_TAP_RADIUS = 20;
 const MIN_DIST_TO_COUNT_DRAG = 10;
 const MIN_SCALE_FACTOR = 0.5;
 const MAX_SCALE_FACTOR = 2.5;
@@ -141,8 +142,7 @@ function pointerupHandler(evt) {
             Math.abs(diffY) < MIN_DIST_TO_COUNT_DRAG) {
 
             // we're in a tap, do tappy things
-            let touchPos = calculateMousePos(evt);
-            selectedEntity = tryToSelectEntityAt(touchPos);
+            handleTap(evt);
         }
     }
 
@@ -262,6 +262,23 @@ function keyupHandler(evt) {
     // any keyboard shortcuts can go here
 }
 
+function handleTap(evt) {
+    let touchPos = calculateMousePos(evt);
+
+    if(!selectedEntity) {
+        selectedEntity = tryToSelectEntityAt(touchPos);
+        return;
+    } else {
+        // TODO after fleet class refactor
+        // if(typeof selectedEntity == 'fleet' ) {
+        targetStep = stepClosestTo(touchPos);
+
+        // }
+    }
+
+
+}
+
 function calculateMousePos(evt) {
     let rect = canvas.getBoundingClientRect();
     let root = document.documentElement;
@@ -313,8 +330,6 @@ function tryToSelectEntityAt(touchPos) {
     debug('trying to select entity at: ('+
         touchPos.x + ', ' + touchPos.y +')');
 
-    const MAX_ENTITY_TAP_RADIUS = 20;
-
     let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
     let closestEntity = null;
 
@@ -337,6 +352,30 @@ function tryToSelectEntityAt(touchPos) {
         debug('could not find closest entity');
     }
     return closestEntity;
+}
+
+function stepClosestTo(touchPos) {
+    let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
+    let closestStep = null;
+
+    debug("TODO");
+    for(const orbit of orbits) {
+        for(let i = 0; i < orbit.stepCount; i++) {
+            // CRUD! I need to refactor to have access
+            // to step coords on-demand. This means
+            // putting step arrays & x/y coords and
+            // using the moveOrbits() function
+
+            // let distFromTap = distBetween(touchPos, fleet);
+
+            // if( distFromTap < closestDistToTapFound ) {
+            //     closestStep = fleet;
+            //     closestDistToTapFound = distFromTap;
+            // }
+        }
+    }
+
+    return closestStep;
 }
 
 function distBetween(pointA, pointB) {

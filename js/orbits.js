@@ -3,19 +3,19 @@ const ORBIT_DRAW_COLOR = "cyan";
 
 var orbits = [
     {
-        radius: 50,
+        radius: 75,
         stepCount: 2,
         centerObj: sun,
         rotation: 0,
     },
     {
-        radius: 80,
+        radius: 130,
         stepCount: 4,
         centerObj: sun,
         rotation: Math.PI / 4,
     },
     {
-        radius: 120,
+        radius: 210,
         stepCount: 15,
         centerObj: sun,
         rotation: 0,
@@ -49,7 +49,7 @@ var connections = [
         innerOrbitX: null, 
         innerOrbitY: null,
         outerOrbitIdx: 2, 
-        outerOrbitStep: 0,
+        outerOrbitStep: 13,
         outerOrbitX: null, 
         outerOrbitY: null,
     },
