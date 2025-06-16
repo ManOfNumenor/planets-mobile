@@ -11,6 +11,7 @@ window.onload = function() {
     setupInput();
     setupSun();
     resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     let framesPerSecond = 30;
     setInterval(updateEverything, 1000/framesPerSecond);
