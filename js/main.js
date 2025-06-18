@@ -32,6 +32,7 @@ function drawEverything() {
     // background
     colorRect(0,0, canvas.width,canvas.height, 'black');
 
+    drawStarfield();
     drawOrbits();
     drawPlanets();
     drawFleets();
