@@ -11,8 +11,8 @@ function drawStarfield() {
 
     for (let x,y,parallaxScale,layerNum=0; layerNum < STARFIELD_PARALLAX_LAYERS; layerNum++) {
         parallaxScale = 1 - (layerNum * 0.2); // each layer scrolls less
-        x = (sun.x*parallaxScale) - cachedStarfields[layerNum].width/2;
-        y = (sun.y*parallaxScale) - cachedStarfields[layerNum].height/2;
+        x = Math.round((sun.x*parallaxScale) - cachedStarfields[layerNum].width/2);
+        y = Math.round((sun.y*parallaxScale) - cachedStarfields[layerNum].height/2);
         canvasContext.drawImage(cachedStarfields[layerNum],x,y);
     }
         
@@ -28,9 +28,9 @@ function initStarfields() {
         cachedStarfields[layerNum].width = canvas.width * 2;
         cachedStarfields[layerNum].height = canvas.height * 2;
         for (var r,g,b,x,y,w,h,n=0; n<STARFIELD_NUMSTARS; n++) {
-            r = g = b = Math.floor(50 + Math.random()*100);
-            r += Math.floor(Math.random()*50-25);
-            g += Math.floor(Math.random()*50-25);
+            r = g = b = Math.floor(50 + Math.random()*100); // mostly grey
+            r += Math.floor(Math.random()*50-25); // with a little rainbow
+            g += Math.floor(Math.random()*50-25); // randomness
             b += Math.floor(Math.random()*50); // boost the blue a bit
             x = Math.floor(Math.random()*cachedStarfields[layerNum].width);
             y = Math.floor(Math.random()*cachedStarfields[layerNum].height);
