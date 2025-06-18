@@ -6,7 +6,45 @@
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title> Planet Orbits </title>
+        <style>
+            html,body {
+                color: white;
+                background-color: #030303;
+                /* prevent pull-down-refresh on touch devices */
+                /* see: https://stackoverflow.com/a/48417352 */
+                overscroll-behavior-y: contain;
+            }
+            canvas {
+                border: 1px solid cyan;
+                height: 85vh;
+                width: 90vw;
+                /* prevent aspect-ratio shifting */
+                /* see: https://www.reddit.com/r/HTML/comments/fss1zo/how_to_solve_blurry_or_distorted_html_canvases/ */
+                object-fit: contain;
+            }
+            #debug { 
+                display: none;
+                border: solid 1px lime;
+                font-size: 0.8rem;
+                /* min-height: 200px; */
+                max-height: 50vh;
+                overflow: scroll;
+                position: fixed;
+                top: 2rem;
+                right: 0;
+            }
+            p#pointerDebug { 
+                border: solid 1px #ff00ff;
+                font-size: 0.7rem;
+                height: 4rem;
+                overflow: hidden;
+                position: fixed;
+                bottom: 7rem;
+                pointer-events: none;
+            }
+        </style>
     </head>
+
     <body>
         <!-- <h1>planet orbits</h1> -->
         <canvas id="gameCanvas" >
@@ -29,60 +67,16 @@
             <p id="debug">
             </p>
         </dialog>
+
+        <script src="js/error-handling.js"></script>
+        <script src="js/graphics-common.js"></script>
+        <script src="js/utilities.js"></script>
+        <script src="js/input.js"></script>
+        <script src="js/sun.js"></script>
+        <script src="js/planets.js"></script>
+        <script src="js/orbits.js"></script>
+        <script src="js/fleets.js"></script>
+        <script src="js/main.js"></script>
+
     </body>
 </html>
-
-<script src="js/error-handling.js"></script>
-<script src="js/graphics-common.js"></script>
-<script src="js/utilities.js"></script>
-<script src="js/input.js"></script>
-<script src="js/sun.js"></script>
-<script src="js/planets.js"></script>
-<script src="js/orbits.js"></script>
-<script src="js/fleets.js"></script>
-<script src="js/main.js"></script>
-
-<style>
-html,body {
-    color: white;
-    background-color: #030303;
-
-    /* prevent pull-down-refresh on touch devices */
-    /* see: https://stackoverflow.com/a/48417352 */
-    overscroll-behavior-y: contain;
-}
-
-canvas {
-    border: 1px solid cyan;
-    height: 85vh;
-    width: 90vw;
-
-    /* prevent aspect-ratio shifting */
-    /* see: https://www.reddit.com/r/HTML/comments/fss1zo/how_to_solve_blurry_or_distorted_html_canvases/ */
-    object-fit: contain;
-}
-#debug { 
-    display: none;
-    border: solid 1px lime;
-    font-size: 0.8rem;
-    /* min-height: 200px; */
-    max-height: 50vh;
-    overflow: scroll;
-    position: fixed;
-    top: 2rem;
-    right: 0;
-}
-p#pointerDebug { 
-    border: solid 1px #ff00ff;
-    font-size: 0.7rem;
-    height: 4rem;
-    overflow: hidden;
-
-    position: fixed;
-    bottom: 7rem;
-
-    pointer-events: none;
-}
-
-</style>
-
