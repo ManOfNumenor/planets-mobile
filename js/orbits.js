@@ -1,62 +1,97 @@
 const STEP_INDICATOR_RADIUS = 5;
 const ORBIT_DRAW_COLOR = "cyan";
 
+// need to:
+// - orbits have steps arrays
+// - orbit step arrays filled in new init function
+// - orbit steps have x & y
+// - orbit step x & y updated in moveOrbits() like
+//  planets are now
+
 var orbits = [
-    {
-        radius: 75,
-        stepCount: 2,
-        centerObj: sun,
-        rotation: 0,
-    },
-    {
-        radius: 130,
-        stepCount: 4,
-        centerObj: sun,
-        rotation: Math.PI / 4,
-    },
-    {
-        radius: 210,
-        stepCount: 15,
-        centerObj: sun,
-        rotation: 0,
-    },
+    // {
+    //     radius: 75,
+    //     stepCount: 2,
+    //     centerObj: sun,
+    //     rotation: 0,
+    //     steps: [],
+    // },
+    // {
+    //     radius: 130,
+    //     stepCount: 4,
+    //     centerObj: sun,
+    //     rotation: Math.PI / 4,
+    //     steps: [],
+    // },
+    // {
+    //     radius: 210,
+    //     stepCount: 15,
+    //     centerObj: sun,
+    //     rotation: 0,
+    //     steps: [],
+    // },
 ];
 
 var connections = [
-    { 
-        innerOrbitIdx: 0, 
-        innerOrbitStep: 0,
-        innerOrbitX: null, 
-        innerOrbitY: null,
-        outerOrbitIdx: 1, 
-        outerOrbitStep: 0,
-        outerOrbitX: null, 
-        outerOrbitY: null,
-    },
-    { 
-        innerOrbitIdx: 0, 
-        innerOrbitStep: 0,
-        innerOrbitX: null, 
-        innerOrbitY: null,
-        outerOrbitIdx: 1, 
-        outerOrbitStep: 3,
-        outerOrbitX: null, 
-        outerOrbitY: null,
-    },
-    { 
-        innerOrbitIdx: 1, 
-        innerOrbitStep: 3,
-        innerOrbitX: null, 
-        innerOrbitY: null,
-        outerOrbitIdx: 2, 
-        outerOrbitStep: 13,
-        outerOrbitX: null, 
-        outerOrbitY: null,
-    },
+    // { 
+    //     innerOrbitIdx: 0, 
+    //     innerStepIdx: 0,
+    //     innerOrbitX: null, 
+    //     innerOrbitY: null,
+    //     outerOrbitIdx: 1, 
+    //     outerStepIdx: 0,
+    //     outerOrbitX: null, 
+    //     outerOrbitY: null,
+    // },
+    // { 
+    //     innerOrbitIdx: 0, 
+    //     innerStepIdx: 0,
+    //     innerOrbitX: null, 
+    //     innerOrbitY: null,
+    //     outerOrbitIdx: 1, 
+    //     outerStepIdx: 3,
+    //     outerOrbitX: null, 
+    //     outerOrbitY: null,
+    // },
+    // { 
+    //     innerOrbitIdx: 1, 
+    //     innerStepIdx: 3,
+    //     innerOrbitX: null, 
+    //     innerOrbitY: null,
+    //     outerOrbitIdx: 2, 
+    //     outerStepIdx: 13,
+    //     outerOrbitX: null, 
+    //     outerOrbitY: null,
+    // },
 ];
+
 function moveOrbits() {
-    //
-}
+    for(const orbit of orbits) {
+        let arcLength = (2 * Math.PI)/
+            orbit.steps.length;
+
+        for(let i=0;i<orbit.steps.length;i++) {
+            let step = orbit.steps[i];
+
+            let stepAng = (i * arcLength) + 
+                orbit.rotation; 
+            // - (Math.PI/2);
+            // subtract PI/2 to start at 'North'
+            // instead of 'East'
+
+            let newCoords = distAngAndOriginToXY(
+                orbit.radius * scaleFactor,
+                stepAng,
+                sun,
+            );
+
+            step.x = newCoords.x;
+            step.y = newCoords.y;
+
+        } // end for i
+
+    } // end for orbit
+} // end function moveOrbits()
 
 function drawOrbits() {
     let orbitIdx = 0;
@@ -72,24 +107,26 @@ function drawOrbits() {
 
             // draw steps
             let arcLength = (2 * Math.PI)/
-                orbit.stepCount;
+                orbit.steps.length;
             // let gapLength = 0.1;
 
-            for(let i=0;i<orbit.stepCount;i++) {
-                let stepAng = (i * arcLength) + 
-                    orbit.rotation; 
-                // - (Math.PI/2);
-                // subtract PI/2 to start at 'North'
-                // instead of 'East'
+            //for(const step of orbit.steps) {
+            for(let i=0;i<orbit.steps.length;i++) {
+                let step = orbit.steps[i];
+                // let stepAng = (i * arcLength) + 
+                //     orbit.rotation; 
+                // // - (Math.PI/2);
+                // // subtract PI/2 to start at 'North'
+                // // instead of 'East'
 
 
-                let drawCoords = distAngAndOriginToXY(
-                    orbit.radius * scaleFactor,
-                    stepAng,
-                    center,
-                );
+                // let drawCoords = distAngAndOriginToXY(
+                //     orbit.radius * scaleFactor,
+                //     stepAng,
+                //     center,
+                // );
 
-                colorCircle(drawCoords.x,drawCoords.y,
+                colorCircle(step.x,step.y,
                     STEP_INDICATOR_RADIUS * scaleFactor,
                     ORBIT_DRAW_COLOR);
 
@@ -99,16 +136,17 @@ function drawOrbits() {
 
                     colorText(
                         orbitIdx+'~'+i,
-                        drawCoords.x + labelOffset,
-                        drawCoords.y + labelOffset,
+                        step.x + labelOffset,
+                        step.y + labelOffset,
                         '#00ff00'
                     );
                 }
 
                 // check for connections at this stop
                 // & update coords since we have them
-                updateConnectionLines(orbitIdx,
-                    i, drawCoords);
+
+                // updateConnectionLines(orbitIdx,
+                //     i, drawCoords);
 
             } // end for loop (steps)
         } // end if
@@ -119,24 +157,33 @@ function drawOrbits() {
 
     // now that we've updated line end coords,
     // lets draw the connection lines
-    for(const conn of connections) {
-        colorLine(
-            conn.innerOrbitX, conn.innerOrbitY,
-            conn.outerOrbitX, conn.outerOrbitY,
-            ORBIT_DRAW_COLOR
-        );
-    }
+    if(orbits.length > 1) {
+        for(const conn of connections) {
+            // console.log('innerOrbit', orbits[conn.innerOrbitIdx], conn, conn.innerOrbitIdx);
+            let innerStep = orbits[conn.innerOrbitIdx]
+                .steps[conn.innerStepIdx];
+            let outerStep = orbits[conn.outerOrbitIdx]
+                .steps[conn.outerStepIdx];
+
+            colorLine(
+                innerStep.x, innerStep.y,
+                outerStep.x, outerStep.y,
+                ORBIT_DRAW_COLOR
+            );
+        } // end for 
+    } // end if
 
 
 } // end function drawOrbits()
 
+/*
 function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
     // console.log('updateConnectionLines', orbitIdx, stepIdx, drawCoords);
     // goes in new func
     let outwardConnectionLines =
         connections.filter((conn) => {
             return conn.innerOrbitIdx == orbitIdx &&
-                conn.innerOrbitStep == stepIdx;
+                conn.innerStepIdx == stepIdx;
         });
 
     // console.log('outwardConnectionLines', outwardConnectionLines);
@@ -151,7 +198,7 @@ function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
     let inwardConnectionLines =
         connections.filter((conn) => {
             return conn.outerOrbitIdx == orbitIdx &&
-                conn.outerOrbitStep == stepIdx;
+                conn.outerStepIdx == stepIdx;
         });
 
     // console.log('inwardConnectionLines', inwardConnectionLines);
@@ -164,3 +211,20 @@ function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
     }
     // console.log('done');
 }
+*/
+
+// function getCurrentStepAng(planet) {
+//     let orbit = orbits[planet.orbitIdx];
+// 
+//     let planetArcLength = (2 * Math.PI)/
+//         orbit.stepCount;
+//     let currentStepNumber = turnNumber % 
+//         orbit.stepCount;
+//     let currentStepAng = (currentStepNumber *
+//         planetArcLength) + orbit.rotation; 
+//     // - (Math.PI/2);
+//     // subtract PI/2 to start at 'North'
+//     // instead of 'East'
+// 
+//     return currentStepAng;
+// }

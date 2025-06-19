@@ -1,31 +1,31 @@
 var planets = [
-    {
-        // orbitRadius: 50,
-        // orbitSteps: 2,
-        orbitIdx: 0,
-        color: 'red',
-        radius: 10,
-        x: null,
-        y: null,
-    },
-    {
-        // orbitRadius: 80,
-        // orbitSteps: 3,
-        orbitIdx: 1,
-        color: '#ff00ff',
-        radius: 14,
-        x: null,
-        y: null,
-    },
-    {
-        // orbitRadius: 120,
-        // orbitSteps: 15,
-        orbitIdx: 2,
-        color: 'lime',
-        radius: 20,
-        x: null,
-        y: null,
-    },
+    // {
+    //     // orbitRadius: 50,
+    //     // orbitSteps: 2,
+    //     orbitIdx: 0,
+    //     color: 'red',
+    //     radius: 10,
+    //     x: null,
+    //     y: null,
+    // },
+    // {
+    //     // orbitRadius: 80,
+    //     // orbitSteps: 3,
+    //     orbitIdx: 1,
+    //     color: '#ff00ff',
+    //     radius: 14,
+    //     x: null,
+    //     y: null,
+    // },
+    // {
+    //     // orbitRadius: 120,
+    //     // orbitSteps: 15,
+    //     orbitIdx: 2,
+    //     color: 'lime',
+    //     radius: 20,
+    //     x: null,
+    //     y: null,
+    // },
 ];
 
 // function getPlanetAng(planet) {
@@ -34,21 +34,25 @@ var planets = [
 // }
 
 function movePlanets() {
-    for(const planet of planets) {
-        let currentStepAng = 
-            getCurrentStepAng(planet);
-        let orbit = orbits[planet.orbitIdx];
-        let planetCoords = distAngAndOriginToXY(
-            orbit.radius * scaleFactor,
-            currentStepAng,
-            sun);
+    // for(const planet of planets) {
+    //     let currentStepAng = 
+    //         getCurrentStepAng(planet);
+    //     let orbit = orbits[planet.orbitIdx];
+    //     let planetCoords = distAngAndOriginToXY(
+    //         orbit.radius * scaleFactor,
+    //         currentStepAng,
+    //         sun);
 
-        planet.x = planetCoords.x;
-        planet.y = planetCoords.y;
-    }
+    //     planet.x = planetCoords.x;
+    //     planet.y = planetCoords.y;
+    // }
 }
 
 function drawPlanets() {
+    if(!orbits || orbits.length < 1) {
+        return; // no orbits, don't draw planets
+    }
+
     // draw sun
     colorCircle(sun.x, sun.y, sun.radius * scaleFactor, sun.color);
 
@@ -77,8 +81,9 @@ function drawPlanets() {
         // }
 
         // draw planet itself
-        let currentStepAng = 
-            getCurrentStepAng(planet);
+        // let currentStepAng = 
+        //     getCurrentStepAng(planet);
+        let step = orbits[planet.orbitIdx].steps[planet.stepIdx];
 
         if(logThisRound) {
             // debug('planet: '+planet.color+
@@ -106,7 +111,7 @@ function drawPlanets() {
         //         'cyan');
         // }
 
-        colorCircle(planet.x, planet.y,
+        colorCircle(step.x, step.y,
             planet.radius * scaleFactor, planet.color);
 
     }
@@ -116,18 +121,18 @@ function drawPlanets() {
 }
 
 
-function getCurrentStepAng(planet) {
-    let orbit = orbits[planet.orbitIdx];
-
-    let planetArcLength = (2 * Math.PI)/
-        orbit.stepCount;
-    let currentStepNumber = turnNumber % 
-        orbit.stepCount;
-    let currentStepAng = (currentStepNumber *
-        planetArcLength) + orbit.rotation; 
-    // - (Math.PI/2);
-    // subtract PI/2 to start at 'North'
-    // instead of 'East'
-
-    return currentStepAng;
-}
+// function getCurrentStepAng(planet) {
+//     let orbit = orbits[planet.orbitIdx];
+// 
+//     let planetArcLength = (2 * Math.PI)/
+//         orbit.stepCount;
+//     let currentStepNumber = turnNumber % 
+//         orbit.stepCount;
+//     let currentStepAng = (currentStepNumber *
+//         planetArcLength) + orbit.rotation; 
+//     // - (Math.PI/2);
+//     // subtract PI/2 to start at 'North'
+//     // instead of 'East'
+// 
+//     return currentStepAng;
+// }

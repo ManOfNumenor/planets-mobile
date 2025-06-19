@@ -9,7 +9,8 @@ window.onload = function() {
     canvasContext = canvas.getContext('2d');
 
     setupInput();
-    setupSun();
+    // setupSun();
+    loadLevel(testLevel);
     resizeCanvas();
 
     let framesPerSecond = 30;
@@ -23,6 +24,7 @@ function updateEverything() {
 }
 
 function moveEverything() {
+    moveOrbits();
     movePlanets();
     moveFleets();
 }
@@ -50,6 +52,10 @@ function debug(message) {
 
 function endTurn() {
     turnNumber++;
+    // TODO: loop through planets and update
+    // stepIdx values, re-setting to 0
+    // if stepIdx >= orbit.steps.length
+
     // debug("turn "+turnNumber);
     // logThisRound = true;
 }
