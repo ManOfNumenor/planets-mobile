@@ -33,6 +33,7 @@ function initStarfields() {
             x = Math.floor(Math.random()*cachedStarfields[layerNum].width);
             y = Math.floor(Math.random()*cachedStarfields[layerNum].height);
             w = h = 1; // Math.ceil(Math.random()*2); 
+            if (Math.random()<0.15) w = h = 2; // occasional big stars
             cachedStarfields[layerNum].context.fillStyle = "rgba("+r+","+g+","+b+",1)";
             cachedStarfields[layerNum].context.fillRect(x,y,w,h);
         } // star loop
