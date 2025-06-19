@@ -12,6 +12,7 @@ window.onload = function() {
     // setupSun();
     loadLevel(testLevel);
     resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     let framesPerSecond = 30;
     setInterval(updateEverything, 1000/framesPerSecond);
@@ -33,6 +34,7 @@ function drawEverything() {
     // background
     colorRect(0,0, canvas.width,canvas.height, 'black');
 
+    drawStarfield();
     drawOrbits();
     drawPlanets();
     drawFleets();
