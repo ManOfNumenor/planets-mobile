@@ -1,6 +1,6 @@
 var gameOptions = {
     showOrbitDebugInfo: true,
     showPointerDebugInfo: false,
-    starfieldStarsPerLayer: 5000,
+    starfieldStarsPerLayer: 10000,
     starfieldLayerCount: 3
 };

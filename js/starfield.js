@@ -23,8 +23,8 @@ function initStarfields() {
         cachedStarfields[layerNum] = document.createElement("canvas");
         cachedStarfields[layerNum].context = cachedStarfields[layerNum].getContext('2d');
         // larger than playfield so we can scroll around
-        cachedStarfields[layerNum].width = canvas.width * 2;
-        cachedStarfields[layerNum].height = canvas.height * 2;
+        cachedStarfields[layerNum].width = canvas.width * 4;
+        cachedStarfields[layerNum].height = canvas.height * 4;
         for (var r,g,b,x,y,w,h,n=0; n<gameOptions.starfieldStarsPerLayer; n++) {
             r = g = b = Math.floor(50 + Math.random()*100); // mostly grey
             r += Math.floor(Math.random()*50-25); // with a little rainbow
