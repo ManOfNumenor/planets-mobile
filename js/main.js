@@ -9,6 +9,7 @@ window.onload = function() {
     canvasContext = canvas.getContext('2d');
 
     setupInput();
+    setupPause(); 
     // setupSun();
     loadLevel(testLevel);
     resizeCanvas();
@@ -20,7 +21,9 @@ window.onload = function() {
 }
 
 function updateEverything() {
-    moveEverything();
+    if (!isPaused) {
+      moveEverything();
+    }
     drawEverything();
 }
 
