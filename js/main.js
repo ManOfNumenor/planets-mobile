@@ -54,9 +54,16 @@ function debug(message) {
 
 function endTurn() {
     turnNumber++;
-    // TODO: loop through planets and update
-    // stepIdx values, re-setting to 0
-    // if stepIdx >= orbit.steps.length
+    for(const planet of planets) {
+        let orbit = orbits[planet.orbitIdx];
+        let finalStepIdx = orbit.steps.length - 1;
+
+        if(planet.stepIdx < finalStepIdx) {
+            planet.stepIdx++;
+        } else {
+            planet.stepIdx = 0;
+        }
+    }
 
     // debug("turn "+turnNumber);
     // logThisRound = true;
@@ -82,7 +89,6 @@ function distAngAndOriginToXY(dist, angRadiants,
     // debug('angDegrees: '+angDegrees);
     let xOffset = Math.cos(angRadiants) * dist;
     let yOffset = Math.sin(angRadiants) * dist;
-    // TODO: debug func & output 'planet' func
     // debug('x: ' + xOffset +', y: ' + yOffset);
 
     return {
