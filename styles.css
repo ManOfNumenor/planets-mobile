@@ -1,0 +1,17 @@
+/*
+#pauseButton, #resumeButton, #mainMenuButton {
+    background-color: transparent;
+    color: cyan;
+    border: 1px solid cyan;
+    font-size: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+*/
+/* change to look like default used by existing "End Turn" button. */
+#endTurnButton, #pauseButton, #resumeButton, #mainMenuButton {
+    margin-left: 1rem;
+    font-family: sans-serif;
+    font-size: inherit;
+}
