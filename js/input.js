@@ -43,7 +43,7 @@ function setupInput() {
 
 function pointerdownHandler(evt) {
     evt.preventDefault();
-    debug('pointerdown');
+    console.log('pointerdown');
     console.log('pointerdown evt', evt);
 
     currentPointerEvents.push(evt);
@@ -63,7 +63,7 @@ function pointerdownHandler(evt) {
 
 function pointermoveHandler(evt) {
     evt.preventDefault();
-    debug('pointermove');
+    console.log('pointermove');
     
     // update currentPointerEvents with new coords
     for(let i=0;i<currentPointerEvents.length;i++) {
@@ -130,7 +130,7 @@ function pointermoveHandler(evt) {
 }
 
 function pointerupHandler(evt) {
-    debug('pointerup');
+    console.log('pointerup');
     evt.preventDefault();
 
     // check if this was a tap
@@ -159,7 +159,7 @@ function pointerupHandler(evt) {
 
     if(currentPointerEvents.length < 2) {
         // stop zooming
-        debug('clearingZoomDiff');
+        console.log('clearingZoomDiff');
         currentZoomDiff = -1;
     }
 
@@ -168,7 +168,7 @@ function pointerupHandler(evt) {
     //     let foundTouch = getCurrentTouchMatchingId(touch.identifier);
 
     //     if(foundTouch) {
-    //         // debug('found touch ' +
+    //         // console.log('found touch ' +
     //         //     foundTouch.identifier);
 
     //         // temp hack: checking touch pos 
@@ -186,15 +186,15 @@ function pointerupHandler(evt) {
     //             touchPos.y - foundTouchPos.y
     //         );
 
-    //         // debug('diffX: '+diffX);
-    //         // debug('diffY: '+diffY);
+    //         // console.log('diffX: '+diffX);
+    //         // console.log('diffY: '+diffY);
 
     //         if(diffX < TAP_DIST_LIMIT &&
     //             diffY < TAP_DIST_LIMIT) {
     //             selectedEntity = tryToSelectEntityAt(touchPos);
     //         }
     //     } else {
-    //         // debug("no touch found");
+    //         // console.log("no touch found");
     //     }
 
     //     // remove this touch from changedTouches
@@ -216,7 +216,7 @@ function pointerupHandler(evt) {
 
 function pointercancelHandler(evt) {
     evt.preventDefault();
-    debug('pointercancel');
+    console.log('pointercancel');
 
     removePointer(evt);
 
@@ -233,14 +233,14 @@ function pointercancelHandler(evt) {
 }
 
 function removePointer(evt) {
-    debug("removePointer :" + evt.pointerId);
+    console.log("removePointer :" + evt.pointerId);
     console.log('before', currentPointerEvents);
     // backwards loop because we're deleting
     for(let i=currentPointerEvents.length - 1;i>=0;i--) {
         if(currentPointerEvents[i].pointerId ==
             evt.pointerId) {
 
-            debug("found pointer to remove at idx: " +
+            console.log("found pointer to remove at idx: " +
                 i);
             currentPointerEvents.splice(i, 1);
         }
@@ -251,11 +251,11 @@ function removePointer(evt) {
 
 // function mousedownHandler(evt) {
 //     let mousePos = calculateMousePos(evt);
-//     // debug('mousedown: (' +mousePos.x + ','+ mousePos.y + ')');
+//     // console.log('mousedown: (' +mousePos.x + ','+ mousePos.y + ')');
 // }
 // 
 // function mouseupHandler(evt) {
-//     // debug('mouseup: (' +mousePos.x + ','+ mousePos.y + ')');
+//     // console.log('mouseup: (' +mousePos.x + ','+ mousePos.y + ')');
 // }
 
 function keyupHandler(evt) {
@@ -319,7 +319,7 @@ function getCurrentTouchMatchingId(touchId) {
 function debugCurrentPointerEvents() {
     console.log('currentPointerEvents', 
         currentPointerEvents);
-    debug('current touches: [' +
+    console.log('current touches: [' +
        currentPointerEvents.map(
            curTouch => curTouch.identifier
        ).join(',') +']');
@@ -327,29 +327,29 @@ function debugCurrentPointerEvents() {
 }
 
 function tryToSelectEntityAt(touchPos) {
-    debug('trying to select entity at: ('+
+    console.log('trying to select entity at: ('+
         touchPos.x + ', ' + touchPos.y +')');
 
     let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
     let closestEntity = null;
 
     for(const fleet of allFleets) {
-        debug('checking fleet at: (' +
+        console.log('checking fleet at: (' +
             fleet.x +', '+ fleet.y +')');
         let distFromTap = distBetween(touchPos, fleet);
-        debug('dist from tap: ' + distFromTap);
+        console.log('dist from tap: ' + distFromTap);
         if( distFromTap <
             closestDistToTapFound ) {
-            debug('new closest entity found');
+            console.log('new closest entity found');
             closestEntity = fleet;
             closestDistToTapFound = distFromTap;
         }
     }
 
     if(closestEntity) {
-        debug('found one');
+        console.log('found one');
     } else {
-        debug('could not find closest entity');
+        console.log('could not find closest entity');
     }
     return closestEntity;
 }
@@ -358,7 +358,7 @@ function stepClosestTo(touchPos) {
     let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
     let closestStep = null;
 
-    debug("TODO");
+    console.log("TODO");
     for(const orbit of orbits) {
         for(let i = 0; i < orbit.stepCount; i++) {
             // CRUD! I need to refactor to have access
