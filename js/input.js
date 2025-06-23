@@ -3,6 +3,7 @@ const MAX_ENTITY_TAP_RADIUS = 20;
 const MIN_DIST_TO_COUNT_DRAG = 10;
 const MIN_SCALE_FACTOR = 0.5;
 const MAX_SCALE_FACTOR = 2.5;
+const MOUSEWHEEL_ZOOM_INCREMENT = 0.5;
 
 // var draggingTouchId = null;
 var dragStartEvt = null;
@@ -12,6 +13,7 @@ var prevZoomDiff = -1;
 var currentPointerEvents = [];
 
 function setupInput() {
+    canvas.addEventListener('wheel', mouseWheelHandler);
     canvas.addEventListener('pointerdown', pointerdownHandler,{passive: false});
     canvas.addEventListener('pointerup', pointerupHandler,{passive: false});
     canvas.addEventListener('pointermove', pointermoveHandler,{passive: false});
@@ -412,3 +414,33 @@ function pointerDebug() {
         `;
     }
 }
+
+function mouseWheelHandler(evt) {
+    // console.log("this mouse wheel event just fired:",evt);
+    // to prevent default browser scrolling behavior:
+    // evt.preventDefault(); 
+
+    let newScaleFactor = scaleFactor;
+
+    if (evt.deltaY < 0) { // scroll up
+        newScaleFactor += MOUSEWHEEL_ZOOM_INCREMENT;
+    } else if (evt.deltaY > 0) { // scroll down
+        newScaleFactor -= MOUSEWHEEL_ZOOM_INCREMENT;
+    }
+
+    // apply min/max constraints
+    newScaleFactor = Math.max(
+        MIN_SCALE_FACTOR,
+        newScaleFactor
+    );
+
+    newScaleFactor = Math.min(
+        MAX_SCALE_FACTOR,
+        newScaleFactor
+    );
+
+    // TODO: ensure this does not interfere with touchscreen pinch zoom
+    scaleFactor = newScaleFactor;
+
+}
+
