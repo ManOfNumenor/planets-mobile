@@ -1,4 +1,4 @@
-function drawNebulae(onthisCanvasContext,scale=200,r=0.5,g=0.2,b=0.2,a=32) {
+function drawNebulae(onthisCanvasContext,scale=256,r=0.5,g=0.2,b=0.2,a=42) {
     console.log("rendering nebulae...");
     let pix = onthisCanvasContext.createImageData(gameOptions.starfieldWidth, gameOptions.starfieldHeight);
     let size = 1 / scale; // scale the blobs - bi

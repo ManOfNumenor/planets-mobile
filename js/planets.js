@@ -62,11 +62,11 @@ function drawSun() {
     if (sun.image.loaded) {
         let sunRotation = performance.now() / 30000;
         let imgScale = ((sun.radius*2)/(sun.image.width*(2/3)))*scaleFactor;
-        // we need extra scale (the 3/2) because the bitmap has empty region that extend beyond the radius
+        // the 2/3 above is because the bitmap has outer glow/shine lines that extend beyond the radius
         // console.log("drawing the sun scaled:"+imgScale+" which is:"+(sun.image.width*imgScale)+"px wide");
         drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,sunRotation,imgScale)
         // 2nd layer moves at a diff speed so the "shine lines" overlap and "glitter"
-        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,-sunRotation/3,imgScale)
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,-sunRotation*.666,imgScale)
     }
 }
 
