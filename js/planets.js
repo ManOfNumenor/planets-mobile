@@ -48,13 +48,35 @@ function movePlanets() {
     // }
 }
 
+function drawSun() {
+    // console.log("drawing the sun! radius:"+sun.radius+" scaleFactor:"+scaleFactor+" which is:"+(sun.radius * scaleFactor * 2)+"px wide");
+    // colorCircle(sun.x, sun.y, sun.radius * scaleFactor, sun.color);
+
+    if (!sun.image) {
+        // console.log("downloading sun.png");
+        sun.image = new Image();
+        sun.image.onload = function() { this.loaded=true; }
+        sun.image.src = "../images/sun.png";
+    }
+    
+    if (sun.image.loaded) {
+        let sunRotation = performance.now() / 30000;
+        let imgScale = ((sun.radius*2)/(sun.image.width*(2/3)))*scaleFactor;
+        // we need extra scale (the 3/2) because the bitmap has empty region that extend beyond the radius
+        // console.log("drawing the sun scaled:"+imgScale+" which is:"+(sun.image.width*imgScale)+"px wide");
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,sunRotation,imgScale)
+        // 2nd layer moves at a diff speed so the "shine lines" overlap and "glitter"
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,-sunRotation/3,imgScale)
+    }
+}
+
 function drawPlanets() {
     if(!orbits || orbits.length < 1) {
         return; // no orbits, don't draw planets
     }
 
     // draw sun
-    colorCircle(sun.x, sun.y, sun.radius * scaleFactor, sun.color);
+    drawSun();
 
     for(const planet of planets) {
         // draw orbit path
