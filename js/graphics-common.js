@@ -39,6 +39,25 @@ function drawBitmapCenteredWithRotation(graphic, atX, atY,withAngle) {
   canvasContext.restore(); // undo the translation movement and rotation since save()
 }
 
+function drawBitmapCenteredWithRotationAndScale(graphic, x, y, angleInRadians, scale) {
+    let width = graphic.width;
+    let height = graphic.height;
+    // Save the current canvas state (transformations)
+    canvasContext.save();
+    // Translate to the center of the sprite
+    // This makes the rotation and scaling happen around the sprite's origin
+    //canvasContext.translate(x - width*scale / 2, y - height*scale / 2);
+    canvasContext.translate(x,y);
+    // Apply rotation
+    canvasContext.rotate(angleInRadians);
+    // Apply scaling
+    canvasContext.scale(scale, scale);
+    // Draw the image, offsetting its position so its center aligns with the translated origin
+    canvasContext.drawImage(graphic, -width / 2, -height / 2, width, height);
+    // Restore the canvas state to its original (before these transformations)
+    canvasContext.restore();
+}
+
 function colorText(showWords, textX,textY, fillColor) {
     canvasContext.fillStyle = fillColor;
     canvasContext.fillText(showWords, textX,textY);
