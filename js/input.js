@@ -338,7 +338,8 @@ function tryToSelectEntityAt(touchPos) {
     for(const fleet of allFleets) {
         console.log('checking fleet at: (' +
             fleet.x +', '+ fleet.y +')');
-        let distFromTap = distBetween(touchPos, fleet);
+        let fleetStep = getFleetStep(fleet);
+        let distFromTap = distBetween(touchPos, fleetStep);
         console.log('dist from tap: ' + distFromTap);
         if( distFromTap <
             closestDistToTapFound ) {

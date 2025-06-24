@@ -1,8 +1,8 @@
 const UNIT_SQUARE_DEFAULT_SIZE = 8;
 var allFleets = [
     {
-        x: null,
-        y: null,
+        // x: null,
+        // y: null,
         ships: 10,
 
         // should be at _either_ a planet
@@ -17,11 +17,11 @@ var allFleets = [
 ];
 
 function moveFleets() {
-    for(const fleet of allFleets) {
-        let planet = planets[fleet.planetIdx];
-        fleet.x = planet.x;
-        fleet.y = planet.y;
-    }
+    // for(const fleet of allFleets) {
+    //     let planet = planets[fleet.planetIdx];
+    //     fleet.x = planet.x;
+    //     fleet.y = planet.y;
+    // }
 }
 
 function drawFleets() {
@@ -29,12 +29,34 @@ function drawFleets() {
     const selectedCircleRadius = drawWidth + 3;
 
     for(const fleet of allFleets) {
-        let drawX = fleet.x - (drawWidth / 2);
-        let drawY = fleet.y - (drawWidth / 2);
+
+        fleetStep = getFleetStep(fleet);
+
+        let fleetX = fleetStep.x;
+        let fleetY = fleetStep.y;
+
+        let drawX = fleetX - (drawWidth / 2);
+        let drawY = fleetY - (drawWidth / 2);
 
         if(selectedEntity && selectedEntity == fleet){
-            colorCircle(fleet.x,fleet.y, drawWidth, 'cyan');
+            colorCircle(fleetX,fleetY, drawWidth, 'cyan');
         }
         colorRect(drawX,drawY, drawWidth,drawWidth, 'yellow');
     }
+}
+
+function getFleetStep(fleet) {
+    let fleetStep = null;
+    if(fleet.planetIdx || fleet.planetIdx === 0) {
+        // use planet coords
+        let planet = planets[fleet.planetIdx];
+        fleetStep = orbits[planet.orbitIdx].steps[planet.stepIdx];
+
+    } else {
+        // use fleet step coords
+        fleetStep = orbits[fleet.orbitIdx].steps[fleet.stepIdx];
+
+    }
+
+    return fleetStep;
 }
