@@ -7,7 +7,7 @@ var allFleets = [
 
         // should be at _either_ a planet
         // (& therefore moving with the planet)
-        planetIdx: 0,
+        planetIdx: 3,
 
         // OR at an orbit & idx point
         // (& therefore not moving with planets)

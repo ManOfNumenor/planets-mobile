@@ -7,7 +7,15 @@ var scaleFactor = 1.0;
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
+    canvasContext.imageSmoothingEnabled = false;  // doesn't seem to be working?
 
+	colorRect(0,0, canvas.width,canvas.height, "black");
+	colorText("Loading...", canvas.width/2,canvas.height/2, "white");
+
+	loadImages();
+}
+
+function imageLoadingDoneSoStartGame() {
     setupInput();
     setupPause(); 
     // setupSun();
@@ -17,7 +25,6 @@ window.onload = function() {
 
     let framesPerSecond = 30;
     setInterval(updateEverything, 1000/framesPerSecond);
-
 }
 
 function updateEverything() {

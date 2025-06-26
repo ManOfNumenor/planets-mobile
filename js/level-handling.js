@@ -35,6 +35,7 @@ function loadLevel(levelObj) {
             radius: levelPlanet.radius,
             orbitIdx: levelPlanet.orbitIdx,
             stepIdx: levelPlanet.startingStepIdx,
+            imageVar: levelPlanet.imageVar,
         });
     }
 }

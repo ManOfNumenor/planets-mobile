@@ -12,7 +12,17 @@ var testLevel = {
         },
         {
             radius: 210,
-            stepCount: 15,
+            stepCount: 8,
+            rotation: 0,
+        },
+        {
+            radius: 290,
+            stepCount: 12,
+            rotation: Math.PI / 4,
+        },
+        {
+            radius: 380,
+            stepCount: 16,
             rotation: 0,
         },
     ],
@@ -33,7 +43,7 @@ var testLevel = {
             innerOrbitIdx: 1, 
             innerStepIdx: 3,
             outerOrbitIdx: 2, 
-            outerStepIdx: 13,
+            outerStepIdx: 8,
         },
     ],
     planets: [
@@ -41,19 +51,36 @@ var testLevel = {
             orbitIdx: 0,
             startingStepIdx: 0,
             color: 'red',
-            radius: 10,
+            radius: 16,
+            //imageVar: planet16x16,
         },
         {
             orbitIdx: 1,
             startingStepIdx: 0,
             color: '#ff00ff',
-            radius: 14,
+            radius: 16,
+            // imageVar: planet24x24,
         },
         {
             orbitIdx: 2,
             startingStepIdx: 1,
             color: 'lime',
+            radius: 16,
+            //imageVar: planet32x32,
+        },
+        {
+            orbitIdx: 3,
+            startingStepIdx: 1,
+            color: 'aliceblue',
             radius: 20,
+            //imageVar: planet64x64
+        },
+        {
+            orbitIdx: 4,
+            startingStepIdx: 1,
+            color: 'darkgreen',
+            radius: 20,
+            //imageVar: planet128x128,
         },
     ],
 };

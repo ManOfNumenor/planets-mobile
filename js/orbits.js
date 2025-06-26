@@ -1,69 +1,9 @@
 const STEP_INDICATOR_RADIUS = 5;
 const ORBIT_DRAW_COLOR = "cyan";
 
-// need to:
-// - orbits have steps arrays
-// - orbit step arrays filled in new init function
-// - orbit steps have x & y
-// - orbit step x & y updated in moveOrbits() like
-//  planets are now
+var orbits = [];
 
-var orbits = [
-    // {
-    //     radius: 75,
-    //     stepCount: 2,
-    //     centerObj: sun,
-    //     rotation: 0,
-    //     steps: [],
-    // },
-    // {
-    //     radius: 130,
-    //     stepCount: 4,
-    //     centerObj: sun,
-    //     rotation: Math.PI / 4,
-    //     steps: [],
-    // },
-    // {
-    //     radius: 210,
-    //     stepCount: 15,
-    //     centerObj: sun,
-    //     rotation: 0,
-    //     steps: [],
-    // },
-];
-
-var connections = [
-    // { 
-    //     innerOrbitIdx: 0, 
-    //     innerStepIdx: 0,
-    //     innerOrbitX: null, 
-    //     innerOrbitY: null,
-    //     outerOrbitIdx: 1, 
-    //     outerStepIdx: 0,
-    //     outerOrbitX: null, 
-    //     outerOrbitY: null,
-    // },
-    // { 
-    //     innerOrbitIdx: 0, 
-    //     innerStepIdx: 0,
-    //     innerOrbitX: null, 
-    //     innerOrbitY: null,
-    //     outerOrbitIdx: 1, 
-    //     outerStepIdx: 3,
-    //     outerOrbitX: null, 
-    //     outerOrbitY: null,
-    // },
-    // { 
-    //     innerOrbitIdx: 1, 
-    //     innerStepIdx: 3,
-    //     innerOrbitX: null, 
-    //     innerOrbitY: null,
-    //     outerOrbitIdx: 2, 
-    //     outerStepIdx: 13,
-    //     outerOrbitX: null, 
-    //     outerOrbitY: null,
-    // },
-];
+var connections = [];
 
 function moveOrbits() {
     for(const orbit of orbits) {
@@ -165,11 +105,13 @@ function drawOrbits() {
             let outerStep = orbits[conn.outerOrbitIdx]
                 .steps[conn.outerStepIdx];
 
-            colorLine(
-                innerStep.x, innerStep.y,
-                outerStep.x, outerStep.y,
-                ORBIT_DRAW_COLOR
-            );
+            if(innerStep && outerStep) {
+                colorLine(
+                    innerStep.x, innerStep.y,
+                    outerStep.x, outerStep.y,
+                    ORBIT_DRAW_COLOR
+                );
+            }
         } // end for 
     } // end if
 

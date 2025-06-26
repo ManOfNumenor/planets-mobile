@@ -99,3 +99,20 @@ function colorLine(startX, startY, endX, endY, lineColor) {
     canvasContext.lineTo(endX, endY);
     canvasContext.stroke();
 }
+
+function shadeCircle(centerX, centerY, radius) {
+
+    let shadowGradient = canvasContext.createLinearGradient(
+        centerX - radius, centerY - radius,
+        centerX + radius, centerY + radius,
+    );
+
+    shadowGradient.addColorStop(0, 'transparent');
+    shadowGradient.addColorStop(0.4, 'rgba(0,0,0, 0.4)');
+    shadowGradient.addColorStop(0.6, 'black');
+
+    canvasContext.fillStyle = shadowGradient;
+    canvasContext.beginPath();
+    canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+    canvasContext.fill();
+}
