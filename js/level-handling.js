@@ -1,3 +1,10 @@
+const PLANET_SIZE_RADIAI = [
+    0, // asteroids, they'll probably be handled differently somehow
+    16,
+    20,
+    32,
+];
+
 function loadLevel(levelObj) {
     // console.log('loading level', levelObj);
 
@@ -32,7 +39,7 @@ function loadLevel(levelObj) {
     for(const levelPlanet of levelObj.planets) {
         planets.push({
             color: levelPlanet.color,
-            radius: levelPlanet.radius,
+            radius: PLANET_SIZE_RADIAI[levelPlanet.size],
             orbitIdx: levelPlanet.orbitIdx,
             stepIdx: levelPlanet.startingStepIdx,
             imageVar: levelPlanet.imageVar,

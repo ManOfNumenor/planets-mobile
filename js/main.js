@@ -16,6 +16,7 @@ window.onload = function() {
 }
 
 function imageLoadingDoneSoStartGame() {
+    console.log('imageLoadingDoneSoStartGame');
     setupInput();
     setupPause(); 
     // setupSun();

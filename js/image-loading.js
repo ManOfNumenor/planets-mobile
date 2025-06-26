@@ -1,5 +1,5 @@
 // remnants of pixel-planet experiments
-// var planet16x16 = document.createElement('img');
+var planet16x16 = document.createElement('img');
 // var planet24x24 = document.createElement('img');
 // var planet32x32 = document.createElement('img');
 // var planet64x64 = document.createElement('img');
@@ -38,7 +38,9 @@ function loadImageForWorldCode(worldCode, fileName) {
 function loadImages() {
 
 	var imageList = [
-		// {varName: planet16x16, theFile: "pixel-planets/planet-16-x-16.png"},
+        // apparently you need to leave at least one image in here, 
+        // or imageLoadingDoneSoStartGame() never gets called
+		{varName: planet16x16, theFile: "pixel-planets/planet-16-x-16.png"},
 		// {varName: planet24x24, theFile: "pixel-planets/planet-24-x-24.png"},
 		// {varName: planet32x32, theFile: "pixel-planets/planet-32-x-32.png"},
 		// {varName: planet64x64, theFile: "pixel-planets/planet-64-x-64.png"},
