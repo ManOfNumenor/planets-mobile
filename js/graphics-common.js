@@ -104,10 +104,10 @@ function colorLine(startX, startY, endX, endY, lineColor) {
 function gradientAtSunAngle(x,y,radius) {
     const angleRadians = Math.atan2(y-sun.y,x-sun.x);
     //console.log("grad: sun:"+Math.round(sun.x)+","+Math.round(sun.y)+" planet:"+Math.round(x)+","+Math.round(y)+" radius:"+Math.round(radius)+" angle:"+Math.round(angleRadians*(180/Math.PI)));
-    const x1 = x + -radius * Math.cos(angleRadians);
-    const y1 = y + -radius * Math.sin(angleRadians);    
-    const x2 = x + radius * Math.cos(angleRadians);
-    const y2 = y + radius * Math.sin(angleRadians);    
+    const x1 = x - (radius * Math.cos(angleRadians));
+    const y1 = y - (radius * Math.sin(angleRadians));    
+    const x2 = x + (radius * Math.cos(angleRadians));
+    const y2 = y + (radius * Math.sin(angleRadians));    
     return canvasContext.createLinearGradient(x1,y1,x2,y2);
 }
 
