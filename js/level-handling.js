@@ -43,6 +43,7 @@ function loadLevel(levelObj) {
             orbitIdx: levelPlanet.orbitIdx,
             stepIdx: levelPlanet.startingStepIdx,
             imageVar: levelPlanet.imageVar,
+            moons: levelPlanet.moons,
         });
     }
 }

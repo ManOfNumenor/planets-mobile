@@ -1,3 +1,4 @@
+var moonPic = document.createElement('img');
 // remnants of pixel-planet experiments
 var planet16x16 = document.createElement('img');
 // var planet24x24 = document.createElement('img');
@@ -40,7 +41,9 @@ function loadImages() {
 	var imageList = [
         // apparently you need to leave at least one image in here, 
         // or imageLoadingDoneSoStartGame() never gets called
-		{varName: planet16x16, theFile: "pixel-planets/planet-16-x-16.png"},
+        {varName: moonPic, theFile: "moon.png"},
+		
+        // {varName: planet16x16, theFile: "pixel-planets/planet-16-x-16.png"},
 		// {varName: planet24x24, theFile: "pixel-planets/planet-24-x-24.png"},
 		// {varName: planet32x32, theFile: "pixel-planets/planet-32-x-32.png"},
 		// {varName: planet64x64, theFile: "pixel-planets/planet-64-x-64.png"},
