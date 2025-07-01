@@ -1,8 +1,36 @@
+#canvasWrapper {
+    position: relative;
+    /* Even though this is technically the default
+     * setting it explicitly on the wrapper div 
+     * will tell #pauseMenuDiv to use this as a
+     * reference point when defining it's position
+     * with `position: absolute;`
+     */
+}
+
 #pauseMenuDiv {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* position: fixed; */
+    position: absolute;
+    /* using `position: absolute;` instead of
+     * `position: fixed` here because we wish to
+     * define it's position relative to a parent
+     * element, rather than the viewport
+     */
+
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* by setting all 4 of these to `0`, 
+     * we tell css to stretch this div
+     * all the way to the edges of it's 
+     * reference point element.
+     */
+
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;

@@ -15,7 +15,7 @@ function togglePause() {
     let pauseMenuDiv = document.getElementById('pauseMenuDiv');
     
     if (isPaused) {
-       pauseMenuDiv.style.display = 'block';
+       pauseMenuDiv.style.display = 'flex';
     } else {
        pauseMenuDiv.style.display = 'none';
     }
