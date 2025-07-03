@@ -1,5 +1,5 @@
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
-const MAX_ENTITY_TAP_RADIUS = 20;
+const MAX_ENTITY_TAP_RADIUS = 25;
 const MIN_DIST_TO_COUNT_DRAG = 10;
 const MIN_SCALE_FACTOR = 0.5;
 const MAX_SCALE_FACTOR = 2.5;
@@ -273,7 +273,39 @@ function handleTap(evt) {
     } else {
         // TODO after fleet class refactor
         // if(typeof selectedEntity == 'fleet' ) {
-        targetStep = stepClosestTo(touchPos);
+        let target = stepAndOrbitIdxClosestTo(touchPos);
+
+        if(target && 
+            (target.orbitIdx || target.orbitIdx===0) && 
+            (target.stepIdx || target.stepIdx===0)
+            // TODO: && 
+            // selected fleet can move to target
+            ) {
+
+            // TODO: check if planet is at target step,
+            // and if so set planetIdx instead of 
+            // orbit/step coords
+
+            // debug("moving fleet FROM planet "+
+            //     selectedEntity.planetIdx +
+            //     " orbit "+ 
+            //     selectedEntity.orbitIdx +
+            //     " step " +
+            //     selectedEntity.stepIdx +
+            //     " TO planet (null) orbit "+ 
+            //     target.orbitIdx +
+            //     " step " +
+            //     target.stepIdx
+            // );
+
+            selectedEntity.planetIdx = null;
+            selectedEntity.orbitIdx = target.orbitIdx;
+            selectedEntity.stepIdx = target.stepIdx;
+        }
+
+        // deselect automatically so player
+        // can select something else
+        selectedEntity = null;
 
         // }
     }
@@ -357,28 +389,58 @@ function tryToSelectEntityAt(touchPos) {
     return closestEntity;
 }
 
-function stepClosestTo(touchPos) {
+// function stepClosestTo(touchPos) {
+//     let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
+//     let closestStep = null;
+// 
+//     for(const orbit of orbits) {
+//         for(let i = 0; i < orbit.steps.length; i++) {
+//             let step = orbit.steps[i];
+// 
+//             let distFromTap = distBetween(touchPos,
+//                 step;
+// 
+//             if( distFromTap < closestDistToTapFound ) {
+//                 closestStep = step;
+//                 closestDistToTapFound = distFromTap;
+//             }
+//         }
+//     }
+// 
+//     return closestStep;
+// }
+
+function stepAndOrbitIdxClosestTo(touchPos) {
     let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
-    let closestStep = null;
+    let closestOrbitIdx = null;
+    let closestStepIdx = null;
 
-    console.log("TODO");
-    for(const orbit of orbits) {
-        for(let i = 0; i < orbit.stepCount; i++) {
-            // CRUD! I need to refactor to have access
-            // to step coords on-demand. This means
-            // putting step arrays & x/y coords and
-            // using the moveOrbits() function
+    // debug('starting closest step search ('+
+    //     touchPos.x +', '+ touchPos.y +')');
+    for(let i = 0; i < orbits.length; i++) {
+        // debug('checking orbit '+i);
+        let orbit = orbits[i];
+        for(let j = 0; j < orbit.steps.length; j++) {
+            // debug('checking step '+j);
+            let step = orbit.steps[j];
 
-            // let distFromTap = distBetween(touchPos, fleet);
+            let distFromTap = distBetween(touchPos,
+                step);
 
-            // if( distFromTap < closestDistToTapFound ) {
-            //     closestStep = fleet;
-            //     closestDistToTapFound = distFromTap;
-            // }
+            if( distFromTap < closestDistToTapFound ) {
+                // debug('found closer step: '+
+                //     i +'~'+ j);
+                closestOrbitIdx = i;
+                closestStepIdx = j;
+                closestDistToTapFound = distFromTap;
+            }
         }
     }
 
-    return closestStep;
+    return {
+        orbitIdx: closestOrbitIdx,
+        stepIdx: closestStepIdx,
+    };
 }
 
 function distBetween(pointA, pointB) {
@@ -440,7 +502,6 @@ function mouseWheelHandler(evt) {
         newScaleFactor
     );
 
-    // TODO: ensure this does not interfere with touchscreen pinch zoom
     scaleFactor = newScaleFactor;
 
 }

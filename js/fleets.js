@@ -1,8 +1,6 @@
-const UNIT_SQUARE_DEFAULT_SIZE = 8;
+const UNIT_SQUARE_DEFAULT_SIZE = 18;
 var allFleets = [
     {
-        // x: null,
-        // y: null,
         ships: 10,
 
         // should be at _either_ a planet
@@ -11,6 +9,12 @@ var allFleets = [
 
         // OR at an orbit & idx point
         // (& therefore not moving with planets)
+        orbitIdx: null,
+        stepIdx: null,
+    },
+    {
+        ships: 10,
+        planetIdx: 1,
         orbitIdx: null,
         stepIdx: null,
     }

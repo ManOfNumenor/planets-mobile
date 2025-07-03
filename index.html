@@ -25,15 +25,14 @@
                 object-fit: contain;
             }
             #debug { 
-                display: none;
                 border: solid 1px lime;
                 font-size: 0.8rem;
                 /* min-height: 200px; */
                 max-height: 50vh;
                 overflow: scroll;
-                position: fixed;
+                /* position: fixed; 
                 top: 2rem;
-                right: 0;
+                right: 0; */
             }
             p#pointerDebug { 
                 border: solid 1px #ff00ff;
@@ -57,6 +56,8 @@
             <div id="pauseMenuDiv"
                 style="display: none">
                 <!-- pause menu buttons go here -->
+                <p id="debug">
+                </p>
                <button id="resumeButton" onclick="resumeGame()">Resume</button>
                <button id="mainMenuButton" onclick="mainMenu()">Main Menu</button>
             </div>
@@ -68,10 +69,6 @@
         </div>
 
         <p id="pointerDebug"></p>
-        <dialog id="debugDialog">
-            <p id="debug">
-            </p>
-        </dialog>
 
         <!-- low-level stuff -->
         <script src="js/error-handling.js"></script>
