@@ -1,3 +1,5 @@
+const CLOUD_LAYER_ENABLED = true;
+
 var planets = [];
 
 function movePlanets() {
@@ -43,6 +45,9 @@ function drawPlanets() {
                 planet.radius * scaleFactor, planet.color);
         }
 
+        // if (planet.hasClouds) 
+        drawCloudLayer(step.x,step.y,planet.radius*scaleFactor,10);
+
         // draw planet shadow
         shadeCircle(step.x, step.y,
                 planet.radius * scaleFactor);
@@ -71,3 +76,22 @@ function drawPlanets() {
 // 
 //     return currentStepAng;
 // }
+
+function drawCloudLayer(x,y,radius,speed) {
+    if (!CLOUD_LAYER_ENABLED) return;
+    canvasContext.save(); 
+    
+    // create a circular "clipping" path
+    canvasContext.beginPath();
+    canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
+    canvasContext.clip(); // now whatever we draw has to be inside the path
+
+    // scroll through a seamless cloud panorama
+    let dx = (performance.now()/1000*speed) % cloudPic.width;
+    let dy = 0;
+    let w = radius*2;
+    let h = radius*2;
+    canvasContext.drawImage(cloudPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
+    
+    canvasContext.restore();
+}
