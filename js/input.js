@@ -132,7 +132,7 @@ function pointermoveHandler(evt) {
 }
 
 function pointerupHandler(evt) {
-    console.log('pointerup');
+   //  console.log('pointerup');
     evt.preventDefault();
 
     // check if this was a tap
@@ -235,19 +235,18 @@ function pointercancelHandler(evt) {
 }
 
 function removePointer(evt) {
-    console.log("removePointer :" + evt.pointerId);
-    console.log('before', currentPointerEvents);
+   //  console.log("removePointer :" + evt.pointerId);
+   //  console.log('before', currentPointerEvents);
     // backwards loop because we're deleting
     for(let i=currentPointerEvents.length - 1;i>=0;i--) {
         if(currentPointerEvents[i].pointerId ==
             evt.pointerId) {
 
-            console.log("found pointer to remove at idx: " +
-                i);
+            // console.log("found pointer to remove at idx: " + i);
             currentPointerEvents.splice(i, 1);
         }
     }
-    console.log('after', currentPointerEvents);
+   //  console.log('after', currentPointerEvents);
     prevZoomDiff = -1;
 }
 
@@ -517,6 +516,24 @@ function mouseWheelHandler(evt) {
 
 }
 
+function findValidConnection(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
+    return connections.find(conn => {
+        if (conn.direction === "outward") {
+            return conn.innerOrbitIdx === currentOrbitIdx &&
+                   conn.innerStepIdx === currentStepIdx &&
+                   conn.outerOrbitIdx === targetOrbitIdx &&
+                   conn.outerStepIdx === targetStepIdx;
+        }
+        if (conn.direction === "inward") {
+            return conn.outerOrbitIdx === currentOrbitIdx &&
+                   conn.outerStepIdx === currentStepIdx &&
+                   conn.innerOrbitIdx === targetOrbitIdx &&
+                   conn.innerStepIdx === targetStepIdx;
+        }
+        return false;
+    });
+}
+
 function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
     // when staying on same orbit check if clockwise
     if (currentOrbitIdx === targetOrbitIdx) {
@@ -531,14 +548,10 @@ function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, t
     }
 
     // if not on same orbit look for adjacency line
-    let validConnection = connections.find(conn =>
-        conn.innerOrbitIdx === currentOrbitIdx &&
-        conn.innerStepIdx === currentStepIdx &&
-        conn.outerOrbitIdx === targetOrbitIdx &&
-        conn.outerStepIdx === targetStepIdx
-    );
+    let validConnection = findValidConnection(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx);
 
     if (validConnection) {
+        console.log("Fleet moving via " + validConnection.direction + " adjacency line");
         return { valid: true };
     } else {
         return {valid: false, error: "Need adjacency line clockwise to move between orbits"};
