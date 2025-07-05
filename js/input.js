@@ -282,6 +282,13 @@ function handleTap(evt) {
             // selected fleet can move to target
             ) {
 
+            // find current position of fleet
+            let currentOrbitIdx = selectedEntity.orbitIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].orbitIdx : null);
+            let currentStepIdx = selectedEntity.stepIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].stepIdx : null);
+
+            // allow clockwise orbital movement
+            let moveValidation = isValidClockwiseMove(currentOrbitIdx, currentStepIdx, target.orbitIdx, target.stepIdx);
+
             // TODO: check if planet is at target step,
             // and if so set planetIdx instead of 
             // orbit/step coords
@@ -298,9 +305,13 @@ function handleTap(evt) {
             //     target.stepIdx
             // );
 
-            selectedEntity.planetIdx = null;
-            selectedEntity.orbitIdx = target.orbitIdx;
-            selectedEntity.stepIdx = target.stepIdx;
+            if (moveValidation.valid) {
+               selectedEntity.planetIdx = null;
+               selectedEntity.orbitIdx = target.orbitIdx;
+               selectedEntity.stepIdx = target.stepIdx;
+            } else {
+               console.log(moveValidation.error);
+            }
         }
 
         // deselect automatically so player
@@ -506,3 +517,30 @@ function mouseWheelHandler(evt) {
 
 }
 
+function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
+    // when staying on same orbit check if clockwise
+    if (currentOrbitIdx === targetOrbitIdx) {
+        let orbit = orbits[currentOrbitIdx];
+        let nextStepIdx = (currentStepIdx + 1) % orbit.steps.length;
+
+        if (targetStepIdx === nextStepIdx) {
+            return { valid: true };
+        } else {
+            return {valid: false, error: "Physics prevents fleet reversing in orbit"};
+        }
+    }
+
+    // if not on same orbit look for adjacency line
+    let validConnection = connections.find(conn =>
+        conn.innerOrbitIdx === currentOrbitIdx &&
+        conn.innerStepIdx === currentStepIdx &&
+        conn.outerOrbitIdx === targetOrbitIdx &&
+        conn.outerStepIdx === targetStepIdx
+    );
+
+    if (validConnection) {
+        return { valid: true };
+    } else {
+        return {valid: false, error: "Need adjacency line clockwise to move between orbits"};
+    }
+}
