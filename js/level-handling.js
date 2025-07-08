@@ -32,7 +32,15 @@ function loadLevel(levelObj) {
     }
 
     // connections
-    connections = levelObj.connections;
+    //connections = levelObj.connections;
+    for(const connArray of levelObj.connections) {
+        connections.push({
+            innerOrbitIdx: connArray[0],
+            innerStepIdx: connArray[1],
+            outerOrbitIdx: connArray[2],
+            outerStepIdx: connArray[3],
+        });
+    }
 
     // planets
     planets = [];
