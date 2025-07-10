@@ -2,6 +2,7 @@ const UNIT_SQUARE_DEFAULT_SIZE = 18;
 var allFleets = [
     {
         ships: 10,
+        ownedByPlayer: 1,
 
         // should be at _either_ a planet
         // (& therefore moving with the planet)
@@ -14,6 +15,7 @@ var allFleets = [
     },
     {
         ships: 10,
+        ownedByPlayer: 2,
         planetIdx: 1,
         orbitIdx: null,
         stepIdx: null,
@@ -46,8 +48,25 @@ function drawFleets() {
             colorCircle(fleetX,fleetY, drawWidth, 'cyan');
         }
         colorRect(drawX,drawY, drawWidth,drawWidth, 'yellow');
-    }
-}
+
+        // TODO: draw player icons instead of colored squares
+        let iconOffset = 6 * scaleFactor;
+        let iconWidth = 20 * scaleFactor;
+        switch(fleet.ownedByPlayer) {
+            case 1:
+                colorRect(drawX - iconOffset,drawY - iconOffset, 
+                    drawWidth * 0.8 ,drawWidth * 0.8, 'red');
+                break;
+            case 2:
+                colorCircle(drawX - (iconOffset / 2),drawY - (iconOffset / 2), 
+                    (drawWidth / 2 ) * 0.9 , '#00ff00');
+                break;
+
+        } // end switch
+
+    } // end for
+
+} // end function
 
 function getFleetStep(fleet) {
     let fleetStep = null;

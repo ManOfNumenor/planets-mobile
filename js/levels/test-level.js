@@ -16,12 +16,12 @@ var testLevel = {
             rotation: 0,
         },
         {
-            radius: 300,
+            radius: 320,
             stepCount: 12,
             rotation: Math.PI / 4,
         },
         {
-            radius: 420,
+            radius: 450,
             stepCount: 16,
             rotation: 0,
         },
