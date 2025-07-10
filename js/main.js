@@ -64,17 +64,25 @@ function debug(message) {
 }
 
 function endTurn() {
-    turnNumber++;
-    for(const planet of planets) {
-        let orbit = orbits[planet.orbitIdx];
-        let finalStepIdx = orbit.steps.length - 1;
+    advancePlayerNumber();
 
-        if(planet.stepIdx < finalStepIdx) {
-            planet.stepIdx++;
-        } else {
-            planet.stepIdx = 0;
+    if(currentPlayerNumber === 0) {
+        turnNumber++;
+        for(const planet of planets) {
+            let orbit = orbits[planet.orbitIdx];
+            let finalStepIdx = orbit.steps.length - 1;
+
+            if(planet.stepIdx < finalStepIdx) {
+                planet.stepIdx++;
+            } else {
+                planet.stepIdx = 0;
+            }
         }
+
+        advancePlayerNumber();
     }
+
+    window.alert(`player ${currentPlayerNumber}'s turn`);
 
     // debug("turn "+turnNumber);
     // logThisRound = true;

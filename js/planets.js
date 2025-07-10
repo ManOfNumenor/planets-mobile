@@ -54,7 +54,18 @@ function drawPlanets() {
 
         if (MOONS_ENABLED) drawAllMoons(planet.moons,step.x,step.y);
 
-    }
+        if(planet.ownedByPlayer) {
+            switch(planet.ownedByPlayer) {
+                case 1:
+                    // TODO: draw player 1 icon below planet
+                    break;
+                case 2:
+                    // TODO: draw player 1 icon below planet
+                    break;
+            } // end switch
+        } // end if
+
+    } // end for
 
     logThisRound = false;
 

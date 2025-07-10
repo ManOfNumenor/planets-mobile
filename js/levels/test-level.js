@@ -1,4 +1,5 @@
 var testLevel = {
+    playerCount: 2,
     orbits: [
         {
             radius: 75,
