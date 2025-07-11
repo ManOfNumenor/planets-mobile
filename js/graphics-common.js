@@ -112,6 +112,7 @@ function gradientAtSunAngle(x,y,radius) {
 }
 
 function shadeCircle(centerX, centerY, radius) {
+    extraShadowWidth = 3; // for hiding atmo, 1px line, etc
 
     /* 45 degree angle version - works great
     let shadowGradient = canvasContext.createLinearGradient(
@@ -127,6 +128,6 @@ function shadeCircle(centerX, centerY, radius) {
 
     canvasContext.fillStyle = shadowGradient;
     canvasContext.beginPath();
-    canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+    canvasContext.arc(centerX, centerY, radius + extraShadowWidth, 0, Math.PI*2, true);
     canvasContext.fill();
 }
