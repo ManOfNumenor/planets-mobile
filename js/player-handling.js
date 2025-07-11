@@ -1,5 +1,5 @@
-var currentPlayerNumber = 1;
-var playerCount = 2;
+var currentPlayerNumber = 0;
+var playerCount = 0;
 
 function advancePlayerNumber() {
     currentPlayerNumber++;

@@ -7,6 +7,8 @@ const PLANET_SIZE_RADIAI = [
 
 function loadLevel(levelObj) {
     // console.log('loading level', levelObj);
+    playerCount = levelObj.playerCount;
+    currentPlayerNumber = 1;
 
     // sun
     setupSun(); // TODO: specify sun sprite based on level data
