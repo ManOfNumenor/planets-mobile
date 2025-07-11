@@ -51,15 +51,16 @@ function drawFleets() {
 
         // TODO: draw player icons instead of colored squares
         let iconOffset = 6 * scaleFactor;
-        let iconWidth = 20 * scaleFactor;
+        let iconWidth = 15 * scaleFactor;
         switch(fleet.ownedByPlayer) {
             case 1:
                 colorRect(drawX - iconOffset,drawY - iconOffset, 
-                    drawWidth * 0.8 ,drawWidth * 0.8, 'red');
+                    iconWidth,iconWidth, 'red');
                 break;
             case 2:
-                colorCircle(drawX - (iconOffset / 2),drawY - (iconOffset / 2), 
-                    (drawWidth / 2 ) * 0.9 , '#00ff00');
+                colorCircle(drawX - (iconOffset / 2),
+                    drawY - (iconOffset / 2), 
+                    (iconWidth / 2 ) * 1.1 , '#00ff00');
                 break;
 
         } // end switch

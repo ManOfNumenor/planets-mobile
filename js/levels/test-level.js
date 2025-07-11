@@ -83,9 +83,8 @@ var testLevel = {
             color: 'red',
             size:1,
             moons:[[22,6,2]], // [distance,speed,radius]
-            //radius: 16,
+            ownedByPlayer: 0,
             //imageVar: planet16x16,
-            //size:1,
         },
         {
             orbitIdx: 1,
@@ -93,7 +92,7 @@ var testLevel = {
             color: '#ff00ff',
             size:1,
             moons:[[26,-0.6,3],[20,-1.2,1]], // [distance,speed,radius]
-            //radius: 16,
+            ownedByPlayer: 2,
             // imageVar: planet24x24,
         },
         {
@@ -102,7 +101,7 @@ var testLevel = {
             color: 'lime',
             size:2,
             moons:[[26,1.5,2]], // [distance,speed,radius]
-            //radius: 16,
+            ownedByPlayer: 0,
             //imageVar: planet32x32,
         },
         {
@@ -110,8 +109,8 @@ var testLevel = {
             startingStepIdx: 1,
             color: 'aliceblue',
             size: 3,
+            ownedByPlayer: 1,
             //moons:[[32,1,1]], // [distance,speed,radius]
-            //radius: 20,
             //imageVar: planet64x64
         },
         {
@@ -120,7 +119,7 @@ var testLevel = {
             color: 'darkgreen',
             size: 3,
             moons:[[36,2,1],[40,1.5,1],[44,1,1],[48,0.5,2]], // [distance,speed,radius]
-            //radius: 20,
+            ownedByPlayer: 0,
             //imageVar: planet128x128,
         },
     ],

@@ -54,13 +54,20 @@ function drawPlanets() {
 
         if (MOONS_ENABLED) drawAllMoons(planet.moons,step.x,step.y);
 
+        // TODO: draw player icons instead of colored squares
+        let iconOffset = 30 * scaleFactor;
+        let iconWidth = 18 * scaleFactor;
+
         if(planet.ownedByPlayer) {
             switch(planet.ownedByPlayer) {
                 case 1:
-                    // TODO: draw player 1 icon below planet
+                    colorRect(step.x - (iconWidth / 2),
+                        step.y + iconOffset, 
+                        iconWidth,iconWidth, 'red');
                     break;
                 case 2:
-                    // TODO: draw player 1 icon below planet
+                    colorCircle(step.x, step.y + iconOffset, 
+                        (iconWidth / 2 ) * 1.1 , '#00ff00');
                     break;
             } // end switch
         } // end if
