@@ -537,14 +537,19 @@ function findValidConnection(currentOrbitIdx, currentStepIdx, targetOrbitIdx, ta
 function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
     // when staying on same orbit check if clockwise
     if (currentOrbitIdx === targetOrbitIdx) {
-        let orbit = orbits[currentOrbitIdx];
-        let nextStepIdx = (currentStepIdx + 1) % orbit.steps.length;
+      let orbit = orbits[currentOrbitIdx];
+      let nextStepIdx = (currentStepIdx + 1) % orbit.steps.length;
 
-        if (targetStepIdx === nextStepIdx) {
-            return { valid: true };
-        } else {
-            return {valid: false, error: "Physics prevents fleet reversing in orbit"};
-        }
+      let prevStepIdx = currentStepIdx - 1;
+      if (prevStepIdx < 0) {
+         prevStepIdx = orbit.steps.length - 1;
+      }
+
+      if (targetStepIdx === nextStepIdx || targetStepIdx === prevStepIdx) {
+         return { valid: true };
+      } else {
+         return {valid: false, error: "Fleet can only move one step clockwise or counter-clockwise"};
+      }
     }
 
     // if not on same orbit look for adjacency line
