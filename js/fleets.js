@@ -39,7 +39,7 @@ function drawFleetSelectionOutline(x,y,w,h,whichSprite) {
 
 function drawFleetIcon(x,y,w,h,whichSprite) {
     // colorRect(x,y,w,h,whichSprite);
-    let angleRad = -performance.now()/400;
+    let angleRad = 0;
     let spriteScale = w*(1/fleetIconPic.width);
     drawBitmapCenteredWithRotationAndScale(fleetIconPic,x,y,angleRad,spriteScale);
 }
