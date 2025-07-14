@@ -1,5 +1,6 @@
 const STEP_INDICATOR_RADIUS = 5;
-const ORBIT_DRAW_COLOR = "cyan";
+//const ORBIT_DRAW_COLOR = "cyan";
+const ORBIT_DRAW_COLOR = "#c0c0c0";
 
 var orbits = [];
 
