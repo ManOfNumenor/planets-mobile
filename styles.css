@@ -1,3 +1,43 @@
+html,body {
+    color: white;
+    background-color: #030303;
+    /* prevent pull-down-refresh and */
+    /* pull-sideways-to-nav on touch devices */
+    /* see: https://stackoverflow.com/a/48417352 */
+    overscroll-behavior: contain;
+    touch-action: none;
+}
+
+canvas {
+    border: 1px solid cyan;
+    height: 85vh;
+    width: 90vw;
+    /* prevent aspect-ratio shifting for canvas contents */
+    /* see: https://www.reddit.com/r/HTML/comments/fss1zo/how_to_solve_blurry_or_distorted_html_canvases/ */
+    object-fit: contain;
+}
+
+#debug { 
+    border: solid 1px lime;
+    font-size: 0.8rem;
+    /* min-height: 200px; */
+    max-height: 50vh;
+    overflow: scroll;
+    /* position: fixed; 
+    top: 2rem;
+    right: 0; */
+}
+
+p#pointerDebug { 
+    border: solid 1px #ff00ff;
+    font-size: 0.7rem;
+    height: 4rem;
+    overflow: hidden;
+    position: fixed;
+    bottom: 7rem;
+    pointer-events: none;
+}
+
 #canvasWrapper {
     position: relative;
     /* Even though this is technically the default
@@ -5,6 +45,11 @@
      * will tell #pauseMenuDiv to use this as a
      * reference point when defining it's position
      * with `position: absolute;`
+     */
+
+    max-width: fit-content; 
+    /* don't create extra margin to the left or right; 
+     * instead wrap tightly around the canvas
      */
 }
 
@@ -52,7 +97,25 @@
 
 /* change to look like default used by existing "End Turn" button. */
 #endTurnButton, #pauseButton {
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     font-family: sans-serif;
     font-size: inherit;
+
+    position: absolute;
+
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid cyan;
+    cursor: pointer;
+}
+
+#pauseButton {
+    top: 2px;
+    left: 2px;
+}
+
+#endTurnButton {
+    bottom: 6px;
+    right: 2px;
 }

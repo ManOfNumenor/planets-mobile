@@ -6,44 +6,6 @@
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title> Planet Orbits </title>
-        <style>
-            html,body {
-                color: white;
-                background-color: #030303;
-                /* prevent pull-down-refresh and */
-                /* pull-sideways-to-nav on touch devices */
-                /* see: https://stackoverflow.com/a/48417352 */
-                overscroll-behavior: contain;
-                touch-action: none;
-            }
-            canvas {
-                border: 1px solid cyan;
-                height: 85vh;
-                width: 90vw;
-                /* prevent aspect-ratio shifting for canvas contents */
-                /* see: https://www.reddit.com/r/HTML/comments/fss1zo/how_to_solve_blurry_or_distorted_html_canvases/ */
-                object-fit: contain;
-            }
-            #debug { 
-                border: solid 1px lime;
-                font-size: 0.8rem;
-                /* min-height: 200px; */
-                max-height: 50vh;
-                overflow: scroll;
-                /* position: fixed; 
-                top: 2rem;
-                right: 0; */
-            }
-            p#pointerDebug { 
-                border: solid 1px #ff00ff;
-                font-size: 0.7rem;
-                height: 4rem;
-                overflow: hidden;
-                position: fixed;
-                bottom: 7rem;
-                pointer-events: none;
-            }
-        </style>
         <link rel="stylesheet" href="styles.css">
     </head>
 
@@ -68,7 +30,7 @@
             </button>
         </div>
 
-        <p id="pointerDebug"></p>
+        <!-- <p id="pointerDebug"></p> -->
 
         <!-- low-level stuff -->
         <script src="js/error-handling.js"></script>

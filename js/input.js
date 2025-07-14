@@ -476,6 +476,8 @@ function distBetween(pointA, pointB) {
 function pointerDebug() {
     if(gameOptions.showPointerDebugInfo) {
         let pointerDebugP = document.getElementById('pointerDebug');
+
+        if(pointerDebugP) {
         pointerDebugP.innerHTML = `
         pointer events: 
         ${currentPointerEvents.map(
@@ -485,6 +487,7 @@ function pointerDebug() {
         prevZoomDiff: ${prevZoomDiff} <br/>
         scaleFactor: ${scaleFactor} <br/>
         `;
+        }
     }
 }
 
