@@ -30,6 +30,27 @@ function moveFleets() {
     // }
 }
 
+function drawFleetSelectionOutline(x,y,w,h,whichSprite) {
+    // colorCircle(x,y,w,whichSprite);
+    let angleRad = performance.now()/100;
+    let spriteScale = w*(1/fleetSelectionOutlinePic.width);
+    drawBitmapCenteredWithRotationAndScale(fleetSelectionOutlinePic,x,y,angleRad,spriteScale);
+}
+
+function drawFleetIcon(x,y,w,h,whichSprite) {
+    // colorRect(x,y,w,h,whichSprite);
+    let angleRad = -performance.now()/400;
+    let spriteScale = w*(1/fleetIconPic.width);
+    drawBitmapCenteredWithRotationAndScale(fleetIconPic,x,y,angleRad,spriteScale);
+}
+
+function drawPlayerIcon(x,y,w,h,whichSprite) {
+    // colorRect(x,y,w,h,whichSprite);
+    let angleRad = 0;
+    let spriteScale = w*(1/playerIconPic.width);
+    drawBitmapCenteredWithRotationAndScale(playerIconPic,x,y,angleRad,spriteScale);
+}
+
 function drawFleets() {
     let drawWidth = UNIT_SQUARE_DEFAULT_SIZE * scaleFactor;
     const selectedCircleRadius = drawWidth + 3;
@@ -45,20 +66,20 @@ function drawFleets() {
         let drawY = fleetY - (drawWidth / 2);
 
         if(selectedEntity && selectedEntity == fleet){
-            colorCircle(fleetX,fleetY, drawWidth, 'cyan');
+            drawFleetSelectionOutline(fleetX,fleetY);
         }
-        colorRect(drawX,drawY, drawWidth,drawWidth, 'yellow');
+        drawFleetIcon(drawX,drawY,drawWidth,drawWidth,'yellow');
 
         // TODO: draw player icons instead of colored squares
         let iconOffset = 6 * scaleFactor;
         let iconWidth = 15 * scaleFactor;
         switch(fleet.ownedByPlayer) {
             case 1:
-                colorRect(drawX - iconOffset,drawY - iconOffset, 
-                    iconWidth,iconWidth, 'red');
+                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
+                    iconWidth,iconWidth, 'red');                    
                 break;
             case 2:
-                colorCircle(drawX - (iconOffset / 2),
+                drawPlayerIcon(drawX - (iconOffset / 2),
                     drawY - (iconOffset / 2), 
                     (iconWidth / 2 ) * 1.1 , '#00ff00');
                 break;

@@ -39,7 +39,7 @@ function drawBitmapCenteredWithRotation(graphic, atX, atY,withAngle) {
   canvasContext.restore(); // undo the translation movement and rotation since save()
 }
 
-function drawBitmapCenteredWithRotationAndScale(graphic, x, y, angleInRadians, scale) {
+function drawBitmapCenteredWithRotationAndScale(graphic, x, y, angleInRadians=0, scale=1) {
     let width = graphic.width;
     let height = graphic.height;
     // Save the current canvas state (transformations)
