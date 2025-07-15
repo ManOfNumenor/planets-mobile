@@ -268,56 +268,68 @@ function handleTap(evt) {
 
     if(!selectedEntity) {
         selectedEntity = tryToSelectEntityAt(touchPos);
-        return;
-    } else {
-        // TODO after fleet class refactor
-        // if(typeof selectedEntity == 'fleet' ) {
-        let target = stepAndOrbitIdxClosestTo(touchPos);
 
-        if(target && 
-            (target.orbitIdx || target.orbitIdx===0) && 
-            (target.stepIdx || target.stepIdx===0)
-            // TODO: && 
-            // selected fleet can move to target
-            ) {
-
-            // find current position of fleet
-            let currentOrbitIdx = selectedEntity.orbitIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].orbitIdx : null);
-            let currentStepIdx = selectedEntity.stepIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].stepIdx : null);
-
-            // allow clockwise orbital movement
-            let moveValidation = isValidClockwiseMove(currentOrbitIdx, currentStepIdx, target.orbitIdx, target.stepIdx);
-
-            // TODO: check if planet is at target step,
-            // and if so set planetIdx instead of 
-            // orbit/step coords
-
-            // debug("moving fleet FROM planet "+
-            //     selectedEntity.planetIdx +
-            //     " orbit "+ 
-            //     selectedEntity.orbitIdx +
-            //     " step " +
-            //     selectedEntity.stepIdx +
-            //     " TO planet (null) orbit "+ 
-            //     target.orbitIdx +
-            //     " step " +
-            //     target.stepIdx
-            // );
-
-            if (moveValidation.valid) {
-               selectedEntity.planetIdx = null;
-               selectedEntity.orbitIdx = target.orbitIdx;
-               selectedEntity.stepIdx = target.stepIdx;
+        if(selectedEntity) { // ie: we found something to select
+            if(selectedEntity.hasOwnProperty("ships")) {
+                // we have selected a fleet
+                selectedFleetAvailableMoves = getAvailableMoves(fleet);
             } else {
-               console.log(moveValidation.error);
+                // we selected something else (or nothing at all)
+                selectedFleetAvailableMoves = [];
             }
         }
+        return;
+    } else {
+        if(selectedEntity.hasOwnProperty("ships")) {
+            // selectedEntity is a fleet
 
-        // deselect automatically so player
-        // can select something else
-        selectedEntity = null;
+            // attempt to move fleet
+            let target = stepAndOrbitIdxClosestTo(touchPos);
 
-        // }
+            if(target && 
+                (target.orbitIdx || target.orbitIdx===0) && 
+                (target.stepIdx || target.stepIdx===0)
+                // TODO: && 
+                // selectedFleetCanMoveTo(target)
+            ) {
+
+                // find current position of fleet
+                let currentOrbitIdx = selectedEntity.orbitIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].orbitIdx : null);
+                let currentStepIdx = selectedEntity.stepIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].stepIdx : null);
+
+                // allow clockwise orbital movement
+                let moveValidation = isValidClockwiseMove(currentOrbitIdx, currentStepIdx, target.orbitIdx, target.stepIdx);
+
+                // TODO: check if planet is at target step,
+                // and if so set planetIdx instead of 
+                // orbit/step coords
+
+                // debug("moving fleet FROM planet "+
+                //     selectedEntity.planetIdx +
+                //     " orbit "+ 
+                //     selectedEntity.orbitIdx +
+                //     " step " +
+                //     selectedEntity.stepIdx +
+                //     " TO planet (null) orbit "+ 
+                //     target.orbitIdx +
+                //     " step " +
+                //     target.stepIdx
+                // );
+
+                if (moveValidation.valid) {
+                    selectedEntity.planetIdx = null;
+                    selectedEntity.orbitIdx = target.orbitIdx;
+                    selectedEntity.stepIdx = target.stepIdx;
+                } else {
+                    console.log(moveValidation.error);
+                }
+            }
+
+            // deselect automatically so player
+            // can select something else
+            selectedEntity = null;
+
+        }
     }
 
 

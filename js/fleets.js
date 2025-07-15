@@ -1,4 +1,6 @@
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
+var selectedFleetAvailableMoves = [];
+
 var allFleets = [
     {
         ships: 10,
@@ -104,4 +106,21 @@ function getFleetStep(fleet) {
     }
 
     return fleetStep;
+}
+
+function getAvailableMoves(fleet) {
+    if(!fleet || !fleet.hasOwnProperty('ships')) {
+        // invalid fleet obj; abort.
+        return [];
+    }
+
+    // TODO: calculate all possible destinations where 
+    // the given fleet can move to this turn and return 
+    // them in an array
+}
+
+function selectedFleetCanMoveTo(target) {
+    // TODO: crunch numbers & return a boolean;
+    // probably involves checking against global
+    // selectedFleetAvailableMoves var
 }

@@ -1,7 +1,7 @@
 // a little experiment we may not use in the game:
 // orbital bodies like moons, rings, and satellites
 
-const MOONS_ENABLED = true; // set false to remove all this lunacy
+const MOONS_ENABLED = false; // set false to remove all this lunacy
 
 function drawAllMoons(moons,planetx,planety) {
     //console.log("drawing all these moons:",moons);
