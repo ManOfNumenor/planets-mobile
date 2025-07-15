@@ -1,5 +1,6 @@
 const SUNSPOTS_ENABLED = true;
 const SUNSPOT_SCROLL_SPEED = 1.75;
+const SUNSPOT_OPACITY = 0.35;
 
 var sun = {
     x: 1,
@@ -38,6 +39,8 @@ function drawSun() {
 
 function drawSunspots(x,y,radius,speed) {
     //console.log("drawing sunspots at "+x+","+y);
+    // FIXME: radius seems to need to be a bit bigger: s the sun src art offsize?
+    radius *= 1.125;
     canvasContext.save(); 
     // create a circular "clipping" path
     canvasContext.beginPath();
@@ -48,6 +51,7 @@ function drawSunspots(x,y,radius,speed) {
     let dy = 0;
     let w = radius*2;
     let h = radius*2;
+    canvasContext.globalAlpha = SUNSPOT_OPACITY;
     canvasContext.drawImage(sunspotPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
     canvasContext.restore();
 }
