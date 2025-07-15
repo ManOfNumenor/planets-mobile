@@ -4,6 +4,7 @@ var playerIconPic = document.createElement('img');
 
 var moonPic = document.createElement('img');
 var cloudPic = document.createElement('img');
+var sunspotPic = document.createElement('img');
 // remnants of pixel-planet experiments
 var planet16x16 = document.createElement('img');
 // var planet24x24 = document.createElement('img');
@@ -48,6 +49,7 @@ function loadImages() {
         // or imageLoadingDoneSoStartGame() never gets called
         {varName: moonPic, theFile: "moon.png"},
         {varName: cloudPic, theFile: "clouds.png"},
+        {varName: sunspotPic, theFile: "sunspots.png"},
 
         {varName: fleetSelectionOutlinePic, theFile: "fleetSelectionOutline.png"},
         {varName: fleetIconPic, theFile: "fleetIcon.png"},

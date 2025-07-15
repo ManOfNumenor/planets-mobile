@@ -1,3 +1,6 @@
+const SUNSPOTS_ENABLED = true;
+const SUNSPOT_SCROLL_SPEED = 1.75;
+
 var sun = {
     x: 1,
     y: 1,
@@ -29,7 +32,24 @@ function drawSun() {
         // 2nd layer moves at a diff speed so the "shine lines" overlap and "glitter"
         drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,-sunRotation*.666,imgScale)
     }
+
+    if (SUNSPOTS_ENABLED) drawSunspots(sun.x,sun.y,sun.radius*scaleFactor,SUNSPOT_SCROLL_SPEED);
 }
 
+function drawSunspots(x,y,radius,speed) {
+    //console.log("drawing sunspots at "+x+","+y);
+    canvasContext.save(); 
+    // create a circular "clipping" path
+    canvasContext.beginPath();
+    canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
+    canvasContext.clip(); // now whatever we draw has to be inside the path
+    // scroll through a seamless panorama
+    let dx = (performance.now()/1000*speed) % sunspotPic.width;
+    let dy = 0;
+    let w = radius*2;
+    let h = radius*2;
+    canvasContext.drawImage(sunspotPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
+    canvasContext.restore();
+}
 
 
