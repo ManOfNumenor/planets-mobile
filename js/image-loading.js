@@ -5,6 +5,9 @@ var playerIconPic = document.createElement('img');
 var moonPic = document.createElement('img');
 var cloudPic = document.createElement('img');
 var sunspotPic = document.createElement('img');
+var ringsFrontPic = document.createElement('img');
+var ringsBackPic = document.createElement('img');
+
 // remnants of pixel-planet experiments
 var planet16x16 = document.createElement('img');
 // var planet24x24 = document.createElement('img');
@@ -50,6 +53,8 @@ function loadImages() {
         {varName: moonPic, theFile: "moon.png"},
         {varName: cloudPic, theFile: "clouds.png"},
         {varName: sunspotPic, theFile: "sunspots.png"},
+        {varName: ringsFrontPic, theFile: "rings-front.png"},
+        {varName: ringsBackPic, theFile: "rings-back.png"},
 
         {varName: fleetSelectionOutlinePic, theFile: "fleetSelectionOutline.png"},
         {varName: fleetIconPic, theFile: "fleetIcon.png"},

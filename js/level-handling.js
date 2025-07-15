@@ -54,6 +54,7 @@ function loadLevel(levelObj) {
             stepIdx: levelPlanet.startingStepIdx,
             imageVar: levelPlanet.imageVar,
             moons: levelPlanet.moons,
+            rings: levelPlanet.rings,
             ownedByPlayer: levelPlanet.ownedByPlayer,
         });
     }

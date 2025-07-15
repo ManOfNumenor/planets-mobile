@@ -33,6 +33,11 @@ function drawPlanets() {
         //         'cyan');
         // }
 
+        if (planet.rings) {
+            drawBitmapCenteredWithRotationAndScale(ringsBackPic,
+                Math.round(step.x),Math.round(step.y),0,scaleFactor/3);
+        }
+
         if(planet.imageVar) {
             drawBitmapCenteredWithRotationAndScale(
                 planet.imageVar, 
@@ -51,6 +56,11 @@ function drawPlanets() {
         // draw planet shadow
         shadeCircle(step.x, step.y,
                 planet.radius * scaleFactor);
+
+        if (planet.rings) {
+            drawBitmapCenteredWithRotationAndScale(ringsFrontPic,
+            Math.round(step.x),Math.round(step.y),0,scaleFactor/3);
+        }
 
         if (MOONS_ENABLED) drawAllMoons(planet.moons,step.x,step.y);
 

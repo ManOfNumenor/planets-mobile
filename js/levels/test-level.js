@@ -110,6 +110,7 @@ var testLevel = {
             size: 3,
             moons:[[36,2,1],[40,1.5,1],[44,1,1],[48,0.5,2]], // [distance,speed,radius]
             ownedByPlayer: 0,
+            rings:true, // TODO: could be [angle,radius,opacity]
             //imageVar: planet128x128,
         },
     ],
