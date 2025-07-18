@@ -272,7 +272,7 @@ function handleTap(evt) {
         if(selectedEntity) { // ie: we found something to select
             if(selectedEntity.hasOwnProperty("ships")) {
                 // we have selected a fleet
-                selectedFleetAvailableMoves = getAvailableMoves(fleet);
+                selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
             } else {
                 // we selected something else (or nothing at all)
                 selectedFleetAvailableMoves = [];
