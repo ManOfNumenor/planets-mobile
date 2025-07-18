@@ -1,3 +1,5 @@
+const ALL_SOUND_MUTED = false; // true for pure silence
+
 // all sound and music must be deferred
 // until after 1st user interaction (see input.js)
 // because browsers don't permit sound to "autoplay" anymore
@@ -13,10 +15,10 @@ const SFX_VOLUME = 1; // max volume, as recorded
 // if (music) music.play();
 
 function soundInitialize() { // called by first user input
-
-    if (soundInitialized) return; // only run once
+    if (ALL_SOUND_MUTED) return; // never downloads anything if true
+    if (soundInitialized) return; // only run this once
     
-    console.log("PLAYING MUSIC");
+    console.log("Initializing sound and STARTING MUSIC");
     
     // music by Michael Avrie - @tarnishedmoth
     music = new Audio("../audio/music_10_minute_ambience.mp3");

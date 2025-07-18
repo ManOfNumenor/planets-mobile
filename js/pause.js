@@ -25,10 +25,12 @@ function togglePause() {
 }
 
 function resumeGame() {
+    if (confirmSound) confirmSound.play();
     isPaused = false;
     document.getElementById('pauseMenuDiv').style.display = 'none';
 }
 
 function mainMenu() {
+    if (confirmSound) confirmSound.play();
     debug('Main menu will appear later');
 }
