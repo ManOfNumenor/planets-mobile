@@ -3,10 +3,13 @@
 // because browsers don't permit sound to "autoplay" anymore
 
 var soundInitialized = false;
-var music = null;
-const MUSIC_SOUND_VOLUME = 0.125; // very quiet so GUI/battle sfx dominate
 
-// example use:
+var music, pauseSound, endTurnSound, confirmSound; // add more here
+
+const MUSIC_SOUND_VOLUME = 0.125; // very quiet
+const SFX_VOLUME = 1; // max volume, as recorded
+
+// example code safe to use anytime:
 // if (music) music.play();
 
 function soundInitialize() { // called by first user input
@@ -20,6 +23,15 @@ function soundInitialize() { // called by first user input
     music.volume = MUSIC_SOUND_VOLUME;
     music.loop = true; // continue forever
     music.play();
+
+    pauseSound = new Audio("../audio/pause.wav");
+    pauseSound.volume = SFX_VOLUME;
+    
+    endTurnSound = new Audio("../audio/end-turn.wav");
+    endTurnSound.volume = SFX_VOLUME;
+    
+    confirmSound = new Audio("../audio/deep-confirm.wav");
+    confirmSound.volume = SFX_VOLUME;
     
     soundInitialized = true;
 }

@@ -64,6 +64,9 @@ function debug(message) {
 }
 
 function endTurn() {
+    
+    if (endTurnSound) endTurnSound.play();
+
     advancePlayerNumber();
 
     if(currentPlayerNumber === 0) {

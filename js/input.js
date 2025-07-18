@@ -415,6 +415,7 @@ function tryToSelectEntityAt(touchPos) {
 
     if(closestEntity) {
         console.log('found one');
+        if (confirmSound) confirmSound.play();
     } else {
         console.log('could not find closest entity');
     }

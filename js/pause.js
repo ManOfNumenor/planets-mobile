@@ -11,6 +11,9 @@ function setupPause() {
 }
 
 function togglePause() {
+    
+    if (pauseSound) pauseSound.play();
+    
     isPaused = !isPaused;
     let pauseMenuDiv = document.getElementById('pauseMenuDiv');
     
