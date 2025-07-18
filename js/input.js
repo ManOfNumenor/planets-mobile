@@ -48,6 +48,9 @@ function pointerdownHandler(evt) {
     console.log('pointerdown');
     console.log('pointerdown evt', evt);
 
+    // browsers block autoplay so we wait for 1st interaction
+    if (!soundInitialized) soundInitialize();
+
     currentPointerEvents.push(evt);
     console.log('currentPointerEvents', currentPointerEvents);
 
@@ -261,10 +264,17 @@ function removePointer(evt) {
 
 function keyupHandler(evt) {
     // any keyboard shortcuts can go here
+    
+    // browsers block autoplay so we wait for 1st interaction
+    if (!soundInitialized) soundInitialize();
+
 }
 
 function handleTap(evt) {
     let touchPos = calculateMousePos(evt);
+
+    // browsers block autoplay so we wait for 1st interaction
+    if (!soundInitialized) soundInitialize();
 
     if(!selectedEntity) {
         selectedEntity = tryToSelectEntityAt(touchPos);
