@@ -542,23 +542,36 @@ function mouseWheelHandler(evt) {
 
 }
 
+// enable moving between orbits in either direction
 function findValidConnection(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
     return connections.find(conn => {
-        if (conn.direction === "outward") {
-            return conn.innerOrbitIdx === currentOrbitIdx &&
-                   conn.innerStepIdx === currentStepIdx &&
-                   conn.outerOrbitIdx === targetOrbitIdx &&
-                   conn.outerStepIdx === targetStepIdx;
-        }
-        if (conn.direction === "inward") {
-            return conn.outerOrbitIdx === currentOrbitIdx &&
-                   conn.outerStepIdx === currentStepIdx &&
-                   conn.innerOrbitIdx === targetOrbitIdx &&
-                   conn.innerStepIdx === targetStepIdx;
-        }
-        return false;
+        return (conn.innerOrbitIdx === currentOrbitIdx &&
+                conn.innerStepIdx === currentStepIdx &&
+                conn.outerOrbitIdx === targetOrbitIdx &&
+                conn.outerStepIdx === targetStepIdx) ||
+               (conn.outerOrbitIdx === currentOrbitIdx &&
+                conn.outerStepIdx === currentStepIdx &&
+                conn.innerOrbitIdx === targetOrbitIdx &&
+                conn.innerStepIdx === targetStepIdx);
     });
 }
+// function findValidConnection(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
+//     return connections.find(conn => {
+//         if (conn.direction === "outward") {
+//             return conn.innerOrbitIdx === currentOrbitIdx &&
+//                    conn.innerStepIdx === currentStepIdx &&
+//                    conn.outerOrbitIdx === targetOrbitIdx &&
+//                    conn.outerStepIdx === targetStepIdx;
+//         }
+//         if (conn.direction === "inward") {
+//             return conn.outerOrbitIdx === currentOrbitIdx &&
+//                    conn.outerStepIdx === currentStepIdx &&
+//                    conn.innerOrbitIdx === targetOrbitIdx &&
+//                    conn.innerStepIdx === targetStepIdx;
+//         }
+//         return false;
+//     });
+// }
 
 function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, targetStepIdx) {
     // when staying on same orbit check if clockwise
