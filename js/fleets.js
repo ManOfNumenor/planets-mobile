@@ -117,10 +117,65 @@ function getAvailableMoves(fleet) {
     // TODO: calculate all possible destinations where 
     // the given fleet can move to this turn and return 
     // them in an array
+    let availableMoves = [];
+
+    let currentOrbitIdx = fleet.orbitIdx || (fleet.planetIdx !== null ? planets[fleet.planetIdx].orbitIdx : null);
+    let currentStepIdx = fleet.stepIdx || (fleet.planetIdx !== null ? planets[fleet.planetIdx].stepIdx : null);
+    
+    if(currentOrbitIdx === null || currentStepIdx === null) {
+        return [];
+    }
+
+    let currentOrbit = orbits[currentOrbitIdx];
+    
+    let clockwiseStepIdx = (currentStepIdx + 1) % currentOrbit.steps.length;
+    availableMoves.push({
+        orbitIdx: currentOrbitIdx,
+        stepIdx: clockwiseStepIdx
+    });
+    
+    let counterClockwiseStepIdx = currentStepIdx - 1;
+    if(counterClockwiseStepIdx < 0) {
+        counterClockwiseStepIdx = currentOrbit.steps.length - 1;
+    }
+    availableMoves.push({
+        orbitIdx: currentOrbitIdx,
+        stepIdx: counterClockwiseStepIdx
+    });
+    
+    let connectionMovements = connections.filter(conn => {
+        return (conn[0] === currentOrbitIdx && conn[1] === currentStepIdx) ||
+               (conn[2] === currentOrbitIdx && conn[3] === currentStepIdx);
+    });
+    
+    for(const conn of connectionMovements) {
+        if(conn[0] === currentOrbitIdx && conn[1] === currentStepIdx) {
+            availableMoves.push({
+                orbitIdx: conn[2],
+                stepIdx: conn[3]
+            });
+        } else {
+            availableMoves.push({
+                orbitIdx: conn[0],
+                stepIdx: conn[1]
+            });
+        }
+    }
+    console.log('Fleet current position:', {orbitIdx: currentOrbitIdx, stepIdx: currentStepIdx});
+    console.log('Available moves:', availableMoves);
+    console.log('Connection moves found:', connectionMovements.length);
+    connectionMovements.forEach((conn, index) => {
+      console.log(`Connection ${index}:`, conn);
+    });
+    return availableMoves;
 }
 
 function selectedFleetCanMoveTo(target) {
     // TODO: crunch numbers & return a boolean;
     // probably involves checking against global
     // selectedFleetAvailableMoves var
+      return selectedFleetAvailableMoves.some(move => 
+        move.orbitIdx === target.orbitIdx && 
+        move.stepIdx === target.stepIdx
+    );
 }

@@ -52,7 +52,7 @@ function pointerdownHandler(evt) {
     if (!soundInitialized) soundInitialize();
 
     currentPointerEvents.push(evt);
-    console.log('currentPointerEvents', currentPointerEvents);
+    //console.log('currentPointerEvents', currentPointerEvents);
 
     if(!dragStartEvt && !startingSunCoords) {
         // no existing dragging anchors,
@@ -164,7 +164,7 @@ function pointerupHandler(evt) {
 
     if(currentPointerEvents.length < 2) {
         // stop zooming
-        console.log('clearingZoomDiff');
+      //   console.log('clearingZoomDiff');
         currentZoomDiff = -1;
     }
 
@@ -393,8 +393,7 @@ function debugCurrentPointerEvents() {
 }
 
 function tryToSelectEntityAt(touchPos) {
-    console.log('trying to select entity at: ('+
-        touchPos.x + ', ' + touchPos.y +')');
+    //console.log('trying to select entity at: ('+ touchPos.x + ', ' + touchPos.y +')');
 
     let closestDistToTapFound = MAX_ENTITY_TAP_RADIUS;
     let closestEntity = null;
@@ -404,10 +403,10 @@ function tryToSelectEntityAt(touchPos) {
             fleet.x +', '+ fleet.y +')');
         let fleetStep = getFleetStep(fleet);
         let distFromTap = distBetween(touchPos, fleetStep);
-        console.log('dist from tap: ' + distFromTap);
+        //console.log('dist from tap: ' + distFromTap);
         if( distFromTap <
             closestDistToTapFound ) {
-            console.log('new closest entity found');
+            //console.log('new closest entity found');
             closestEntity = fleet;
             closestDistToTapFound = distFromTap;
         }
