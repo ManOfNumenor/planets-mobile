@@ -144,20 +144,20 @@ function getAvailableMoves(fleet) {
     });
     
     let connectionMovements = connections.filter(conn => {
-        return (conn[0] === currentOrbitIdx && conn[1] === currentStepIdx) ||
-               (conn[2] === currentOrbitIdx && conn[3] === currentStepIdx);
+        return (conn.innerOrbitIdx === currentOrbitIdx && conn.innerStepIdx === currentStepIdx) ||
+               (conn.outerOrbitIdx === currentOrbitIdx && conn.outerStepIdx === currentStepIdx);
     });
     
     for(const conn of connectionMovements) {
-        if(conn[0] === currentOrbitIdx && conn[1] === currentStepIdx) {
+        if(conn.innerOrbitIdx === currentOrbitIdx && conn.innerStepIdx === currentStepIdx) {
             availableMoves.push({
-                orbitIdx: conn[2],
-                stepIdx: conn[3]
+                orbitIdx: conn.outerOrbitIdx,
+                stepIdx: conn.outerStepIdx,
             });
         } else {
             availableMoves.push({
-                orbitIdx: conn[0],
-                stepIdx: conn[1]
+                orbitIdx: conn.innerOrbitIdx,
+                stepIdx: conn.innerStepIdx,
             });
         }
     }

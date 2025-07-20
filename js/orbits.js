@@ -70,6 +70,13 @@ function drawOrbits() {
                 colorCircle(step.x,step.y,
                     STEP_INDICATOR_RADIUS * scaleFactor,
                     ORBIT_DRAW_COLOR);
+                
+                if(selectedFleetCanMoveTo({ orbitIdx: orbitIdx, stepIdx: i})) {
+                    // TODO: make sure future indicator can be drawn over planets
+                    colorCircle(step.x,step.y,
+                        (STEP_INDICATOR_RADIUS + 3) * scaleFactor,
+                        'yellow');
+                }
 
                 if(gameOptions.showOrbitDebugInfo) {
                     const labelOffset = 
