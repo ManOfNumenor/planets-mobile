@@ -71,6 +71,7 @@ function endTurn() {
 
     if(currentPlayerNumber === 0) {
         turnNumber++;
+        movePlanetsAndProduceShips();
         for(const planet of planets) {
             let orbit = orbits[planet.orbitIdx];
             let finalStepIdx = orbit.steps.length - 1;

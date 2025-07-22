@@ -49,6 +49,7 @@ function loadLevel(levelObj) {
     for(const levelPlanet of levelObj.planets) {
         planets.push({
             color: levelPlanet.color,
+            size: levelPlanet.size,
             radius: PLANET_SIZE_RADIAI[levelPlanet.size],
             orbitIdx: levelPlanet.orbitIdx,
             stepIdx: levelPlanet.startingStepIdx,

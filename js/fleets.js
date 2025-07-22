@@ -1,4 +1,5 @@
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
+const SHIP_PRODUCTION_FACTOR = 1;
 var selectedFleetAvailableMoves = [];
 
 var allFleets = [
@@ -178,4 +179,36 @@ function selectedFleetCanMoveTo(target) {
         move.orbitIdx === target.orbitIdx && 
         move.stepIdx === target.stepIdx
     );
+}
+
+function movePlanetsAndProduceShips() {
+    for(let i=0;i<planets.length;i++) {
+
+        let planet = planets[i];
+        let orbit = orbits[planet.orbitIdx];
+        let finalStepIdx = orbit.steps.length - 1;
+
+        if(planet.stepIdx < finalStepIdx) {
+            planet.stepIdx++;
+        } else {
+            planet.stepIdx = 0;
+        }
+
+        if(planet.ownedByPlayer > 0) {
+            let countShipsProduced = Math.floor(planet.size * SHIP_PRODUCTION_FACTOR);
+            let fleetAtPlanet = allFleets.find(fleet => fleet.planetIdx === i);
+
+            if(fleetAtPlanet && fleetAtPlanet.ownedByPlayer === planet.ownedByPlayer) {
+                fleetAtPlanet.ships += countShipsProduced;
+            } else {
+                allFleets.push({
+                    ships: countShipsProduced,
+                    ownedByPlayer: planet.ownedByPlayer,
+                    planetIdx: i,
+                    orbitIdx: null,
+                    stepIdx: null,
+                });
+            }
+        }
+    }
 }
