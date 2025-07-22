@@ -74,6 +74,7 @@ var testLevel = {
             size:1,
             moons:[[22,6,2]], // [distance,speed,radius]
             ownedByPlayer: 0,
+            hasClouds: false,
             //imageVar: planet16x16,
         },
         {
@@ -83,6 +84,7 @@ var testLevel = {
             size:1,
             moons:[[26,-0.6,3],[20,-1.2,1]], // [distance,speed,radius]
             ownedByPlayer: 2,
+            hasClouds: true,
             // imageVar: planet24x24,
         },
         {
@@ -92,6 +94,7 @@ var testLevel = {
             size:2,
             moons:[[26,1.5,2]], // [distance,speed,radius]
             ownedByPlayer: 0,
+            hasClouds: true,
             //imageVar: planet32x32,
         },
         {
@@ -100,6 +103,7 @@ var testLevel = {
             color: 'aliceblue',
             size: 3,
             ownedByPlayer: 1,
+            hasClouds: false,
             //moons:[[32,1,1]], // [distance,speed,radius]
             //imageVar: planet64x64
         },
@@ -110,6 +114,7 @@ var testLevel = {
             size: 3,
             moons:[[36,2,1],[40,1.5,1],[44,1,1],[48,0.5,2]], // [distance,speed,radius]
             ownedByPlayer: 0,
+            hasClouds: false,
             rings:true, // TODO: could be [angle,radius,opacity]
             //imageVar: planet128x128,
         },

@@ -50,8 +50,9 @@ function drawPlanets() {
                 planet.radius * scaleFactor, planet.color);
         }
 
-        // if (planet.hasClouds) 
-        drawCloudLayer(step.x,step.y,planet.radius*scaleFactor,10);
+        if (planet.hasClouds) {
+            drawCloudLayer(step.x,step.y,planet.radius*scaleFactor,10);
+        }
 
         // draw planet shadow
         shadeCircle(step.x, step.y,
