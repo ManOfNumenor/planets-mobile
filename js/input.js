@@ -298,9 +298,8 @@ function handleTap(evt) {
 
             if(target && 
                 (target.orbitIdx || target.orbitIdx===0) && 
-                (target.stepIdx || target.stepIdx===0)
-                // TODO: && 
-                // selectedFleetCanMoveTo(target)
+                (target.stepIdx || target.stepIdx===0) && 
+                selectedFleetCanMoveTo(target)
             ) {
 
                 // find current position of fleet
@@ -330,6 +329,8 @@ function handleTap(evt) {
                     selectedEntity.planetIdx = null;
                     selectedEntity.orbitIdx = target.orbitIdx;
                     selectedEntity.stepIdx = target.stepIdx;
+
+                    selectedFleetAvailableMoves = [];
                 } else {
                     console.log(moveValidation.error);
                 }
@@ -338,6 +339,7 @@ function handleTap(evt) {
             // deselect automatically so player
             // can select something else
             selectedEntity = null;
+            selectedFleetAvailableMoves = [];
 
         }
     }
