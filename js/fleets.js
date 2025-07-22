@@ -35,7 +35,7 @@ function moveFleets() {
 function drawFleetSelectionOutline(x,y,w,h,whichSprite) {
     // colorCircle(x,y,w,whichSprite);
     let angleRad = performance.now()/600;
-    let spriteScale = w*(1/fleetSelectionOutlinePic.width);
+    let spriteScale = (scaleFactor / 2)*(1 / fleetSelectionOutlinePic.width + 1);
     drawBitmapCenteredWithRotationAndScale(fleetSelectionOutlinePic,x,y,angleRad,spriteScale);
 }
 
