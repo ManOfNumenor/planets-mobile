@@ -72,13 +72,21 @@ function drawPlanets() {
         if(planet.ownedByPlayer) {
             switch(planet.ownedByPlayer) {
                 case 1:
-                    colorRect(step.x - (iconWidth / 2),
-                        step.y + iconOffset, 
-                        iconWidth,iconWidth, 'red');
+                    // a red rectangle below the planet
+                    //colorRect(step.x - (iconWidth / 2),
+                    //    step.y + iconOffset, 
+                    //    iconWidth,iconWidth, 'red');
+                    // a red dotted circle around planet
+                    drawBitmapCenteredWithRotationAndScale(ownedByPlayer1Pic,
+                        Math.round(step.x),Math.round(step.y),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
                     break;
+                
                 case 2:
-                    colorCircle(step.x, step.y + iconOffset, 
-                        (iconWidth / 2 ) * 1.1 , '#00ff00');
+                    //colorCircle(step.x, step.y + iconOffset, 
+                    //    (iconWidth / 2 ) * 1.1 , '#00ff00');
+                    // a green dashed circle around planet
+                    drawBitmapCenteredWithRotationAndScale(ownedByPlayer2Pic,
+                        Math.round(step.x),Math.round(step.y),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
                     break;
             } // end switch
         } // end if

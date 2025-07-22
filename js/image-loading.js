@@ -1,6 +1,8 @@
 var fleetSelectionOutlinePic = document.createElement('img');
 var fleetIconPic = document.createElement('img');
 var playerIconPic = document.createElement('img');
+var ownedByPlayer1Pic = document.createElement('img');
+var ownedByPlayer2Pic = document.createElement('img');
 
 var moonPic = document.createElement('img');
 var cloudPic = document.createElement('img');
@@ -55,6 +57,8 @@ function loadImages() {
         {varName: sunspotPic, theFile: "sunspots.png"},
         {varName: ringsFrontPic, theFile: "rings-front.png"},
         {varName: ringsBackPic, theFile: "rings-back.png"},
+        {varName: ownedByPlayer1Pic, theFile: "ownedByPlayer1.png"},
+        {varName: ownedByPlayer2Pic, theFile: "ownedByPlayer2.png"},
 
         {varName: fleetSelectionOutlinePic, theFile: "fleetSelectionOutline.png"},
         {varName: fleetIconPic, theFile: "fleetIcon.png"},
