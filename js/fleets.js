@@ -181,6 +181,32 @@ function selectedFleetCanMoveTo(target) {
     );
 }
 
+function moveFleetToTarget(fleet, target) {
+    let foundPlanetIdx = planets.findIndex((planet) => {
+        return planet.orbitIdx == target.orbitIdx &&
+            planet.stepIdx == target.stepIdx;
+    });
+
+    if(foundPlanetIdx !== -1) {
+        fleet.planetIdx = foundPlanetIdx;
+        fleet.orbitIdx = null;
+        fleet.stepIdx = null;
+    } else {
+        fleet.planetIdx = null;
+        fleet.orbitIdx = target.orbitIdx;
+        fleet.stepIdx = target.stepIdx;
+    }
+
+    // TODO: initiate fleet combat logic here, including:
+
+    /*
+    if(foundPlanetIdx !== -1 && fleet won combat) {
+        // TODO: check planet conquering logic here
+    }
+    */
+
+}
+
 function movePlanetsAndProduceShips() {
     for(let i=0;i<planets.length;i++) {
 

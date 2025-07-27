@@ -289,7 +289,8 @@ function handleTap(evt) {
             }
         }
         return;
-    } else {
+    } else { // ie: we have a selectedEntity
+
         if(selectedEntity.hasOwnProperty("ships")) {
             // selectedEntity is a fleet
 
@@ -326,9 +327,7 @@ function handleTap(evt) {
                 // );
 
                 if (moveValidation.valid) {
-                    selectedEntity.planetIdx = null;
-                    selectedEntity.orbitIdx = target.orbitIdx;
-                    selectedEntity.stepIdx = target.stepIdx;
+                    moveFleetToTarget(selectedEntity, target);
 
                     selectedFleetAvailableMoves = [];
                 } else {
