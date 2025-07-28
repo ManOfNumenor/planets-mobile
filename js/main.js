@@ -4,6 +4,8 @@ var logThisRound = true;
 var selectedEntity = null;
 var scaleFactor = 1.0;
 
+var selectedFleetInfoDiv = document.getElementById('selectedFleetInfoDiv');
+
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');

@@ -15,6 +15,7 @@ var allFleets = [
         // (& therefore not moving with planets)
         orbitIdx: null,
         stepIdx: null,
+        movedThisTurn: false,
     },
     {
         ships: 10,
@@ -22,6 +23,7 @@ var allFleets = [
         planetIdx: 1,
         orbitIdx: null,
         stepIdx: null,
+        movedThisTurn: false,
     }
 ];
 
@@ -197,8 +199,57 @@ function moveFleetToTarget(fleet, target) {
         fleet.stepIdx = target.stepIdx;
     }
 
-    // TODO: initiate fleet combat logic here, including:
+    let existingFleetAtStep = allFleets.find(foundFleet => {
+        return ( 
+            (foundFleet.stepIdx == target.stepIdx && foundFleet.orbitIdx == target.orbitIdx) ||
+            (foundFleet.planetIdx == foundPlanetIdx)
+        ) && foundFleet !== fleet;
+    });
 
+    if(existingFleetAtStep) {
+        if(existingFleetAtStep.ownedByPlayer === fleet.ownedByPlayer) {
+            // merge the two fleets
+            existingFleetAtStep.ships += fleet.ships;
+
+            // make sure dest fleet can't move again this turn,
+            // otherwise a player can move a big fleet really far 
+            // in one turn by just lining up a bunch of friendly
+            // one-ship fleets it it's path.
+            existingFleetAtStep.movedThisTurn = true; 
+
+            // delete moved fleet
+            allFleets = allFleets.filter(
+                fleetToCheck => fleetToCheck !== fleet
+            );
+        } else {
+            // initiate combat
+
+            if(existingFleetAtStep.ships > fleet.ships) {
+                // existing fleet (defender) wins
+
+                // calculate winner casualties (avoiding zero-fleet ships)
+                existingFleetAtStep.ships = Math.max(existingFleetAtStep.ships - fleet.ships, 1);
+
+                // delete moved fleet
+                allFleets = allFleets.filter(
+                    fleetToCheck => fleetToCheck !== fleet
+                );
+            } else {
+                // fleet (attacker) wins
+
+                // calculate winner casualties (avoiding zero-fleet ships)
+                fleet.ships = Math.max(fleet.ships - existingFleetAtStep.ships, 1);
+
+                // delete existing fleet
+                allFleets = allFleets.filter(
+                    fleetToCheck => fleetToCheck !== existingFleetAtStep
+                );
+            }
+
+        }
+    }
+
+    // TODO: planet capture logic here
     /*
     if(foundPlanetIdx !== -1 && fleet won combat) {
         // TODO: check planet conquering logic here
@@ -237,4 +288,15 @@ function movePlanetsAndProduceShips() {
             }
         }
     }
+}
+
+function setupFleetInfoDiv() {
+    selectedFleetInfoDiv.innerText = "Ships: " + selectedEntity.ships;
+    // TODO: add fleet action buttons
+    selectedFleetInfoDiv.style.display = 'flex';
+}
+
+function clearFleetInfoDiv() {
+    selectedFleetInfoDiv.innerHTML = "";
+    selectedFleetInfoDiv.style.display = 'none';
 }

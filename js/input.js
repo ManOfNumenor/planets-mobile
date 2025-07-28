@@ -283,6 +283,7 @@ function handleTap(evt) {
             if(selectedEntity.hasOwnProperty("ships")) {
                 // we have selected a fleet
                 selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
+                setupFleetInfoDiv();
             } else {
                 // we selected something else (or nothing at all)
                 selectedFleetAvailableMoves = [];
@@ -339,6 +340,7 @@ function handleTap(evt) {
             // can select something else
             selectedEntity = null;
             selectedFleetAvailableMoves = [];
+            clearFleetInfoDiv();
 
         }
     }

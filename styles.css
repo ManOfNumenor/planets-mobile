@@ -96,7 +96,7 @@ p#pointerDebug {
 }
 
 /* change to look like default used by existing "End Turn" button. */
-#endTurnButton, #pauseButton {
+#endTurnButton, #pauseButton, #selectedFleetInfoDiv > button {
     /* margin-left: 1rem; */
     font-family: sans-serif;
     font-size: inherit;
@@ -118,4 +118,18 @@ p#pointerDebug {
 #endTurnButton {
     bottom: 6px;
     right: 2px;
+}
+
+#selectedFleetInfoDiv {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 4px;
+
+    font-family: sans-serif;
+    font-size: inherit;
+
+    border: 2px solid cyan;
+    padding: 0.25rem;
 }
