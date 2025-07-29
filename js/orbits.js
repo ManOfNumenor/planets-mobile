@@ -72,10 +72,7 @@ function drawOrbits() {
                     ORBIT_DRAW_COLOR);
                 
                 if(selectedFleetCanMoveTo({ orbitIdx: orbitIdx, stepIdx: i})) {
-                    // TODO: make sure future indicator can be drawn over planets
-                    colorCircle(step.x,step.y,
-                        (STEP_INDICATOR_RADIUS + 3) * scaleFactor,
-                        'yellow');
+                    drawCanMoveHereIndicator(step);
                 }
 
                 if(gameOptions.showOrbitDebugInfo) {
@@ -126,6 +123,13 @@ function drawOrbits() {
 
 } // end function drawOrbits()
 
+function drawCanMoveHereIndicator(step) {
+    // extracted to function because it's called from 
+    // both drawOrbits() & drawPlanets()
+    colorCircle(step.x,step.y,
+        (STEP_INDICATOR_RADIUS + 3) * scaleFactor,
+        'yellow');
+}
 /*
 function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
     // console.log('updateConnectionLines', orbitIdx, stepIdx, drawCoords);

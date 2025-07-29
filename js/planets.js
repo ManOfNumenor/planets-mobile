@@ -91,6 +91,14 @@ function drawPlanets() {
             } // end switch
         } // end if
 
+        if(selectedFleetCanMoveTo({ 
+                orbitIdx: planet.orbitIdx, 
+                stepIdx: planet.stepIdx
+            })) {
+
+            drawCanMoveHereIndicator(step);
+        }
+
     } // end for
 
     logThisRound = false;
