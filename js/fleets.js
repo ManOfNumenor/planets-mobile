@@ -296,7 +296,9 @@ function movePlanetsAndProduceShips() {
 }
 
 function setupFleetInfoDiv() {
-    selectedFleetInfoDiv.innerText = "Ships: " + selectedEntity.ships;
+    selectedFleetInfoDiv.innerHTML = `
+    Player: ${selectedEntity.ownedByPlayer} Ships: ${selectedEntity.ships}
+    `;
     // TODO: add fleet action buttons
     selectedFleetInfoDiv.style.display = 'flex';
 }

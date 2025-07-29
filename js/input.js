@@ -282,8 +282,11 @@ function handleTap(evt) {
         if(selectedEntity) { // ie: we found something to select
             if(selectedEntity.hasOwnProperty("ships")) {
                 // we have selected a fleet
-                selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
                 setupFleetInfoDiv();
+
+                if(selectedEntity.ownedByPlayer === currentPlayerNumber) {
+                    selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
+                }
             } else {
                 // we selected something else (or nothing at all)
                 selectedFleetAvailableMoves = [];
@@ -292,8 +295,9 @@ function handleTap(evt) {
         return;
     } else { // ie: we have a selectedEntity
 
-        if(selectedEntity.hasOwnProperty("ships")) {
-            // selectedEntity is a fleet
+        if(selectedEntity.hasOwnProperty("ships") && 
+            selectedEntity.ownedByPlayer === currentPlayerNumber) {
+            // selectedEntity is a player-owned fleet
 
             // attempt to move fleet
             let target = stepAndOrbitIdxClosestTo(touchPos);
@@ -336,17 +340,17 @@ function handleTap(evt) {
                 }
             }
 
-            // deselect automatically so player
-            // can select something else
-            selectedEntity = null;
-            selectedFleetAvailableMoves = [];
-            clearFleetInfoDiv();
+        } // end if selectedEntity is a fleet owned by current player
 
-        }
-    }
+        // deselect automatically so player
+        // can select something else
+        selectedEntity = null;
+        selectedFleetAvailableMoves = [];
+        clearFleetInfoDiv();
 
+    } // end else (ie: we have a selected entity
 
-}
+} // end function handleTap(evt)
 
 function calculateMousePos(evt) {
     let rect = canvas.getBoundingClientRect();

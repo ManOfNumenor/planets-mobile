@@ -60,4 +60,7 @@ function loadLevel(levelObj) {
             ownedByPlayer: levelPlanet.ownedByPlayer,
         });
     }
+
+    // finally, show who's first
+    window.alert(`player ${currentPlayerNumber}'s turn`);
 }
