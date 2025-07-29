@@ -244,19 +244,24 @@ function moveFleetToTarget(fleet, target) {
                 allFleets = allFleets.filter(
                     fleetToCheck => fleetToCheck !== existingFleetAtStep
                 );
-            }
 
+            } // end else (attacker wins)
+
+        } // end else (initiate combat)
+
+    } // end if(existingFleetAtStep)
+
+    if(fleet && fleet.planetIdx !== null) {
+        // we landed on a planet and we're still here, conquer it!
+        let planet = planets[foundPlanetIdx];
+
+        if(planet.ownedByPlayer !== fleet.ownedByPlayer) {
+            planet.ownedByPlayer = fleet.ownedByPlayer;
         }
-    }
 
-    // TODO: planet capture logic here
-    /*
-    if(foundPlanetIdx !== -1 && fleet won combat) {
-        // TODO: check planet conquering logic here
-    }
-    */
+    } // end if(fleet && fleet.planetIdx)
 
-}
+} // end function
 
 function movePlanetsAndProduceShips() {
     for(let i=0;i<planets.length;i++) {
