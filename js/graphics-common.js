@@ -101,14 +101,20 @@ function colorLine(startX, startY, endX, endY, lineColor) {
 }
 
 // creates a gradient fillstyle angled to point at the sun
-function gradientAtSunAngle(x,y,radius) {
+function gradientAtSunAngle(x,y,radius, radial=false) {
     const angleRadians = Math.atan2(y-sun.y,x-sun.x);
     //console.log("grad: sun:"+Math.round(sun.x)+","+Math.round(sun.y)+" planet:"+Math.round(x)+","+Math.round(y)+" radius:"+Math.round(radius)+" angle:"+Math.round(angleRadians*(180/Math.PI)));
     const x1 = x - (radius * Math.cos(angleRadians));
     const y1 = y - (radius * Math.sin(angleRadians));    
     const x2 = x + (radius * Math.cos(angleRadians));
     const y2 = y + (radius * Math.sin(angleRadians));    
-    return canvasContext.createLinearGradient(x1,y1,x2,y2);
+
+    if(radial) {
+        // needs much tweaking... much larger radiaii && further dist from center
+        return canvasContext.createRadialGradient(x1,y1,radius / 2, x2,y2, radius);
+    } else {
+        return canvasContext.createLinearGradient(x1,y1,x2,y2);
+    }
 }
 
 function shadeCircle(centerX, centerY, radius) {
@@ -120,11 +126,20 @@ function shadeCircle(centerX, centerY, radius) {
         centerX + radius, centerY + radius,
     ); */
 
-    let shadowGradient = gradientAtSunAngle(centerX, centerY, radius);
+    let shadowGradient = null;
+    if(gameOptions.radialPlanetShadows) {
+        shadowGradient = gradientAtSunAngle(centerX, centerY, radius, true);
 
-    shadowGradient.addColorStop(0, 'transparent');
-    shadowGradient.addColorStop(0.4, 'rgba(0,0,0, 0.4)');
-    shadowGradient.addColorStop(0.6, 'black');
+        shadowGradient.addColorStop(0, 'transparent');
+        shadowGradient.addColorStop(0.4, 'rgba(0,0,0, 0.4)');
+        shadowGradient.addColorStop(0.6, 'black');
+    } else {
+        shadowGradient = gradientAtSunAngle(centerX, centerY, radius);
+
+        shadowGradient.addColorStop(0, 'transparent');
+        shadowGradient.addColorStop(0.4, 'rgba(0,0,0, 0.4)');
+        shadowGradient.addColorStop(0.6, 'black');
+    }
 
     canvasContext.fillStyle = shadowGradient;
     canvasContext.beginPath();
