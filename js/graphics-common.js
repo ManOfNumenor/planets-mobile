@@ -104,15 +104,27 @@ function colorLine(startX, startY, endX, endY, lineColor) {
 function gradientAtSunAngle(x,y,radius, radial=false) {
     const angleRadians = Math.atan2(y-sun.y,x-sun.x);
     //console.log("grad: sun:"+Math.round(sun.x)+","+Math.round(sun.y)+" planet:"+Math.round(x)+","+Math.round(y)+" radius:"+Math.round(radius)+" angle:"+Math.round(angleRadians*(180/Math.PI)));
-    const x1 = x - (radius * Math.cos(angleRadians));
-    const y1 = y - (radius * Math.sin(angleRadians));    
-    const x2 = x + (radius * Math.cos(angleRadians));
-    const y2 = y + (radius * Math.sin(angleRadians));    
 
     if(radial) {
-        // needs much tweaking... much larger radiaii && further dist from center
-        return canvasContext.createRadialGradient(x1,y1,radius / 2, x2,y2, radius);
+        // had to build a 45 degree version to wrap my head around the math
+        // return canvasContext.createRadialGradient(
+        //     x - radius, y - radius, radius / 4,
+        //     x, y, radius * 2,
+        // );
+
+        const x1 = x - (radius * Math.cos(angleRadians));
+        const y1 = y - (radius * Math.sin(angleRadians));    
+        const x2 = x;
+        const y2 = y;    
+
+        return canvasContext.createRadialGradient(x1,y1,radius / 4, x2,y2, radius * 2);
+
     } else {
+        const x1 = x - (radius * Math.cos(angleRadians));
+        const y1 = y - (radius * Math.sin(angleRadians));    
+        const x2 = x + (radius * Math.cos(angleRadians));
+        const y2 = y + (radius * Math.sin(angleRadians));    
+
         return canvasContext.createLinearGradient(x1,y1,x2,y2);
     }
 }
