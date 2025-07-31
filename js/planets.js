@@ -136,7 +136,13 @@ function drawCloudLayer(x,y,radius,speed) {
     let dy = 0;
     let w = radius*2;
     let h = radius*2;
-    canvasContext.drawImage(cloudPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
+
+    // FIXME: scale the src img account for zoom scale
+    // old version: looks nice but no zoom
+    // canvasContext.drawImage(cloudPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
     
+    // solution: src w,h are constant based on max zoom planet radius
+    canvasContext.drawImage(cloudPic,dx,dy,128,128,x-w/2,y-h/2,w,h);
+
     canvasContext.restore();
 }
