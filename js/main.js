@@ -78,7 +78,8 @@ function endTurn() {
         advancePlayerNumber();
     }
 
-    window.alert(`player ${currentPlayerNumber}'s turn`);
+    //window.alert(`player ${currentPlayerNumber}'s turn`);
+    alertDialog(`player ${currentPlayerNumber}'s turn`);
 
     // debug("turn "+turnNumber);
     // logThisRound = true;

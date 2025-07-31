@@ -29,9 +29,26 @@
                 End Turn
             </button>
 
-            <div id="selectedFleetInfoDiv">
-            </div>
+            <div id="selectedFleetInfoDiv"></div>
+
+            <button style="position: absolute; left: 2px; bottom: 2px;"
+                    onclick="testConfirmDialog()">
+                test confirm dialog
+            </button>
         </div>
+
+        <dialog id="alertDialog">
+            <p><!-- this element MUST remain the first child of this dialog element --></p>
+            <button onclick="closeAlertDialog()">Ok</button>
+        </dialog>
+
+        <dialog id="confirmDialog">
+            <p><!-- this element MUST remain the first child of this dialog element --></p>
+            <form method="dialog">
+                <button value="cancel">Cancel</button>
+                <button value="confirm">Confirm</button>
+            </form>
+        </dialog>
 
         <!-- <p id="pointerDebug"></p> -->
 

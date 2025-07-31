@@ -62,5 +62,6 @@ function loadLevel(levelObj) {
     }
 
     // finally, show who's first
-    window.alert(`player ${currentPlayerNumber}'s turn`);
+    //window.alert(`player ${currentPlayerNumber}'s turn`);
+    alertDialog(`player ${currentPlayerNumber}'s turn`);
 }
