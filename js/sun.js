@@ -52,7 +52,13 @@ function drawSunspots(x,y,radius,speed) {
     let w = radius*2;
     let h = radius*2;
     canvasContext.globalAlpha = SUNSPOT_OPACITY;
-    canvasContext.drawImage(sunspotPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
+    
+    // old version: looked strange when zooming
+    // canvasContext.drawImage(sunspotPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
+
+    // new version: constant size for source px
+    canvasContext.drawImage(sunspotPic,dx,dy,256,256,x-w/2,y-h/2,w,h);
+    
     canvasContext.restore();
 }
 
