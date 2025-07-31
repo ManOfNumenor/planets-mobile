@@ -1,5 +1,11 @@
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
 const SHIP_PRODUCTION_FACTOR = 1;
+
+// like on google maps, where pin icons don't change size as you zoom
+// if set to 0, icons will scale with game zoom
+const FLEET_ICON_CONSTANT_SIZE = 42; 
+const PLAYER_ICON_CONSTANT_SIZE = 32; 
+
 var selectedFleetAvailableMoves = [];
 
 var allFleets = [
@@ -46,6 +52,7 @@ function drawFleetIcon(x,y,w,h,whichSprite) {
     // colorRect(x,y,w,h,whichSprite);
     let angleRad = 0;
     let spriteScale = w*(1/fleetIconPic.width);
+    if (FLEET_ICON_CONSTANT_SIZE) spriteScale = FLEET_ICON_CONSTANT_SIZE*(1/fleetIconPic.width);
     drawBitmapCenteredWithRotationAndScale(fleetIconPic,x,y,angleRad,spriteScale);
 }
 
@@ -53,6 +60,7 @@ function drawPlayerIcon(x,y,w,h,whichSprite) {
     // colorRect(x,y,w,h,whichSprite);
     let angleRad = 0;
     let spriteScale = w*(1/playerIconPic.width);
+    if (PLAYER_ICON_CONSTANT_SIZE) spriteScale = PLAYER_ICON_CONSTANT_SIZE*(1/playerIconPic.width);
     drawBitmapCenteredWithRotationAndScale(playerIconPic,x,y,angleRad,spriteScale);
 }
 

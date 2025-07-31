@@ -129,6 +129,14 @@ function drawCanMoveHereIndicator(step) {
     colorCircle(step.x,step.y,
         (STEP_INDICATOR_RADIUS + 3) * scaleFactor,
         'yellow');
+
+    // a spinning green triangle pin to help draw the eye
+    let wobble = Math.cos(performance.now()/222) * 8;
+    canvasContext.drawImage(canMoveHerePic,
+        0,0,canMoveHerePic.width,canMoveHerePic.height,
+        step.x-4-wobble/2,step.y-12-((STEP_INDICATOR_RADIUS + 3) * scaleFactor),
+        8+wobble, 8);
+
 }
 /*
 function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
