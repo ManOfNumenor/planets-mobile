@@ -307,7 +307,7 @@ function handleTap(evt) {
                 (target.stepIdx || target.stepIdx===0) && 
                 selectedFleetCanMoveTo(target)
             ) {
-
+                if (choiceSound) choiceSound();
                 // find current position of fleet
                 let currentOrbitIdx = selectedEntity.orbitIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].orbitIdx : null);
                 let currentStepIdx = selectedEntity.stepIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].stepIdx : null);
@@ -332,6 +332,7 @@ function handleTap(evt) {
                 // );
 
                 if (moveValidation.valid) {
+                    if (choiceSound) choiceSound();
                     moveFleetToTarget(selectedEntity, target);
 
                     selectedFleetAvailableMoves = [];

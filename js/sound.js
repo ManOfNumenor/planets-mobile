@@ -6,7 +6,7 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound; // add more here
+var music, pauseSound, endTurnSound, confirmSound, choiceSound; // add more here
 
 const MUSIC_SOUND_VOLUME = 0.125; // very quiet
 const SFX_VOLUME = 1; // max volume, as recorded
@@ -34,6 +34,36 @@ function soundInitialize() { // called by first user input
     
     confirmSound = new Audio("../audio/deep-confirm.wav");
     confirmSound.volume = SFX_VOLUME;
+
+    choiceSound = makeChoiceSound;
     
     soundInitialized = true;
+}
+
+function makeChoiceSound() {
+    if (ALL_SOUND_MUTED) return;
+
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    const frequencies = [600, 800, 1000];
+    const delays = [0, 0.04, 0.08];
+
+    frequencies.forEach((freq, i) => {
+         const oscillator = ctx.createOscillator();
+         const gainNode = ctx.createGain();
+
+         oscillator.type = 'square';
+         oscillator.frequency.value = freq;
+
+         const startTime = ctx.currentTime + delays[i];
+         gainNode.gain.setValueAtTime(0, startTime);
+         gainNode.gain.linearRampToValueAtTime(0.3 * SFX_VOLUME, startTime + 0.005);
+         gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + 0.03);
+
+         oscillator.connect(gainNode);
+         gainNode.connect(ctx.destination);
+
+         oscillator.start(startTime);
+         oscillator.stop(startTime + 0.03);
+    });
 }
