@@ -43,7 +43,9 @@ function soundInitialize() { // called by first user input
 function makeChoiceSound() {
     if (ALL_SOUND_MUTED) return;
 
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const AudioMaker = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioMaker();
+    const baseTime = ctx.currentTime;
 
     const frequencies = [600, 800, 1000];
     const delays = [0, 0.04, 0.08];
@@ -55,7 +57,7 @@ function makeChoiceSound() {
          oscillator.type = 'square';
          oscillator.frequency.value = freq;
 
-         const startTime = ctx.currentTime + delays[i];
+         const startTime = baseTime + delays[i];
          gainNode.gain.setValueAtTime(0, startTime);
          gainNode.gain.linearRampToValueAtTime(0.3 * SFX_VOLUME, startTime + 0.005);
          gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + 0.03);
