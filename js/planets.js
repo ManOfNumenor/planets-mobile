@@ -1,4 +1,6 @@
 const CLOUD_LAYER_ENABLED = true;
+const CLOUD_SCALE = 80; // how many pixels from src image are resized to fit planet - smaller numbers mean bigger (but blurrier at high zoom) clouds
+const CLOUD_OPACITY = 1; // less than one for fainter clouds (note: image has alpha too)
 
 var planets = [];
 
@@ -142,7 +144,8 @@ function drawCloudLayer(x,y,radius,speed) {
     // canvasContext.drawImage(cloudPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
     
     // solution: src w,h are constant based on max zoom planet radius
-    canvasContext.drawImage(cloudPic,dx,dy,128,128,x-w/2,y-h/2,w,h);
-
+    canvasContext.globalAlpha = CLOUD_OPACITY;
+    canvasContext.drawImage(cloudPic,dx,dy,CLOUD_SCALE,CLOUD_SCALE,x-w/2,y-h/2,w,h);
+    
     canvasContext.restore();
 }
