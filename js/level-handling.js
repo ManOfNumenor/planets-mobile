@@ -58,6 +58,7 @@ function loadLevel(levelObj) {
             hasClouds: levelPlanet.hasClouds,
             rings: levelPlanet.rings,
             ownedByPlayer: levelPlanet.ownedByPlayer,
+            atmosphereColor: levelPlanet.atmosphereColor,
         });
     }
 

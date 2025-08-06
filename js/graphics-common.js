@@ -130,7 +130,8 @@ function gradientAtSunAngle(x,y,radius, radial=false) {
 }
 
 function shadeCircle(centerX, centerY, radius) {
-    extraShadowWidth = 3; // for hiding atmo, 1px line, etc
+    let extraShadowWidth = 3 * scaleFactor; 
+        // for hiding atmo, 1px line, etc
 
     /* 45 degree angle version - works great
     let shadowGradient = canvasContext.createLinearGradient(

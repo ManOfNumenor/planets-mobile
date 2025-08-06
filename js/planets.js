@@ -24,7 +24,7 @@ function drawPlanets() {
         }
 
         if(planet.atmosphereColor) {
-            drawAtmoHaze(planet);
+            drawAtmoHaze(step.x, step.y, planet);
         }
 
         // planets are no longer selectable, but 
@@ -154,18 +154,34 @@ function drawCloudLayer(x,y,radius,speed) {
     canvasContext.restore();
 }
 
-function drawAtmoHaze(planet) {
-    const ATMO_RADIUS_FACTOR = 1.2;
+function drawAtmoHaze(x,y, planet) {
+    //console.log('drawAtmoHaze');
+    const ATMO_RADIUS_FACTOR = 1.3;
 
+    let innerRadius = planet.radius * scaleFactor;
+    let outerRadius = planet.radius * ATMO_RADIUS_FACTOR * scaleFactor;
+
+    //console.log('innerRadius', innerRadius, 'outerRadius', outerRadius);
+    //console.log(x, y, planet.radius, planet.radius * ATMO_RADIUS_FACTOR);
     let atmoGradient = canvasContext.createRadialGradient(
-        planet.x,planet.y, planet.radius
-        planet.x, planet.y, (planet.radius * ATMO_RADIUS_FACTOR)
+        x,y, innerRadius,
+        x,y, outerRadius
     );
 
     atmoGradient.addColorStop(0,
         planet.atmosphereColor);
-    atmoGradient.addColorStop(0.8,
+    atmoGradient.addColorStop(0.4,
         planet.atmosphereColor);
-    ,tmoGradient.addColorStop(1,
+    atmoGradient.addColorStop(1,
         'transparent');
+
+    canvasContext.fillStyle = atmoGradient;
+    canvasContext.fillRect(x - 100, y - 100, 200, 200);
+    /*
+    canvasContext.beginPath();
+    canvasContext.arc(x,y,
+        outerRadius * 2,
+        0, Math.PI*2, true);
+    canvasContext.fill();
+    */
 }
