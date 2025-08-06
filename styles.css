@@ -110,7 +110,7 @@ button {
 }
 
 /* change to look like default used by existing "End Turn" button. */
-#endTurnButton, #pauseButton {
+#endTurnButton, #pauseButton, #warpButton {
 
     /* margin-left: 1rem; */
     position: absolute;
@@ -169,5 +169,10 @@ dialog > p {
 }
 
 dialog::backdrop {
-    rgba(0,0,0, 0.8);
+    color:rgba(0,0,0, 0.8);
+}
+
+#warpButton {
+    top:2px;
+    right:2px;
 }

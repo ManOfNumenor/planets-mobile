@@ -66,3 +66,58 @@ function loadLevel(levelObj) {
     //window.alert(`player ${currentPlayerNumber}'s turn`);
     alertDialog(`player ${currentPlayerNumber}'s turn`);
 }
+
+function randomizeLevel() {
+
+    for (let i=0; i<orbits.length; i++) {
+        // todo: random number of planets+orbits from 1-10
+        // be sure to delete or make new planets if so
+    }
+
+    for (let i=0; i<connections.length; i++) {
+        // calculate via max distance check between steps and orbits
+        // complex multidimensional array - tricky
+    }
+
+    for (let i=0; i<planets.length; i++) {
+            planets[i].color = randomPlanetColor();
+            planets[i].size = randomPlanetSize();
+            planets[i].radius = randomPlanetRadius();
+            
+            // leave it be for now
+            // planets[i].orbitIdx = levelPlanet.orbitIdx;
+            
+            // could pick from 0-orbits[i].steps.length;
+            // planets[i].stepIdx = levelPlanet.startingStepIdx;
+            
+            // pick from random array of special sprites?
+            // planets[i].imageVar = levelPlanet.imageVar;
+
+            planets[i].hasClouds = Math.random()<0.5;
+            planets[i].rings = Math.random()<0.15;
+            planets[i].atmosphereColor = randomPlanetColor();
+
+            // reset ownership
+            planets[i].ownedByPlayer = 0; 
+
+    }
+
+}
+
+function randomPlanetColor() {
+    let r = Math.random()*255;
+    let g = Math.random()*255;
+    let b = Math.random()*255;
+    let a = 1;
+    return "rgba("+r+","+g+","+b+","+a+")";
+}
+
+function randomPlanetSize() { // 1-3
+    return 1+Math.ceil(Math.random()*2);
+}
+
+function randomPlanetRadius() { // 12-32
+    let min = 12;
+    let range = 20;
+    return min+Math.round(Math.random()*range);
+}
