@@ -56,12 +56,12 @@ function drawFleetIcon(x,y,w,h,whichSprite) {
     drawBitmapCenteredWithRotationAndScale(fleetIconPic,x,y,angleRad,spriteScale);
 }
 
-function drawPlayerIcon(x,y,w,h,whichSprite) {
+function drawPlayerIcon(x,y,w,h,whichSprite=player1IconPic) {
     // colorRect(x,y,w,h,whichSprite);
     let angleRad = 0;
-    let spriteScale = w*(1/playerIconPic.width);
-    if (PLAYER_ICON_CONSTANT_SIZE) spriteScale = PLAYER_ICON_CONSTANT_SIZE*(1/playerIconPic.width);
-    drawBitmapCenteredWithRotationAndScale(playerIconPic,x,y,angleRad,spriteScale);
+    let spriteScale = w*(1/whichSprite.width);
+    if (PLAYER_ICON_CONSTANT_SIZE) spriteScale = PLAYER_ICON_CONSTANT_SIZE*(1/whichSprite.width);
+    drawBitmapCenteredWithRotationAndScale(whichSprite,x,y,angleRad,spriteScale);
 }
 
 function drawFleets() {
@@ -89,12 +89,19 @@ function drawFleets() {
         switch(fleet.ownedByPlayer) {
             case 1:
                 drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
-                    iconWidth,iconWidth, 'red');                    
+                    iconWidth,iconWidth, player1IconPic);
                 break;
             case 2:
-                drawPlayerIcon(drawX - (iconOffset / 2),
-                    drawY - (iconOffset / 2), 
-                    (iconWidth / 2 ) * 1.1 , '#00ff00');
+                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
+                    iconWidth,iconWidth, player2IconPic);
+                break;
+            case 3:
+                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
+                    iconWidth,iconWidth, player3IconPic);
+                break;
+            case 4:
+                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
+                    iconWidth,iconWidth, player4IconPic);
                 break;
 
         } // end switch

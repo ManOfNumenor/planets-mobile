@@ -1,6 +1,9 @@
 var fleetSelectionOutlinePic = document.createElement('img');
 var fleetIconPic = document.createElement('img');
-var playerIconPic = document.createElement('img');
+var player1IconPic = document.createElement('img');
+var player2IconPic = document.createElement('img');
+var player3IconPic = document.createElement('img');
+var player4IconPic = document.createElement('img');
 var ownedByPlayer1Pic = document.createElement('img');
 var ownedByPlayer2Pic = document.createElement('img');
 var canMoveHerePic = document.createElement('img');
@@ -64,7 +67,10 @@ function loadImages() {
 
         {varName: fleetSelectionOutlinePic, theFile: "fleetSelectionOutline.png"},
         {varName: fleetIconPic, theFile: "fleetIcon.png"},
-        {varName: playerIconPic, theFile: "playerIcon.png"}, 
+        {varName: player1IconPic, theFile: "player1Icon.png"}, 
+        {varName: player2IconPic, theFile: "player2Icon.png"}, 
+        {varName: player3IconPic, theFile: "player3Icon.png"}, 
+        {varName: player4IconPic, theFile: "player4Icon.png"}, 
 		
         // {varName: planet16x16, theFile: "pixel-planets/planet-16-x-16.png"},
 		// {varName: planet24x24, theFile: "pixel-planets/planet-24-x-24.png"},
