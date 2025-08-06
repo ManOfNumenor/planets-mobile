@@ -21,6 +21,10 @@ function drawPlanets() {
             //
         }
 
+        if(planet.atmosphereColor) {
+            drawAtmoHaze(planet);
+        }
+
         // planets are no longer selectable, but 
         // leaving this here just in case that 
         // changes later on
@@ -145,4 +149,20 @@ function drawCloudLayer(x,y,radius,speed) {
     canvasContext.drawImage(cloudPic,dx,dy,128,128,x-w/2,y-h/2,w,h);
 
     canvasContext.restore();
+}
+
+function drawAtmoHaze(planet) {
+    const ATMO_RADIUS_FACTOR = 1.2;
+
+    let atmoGradient = canvasContext.createRadialGradient(
+        planet.x,planet.y, planet.radius
+        planet.x, planet.y, (planet.radius * ATMO_RADIUS_FACTOR)
+    );
+
+    atmoGradient.addColorStop(0,
+        planet.atmosphereColor);
+    atmoGradient.addColorStop(0.8,
+        planet.atmosphereColor);
+    ,tmoGradient.addColorStop(1,
+        'transparent');
 }
