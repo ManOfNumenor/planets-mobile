@@ -88,7 +88,8 @@ function randomizeLevel() {
             // planets[i].orbitIdx = levelPlanet.orbitIdx;
             
             // could pick from 0-orbits[i].steps.length;
-            // planets[i].stepIdx = levelPlanet.startingStepIdx;
+            // stored initially in levelPlanet.startingStepIdx;
+            planets[i].stepIdx = Math.floor(Math.random()*orbits[planets[i].orbitIdx].steps.length);
             
             // pick from random array of special sprites?
             // planets[i].imageVar = levelPlanet.imageVar;
@@ -101,6 +102,9 @@ function randomizeLevel() {
             planets[i].ownedByPlayer = 0; 
 
     }
+
+    // todo: reset fleets? 
+    // if so, also change ownedByPlayer above
 
 }
 
