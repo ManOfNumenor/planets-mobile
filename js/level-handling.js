@@ -62,6 +62,8 @@ function loadLevel(levelObj) {
         });
     }
 
+    hideAllMenus();
+
     // finally, show who's first
     //window.alert(`player ${currentPlayerNumber}'s turn`);
     alertDialog(`player ${currentPlayerNumber}'s turn`);

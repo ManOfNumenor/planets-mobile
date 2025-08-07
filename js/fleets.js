@@ -9,6 +9,7 @@ const PLAYER_ICON_CONSTANT_SIZE = 32;
 var selectedFleetAvailableMoves = [];
 
 var allFleets = [
+    /*
     {
         ships: 10,
         ownedByPlayer: 1,
@@ -31,6 +32,7 @@ var allFleets = [
         stepIdx: null,
         movedThisTurn: false,
     }
+    */
 ];
 
 function moveFleets() {
@@ -65,6 +67,10 @@ function drawPlayerIcon(x,y,w,h,whichSprite=player1IconPic) {
 }
 
 function drawFleets() {
+    if(!allFleets || allFleets.length < 1) {
+        return;
+    }
+
     let drawWidth = UNIT_SQUARE_DEFAULT_SIZE * scaleFactor;
     const selectedCircleRadius = drawWidth + 3;
 

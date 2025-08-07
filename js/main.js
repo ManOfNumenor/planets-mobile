@@ -22,7 +22,8 @@ function imageLoadingDoneSoStartGame() {
     setupInput();
     setupPause(); 
     // setupSun();
-    loadLevel(testLevel);
+    //loadLevel(testLevel);
+    showMenu('main');
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 

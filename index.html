@@ -16,6 +16,7 @@
             </canvas>
 
             <div id="pauseMenuDiv"
+                 class="menu-div"
                 style="display: none">
                 <!-- pause menu buttons go here -->
                 <p id="debug">
@@ -41,6 +42,26 @@
                     onclick="testConfirmDialog()">
                 test confirm dialog
             </button>
+            
+            <div id="mainMenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <button onclick="showMenu('level')"> Play </button>
+            </div>
+            <div id="levelMenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                TODO: add level thumbnails to the buttons
+                <button onclick="loadLevel(testLevel)"> Test Level </button>
+                <button onclick="showMenu('main')"> Back </button>
+            </div>
+            <div id="creditsMenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                TODO: credits screen here
+                <button onclick="showMenu('main')"> Back </button>
+            </div>
+
         </div>
 
         <dialog id="alertDialog">
@@ -65,6 +86,7 @@
         <script src="js/image-loading.js"></script>
         <script src="js/level-handling.js"></script>
         <script src="js/player-handling.js"></script>
+        <script src="js/menus.js"></script>
 
         <!-- level definitions -->
         <script src="js/levels/test-level.js"></script>
