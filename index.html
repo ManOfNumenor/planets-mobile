@@ -39,7 +39,7 @@
             <div id="selectedFleetInfoDiv"></div>
 
             <button style="position: absolute; left: 2px; bottom: 2px;"
-                    onclick="testConfirmDialog()">
+                    onclick="testConfirmDialog('foo')">
                 test confirm dialog
             </button>
             
@@ -71,10 +71,17 @@
 
         <dialog id="confirmDialog">
             <p><!-- this element MUST remain the first child of this dialog element --></p>
-            <form method="dialog">
-                <button value="cancel">Cancel</button>
-                <button value="confirm">Confirm</button>
-            </form>
+            <button onclick="closeConfirmDialog()">Cancel</button>
+
+            <!-- 
+                This button's `onclick` function will be modified 
+                to suit the situation, but closeConfirmDialog() 
+                works as a safe default.
+
+                Also, this needs to remain the last element child of
+                the `<dialog>` element
+            -->
+            <button onclick="closeConfirmDialog()">Confirm</button>
         </dialog>
 
         <!-- <p id="pointerDebug"></p> -->

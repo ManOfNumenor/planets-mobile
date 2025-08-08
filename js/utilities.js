@@ -1,10 +1,10 @@
 var gameOptions = {
     showOrbitDebugInfo: true,
     showPointerDebugInfo: false,
-    starfieldStarsPerLayer: 10000,
+    starfieldStarsPerLayer: 100,
     starfieldLayerCount: 3,
-    starfieldWidth: 4000,
-    starfieldHeight: 4000,
+    starfieldWidth: 1000,
+    starfieldHeight: 1000,
     radialPlanetShadows: false,
 };
 
@@ -31,22 +31,37 @@ function closeAlertDialog() {
     dialog.close();
 }
 
-function testConfirmDialog() {
-    let confirmed = confirmDialog('Testing confirmation dialog');
+function testConfirmDialog(testArg) {
+    console.log('testConfirmDialog', testArg);
+     confirmDialog('Testing confirmation dialog', 
+         () => console.log(testArg));
 
-    console.log('confirmed?', confirmed);
+    //console.log('confirmed?', confirmed);
 }
 
-function confirmDialog(message) {
+function confirmDialog(message, confirmFunction) {
     let dialog = document.getElementById('confirmDialog');
 
     dialog.firstElementChild.innerText = message;
 
-    // TODO: promises? 
-    // Somehow need to access info about which button gets pressed here
-    let returnValue = dialog.showModal();
+    dialog.lastElementChild.onclick = () => {
+        confirmFunction();
+        closeConfirmDialog();
+    };
 
-    console.log('return value', returnValue);
+    dialog.showModal();
+}
+
+function closeConfirmDialog() {
+    let dialog = document.getElementById('confirmDialog');
+    dialog.close();
+
+    dialog.lastElementChild.onclick = () => {
+        closeConfirmDialog();
+    };
 }
 
 
+function logFoo() {
+    console.log('foo');
+}
