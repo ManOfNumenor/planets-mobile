@@ -62,6 +62,28 @@ function loadLevel(levelObj) {
         });
     }
 
+    for(let i=0;i<levelObj.playerCount;i++) {
+        let playerNumber = i + 1;
+        let foundPlanetIdx = planets.findIndex(planet => {
+            return planet.ownedByPlayer === playerNumber;
+        });
+
+        if(!foundPlanetIdx) {
+            console.error(
+                `ERROR: no starting planet found for player ${i}`
+            );
+        }
+
+        allFleets.push({
+            ships: 10,
+            ownedByPlayer: playerNumber,
+            planetIdx: foundPlanetIdx,
+            movedThisTurn: false,
+            orbitIdx: null,
+            stepIdx: null,
+        });
+    }
+
     hideAllMenus();
 
     // finally, show who's first
