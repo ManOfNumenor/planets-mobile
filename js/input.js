@@ -70,6 +70,9 @@ function pointermoveHandler(evt) {
     evt.preventDefault();
     console.log('pointermove');
     
+    // makes nearby tooltips appear
+    updateTooltips(evt.clientX,evt.clientY);
+    
     // update currentPointerEvents with new coords
     for(let i=0;i<currentPointerEvents.length;i++) {
         

@@ -105,6 +105,9 @@ function drawPlanets() {
             drawCanMoveHereIndicator(step);
         }
 
+        // display a tooltip with planet info
+        maybeDrawTooltip(planet,step);
+
     } // end for
 
     logThisRound = false;
@@ -184,4 +187,48 @@ function drawAtmoHaze(x,y, planet) {
         0, Math.PI*2, true);
     canvasContext.fill();
     */
+}
+
+// draws and fades some planetary info
+// based on proxmity to the pointer (mouse/touch)
+var hoveringXY = {x:999999999,y:999999999};
+
+function updateTooltips(x,y) {
+    hoveringXY.x = x;
+    hoveringXY.y = y;
+}
+
+function maybeDrawTooltip(planet,thisXY) {
+        const CLOSE_ENOUGH = planet.radius; // only if the pointer is nearby
+        if (distBetween(hoveringXY,thisXY)<=CLOSE_ENOUGH) {
+            //console.log("hovering this planet: "+planet.name);
+            let line1 = "Planet Name: "+planet.name;
+            let line2 = planet.description;
+            let line3 = "Unclaimed by any player";
+            if (planet.ownedByPlayer) line3 = "Owned by player "+planet.ownedByPlayer;
+            drawPlanetTooltip(line1,line2,line3,thisXY.x,thisXY.y-planet.radius-36);
+        }
+}
+
+function drawPlanetTooltip(line1,line2,line3,textX,textY) {
+    const ofsX = 75-12;
+    const pad = 12;
+    const boxW = 150;
+    const boxH = 44;
+    // tooltip box
+    canvasContext.fillStyle = "white";
+    canvasContext.globalAlpha = 0.1;
+    canvasContext.fillRect(textX-pad-ofsX,textY-pad,boxW,boxH);
+    canvasContext.globalAlpha = 1;
+    outlineRect(textX-pad-ofsX,textY-pad,boxW,boxH,"rgba(255,255,255,0.4);");
+    // tooltip text
+    canvasContext.textAlign = "center";
+    canvasContext.fillStyle = "black";
+    canvasContext.fillText(line1,textX+1,textY+1);
+    canvasContext.fillStyle = "white";
+    canvasContext.fillText(line1,textX,textY);
+    canvasContext.fillStyle = "silver";
+    canvasContext.fillText(line2,textX,textY+12);
+    canvasContext.fillStyle = "brown";
+    canvasContext.fillText(line3,textX,textY+24);
 }

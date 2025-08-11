@@ -68,6 +68,8 @@ var testLevel = {
 
     planets: [
         {
+            name:"Koraxian Prime",
+            description:"Class:M, Pop:9B, Tech:Advanced",
             orbitIdx: 0,
             startingStepIdx: 0,
             color: 'red',
@@ -78,6 +80,8 @@ var testLevel = {
             //imageVar: planet16x16,
         },
         {
+            name:"Objectus",
+            description:"Super-dense gas giant",
             orbitIdx: 1,
             startingStepIdx: 0,
             color: '#ff00ff',
@@ -89,6 +93,8 @@ var testLevel = {
             // imageVar: planet24x24,
         },
         {
+            name:"Ganth II",
+            description:"It's icy core creates huge storms.",
             orbitIdx: 2,
             startingStepIdx: 1,
             color: 'lime',
@@ -100,6 +106,8 @@ var testLevel = {
             //imageVar: planet32x32,
         },
         {
+            name:"Oceana",
+            description:"Covered in pure water.",
             orbitIdx: 3,
             startingStepIdx: 1,
             color: 'aliceblue',
@@ -110,6 +118,8 @@ var testLevel = {
             //imageVar: planet64x64
         },
         {
+            name:"Vasturia",
+            description:"A lush, dense, jungle-planet.",
             orbitIdx: 4,
             startingStepIdx: 1,
             color: 'darkgreen',
