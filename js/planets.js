@@ -57,7 +57,8 @@ function drawPlanets() {
         }
 
         if (planet.hasClouds) {
-            drawCloudLayer(step.x,step.y,planet.radius*scaleFactor,10);
+            let cloudSpeed = 10; // fixme make a planet property
+            drawCloudLayer(step.x,step.y,planet.radius*scaleFactor,cloudSpeed,planet.cloudStretchScale);
         }
 
         // draw planet shadow
@@ -131,10 +132,9 @@ function drawPlanets() {
 //     return currentStepAng;
 // }
 
-function drawCloudLayer(x,y,radius,speed) {
+function drawCloudLayer(x,y,radius,speed=10,stretch=1) {
     if (!CLOUD_LAYER_ENABLED) return;
     canvasContext.save(); 
-    
     // create a circular "clipping" path
     canvasContext.beginPath();
     canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
@@ -146,13 +146,8 @@ function drawCloudLayer(x,y,radius,speed) {
     let w = radius*2;
     let h = radius*2;
 
-    // FIXME: scale the src img account for zoom scale
-    // old version: looks nice but no zoom
-    // canvasContext.drawImage(cloudPic,dx,dy,w,h,x-w/2,y-h/2,w,h);
-    
-    // solution: src w,h are constant based on max zoom planet radius
     canvasContext.globalAlpha = CLOUD_OPACITY;
-    canvasContext.drawImage(cloudPic,dx,dy,CLOUD_SCALE,CLOUD_SCALE,x-w/2,y-h/2,w,h);
+    canvasContext.drawImage(cloudPic,dx,dy,CLOUD_SCALE*(1/stretch),CLOUD_SCALE,x-w/2,y-h/2,w,h);
     
     canvasContext.restore();
 }

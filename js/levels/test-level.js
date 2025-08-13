@@ -89,6 +89,7 @@ var testLevel = {
             moons:[[26,-0.6,3],[20,-1.2,1]], // [distance,speed,radius]
             ownedByPlayer: 2,
             hasClouds: true,
+            cloudStretchScale: 10, // >1 for long jupiter style clouds
             atmosphereColor: 'rgba(0, 255, 0, 0.5)',
             // imageVar: planet24x24,
         },

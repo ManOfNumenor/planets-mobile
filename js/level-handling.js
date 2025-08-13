@@ -47,6 +47,7 @@ function loadLevel(levelObj) {
     // planets
     planets = [];
     for(const levelPlanet of levelObj.planets) {
+        // NOTE: remember to add any new properties in the level data here
         planets.push({
             name: levelPlanet.name,
             description: levelPlanet.description,
@@ -56,11 +57,16 @@ function loadLevel(levelObj) {
             orbitIdx: levelPlanet.orbitIdx,
             stepIdx: levelPlanet.startingStepIdx,
             imageVar: levelPlanet.imageVar,
-            //moons: levelPlanet.moons,
-            hasClouds: levelPlanet.hasClouds,
-            rings: levelPlanet.rings,
             ownedByPlayer: levelPlanet.ownedByPlayer,
             atmosphereColor: levelPlanet.atmosphereColor,
+            hasClouds: levelPlanet.hasClouds,
+            cloudStretchScale: levelPlanet.cloudStretchScale,
+            moons: levelPlanet.moons,
+            rings: levelPlanet.rings,
+            ice: levelPlanet.ice,
+            lava: levelPlanet.lava,
+            craters: levelPlanet.craters,
+            polarIce: levelPlanet.polarIce,
         });
     }
 
