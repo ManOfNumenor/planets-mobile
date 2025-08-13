@@ -69,7 +69,7 @@ var testLevel = {
     planets: [
         {
             name:"Koraxian Prime",
-            description:"Class:M, Pop:9B, Tech:Advanced",
+            description:"Super-heated lava planet.",
             orbitIdx: 0,
             startingStepIdx: 0,
             color: 'red',
@@ -78,6 +78,7 @@ var testLevel = {
             ownedByPlayer: 0,
             hasClouds: false,
             //imageVar: planet16x16,
+            lava:1.0, // opacity of lava
         },
         {
             name:"Objectus",
@@ -105,18 +106,21 @@ var testLevel = {
             hasClouds: true,
             atmosphereColor: 'rgba(0, 255, 255, 0.5)',
             //imageVar: planet32x32,
+            ice:0.6, // alpha of ice overlay, 0 is default none
+            polarIce:1.0, // very distinct ice poles
         },
         {
-            name:"Oceana",
-            description:"Covered in pure water.",
+            name:"Derelictus",
+            description:"A wasteland of ancient craters.",
             orbitIdx: 3,
             startingStepIdx: 1,
-            color: 'aliceblue',
+            color: 'grey',
             size: 3,
             ownedByPlayer: 1,
             hasClouds: false,
             //moons:[[32,1,1]], // [distance,speed,radius]
             //imageVar: planet64x64
+            craters:1.0, // the opacity of the craters overlay
         },
         {
             name:"Vasturia",
@@ -127,9 +131,11 @@ var testLevel = {
             size: 3,
             moons:[[36,2,1],[40,1.5,1],[44,1,1],[48,0.5,2]], // [distance,speed,radius]
             ownedByPlayer: 0,
-            hasClouds: false,
+            hasClouds: true,
+            cloudStretchScale:16,
             rings:true, // TODO: could be [angle,radius,opacity]
             //imageVar: planet128x128,
+            polarIce:1.0, // albedo %
         },
     ],
 };

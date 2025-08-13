@@ -1,6 +1,11 @@
 const CLOUD_LAYER_ENABLED = true;
-const CLOUD_SCALE = 80; // how many pixels from src image are resized to fit planet - smaller numbers mean bigger (but blurrier at high zoom) clouds
 const CLOUD_OPACITY = 1; // less than one for fainter clouds (note: image has alpha too)
+
+// most textures have a max of around 600 available
+const CLOUD_SRC_PIXELS = 80;
+const ICE_SRC_PIXELS = 128;
+const LAVA_SRC_PIXELS = 128;
+const CRATERS_SRC_PIXELS = 200;
 
 var planets = [];
 
@@ -22,6 +27,8 @@ function drawPlanets() {
         if(logThisRound) {
             //
         }
+
+        canvasContext.save();
 
         if(planet.atmosphereColor) {
             drawAtmoHaze(step.x, step.y, planet);
@@ -54,6 +61,27 @@ function drawPlanets() {
         } else {
             colorCircle(step.x, step.y,
                 planet.radius * scaleFactor, planet.color);
+        }
+
+        // FIXME:
+        // something is making craters not visible... stumped
+        // is there an unknown blendmode (?) left over from a previous draw function?
+        // but all other layers (ice, lava, clouds, polarIce) are fine. hmmmmmmm.
+        // where's the typo? =)
+        if (planet.craters) {
+            drawCraters(step.x,step.y,planet.radius*scaleFactor,planet.craters);
+        }
+
+        if (planet.ice) {
+            drawIce(step.x,step.y,planet.radius*scaleFactor,planet.ice);
+        }
+        
+        if (planet.lava) {
+            drawLava(step.x,step.y,planet.radius*scaleFactor,planet.lava);
+        }
+
+        if (planet.polarIce) {
+            drawPolarIce(step.x,step.y,planet.radius*scaleFactor,planet.polarIce);
         }
 
         if (planet.hasClouds) {
@@ -134,21 +162,62 @@ function drawPlanets() {
 
 function drawCloudLayer(x,y,radius,speed=10,stretch=1) {
     if (!CLOUD_LAYER_ENABLED) return;
+    if (stretch>1) {
+        speed *= 1/stretch; // so long clouds don't scroll super fast
+    }
     canvasContext.save(); 
     // create a circular "clipping" path
     canvasContext.beginPath();
     canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
     canvasContext.clip(); // now whatever we draw has to be inside the path
-
     // scroll through a seamless cloud panorama
     let dx = (performance.now()/1000*speed) % cloudPic.width;
     let dy = 0;
     let w = radius*2;
     let h = radius*2;
-
     canvasContext.globalAlpha = CLOUD_OPACITY;
-    canvasContext.drawImage(cloudPic,dx,dy,CLOUD_SCALE*(1/stretch),CLOUD_SCALE,x-w/2,y-h/2,w,h);
-    
+    canvasContext.drawImage(cloudPic,dx,dy,CLOUD_SRC_PIXELS*(1/stretch),CLOUD_SRC_PIXELS,x-w/2,y-h/2,w,h);
+    canvasContext.restore();
+}
+
+function drawLava(x,y,radius,alpha) {
+    canvasContext.save(); 
+    canvasContext.beginPath();
+    canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
+    canvasContext.clip();
+    canvasContext.globalAlpha = alpha;
+    canvasContext.drawImage(lavaPic,0,0,LAVA_SRC_PIXELS,LAVA_SRC_PIXELS,x-radius,y-radius,radius*2,radius*2);
+    canvasContext.restore();
+}
+
+function drawIce(x,y,radius,alpha) {
+    canvasContext.save(); 
+    canvasContext.beginPath();
+    canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
+    canvasContext.clip();
+    canvasContext.globalAlpha = alpha;
+    canvasContext.drawImage(icePic,0,0,ICE_SRC_PIXELS,ICE_SRC_PIXELS,x-radius,y-radius,radius*2,radius*2);
+    canvasContext.restore();
+}
+
+function drawCraters(x,y,radius,alpha) {
+    canvasContext.save(); 
+    canvasContext.beginPath();
+    canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
+    canvasContext.clip();
+    canvasContext.globalAlpha = alpha;
+    canvasContext.drawImage(cratersPic,0,0,CRATERS_SRC_PIXELS,CRATERS_SRC_PIXELS.height,x-radius,y-radius,radius*2,radius*2);
+    canvasContext.restore();
+}
+
+function drawPolarIce(x,y,radius,alpha) {
+    canvasContext.save(); 
+    canvasContext.beginPath();
+    canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
+    canvasContext.clip();
+    canvasContext.globalAlpha = alpha;
+    // these extra offsets are because there's blank space in the art
+    canvasContext.drawImage(polarIcePic,64,64,polarIcePic.width-128,polarIcePic.height-128,x-radius,y-radius,radius*2,radius*2);
     canvasContext.restore();
 }
 

@@ -14,6 +14,11 @@ var sunspotPic = document.createElement('img');
 var ringsFrontPic = document.createElement('img');
 var ringsBackPic = document.createElement('img');
 
+var cratersPic = document.createElement('img');
+var polarIcePic = document.createElement('img');
+var icePic = document.createElement('img');
+var lavaPic = document.createElement('img');
+
 // remnants of pixel-planet experiments
 var planet16x16 = document.createElement('img');
 // var planet24x24 = document.createElement('img');
@@ -61,6 +66,12 @@ function loadImages() {
         {varName: sunspotPic, theFile: "sunspots.png"},
         {varName: ringsFrontPic, theFile: "rings-front.png"},
         {varName: ringsBackPic, theFile: "rings-back.png"},
+
+        {varName: cratersPic, theFile: "craters.png"},
+        {varName: polarIcePic, theFile: "polarIce.png"},
+        {varName: icePic, theFile: "ice.png"},
+        {varName: lavaPic, theFile: "lava.png"},
+
         {varName: ownedByPlayer1Pic, theFile: "ownedByPlayer1.png"},
         {varName: ownedByPlayer2Pic, theFile: "ownedByPlayer2.png"},
         {varName: canMoveHerePic, theFile: "canMoveHere.png"},
