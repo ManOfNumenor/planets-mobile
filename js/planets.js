@@ -206,7 +206,7 @@ function drawCraters(x,y,radius,alpha) {
     canvasContext.arc(x, y, radius, 0, Math.PI*2, true);
     canvasContext.clip();
     canvasContext.globalAlpha = alpha;
-    canvasContext.drawImage(cratersPic,0,0,CRATERS_SRC_PIXELS,CRATERS_SRC_PIXELS.height,x-radius,y-radius,radius*2,radius*2);
+    canvasContext.drawImage(cratersPic,0,0,CRATERS_SRC_PIXELS,CRATERS_SRC_PIXELS,x-radius,y-radius,radius*2,radius*2);
     canvasContext.restore();
 }
 
