@@ -66,26 +66,6 @@ function debug(message) {
     debugP.innerHTML += message + '<br/><br/>';
 }
 
-function endTurn() {
-    
-    if (endTurnSound) endTurnSound.play();
-
-    advancePlayerNumber();
-
-    if(currentPlayerNumber === 0) {
-        turnNumber++;
-        movePlanetsAndProduceShips();
-
-        advancePlayerNumber();
-    }
-
-    //window.alert(`player ${currentPlayerNumber}'s turn`);
-    alertDialog(`player ${currentPlayerNumber}'s turn`);
-
-    // debug("turn "+turnNumber);
-    // logThisRound = true;
-}
-
 function resizeCanvas() {
     debug('canvas height: ' + canvas.height);
     let canvasRect = canvas.getBoundingClientRect();

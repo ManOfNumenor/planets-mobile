@@ -63,11 +63,6 @@ function drawPlanets() {
                 planet.radius * scaleFactor, planet.color);
         }
 
-        // FIXME:
-        // something is making craters not visible... stumped
-        // is there an unknown blendmode (?) left over from a previous draw function?
-        // but all other layers (ice, lava, clouds, polarIce) are fine. hmmmmmmm.
-        // where's the typo? =)
         if (planet.craters) {
             drawCraters(step.x,step.y,planet.radius*scaleFactor,planet.craters);
         }
