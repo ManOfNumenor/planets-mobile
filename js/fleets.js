@@ -138,6 +138,10 @@ function getAvailableMoves(fleet) {
         return [];
     }
 
+    if(fleet.movedThisTurn) {
+        return [];
+    }
+
     // TODO: calculate all possible destinations where 
     // the given fleet can move to this turn and return 
     // them in an array
@@ -195,9 +199,6 @@ function getAvailableMoves(fleet) {
 }
 
 function selectedFleetCanMoveTo(target) {
-    // TODO: crunch numbers & return a boolean;
-    // probably involves checking against global
-    // selectedFleetAvailableMoves var
       return selectedFleetAvailableMoves.some(move => 
         move.orbitIdx === target.orbitIdx && 
         move.stepIdx === target.stepIdx
@@ -205,6 +206,12 @@ function selectedFleetCanMoveTo(target) {
 }
 
 function moveFleetToTarget(fleet, target) {
+    if(fleet.movedThisTurn) {
+        console.log('cannot move fleet, has already moved this turn:',
+            fleet);
+        return;
+    }
+
     let foundPlanetIdx = planets.findIndex((planet) => {
         return planet.orbitIdx == target.orbitIdx &&
             planet.stepIdx == target.stepIdx;
@@ -219,6 +226,8 @@ function moveFleetToTarget(fleet, target) {
         fleet.orbitIdx = target.orbitIdx;
         fleet.stepIdx = target.stepIdx;
     }
+
+    fleet.movedThisTurn = true;
 
     let existingFleetAtStep = allFleets.find(foundFleet => {
         return ( 

@@ -12,6 +12,10 @@ function endTurn() {
         turnNumber++;
         movePlanetsAndProduceShips();
 
+        for(const fleet of allFleets) {
+            fleet.movedThisTurn = false;
+        }
+
         advancePlayerNumber();
     }
 
