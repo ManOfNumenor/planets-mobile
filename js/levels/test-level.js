@@ -134,6 +134,7 @@ var testLevel = {
             hasClouds: true,
             cloudStretchScale:16,
             rings:true, // TODO: could be [angle,radius,opacity]
+            ringAngle: 30, // degrees (0 = horizontal)
             //imageVar: planet128x128,
             polarIce:1.0, // albedo %
         },
