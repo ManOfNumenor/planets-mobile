@@ -303,10 +303,12 @@ function handleTap(evt) {
 
                 if(selectedEntity.ownedByPlayer === currentPlayerNumber) {
                     selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
+                    currentlySelectedFleet = selectedEntity;
                 }
             } else {
                 // we selected something else (or nothing at all)
                 selectedFleetAvailableMoves = [];
+                currentlySelectedFleet = null;
             }
         }
         return;
@@ -353,6 +355,7 @@ function handleTap(evt) {
                     moveFleetToTarget(selectedEntity, target);
 
                     selectedFleetAvailableMoves = [];
+                    currentlySelectedFleet = null; // FIXME: perhaps it could stay selected? if so comment out this line
                 } else {
                     console.log(moveValidation.error);
                 }
