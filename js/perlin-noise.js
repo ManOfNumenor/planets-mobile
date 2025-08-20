@@ -1,4 +1,4 @@
-function drawNebulae(onthisCanvasContext,scale=256,r=0.5,g=0.2,b=0.2,a=42) {
+function drawNebulae(onthisCanvasContext,scale=256,r=0.5,g=0.2,b=0.2,a=42,noiseOffsetX=0,noiseOffsetY=0) {
     console.log("rendering nebulae...");
     let pix = onthisCanvasContext.createImageData(gameOptions.starfieldWidth, gameOptions.starfieldHeight);
     let size = 1 / scale; // scale the blobs - bi
@@ -6,15 +6,23 @@ function drawNebulae(onthisCanvasContext,scale=256,r=0.5,g=0.2,b=0.2,a=42) {
     let z = 0; // unused axis - could use used to animate the noise
     for (var y = 0; y < gameOptions.starfieldHeight; y++) {
         for (var x = 0; x < gameOptions.starfieldWidth; x++) {
-        var col = parseInt(Math.abs(noise(x * size, y * size, z)) * 500);
+        var col = parseInt(Math.abs(noise((x+noiseOffsetX) * size, (y+noiseOffsetY) * size, z)) * 500);
         pix.data[i++] = col * r;
         pix.data[i++] = col * g;
         pix.data[i++] = col * b;
         pix.data[i++] = a;
         }
     }
+    
+    // this overwrites the image:
     onthisCanvasContext.putImageData(pix, 0, 0);
+    
+    // this blends it with whatever was there before:
+    //var image = new Image();
+    //image.src = pix.toDataURL();
+    //onthisCanvasContext.drawImage(image,0,0);
 }
+
 
 // IMPLEMENTATION OF IMPROVED NOISE - COPYRIGHT 2002 KEN PERLIN.
 const p = [];

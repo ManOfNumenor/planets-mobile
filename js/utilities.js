@@ -3,8 +3,8 @@ var gameOptions = {
     showPointerDebugInfo: false,
     starfieldStarsPerLayer: 100,
     starfieldLayerCount: 3,
-    starfieldWidth: 1000,
-    starfieldHeight: 1000,
+    starfieldWidth: 3000,
+    starfieldHeight: 3000,
     radialPlanetShadows: false,
 };
 
@@ -13,8 +13,8 @@ function resetGameOptions() {
     showPointerDebugInfo = false;
     starfieldStarsPerLayer = 10000;
     starfieldLayerCount = 3;
-    starfieldWidth = 4000;
-    starfieldHeight = 4000;
+    starfieldWidth = 3000;
+    starfieldHeight = 3000;
     radialPlanetShadows =  false;
 }
 

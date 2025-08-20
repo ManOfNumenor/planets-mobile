@@ -27,7 +27,14 @@ function initStarfields() {
         cachedStarfields[layerNum].height = gameOptions.starfieldHeight; //canvas.height * 4;
         if (layerNum==gameOptions.starfieldLayerCount-1) {
             // fartheset parallax layer also has nebulae
+            // reddish main blobs
             drawNebulae(cachedStarfields[layerNum].context);
+            // plus some extra layers for variety?
+            // FIXME: this function replaces the last layer - not blended
+            //drawNebulae(cachedStarfields[layerNum].context,1024,0.1,0.9,0.9,64,777,666);
+            //drawNebulae(cachedStarfields[layerNum].context,512,1,1,1,64,5435,4321);
+            //drawNebulae(cachedStarfields[layerNum].context,128,1,0,1,64,100,500);
+
         }
         // fill the layer with stars
         for (var r,g,b,x,y,w,h,n=0; n<gameOptions.starfieldStarsPerLayer; n++) {
