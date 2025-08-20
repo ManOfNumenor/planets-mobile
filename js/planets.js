@@ -258,7 +258,9 @@ function updateTooltips(x,y) {
 }
 
 function maybeDrawTooltip(planet,thisXY) {
-        const CLOSE_ENOUGH = planet.radius; // only if the pointer is nearby
+        // only if the pointer is nearby
+        // added an extra 20 pixels around planet for ease
+        const CLOSE_ENOUGH = planet.radius+20; 
         if (distBetween(hoveringXY,thisXY)<=CLOSE_ENOUGH) {
             //console.log("hovering this planet: "+planet.name);
             let line1 = "Planet Name: "+planet.name;

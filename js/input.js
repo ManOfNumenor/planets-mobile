@@ -51,6 +51,9 @@ function pointerdownHandler(evt) {
     // browsers block autoplay so we wait for 1st interaction
     if (!soundInitialized) soundInitialize();
 
+    // makes nearby tooltips appear
+    if (evt.clientX) updateTooltips(evt.clientX,evt.clientY);
+
     currentPointerEvents.push(evt);
     //console.log('currentPointerEvents', currentPointerEvents);
 
@@ -68,10 +71,12 @@ function pointerdownHandler(evt) {
 
 function pointermoveHandler(evt) {
     evt.preventDefault();
-    console.log('pointermove');
+    //console.log('pointermove: '+Math.round(evt.clientX)+','+Math.round(evt.clientY));
     
     // makes nearby tooltips appear
-    updateTooltips(evt.clientX,evt.clientY);
+    // currently triggered by pointerdown
+    // but this makes for a nice "mouse hover"
+    // if (evt.clientX) updateTooltips(evt.clientX,evt.clientY);
     
     // update currentPointerEvents with new coords
     for(let i=0;i<currentPointerEvents.length;i++) {
