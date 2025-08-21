@@ -63,6 +63,7 @@ function loadLevel(levelObj) {
             cloudStretchScale: levelPlanet.cloudStretchScale,
             moons: levelPlanet.moons,
             rings: levelPlanet.rings,
+            ringAngle: levelPlanet.ringAngle,
             ice: levelPlanet.ice,
             lava: levelPlanet.lava,
             craters: levelPlanet.craters,
@@ -129,6 +130,7 @@ function randomizeLevel() {
 
             planets[i].hasClouds = Math.random()<0.5;
             planets[i].rings = Math.random()<0.15;
+            planets[i].ringAngle = Math.random()*360;
             planets[i].atmosphereColor = randomPlanetColor();
 
             // reset ownership

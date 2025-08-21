@@ -1,3 +1,4 @@
+const DEG_TO_RAD = Math.PI / 180
 const CLOUD_LAYER_ENABLED = true;
 const CLOUD_OPACITY = 1; // less than one for fainter clouds (note: image has alpha too)
 
@@ -48,7 +49,8 @@ function drawPlanets() {
 
         if (planet.rings) {
             drawBitmapCenteredWithRotationAndScale(ringsBackPic,
-                Math.round(step.x),Math.round(step.y),0,scaleFactor/3);
+                Math.round(step.x),Math.round(step.y),
+                DEG_TO_RAD*(planet.ringAngle|0),scaleFactor/3);
         }
 
         if(planet.imageVar) {
@@ -90,7 +92,8 @@ function drawPlanets() {
 
         if (planet.rings) {
             drawBitmapCenteredWithRotationAndScale(ringsFrontPic,
-            Math.round(step.x),Math.round(step.y),0,scaleFactor/3);
+                Math.round(step.x),Math.round(step.y),
+                DEG_TO_RAD*(planet.ringAngle|0),scaleFactor/3);
         }
 
         if (MOONS_ENABLED) drawAllMoons(planet.moons,step.x,step.y);
@@ -258,7 +261,9 @@ function updateTooltips(x,y) {
 }
 
 function maybeDrawTooltip(planet,thisXY) {
-        const CLOSE_ENOUGH = planet.radius; // only if the pointer is nearby
+        // only if the pointer is nearby
+        // added an extra 20 pixels around planet for ease
+        const CLOSE_ENOUGH = planet.radius+20; 
         if (distBetween(hoveringXY,thisXY)<=CLOSE_ENOUGH) {
             //console.log("hovering this planet: "+planet.name);
             let line1 = "Planet Name: "+planet.name;

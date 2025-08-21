@@ -7,6 +7,7 @@ const FLEET_ICON_CONSTANT_SIZE = 42;
 const PLAYER_ICON_CONSTANT_SIZE = 32; 
 
 var selectedFleetAvailableMoves = [];
+var currentlySelectedFleet = null;
 
 var allFleets = [
     /*

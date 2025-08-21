@@ -1,3 +1,4 @@
+const KEEP_SUN_IN_VIEW = true; // avoid scrolling it offscreen
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
 const MAX_ENTITY_TAP_RADIUS = 25;
 const MIN_DIST_TO_COUNT_DRAG = 10;
@@ -51,6 +52,9 @@ function pointerdownHandler(evt) {
     // browsers block autoplay so we wait for 1st interaction
     if (!soundInitialized) soundInitialize();
 
+    // makes nearby tooltips appear
+    if (evt.clientX) updateTooltips(evt.clientX,evt.clientY);
+
     currentPointerEvents.push(evt);
     //console.log('currentPointerEvents', currentPointerEvents);
 
@@ -68,10 +72,12 @@ function pointerdownHandler(evt) {
 
 function pointermoveHandler(evt) {
     evt.preventDefault();
-    console.log('pointermove');
+    //console.log('pointermove: '+Math.round(evt.clientX)+','+Math.round(evt.clientY));
     
     // makes nearby tooltips appear
-    updateTooltips(evt.clientX,evt.clientY);
+    // currently triggered by pointerdown
+    // but this makes for a nice "mouse hover"
+    // if (evt.clientX) updateTooltips(evt.clientX,evt.clientY);
     
     // update currentPointerEvents with new coords
     for(let i=0;i<currentPointerEvents.length;i++) {
@@ -91,6 +97,14 @@ function pointermoveHandler(evt) {
 
         sun.x = startingSunCoords.x + diffX;
         sun.y = startingSunCoords.y + diffY;
+
+        if (KEEP_SUN_IN_VIEW) {
+            sun.x = Math.max(0,sun.x);
+            sun.y = Math.max(0,sun.y);
+            sun.x = Math.min(canvas.width,sun.x);
+            sun.y = Math.min(canvas.height,sun.y);
+            //console.log("sun: "+Math.round(sun.x)+","+Math.round(sun.y));
+        }
     }
 
     if(currentPointerEvents.length == 2) {
@@ -289,10 +303,12 @@ function handleTap(evt) {
 
                 if(selectedEntity.ownedByPlayer === currentPlayerNumber) {
                     selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
+                    currentlySelectedFleet = selectedEntity;
                 }
             } else {
                 // we selected something else (or nothing at all)
                 selectedFleetAvailableMoves = [];
+                currentlySelectedFleet = null;
             }
         }
         return;
@@ -339,6 +355,7 @@ function handleTap(evt) {
                     moveFleetToTarget(selectedEntity, target);
 
                     selectedFleetAvailableMoves = [];
+                    currentlySelectedFleet = null; // FIXME: perhaps it could stay selected? if so comment out this line
                 } else {
                     console.log(moveValidation.error);
                 }

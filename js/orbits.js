@@ -1,3 +1,8 @@
+// blue lines between available fleet moves:
+const DRAW_ROUTE_LINES = true; 
+const ROUTE_LINES_RGBA = "rgba(0,255,255,0.15)";
+const ROUTE_LINES_WIDTH = 16;
+
 const STEP_INDICATOR_RADIUS = 5;
 //const ORBIT_DRAW_COLOR = "cyan";
 const ORBIT_DRAW_COLOR = "#c0c0c0";
@@ -136,6 +141,24 @@ function drawCanMoveHereIndicator(step) {
         0,0,canMoveHerePic.width,canMoveHerePic.height,
         step.x-4-wobble/2,step.y-12-((STEP_INDICATOR_RADIUS + 3) * scaleFactor),
         8+wobble, 8);
+
+    // draw a line from the fleet to this target
+    if (DRAW_ROUTE_LINES && currentlySelectedFleet) {
+        let fleetStep = getFleetStep(currentlySelectedFleet);
+        let fromX = fleetStep.x;
+        let fromY = fleetStep.y;
+        let toX = step.x;
+        let toY = step.y;
+        //console.log("route lines! from "+fromX+","+fromY+" to "+toX+","+toY);
+        canvasContext.save();
+        canvasContext.beginPath();
+        canvasContext.moveTo(fromX, fromY);
+        canvasContext.lineTo(toX, toY);
+        canvasContext.lineWidth = ROUTE_LINES_WIDTH;
+        canvasContext.strokeStyle = ROUTE_LINES_RGBA;
+        canvasContext.stroke();
+        canvasContext.restore();
+    }
 
 }
 /*
