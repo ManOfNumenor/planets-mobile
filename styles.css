@@ -84,6 +84,8 @@ div.menu-div {
     align-items: center;
     gap: 2rem;
     z-index: 1000;
+
+    overflow: scroll;
 }
 
 button {
@@ -177,4 +179,17 @@ dialog::backdrop {
 #warpButton {
     top:2px;
     right:2px;
+}
+
+div.player-select-box {
+    text-align: center;
+}
+
+div.player-select-box > img {
+    display: block;
+    margin: auto;
+    max-width: 100px;
+}
+
+div.player-select-box > img {
 }

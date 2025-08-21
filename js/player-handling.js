@@ -1,6 +1,6 @@
 var currentPlayerNumber = 0;
 var playerCount = 0;
-var computerPlayerIndecies = [2];
+var computerPlayerNumbers = [2];
 
 function endTurn() {
     
@@ -20,7 +20,7 @@ function endTurn() {
     }
 
     //window.alert(`player ${currentPlayerNumber}'s turn`);
-    if(!computerPlayerIndecies.includes(currentPlayerNumber)) {
+    if(!computerPlayerNumbers.includes(currentPlayerNumber)) {
         alertDialog(`player ${currentPlayerNumber}'s turn`);
     } else {
         runComputerTurn();
@@ -39,7 +39,7 @@ function advancePlayerNumber() {
     }
 }
 
-function runComputerTurn() {
+async function runComputerTurn() {
     let playerFleets = allFleets.filter(
         fleet => fleet.ownedByPlayer === currentPlayerNumber
     );
@@ -54,7 +54,29 @@ function runComputerTurn() {
 
         moveFleetToTarget(fleet, availableMoves[randomIdx]);
 
+        //await let foo = setTimeout(() => {return 'foo';}, 500);
+        await delay(500);
+
     }
 
     endTurn();
+}
+
+function delay(milliseconds) {
+    return new Promise((resolved) => {
+        setTimeout(resolved, milliseconds);
+    })
+}
+
+function togglePlayerType(playerNumber) {
+    // only called while player menu is open,
+    // hence the call to renderPlayersList() at the end.
+
+    if(computerPlayerNumbers.includes(playerNumber)) {
+        computerPlayerNumbers = computerPlayerNumbers.filter(n => n !== playerNumber);
+    } else {
+        computerPlayerNumbers.push(playerNumber);
+    }
+
+    renderPlayersList();
 }

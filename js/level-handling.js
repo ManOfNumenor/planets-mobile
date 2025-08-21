@@ -92,11 +92,12 @@ function loadLevel(levelObj) {
         });
     }
 
-    hideAllMenus();
+    renderPlayersList();
+    // hideAllMenus();
 
-    // finally, show who's first
-    //window.alert(`player ${currentPlayerNumber}'s turn`);
-    alertDialog(`player ${currentPlayerNumber}'s turn`);
+    // // finally, show who's first
+    // //window.alert(`player ${currentPlayerNumber}'s turn`);
+    // alertDialog(`player ${currentPlayerNumber}'s turn`);
 }
 
 function randomizeLevel() {
