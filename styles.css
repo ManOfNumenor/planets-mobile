@@ -179,6 +179,15 @@ dialog::backdrop {
     color:rgba(0,0,0, 0.8);
 }
 
+#alertDialog {
+   background-image:url("images/hull-dark-3.png"); 
+   
+}
+
+#alertDialog p {
+    text-align:center;
+}
+
 #warpButton {
     top:2px;
     right:2px;

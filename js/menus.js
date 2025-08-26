@@ -36,7 +36,7 @@ function hideMenu(menuKey) {
 // case-insensitive template logic, so this function gets a snake_case name
 function start_first_turn() {
     hideAllMenus();
-    alertDialog("player 1's turn"); // TODO intro blurb here
+    alertDialog("<b>Player 1: Prepare for Battle!</b><br><br>Take control of the solar system<br>by moving units to capture planets."); // TODO intro blurb here
 }
 
 function renderPlayersList() {

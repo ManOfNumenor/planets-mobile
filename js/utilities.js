@@ -21,7 +21,7 @@ function resetGameOptions() {
 function alertDialog(message) {
     let dialog = document.getElementById('alertDialog');
 
-    dialog.firstElementChild.innerText = message;
+    dialog.firstElementChild.innerHTML = message;
 
     dialog.showModal();
 }
