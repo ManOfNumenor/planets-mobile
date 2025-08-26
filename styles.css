@@ -1,3 +1,11 @@
+* {
+    /*
+    this prevents dragging (mouse/touch) from accidentally 
+    "selecting" html text on buttons and alert dialogs
+    */
+    user-select: none;
+}
+
 html,body {
     color: white;
     background-color: #030303;
