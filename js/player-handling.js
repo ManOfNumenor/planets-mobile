@@ -47,12 +47,14 @@ async function runComputerTurn() {
     for(const fleet of playerFleets) {
         let availableMoves = getAvailableMoves(fleet);
 
-        // move the fleet to a random available space
-        let randomIdx = Math.floor(Math.random() * availableMoves.length);
+        if(availableMoves.length > 0) {
+            // move the fleet to a random available space
+            let randomIdx = Math.floor(Math.random() * availableMoves.length);
 
-        // console.log('chosenMove', availableMoves[randomIdx]);
+            // console.log('chosenMove', availableMoves[randomIdx]);
 
-        moveFleetToTarget(fleet, availableMoves[randomIdx]);
+            moveFleetToTarget(fleet, availableMoves[randomIdx]);
+        }
 
         //await let foo = setTimeout(() => {return 'foo';}, 500);
         await delay(500);
