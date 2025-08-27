@@ -1,5 +1,4 @@
-// just for fun, a simple starfield background
-// future plans: nebulae and parallax
+// simple starfield background with nebulae and parallax
 
 var cachedStarfields = [];
 
