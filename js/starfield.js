@@ -17,7 +17,7 @@ function drawStarfield() {
 
 // new version: use two image files for speed and simplicity
 function initStarfields() {
-    cachedStarfields = [nebulaePic,starsPic,starsPic];
+    cachedStarfields = [nebulaePic,starsPic];
 }
 
 /* 
