@@ -19,6 +19,9 @@ var polarIcePic = document.createElement('img');
 var icePic = document.createElement('img');
 var lavaPic = document.createElement('img');
 
+var starsPic = document.createElement('img');
+var nebulaePic = document.createElement('img');
+
 // remnants of pixel-planet experiments
 var planet16x16 = document.createElement('img');
 // var planet24x24 = document.createElement('img');
@@ -71,6 +74,9 @@ function loadImages() {
         {varName: polarIcePic, theFile: "polarIce.png"},
         {varName: icePic, theFile: "ice.png"},
         {varName: lavaPic, theFile: "lava.png"},
+
+        {varName: nebulaePic, theFile: "nebulae.jpg"},
+        {varName: starsPic, theFile: "stars.png"},
 
         {varName: ownedByPlayer1Pic, theFile: "ownedByPlayer1.png"},
         {varName: ownedByPlayer2Pic, theFile: "ownedByPlayer2.png"},

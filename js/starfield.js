@@ -16,8 +16,16 @@ function drawStarfield() {
         
 }
 
+// new version: use two image files for speed and simplicity
 function initStarfields() {
-    // renders a vast number of stars once at init
+    cachedStarfields = [nebulaePic,starsPic,starsPic];
+}
+
+/* 
+// old version: uses perlin noise to
+// render a vast number of stars+clouds once at init
+// but takes several seconds on mobile devices!
+function initStarfields() {
     for (let layerNum=0; layerNum < gameOptions.starfieldLayerCount; layerNum++) {
         console.log("creating starfield background layer "+layerNum);
         cachedStarfields[layerNum] = document.createElement("canvas");
@@ -34,7 +42,6 @@ function initStarfields() {
             //drawNebulae(cachedStarfields[layerNum].context,1024,0.1,0.9,0.9,64,777,666);
             //drawNebulae(cachedStarfields[layerNum].context,512,1,1,1,64,5435,4321);
             //drawNebulae(cachedStarfields[layerNum].context,128,1,0,1,64,100,500);
-
         }
         // fill the layer with stars
         for (var r,g,b,x,y,w,h,n=0; n<gameOptions.starfieldStarsPerLayer; n++) {
@@ -51,4 +58,5 @@ function initStarfields() {
             } // star loop
     } // for each layer
 }
+*/
 
