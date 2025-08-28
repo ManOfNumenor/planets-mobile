@@ -134,24 +134,41 @@ function getFleetStep(fleet) {
 }
 
 function getAvailableMoves(fleet) {
+    console.log('getAvailableMoves', fleet);
+    // calculates all possible destinations where 
+    // the given fleet can move to this turn and return 
+    // them in an array
+
+    // BACK: figure out why the below logic gets stuck if stepIdx === 0
     if(!fleet || !fleet.hasOwnProperty('ships')) {
         // invalid fleet obj; abort.
+        console.error('invalid fleet object:', fleet);
         return [];
     }
 
     if(fleet.movedThisTurn) {
+        console.log('fleet has already moved this turn');
         return [];
     }
 
-    // TODO: calculate all possible destinations where 
-    // the given fleet can move to this turn and return 
-    // them in an array
     let availableMoves = [];
 
-    let currentOrbitIdx = fleet.orbitIdx || (fleet.planetIdx !== null ? planets[fleet.planetIdx].orbitIdx : null);
-    let currentStepIdx = fleet.stepIdx || (fleet.planetIdx !== null ? planets[fleet.planetIdx].stepIdx : null);
+    let currentOrbitIdx = null;
+    let currentStepIdx = null;
+
+    // fleet.orbitIdx || (fleet.planetIdx !== null ? planets[fleet.planetIdx].orbitIdx : null);
+    // fleet.stepIdx || (fleet.planetIdx !== null ? planets[fleet.planetIdx].stepIdx : null);
+
+    if(fleet.planetIdx !== null) {
+        currentOrbitIdx = planets[fleet.planetIdx].orbitIdx;
+        currentStepIdx = planets[fleet.planetIdx].stepIdx;
+    } else {
+        currentOrbitIdx = fleet.orbitIdx;
+        currentStepIdx = fleet.stepIdx;
+    }
     
     if(currentOrbitIdx === null || currentStepIdx === null) {
+        console.error('orbitIdx or stepIdx is null', currentOrbitIdx, currentStepIdx);
         return [];
     }
 
@@ -207,6 +224,11 @@ function selectedFleetCanMoveTo(target) {
 }
 
 function moveFleetToTarget(fleet, target) {
+    if(!target) {
+        console.error('Cannot move fleet without a target', target);
+        return;
+    }
+
     if(fleet.movedThisTurn) {
         console.log('cannot move fleet, has already moved this turn:',
             fleet);

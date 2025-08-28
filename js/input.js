@@ -334,22 +334,6 @@ function handleTap(evt) {
                 // allow clockwise orbital movement
                 let moveValidation = isValidClockwiseMove(currentOrbitIdx, currentStepIdx, target.orbitIdx, target.stepIdx);
 
-                // TODO: check if planet is at target step,
-                // and if so set planetIdx instead of 
-                // orbit/step coords
-
-                // debug("moving fleet FROM planet "+
-                //     selectedEntity.planetIdx +
-                //     " orbit "+ 
-                //     selectedEntity.orbitIdx +
-                //     " step " +
-                //     selectedEntity.stepIdx +
-                //     " TO planet (null) orbit "+ 
-                //     target.orbitIdx +
-                //     " step " +
-                //     target.stepIdx
-                // );
-
                 if (moveValidation.valid) {
                     if (choiceSound) choiceSound();
                     moveFleetToTarget(selectedEntity, target);
@@ -427,8 +411,8 @@ function tryToSelectEntityAt(touchPos) {
     let closestEntity = null;
 
     for(const fleet of allFleets) {
-        console.log('checking fleet at: (' +
-            fleet.x +', '+ fleet.y +')');
+        //console.log('checking fleet at: (' +
+        //    fleet.x +', '+ fleet.y +')');
         let fleetStep = getFleetStep(fleet);
         let distFromTap = distBetween(touchPos, fleetStep);
         //console.log('dist from tap: ' + distFromTap);
@@ -441,7 +425,7 @@ function tryToSelectEntityAt(touchPos) {
     }
 
     if(closestEntity) {
-        console.log('found one');
+        console.log('found fleet close to tap');
         if (confirmSound) confirmSound.play();
     } else {
         console.log('could not find closest entity');
