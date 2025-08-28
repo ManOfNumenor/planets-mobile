@@ -327,9 +327,22 @@ function handleTap(evt) {
                 selectedFleetCanMoveTo(target)
             ) {
                 if (choiceSound) choiceSound();
+
+
                 // find current position of fleet
-                let currentOrbitIdx = selectedEntity.orbitIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].orbitIdx : null);
-                let currentStepIdx = selectedEntity.stepIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].stepIdx : null);
+                //let currentOrbitIdx = selectedEntity.orbitIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].orbitIdx : null);
+                //let currentStepIdx = selectedEntity.stepIdx || (selectedEntity.planetIdx !== null ? planets[selectedEntity.planetIdx].stepIdx : null);
+
+                let currentOrbitIdx = null;
+                let currentStepIdx = null;
+
+                if(selectedEntity.planetIdx !== null) {
+                    currentOrbitIdx = planets[selectedEntity.planetIdx].orbitIdx;
+                    currentStepIdx = planets[selectedEntity.planetIdx].stepIdx;
+                } else {
+                    currentOrbitIdx = selectedEntity.orbitIdx;
+                    currentStepIdx = selectedEntity.stepIdx;
+                }
 
                 // allow clockwise orbital movement
                 let moveValidation = isValidClockwiseMove(currentOrbitIdx, currentStepIdx, target.orbitIdx, target.stepIdx);
