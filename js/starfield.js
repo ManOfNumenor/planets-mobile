@@ -1,5 +1,4 @@
-// just for fun, a simple starfield background
-// future plans: nebulae and parallax
+// simple starfield background with nebulae and parallax
 
 var cachedStarfields = [];
 
@@ -18,7 +17,7 @@ function drawStarfield() {
 
 // new version: use two image files for speed and simplicity
 function initStarfields() {
-    cachedStarfields = [nebulaePic,starsPic,starsPic];
+    cachedStarfields = [nebulaePic,starsPic];
 }
 
 /* 
