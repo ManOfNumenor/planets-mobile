@@ -3,6 +3,8 @@ const MENU_KEYS = [
     'level',
     'players',
     'credits',
+    'options',
+    'pause', // kind of a special case, see pause.js
 ];
 
 function getMenuDiv(menuKey) {

@@ -63,7 +63,9 @@ function debug(message) {
     console.log('debug:', message);
     let debugP = document.getElementById('debug');
 
-    debugP.innerHTML += message + '<br/><br/>';
+    if(debugP) {
+        debugP.innerHTML += message + '<br/><br/>';
+    }
 }
 
 function resizeCanvas() {

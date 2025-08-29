@@ -59,6 +59,7 @@ function drawBitmapCenteredWithRotationAndScale(graphic, x, y, angleInRadians=0,
 }
 
 function colorText(showWords, textX,textY, fillColor) {
+    canvasContext.font = "16px sans-serif";
     canvasContext.fillStyle = fillColor;
     canvasContext.fillText(showWords, textX,textY);
 }

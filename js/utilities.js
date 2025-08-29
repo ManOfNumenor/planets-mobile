@@ -1,5 +1,5 @@
 var gameOptions = {
-    showOrbitDebugInfo: true,
+    showOrbitDebugInfo: false,
     showPointerDebugInfo: false,
     starfieldStarsPerLayer: 100,
     starfieldLayerCount: 3,
@@ -64,4 +64,13 @@ function closeConfirmDialog() {
 
 function logFoo() {
     console.log('foo');
+}
+
+function toggleOrbitCoords() {
+    gameOptions.showOrbitDebugInfo = !gameOptions.showOrbitDebugInfo;
+
+    orbitCoordsButton = document.getElementById('orbitCoordsButton');
+
+    orbitCoordsButton.innerText = "Orbit Coordinates: " +
+        ( gameOptions.showOrbitDebugInfo ? 'On' : 'Off' );
 }

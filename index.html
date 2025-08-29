@@ -19,9 +19,9 @@
                  class="menu-div"
                 style="display: none">
                 <!-- pause menu buttons go here -->
-                <p id="debug">
-                </p>
+                <!-- <p id="debug"></p> -->
                <button id="resumeButton" onclick="resumeGame()">Resume</button>
+               <button onclick="showMenu('options')"> Options </button>
                <button id="mainMenuButton" onclick="mainMenu()">Main Menu</button>
             </div>
 
@@ -68,6 +68,18 @@
                  style="display: none">
                 TODO: credits screen here
                 <button onclick="showMenu('main')"> Back </button>
+            </div>
+            <div id="optionsMenuDiv"
+                 class="menu-div"
+                 style="display: none">
+
+                <p> Toggle orbit coordinate text (has a negative impact on performance) </p>
+                <button id="orbitCoordsButton"
+                        onclick="toggleOrbitCoords()">
+                    Orbit Coordinates: Off
+                </button>
+
+                <button onclick="showMenu('pause')"> Back </button>
             </div>
 
         </div>
