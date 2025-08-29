@@ -1,4 +1,5 @@
-const KEEP_SUN_IN_VIEW = true; // avoid scrolling it offscreen
+//const KEEP_SUN_IN_VIEW = true; // avoid scrolling it offscreen
+const SUN_MAX_DIST_OFF_SCREEN_FACTOR = 150; // set to 0 to always keep sun on screen
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
 const MAX_ENTITY_TAP_RADIUS = 25;
 const MIN_DIST_TO_COUNT_DRAG = 10;
@@ -98,13 +99,17 @@ function pointermoveHandler(evt) {
         sun.x = startingSunCoords.x + diffX;
         sun.y = startingSunCoords.y + diffY;
 
-        if (KEEP_SUN_IN_VIEW) {
-            sun.x = Math.max(0,sun.x);
-            sun.y = Math.max(0,sun.y);
-            sun.x = Math.min(canvas.width,sun.x);
-            sun.y = Math.min(canvas.height,sun.y);
-            //console.log("sun: "+Math.round(sun.x)+","+Math.round(sun.y));
-        }
+        //if (KEEP_SUN_IN_VIEW) {
+        let sunBufferWidth = SUN_MAX_DIST_OFF_SCREEN_FACTOR * (scaleFactor * 2);
+            // multiplied scale factor by 2 here to give scale factor a greater
+            // effect on sun buffer size than it does on other things in the game
+
+        sun.x = Math.max(0 - sunBufferWidth, sun.x);
+        sun.y = Math.max(0 - sunBufferWidth, sun.y);
+        sun.x = Math.min(canvas.width + sunBufferWidth, sun.x);
+        sun.y = Math.min(canvas.height + sunBufferWidth, sun.y);
+        //console.log("sun: "+Math.round(sun.x)+","+Math.round(sun.y));
+        //}
     }
 
     if(currentPointerEvents.length == 2) {
