@@ -22,7 +22,10 @@ function drawPlanets() {
     // draw sun
     drawSun();
 
-    for(const planet of planets) {
+    //for(const planet, idx of planets) {
+    for(let i=0;i<planets.length;i++) {
+        let planet = planets[i];
+        
         let step = orbits[planet.orbitIdx].steps[planet.stepIdx];
 
         if(logThisRound) {
@@ -122,6 +125,17 @@ function drawPlanets() {
                         Math.round(step.x),Math.round(step.y),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
                     break;
             } // end switch
+
+            let fleetAtPlanet = allFleets.find(fleet => {
+                return fleet.planetIdx === i;
+            });
+
+            //if(fleetAtPlanet && fleetAtPlanet.ownedByPlayer !== planet.ownedByPlayer) {
+            if(i == 3) {
+                drawPlanetExplosions(step.x,step.y);
+            }
+
+
         } // end if
 
         if(selectedFleetCanMoveTo({ 
@@ -295,4 +309,60 @@ function drawPlanetTooltip(line1,line2,line3,textX,textY) {
     canvasContext.fillText(line2,textX,textY+12);
     canvasContext.fillStyle = "brown";
     canvasContext.fillText(line3,textX,textY+24);
+}
+
+function drawPlanetExplosions(centerX,centerY) {
+    const LOOP_LENGTH = 2000;
+    const TIME_VALUE = performance.now() % LOOP_LENGTH;
+    const MAX_SCALE = 0.3;
+
+    let explosions = [
+        // `tOffset` is "time offset"
+        // `tLength` is "time length"
+        {
+            xOffset: -8,
+            yOffset: 15,
+            tOffset: 0,
+            tLength: 300,
+            maxScaleOffset: 0,
+        },
+        {
+            xOffset: 15,
+            yOffset: -20,
+            tOffset: 600,
+            tLength: 400,
+            maxScaleOffset: -0.1,
+        },
+        {
+            xOffset: -12,
+            yOffset: -6,
+            tOffset: 800,
+            tLength: 200,
+            maxScaleOffset: -0.2,
+        },
+        {
+            xOffset: 3,
+            yOffset: 14,
+            tOffset: 900,
+            tLength: 300,
+            maxScaleOffset: -0.1,
+        },
+    ];
+
+    for(const explosion of explosions) {
+        // `tOffset` & `tLength` define start & stop points for the explosion animation
+        // along the timeline, in the same way that a rectangle's `x` & `width` values 
+        // define the start and stop points of the rectangle along the X coordinate axis
+
+        if(TIME_VALUE > explosion.tOffset && 
+            TIME_VALUE < explosion.tOffset + explosion.tLength) {
+
+            let drawX = centerX + (explosion.xOffset * scaleFactor);
+            let drawY = centerY + (explosion.yOffset * scaleFactor);
+            let progress = (TIME_VALUE - explosion.tOffset) / explosion.tLength;
+            let scale = scaleFactor * progress * (MAX_SCALE + explosion.maxScaleOffset);
+
+            drawBitmapCenteredWithRotationAndScale(boomPic, drawX,drawY, 0, scale);
+        }
+    }
 }

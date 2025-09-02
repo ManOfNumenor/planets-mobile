@@ -8,6 +8,7 @@ var ownedByPlayer1Pic = document.createElement('img');
 var ownedByPlayer2Pic = document.createElement('img');
 var canMoveHerePic = document.createElement('img');
 
+var boomPic = document.createElement('img');
 var moonPic = document.createElement('img');
 var cloudPic = document.createElement('img');
 var sunspotPic = document.createElement('img');
@@ -64,6 +65,7 @@ function loadImages() {
 	var imageList = [
         // apparently you need to leave at least one image in here, 
         // or imageLoadingDoneSoStartGame() never gets called
+        {varName: boomPic, theFile: "boom.png"},
         {varName: moonPic, theFile: "moon.png"},
         {varName: cloudPic, theFile: "clouds.png"},
         {varName: sunspotPic, theFile: "sunspots.png"},
@@ -88,6 +90,7 @@ function loadImages() {
         {varName: player2IconPic, theFile: "player2Icon.png"}, 
         {varName: player3IconPic, theFile: "player3Icon.png"}, 
         {varName: player4IconPic, theFile: "player4Icon.png"}, 
+
 		
         // {varName: planet16x16, theFile: "pixel-planets/planet-16-x-16.png"},
 		// {varName: planet24x24, theFile: "pixel-planets/planet-24-x-24.png"},
