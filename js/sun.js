@@ -7,6 +7,7 @@ var sun = {
     y: 1,
     color: 'yellow',
     radius: 42,
+    isBinaryStar: false
 };
 
 function setupSun() {
@@ -17,24 +18,43 @@ function setupSun() {
 function drawSun() {
     // console.log("drawing the sun! radius:"+sun.radius+" scaleFactor:"+scaleFactor+" which is:"+(sun.radius * scaleFactor * 2)+"px wide");
     // colorCircle(sun.x, sun.y, sun.radius * scaleFactor, sun.color);
+    
+    // FIXME: use standard image-loading.js code instead
     if (!sun.image) {
         // console.log("downloading sun.png");
         sun.image = new Image();
         sun.image.onload = function() { this.loaded=true; }
         sun.image.src = "../images/sun.png";
     }
+
+    if (!sun.image.loaded) return;
+
+    // used by binary star rendering (defaults are for single star)
+    let extraScale = 1;
+    let extraOffset = 0;
+    let sunCount = 1;
+
+    if (sun.isBinaryStar) {
+        sunCount = 2;
+        extraScale = 0.3333; // draw smaller to fit two suns
+        extraOffset = sun.radius * 0.6666 * scaleFactor; // nudge over
+    }
     
-    if (sun.image.loaded) {
+    for (let sunNum = 0; sunNum<sunCount; sunNum++) {
         let sunRotation = performance.now() / 30000;
         let imgScale = ((sun.radius*2)/(sun.image.width*(2/3)))*scaleFactor;
         // the 2/3 above is because the bitmap has outer glow/shine lines that extend beyond the radius
+        
+        // binary system: draw smaller and offset from each other
+        imgScale *= extraScale;
+        let ofs = sunNum?extraOffset:-extraOffset;
+        
         // console.log("drawing the sun scaled:"+imgScale+" which is:"+(sun.image.width*imgScale)+"px wide");
-        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,sunRotation,imgScale)
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x+ofs,sun.y,sunRotation,imgScale)
         // 2nd layer moves at a diff speed so the "shine lines" overlap and "glitter"
-        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x,sun.y,-sunRotation*.666,imgScale)
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x+ofs,sun.y,-sunRotation*.666,imgScale)
+        if (SUNSPOTS_ENABLED) drawSunspots(sun.x+ofs,sun.y,sun.radius*scaleFactor*extraScale,SUNSPOT_SCROLL_SPEED);
     }
-
-    if (SUNSPOTS_ENABLED) drawSunspots(sun.x,sun.y,sun.radius*scaleFactor,SUNSPOT_SCROLL_SPEED);
 }
 
 function drawSunspots(x,y,radius,speed) {

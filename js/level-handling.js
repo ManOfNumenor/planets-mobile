@@ -103,6 +103,8 @@ function loadLevel(levelObj) {
 
 function randomizeLevel() {
 
+    sun.isBinaryStar = Math.random()<0.2;
+
     for (let i=0; i<orbits.length; i++) {
         // todo: random number of planets+orbits from 1-10
         // be sure to delete or make new planets if so
