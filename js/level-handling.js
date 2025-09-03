@@ -11,7 +11,7 @@ function loadLevel(levelObj) {
     currentPlayerNumber = 1;
 
     // sun
-    setupSun(); // TODO: specify sun sprite based on level data
+    setupSun(levelObj.sun);
 
     // orbits
     orbits = [];
