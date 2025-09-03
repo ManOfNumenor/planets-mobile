@@ -139,7 +139,6 @@ function getAvailableMoves(fleet) {
     // the given fleet can move to this turn and return 
     // them in an array
 
-    // BACK: figure out why the below logic gets stuck if stepIdx === 0
     if(!fleet || !fleet.hasOwnProperty('ships')) {
         // invalid fleet obj; abort.
         console.error('invalid fleet object:', fleet);
@@ -223,13 +222,13 @@ function selectedFleetCanMoveTo(target) {
     );
 }
 
-function moveFleetToTarget(fleet, target) {
+function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
     if(!target) {
         console.error('Cannot move fleet without a target', target);
         return;
     }
 
-    if(fleet.movedThisTurn) {
+    if(fleet.movedThisTurn && !ignoreMoveLimit) {
         console.log('cannot move fleet, has already moved this turn:',
             fleet);
         return;
@@ -323,12 +322,7 @@ function movePlanetsAndProduceShips() {
         let orbit = orbits[planet.orbitIdx];
         let finalStepIdx = orbit.steps.length - 1;
 
-        if(planet.stepIdx < finalStepIdx) {
-            planet.stepIdx++;
-        } else {
-            planet.stepIdx = 0;
-        }
-
+        // produce ships
         if(planet.ownedByPlayer > 0) {
             let countShipsProduced = Math.floor(planet.size * SHIP_PRODUCTION_FACTOR);
             let fleetAtPlanet = allFleets.find(fleet => fleet.planetIdx === i);
@@ -344,6 +338,28 @@ function movePlanetsAndProduceShips() {
                     stepIdx: null,
                 });
             }
+        }
+
+        // move planet
+        if(planet.stepIdx < finalStepIdx) {
+            planet.stepIdx++;
+        } else {
+            planet.stepIdx = 0;
+        }
+
+        // handle planet moving "on top of" fleet
+        let foundFleet = allFleets.find(fleet => {
+            return fleet.stepIdx === planet.stepIdx &&
+                fleet.orbitIdx === planet.orbitIdx;
+        });
+
+        // This may look janky, but it seemed the quickest and
+        // easiest way to invoke all the same logic and triggers
+        // as moving a fleet on to a planet and make sure any
+        // changes to that logic are also respected here.
+        if(foundFleet) {
+            console.log('found fleet at planet location');
+            moveFleetToTarget(foundFleet, planet, true);
         }
     }
 }
