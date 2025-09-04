@@ -1,3 +1,6 @@
+const ANIMATE_FLEET_MOVEMENTS = true; // tween from prev to current pos
+const FLEET_ANIM_SPEED = 0.1; // percent to move each frame
+
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
 const SHIP_PRODUCTION_FACTOR = 1;
 
@@ -67,6 +70,12 @@ function drawPlayerIcon(x,y,w,h,whichSprite=player1IconPic) {
     drawBitmapCenteredWithRotationAndScale(whichSprite,x,y,angleRad,spriteScale);
 }
 
+function lerp(start, end, amount) {
+    if (end==undefined) end = 0;
+    if (start==undefined) start = end;
+    return start + (end - start) * amount;
+}
+
 function drawFleets() {
     if(!allFleets || allFleets.length < 1) {
         return;
@@ -81,6 +90,13 @@ function drawFleets() {
 
         let fleetX = fleetStep.x;
         let fleetY = fleetStep.y;
+
+        if (ANIMATE_FLEET_MOVEMENTS) {
+            fleet.animatingX = lerp(fleet.animatingX,fleetStep.x,FLEET_ANIM_SPEED);
+            fleet.animatingY = lerp(fleet.animatingY,fleetStep.y,FLEET_ANIM_SPEED);
+            fleetX = fleet.animatingX;
+            fleetY = fleet.animatingY;
+        }
 
         let drawX = fleetX - (drawWidth / 2);
         let drawY = fleetY - (drawWidth / 2);
