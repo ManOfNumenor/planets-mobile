@@ -37,7 +37,7 @@ function drawSun() {
     if (sun.isBinaryStar) {
         sunCount = 2;
         extraScale = 0.3333; // draw smaller to fit two suns
-        extraOffset = sun.radius * 0.6666 * scaleFactor; // nudge over
+        extraOffset = sun.radius * 0.5 * scaleFactor; // nudge over
     }
     
     for (let sunNum = 0; sunNum<sunCount; sunNum++) {
@@ -48,12 +48,16 @@ function drawSun() {
         // binary system: draw smaller and offset from each other
         imgScale *= extraScale;
         let ofs = sunNum?extraOffset:-extraOffset;
+        // binary stars orbit each other
+        let now = performance.now() * 0.0001;
+        let ofsx = Math.cos(now) * ofs;
+        let ofsy = Math.sin(now) * ofs;
         
         // console.log("drawing the sun scaled:"+imgScale+" which is:"+(sun.image.width*imgScale)+"px wide");
-        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x+ofs,sun.y,sunRotation,imgScale)
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x+ofsx,sun.y+ofsy,sunRotation,imgScale)
         // 2nd layer moves at a diff speed so the "shine lines" overlap and "glitter"
-        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x+ofs,sun.y,-sunRotation*.666,imgScale)
-        if (SUNSPOTS_ENABLED) drawSunspots(sun.x+ofs,sun.y,sun.radius*scaleFactor*extraScale,SUNSPOT_SCROLL_SPEED);
+        drawBitmapCenteredWithRotationAndScale(sun.image,sun.x+ofsx,sun.y+ofsy,-sunRotation*.666,imgScale)
+        if (SUNSPOTS_ENABLED) drawSunspots(sun.x+ofsx,sun.y+ofsy,sun.radius*scaleFactor*extraScale,SUNSPOT_SCROLL_SPEED);
     }
 }
 
