@@ -70,6 +70,9 @@ function drawPlayerIcon(x,y,w,h,whichSprite=player1IconPic) {
     drawBitmapCenteredWithRotationAndScale(whichSprite,x,y,angleRad,spriteScale);
 }
 
+// linear interpolation:
+// if amount==0 it returns start
+// if amount==1 it returns end
 function lerp(start, end, amount) {
     if (end==undefined) end = 0;
     if (start==undefined) start = end;
@@ -91,11 +94,18 @@ function drawFleets() {
         let fleetX = fleetStep.x;
         let fleetY = fleetStep.y;
 
+        // only animate if we are not dragging
+        // otherwise instant move speed is best
         if (ANIMATE_FLEET_MOVEMENTS) {
-            fleet.animatingX = lerp(fleet.animatingX,fleetStep.x,FLEET_ANIM_SPEED);
-            fleet.animatingY = lerp(fleet.animatingY,fleetStep.y,FLEET_ANIM_SPEED);
-            fleetX = fleet.animatingX;
-            fleetY = fleet.animatingY;
+            if (!dragStartEvt) { // the fleet is on the move
+                fleet.animatingX = lerp(fleet.animatingX,fleetStep.x,FLEET_ANIM_SPEED);
+                fleet.animatingY = lerp(fleet.animatingY,fleetStep.y,FLEET_ANIM_SPEED);
+                fleetX = fleet.animatingX;
+                fleetY = fleet.animatingY;
+            } else { // unless we are dragging the camera: move instantly
+                fleet.animatingX = fleetX;
+                fleet.animatingY = fleetY;
+            }
         }
 
         let drawX = fleetX - (drawWidth / 2);
