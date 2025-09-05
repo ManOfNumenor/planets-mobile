@@ -1,3 +1,5 @@
+const ANIMATE_PLANET_MOVEMENTS = false; // work in progress
+
 const DEG_TO_RAD = Math.PI / 180
 const CLOUD_LAYER_ENABLED = true;
 const CLOUD_OPACITY = 1; // less than one for fainter clouds (note: image has alpha too)
@@ -27,6 +29,12 @@ function drawPlanets() {
         let planet = planets[i];
         
         let step = orbits[planet.orbitIdx].steps[planet.stepIdx];
+        let drawX = step.x;
+        let drawY = step.y;
+
+        if (ANIMATE_PLANET_MOVEMENTS) {
+            // TODO - orbit the sun until we arrive at drawXY
+        }
 
         if(logThisRound) {
             //
@@ -35,7 +43,7 @@ function drawPlanets() {
         canvasContext.save();
 
         if(planet.atmosphereColor) {
-            drawAtmoHaze(step.x, step.y, planet);
+            drawAtmoHaze(drawX, drawY, planet);
         }
 
         // planets are no longer selectable, but 
@@ -52,54 +60,54 @@ function drawPlanets() {
 
         if (planet.rings) { // draw rings back side
             drawBitmapCenteredWithRotationAndScale(ringsBackPic,
-                Math.round(step.x),Math.round(step.y),
+                Math.round(drawX),Math.round(drawY),
                 Math.round(DEG_TO_RAD*(planet.ringAngle|0)),scaleFactor/3);
         }
 
         if(planet.imageVar) {
             drawBitmapCenteredWithRotationAndScale(
                 planet.imageVar, 
-                step.x, step.y, 
+                drawX, drawY, 
                 0,
                 scaleFactor
             );
         } else {
-            colorCircle(step.x, step.y,
+            colorCircle(drawX, drawY,
                 planet.radius * scaleFactor, planet.color);
         }
 
         if (planet.craters) {
-            drawCraters(step.x,step.y,planet.radius*scaleFactor,planet.craters);
+            drawCraters(drawX,drawY,planet.radius*scaleFactor,planet.craters);
         }
 
         if (planet.ice) {
-            drawIce(step.x,step.y,planet.radius*scaleFactor,planet.ice);
+            drawIce(drawX,drawY,planet.radius*scaleFactor,planet.ice);
         }
         
         if (planet.lava) {
-            drawLava(step.x,step.y,planet.radius*scaleFactor,planet.lava);
+            drawLava(drawX,drawY,planet.radius*scaleFactor,planet.lava);
         }
 
         if (planet.polarIce) {
-            drawPolarIce(step.x,step.y,planet.radius*scaleFactor,planet.polarIce);
+            drawPolarIce(drawX,drawY,planet.radius*scaleFactor,planet.polarIce);
         }
 
         if (planet.hasClouds) {
             let cloudSpeed = 10; // fixme make a planet property
-            drawCloudLayer(step.x,step.y,planet.radius*scaleFactor,cloudSpeed,planet.cloudStretchScale);
+            drawCloudLayer(drawX,drawY,planet.radius*scaleFactor,cloudSpeed,planet.cloudStretchScale);
         }
 
         // draw planet shadow
-        shadeCircle(step.x, step.y,
+        shadeCircle(drawX, drawY,
                 planet.radius * scaleFactor);
 
         if (planet.rings) { // draw rings front side
             drawBitmapCenteredWithRotationAndScale(ringsFrontPic,
-                Math.round(step.x),Math.round(step.y),
+                Math.round(drawX),Math.round(drawY),
                 Math.round(DEG_TO_RAD*(planet.ringAngle|0)),scaleFactor/3);
         }
 
-        if (MOONS_ENABLED) drawAllMoons(planet.moons,step.x,step.y);
+        if (MOONS_ENABLED) drawAllMoons(planet.moons,drawX,drawY);
 
         // TODO: draw player icons instead of colored squares
         let iconOffset = 30 * scaleFactor;
@@ -109,20 +117,20 @@ function drawPlanets() {
             switch(planet.ownedByPlayer) {
                 case 1:
                     // a red rectangle below the planet
-                    //colorRect(step.x - (iconWidth / 2),
-                    //    step.y + iconOffset, 
+                    //colorRect(drawX - (iconWidth / 2),
+                    //    drawY + iconOffset, 
                     //    iconWidth,iconWidth, 'red');
                     // a red dotted circle around planet
                     drawBitmapCenteredWithRotationAndScale(ownedByPlayer1Pic,
-                        Math.round(step.x),Math.round(step.y),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
+                        Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
                     break;
                 
                 case 2:
-                    //colorCircle(step.x, step.y + iconOffset, 
+                    //colorCircle(drawX, drawY + iconOffset, 
                     //    (iconWidth / 2 ) * 1.1 , '#00ff00');
                     // a green dashed circle around planet
                     drawBitmapCenteredWithRotationAndScale(ownedByPlayer2Pic,
-                        Math.round(step.x),Math.round(step.y),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
+                        Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
                     break;
             } // end switch
 
@@ -132,7 +140,7 @@ function drawPlanets() {
 
             //if(fleetAtPlanet && fleetAtPlanet.ownedByPlayer !== planet.ownedByPlayer) {
             if(i == 3) {
-                drawPlanetExplosions(step.x,step.y);
+                drawPlanetExplosions(drawX,drawY);
             }
 
 
