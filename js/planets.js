@@ -1,4 +1,5 @@
-const ANIMATE_PLANET_MOVEMENTS = false; // work in progress
+const ANIMATE_PLANET_MOVEMENTS = true; // work in progress
+const PLANET_ANIM_SPEED = 0.1; // percent per frame
 
 const DEG_TO_RAD = Math.PI / 180
 const CLOUD_LAYER_ENABLED = true;
@@ -33,7 +34,17 @@ function drawPlanets() {
         let drawY = step.y;
 
         if (ANIMATE_PLANET_MOVEMENTS) {
-            // TODO - orbit the sun until we arrive at drawXY
+            if (!dragStartEvt) { // not dragging?
+                // FIXME: this is linear but we want a nice radial curve
+                // TODO
+                planet.animationX = lerp(planet.animationX,drawX,PLANET_ANIM_SPEED);
+                planet.animationY = lerp(planet.animationY,drawY,PLANET_ANIM_SPEED);
+                drawX = planet.animationX;
+                drawY = planet.animationY;
+            } else { // dragging: don't animate
+                planet.animationX = drawX;
+                planet.animationY = drawY;
+            }
         }
 
         if(logThisRound) {
