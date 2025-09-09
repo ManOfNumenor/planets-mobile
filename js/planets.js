@@ -150,7 +150,8 @@ function drawPlanets() {
             });
 
             //if(fleetAtPlanet && fleetAtPlanet.ownedByPlayer !== planet.ownedByPlayer) {
-            if(i == 3) {
+            //if(i == 3) {
+            if(planet.underSiege) {
                 drawPlanetExplosions(drawX,drawY);
             }
 

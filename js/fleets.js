@@ -330,11 +330,12 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
     } // end if(existingFleetAtStep)
 
     if(fleet && fleet.planetIdx !== null) {
-        // we landed on a planet and we're still here, conquer it!
+        // we landed on a planet and we're still here, place it under siege!
         let planet = planets[foundPlanetIdx];
 
-        if(planet.ownedByPlayer !== fleet.ownedByPlayer) {
-            planet.ownedByPlayer = fleet.ownedByPlayer;
+        if(planet.ownedByPlayer && planet.ownedByPlayer !== fleet.ownedByPlayer) {
+            //planet.ownedByPlayer = fleet.ownedByPlayer;
+            planet.underSiege = true;
         }
 
     } // end if(fleet && fleet.planetIdx)
@@ -349,7 +350,7 @@ function movePlanetsAndProduceShips() {
         let finalStepIdx = orbit.steps.length - 1;
 
         // produce ships
-        if(planet.ownedByPlayer > 0) {
+        if(planet.ownedByPlayer > 0 && !planet.underSiege) {
             let countShipsProduced = Math.floor(planet.size * SHIP_PRODUCTION_FACTOR);
             let fleetAtPlanet = allFleets.find(fleet => fleet.planetIdx === i);
 

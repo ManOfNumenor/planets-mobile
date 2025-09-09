@@ -68,6 +68,7 @@ function loadLevel(levelObj) {
             lava: levelPlanet.lava,
             craters: levelPlanet.craters,
             polarIce: levelPlanet.polarIce,
+            underSiege: false,
         });
     }
 
