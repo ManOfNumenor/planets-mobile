@@ -391,15 +391,52 @@ function movePlanetsAndProduceShips() {
     }
 }
 
-function setupFleetInfoDiv() {
-    selectedFleetInfoDiv.innerHTML = `
-    Player: ${selectedEntity.ownedByPlayer} Ships: ${selectedEntity.ships}
-    `;
-    // TODO: add fleet action buttons
+function setupFleetInfoDiv(fleet) {
+    let fleetIdx = allFleets.indexOf(fleet);
+    let template = `Player: ${selectedEntity.ownedByPlayer} Ships: ${selectedEntity.ships}`;
+
+    if(fleet.ownedByPlayer == currentPlayerNumber) {
+        template +=`<div>`;
+                
+        let occupyingHostilePlanet = false;
+        if(fleet.planetIdx) {
+            let foundPlanet = planets[fleet.planetIdx];
+            
+            if(foundPlanet && foundPlanet.ownedByPlayer != fleet.ownedByPlayer) {
+                occupyingHostilePlanet = true;
+            }
+        }
+
+        if(occupyingHostilePlanet && !fleet.movedThisTurn) {
+            // TODO: fix edge case where planet moves on to fleet,
+            // then fleet could theoretically capture on 1st turn 
+            // of occupation.
+            template += `
+                <button onclick="capture_planet(${fleetIdx})">
+                Capture
+                </button>`;
+        }
+
+        let disableSplitButton = false;
+        if(occupyingHostilePlanet || fleet.movedThisTurn) {
+            disableSplitButton = true;
+        }
+
+        template += `<button ${disableSplitButton ? 'disabled' : ""}> Split </button>`;
+
+        template +=`</div>`;
+    }
+
+    selectedFleetInfoDiv.innerHTML = template;
+
     selectedFleetInfoDiv.style.display = 'flex';
 }
 
 function clearFleetInfoDiv() {
     selectedFleetInfoDiv.innerHTML = "";
     selectedFleetInfoDiv.style.display = 'none';
+}
+
+function capture_planet(fleetIdx) {
+    console.log('TODO: capture planet using fleetIdx:' , fleetIdx);
 }

@@ -304,7 +304,7 @@ function handleTap(evt) {
         if(selectedEntity) { // ie: we found something to select
             if(selectedEntity.hasOwnProperty("ships")) {
                 // we have selected a fleet
-                setupFleetInfoDiv();
+                setupFleetInfoDiv(selectedEntity);
 
                 if(selectedEntity.ownedByPlayer === currentPlayerNumber) {
                     selectedFleetAvailableMoves = getAvailableMoves(selectedEntity);
