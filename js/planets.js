@@ -35,12 +35,21 @@ function drawPlanets() {
 
         if (ANIMATE_PLANET_MOVEMENTS) {
             if (!dragStartEvt) { // not dragging?
-                // FIXME: this is linear but we want a nice radial curve
-                // TODO
+                // move along the orbital curve
+                let newpos = getOrbitTweenPos(planet,step,sun);
+                planet.animationX = newpos.x;
+                planet.animationY = newpos.y
+                
+                /*
+                // old version:
+                // move in a straight line (works fine)
                 planet.animationX = lerp(planet.animationX,drawX,PLANET_ANIM_SPEED);
                 planet.animationY = lerp(planet.animationY,drawY,PLANET_ANIM_SPEED);
+                */
+
                 drawX = planet.animationX;
                 drawY = planet.animationY;
+
             } else { // dragging: don't animate
                 planet.animationX = drawX;
                 planet.animationY = drawY;
