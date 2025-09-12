@@ -333,7 +333,7 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
         // we landed on a planet and we're still here, place it under siege!
         let planet = planets[foundPlanetIdx];
 
-        if(planet.ownedByPlayer && planet.ownedByPlayer !== fleet.ownedByPlayer) {
+        if(planet.ownedByPlayer !== fleet.ownedByPlayer) {
             //planet.ownedByPlayer = fleet.ownedByPlayer;
             planet.underSiege = true;
         }
