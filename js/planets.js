@@ -165,7 +165,16 @@ function drawPlanets() {
             }
 
 
-        } // end if
+        } else { // ie: !planet.ownedByPlayer
+            // TODO: pulse opacity and/or use subtle motion over time
+            if(planet.underSiege) {
+                drawBitmapCenteredWithRotationAndScale(flagIcon, 
+                    drawX,drawY, 0,
+                    0.2
+                ); 
+            }
+
+        }
 
         if(selectedFleetCanMoveTo({ 
                 orbitIdx: planet.orbitIdx, 
@@ -341,6 +350,7 @@ function drawPlanetTooltip(line1,line2,line3,textX,textY) {
 }
 
 function drawPlanetExplosions(centerX,centerY) {
+    console.log('drawPlanetExplosions', centerX, centerY);
     const LOOP_LENGTH = 2000;
     const TIME_VALUE = performance.now() % LOOP_LENGTH;
     const MAX_SCALE = 0.3;

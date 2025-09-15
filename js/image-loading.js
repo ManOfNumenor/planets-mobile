@@ -29,6 +29,8 @@ var sunNeutron = document.createElement('img');
 var sunRedGiant = document.createElement('img');
 var sunWhiteDwarf = document.createElement('img');
 
+var flagIcon = document.createElement('img');
+
 var worldPics = [];
 
 var picsToLoad = 0; //set automatically based on number of imageList in loadImages()
@@ -88,6 +90,8 @@ function loadImages() {
         {varName: player2IconPic, theFile: "player2Icon.png"}, 
         {varName: player3IconPic, theFile: "player3Icon.png"}, 
         {varName: player4IconPic, theFile: "player4Icon.png"}, 
+
+        {varName: flagIcon, theFile: "flagIcon.png"}, 
 
 		];
 
