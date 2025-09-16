@@ -343,6 +343,8 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
 } // end function
 
 function movePlanetsAndProduceShips() {
+    planetsMoving = true;
+
     for(let i=0;i<planets.length;i++) {
 
         let planet = planets[i];
@@ -389,6 +391,10 @@ function movePlanetsAndProduceShips() {
             moveFleetToTarget(foundFleet, planet, true);
         }
     }
+
+    let planetTimeoutLengthSeconds = 2;
+    setTimeout(() => planetsMoving = false,
+        planetTimeoutLengthSeconds * 1000)
 }
 
 function setupFleetInfoDiv(fleet) {

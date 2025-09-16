@@ -12,6 +12,7 @@ const LAVA_SRC_PIXELS = 128;
 const CRATERS_SRC_PIXELS = 200;
 
 var planets = [];
+var planetsMoving = false;
 
 function movePlanets() {
     //
@@ -34,7 +35,8 @@ function drawPlanets() {
         let drawY = step.y;
 
         if (ANIMATE_PLANET_MOVEMENTS) {
-            if (!dragStartEvt) { // not dragging?
+            if (!dragStartEvt && planetsMoving) { // not dragging?
+                console.log('tweening planet movement');
                 // move along the orbital curve
                 let newpos = getOrbitTweenPos(planet,step,sun);
                 planet.animationX = newpos.x;
