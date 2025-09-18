@@ -79,10 +79,15 @@ function lerp(start, end, amount) {
     return start + (end - start) * amount;
 }
 
+var previousScaleFactor = -999; // used to skip ship tweening if we just zoomed
+
 function drawFleets() {
     if(!allFleets || allFleets.length < 1) {
         return;
     }
+
+    let justZoomed = previousScaleFactor!=scaleFactor;
+    previousScaleFactor=scaleFactor;
 
     let drawWidth = UNIT_SQUARE_DEFAULT_SIZE * scaleFactor;
     const selectedCircleRadius = drawWidth + 3;
@@ -97,7 +102,8 @@ function drawFleets() {
         // only animate if we are not dragging
         // otherwise instant move speed is best
         if (ANIMATE_FLEET_MOVEMENTS) {
-            if (!dragStartEvt) { // the fleet is on the move
+            // only animate if we are NOT scrolling or zooming
+            if (!dragStartEvt && !justZoomed) {
                 fleet.animatingX = lerp(fleet.animatingX,fleetStep.x,FLEET_ANIM_SPEED);
                 fleet.animatingY = lerp(fleet.animatingY,fleetStep.y,FLEET_ANIM_SPEED);
                 fleetX = fleet.animatingX;
