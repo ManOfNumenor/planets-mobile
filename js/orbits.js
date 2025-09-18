@@ -227,6 +227,9 @@ function getOrbitTweenPos(planet,step,sun) {
     let currentAngle = Math.atan2(start.y-sun.y,start.x-sun.x);
     // determine target angle from sun
     let targetAngle = Math.atan2(step.y-sun.y,step.x-sun.x);
+    let angleDifference = Math.abs(currentAngle - targetAngle);
+    // stay put when close enough to avoid float imprecision infinite drift
+    if (angleDifference < 0.005) return { x:step.x, y:step.y };
     // make sure we go "the short way around"
     if (currentAngle > targetAngle) currentAngle -= 360*DEG_TO_RAD;
     // step (lerp) the angle from current to target
