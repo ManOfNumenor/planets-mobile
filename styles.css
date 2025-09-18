@@ -120,8 +120,9 @@ button:hover, button:focus, button:active {
 }
 
 button:disabled {
-    color: lightgrey;
-    border-color: #009e9e;
+    color: rgba(211, 211, 211, 0.288);
+    border-color: rgba(0, 158, 158, 0.176);
+    background: rgba(255,255,255,0.1);
 }
 
 #pauseMenuDiv button,
