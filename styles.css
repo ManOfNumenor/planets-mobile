@@ -115,8 +115,13 @@ button {
     background:url(images/button-bg.png);
 }
 
-button:hover {
+button:hover, button:focus, button:active {
     background:url(images/button-bg-hover.png);
+}
+
+button:disabled {
+    color: lightgrey;
+    border-color: #009e9e;
 }
 
 #pauseMenuDiv button,

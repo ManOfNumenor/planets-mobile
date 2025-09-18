@@ -3,6 +3,8 @@ var playerCount = 0;
 var computerPlayerNumbers = [2];
 
 function endTurn() {
+    let endTurnButton = document.getElementById('endTurnButton');
+    endTurnButton.setAttribute('disabled', true);
     
     if (endTurnSound) endTurnSound.play();
 
@@ -22,6 +24,7 @@ function endTurn() {
     //window.alert(`player ${currentPlayerNumber}'s turn`);
     if(!computerPlayerNumbers.includes(currentPlayerNumber)) {
         alertDialog(`player ${currentPlayerNumber}'s turn`);
+        endTurnButton.removeAttribute('disabled');
     } else {
         runComputerTurn();
     }
