@@ -418,10 +418,12 @@ function setupFleetInfoDiv(fleet) {
         template +=`<div>`;
                 
         let occupyingHostilePlanet = false;
-        if(fleet.planetIdx) {
+        if(fleet.planetIdx || fleet.planetIdx === 0) {
             let foundPlanet = planets[fleet.planetIdx];
             
-            if(foundPlanet && foundPlanet.ownedByPlayer != fleet.ownedByPlayer) {
+            if(foundPlanet && 
+                foundPlanet.ownedByPlayer != fleet.ownedByPlayer) {
+
                 occupyingHostilePlanet = true;
             }
         }
@@ -470,7 +472,7 @@ function capture_planet(fleetIdx) {
         return;
     }
 
-    if(!fleet.planetIdx) {
+    if(!fleet.planetIdx && fleet.planetIdx !== 0) {
         console.error("Fleet is not at a planet: ", fleet);
         return;
     }
