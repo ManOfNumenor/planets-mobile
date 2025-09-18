@@ -116,7 +116,6 @@ function drawFleets() {
         }
         drawFleetIcon(drawX,drawY,drawWidth,drawWidth,'yellow');
 
-        // TODO: draw player icons instead of colored squares
         let iconOffset = 6 * scaleFactor;
         let iconWidth = 15 * scaleFactor;
         switch(fleet.ownedByPlayer) {
@@ -312,6 +311,16 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
                 allFleets = allFleets.filter(
                     fleetToCheck => fleetToCheck !== fleet
                 );
+
+                if(existingFleetAtStep.planetIdx || 
+                    existingFleetAtStep.planetIdx === 0) {
+                    console.log(
+                        'defending fleet wins, no longer under siege'
+                    );
+                    let defenderPlanet = 
+                        planets[existingFleetAtStep.planetIdx];
+                    defenderPlanet.underSiege = false;
+                }
             } else {
                 // fleet (attacker) wins
 
@@ -329,13 +338,17 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
 
     } // end if(existingFleetAtStep)
 
-    if(fleet && fleet.planetIdx !== null) {
+    if(allFleets.includes(fleet) && fleet.planetIdx !== null) {
         // we landed on a planet and we're still here, place it under siege!
         let planet = planets[foundPlanetIdx];
 
         if(planet.ownedByPlayer !== fleet.ownedByPlayer) {
             //planet.ownedByPlayer = fleet.ownedByPlayer;
+            console.log('placing planet under siege', fleet);
             planet.underSiege = true;
+        } else {
+            console.log('NOT placing planet under siege', fleet);
+            planet.underSiege = false;
         }
 
     } // end if(fleet && fleet.planetIdx)
@@ -444,5 +457,37 @@ function clearFleetInfoDiv() {
 }
 
 function capture_planet(fleetIdx) {
-    console.log('TODO: capture planet using fleetIdx:' , fleetIdx);
+    //console.log('capture planet using fleetIdx:' , fleetIdx);
+    let fleet = allFleets[fleetIdx];
+    
+    if(!fleet) {
+        console.error("No Fleet found at fleetIdx: "+fleetIdx);
+        return;
+    }
+
+    if(fleet.movedThisTurn) {
+        console.error("Fleet has already moved: cannot capture planet");
+        return;
+    }
+
+    if(!fleet.planetIdx) {
+        console.error("Fleet is not at a planet: ", fleet);
+        return;
+    }
+
+    let planet = planets[fleet.planetIdx];
+
+    if(!planet) {
+        console.error("No Planet found at idx: "+fleet.planetIdx);
+        return;
+    }
+
+    planet.ownedByPlayer = fleet.ownedByPlayer;
+    planet.underSiege = false;
+
+    // capturing counts as movement
+    fleet.movedThisTurn = true;
+    if(selectedEntity === fleet) {
+        selectedFleetAvailableMoves = [];
+    }
 }

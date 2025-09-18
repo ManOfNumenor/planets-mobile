@@ -36,7 +36,6 @@ function drawPlanets() {
 
         if (ANIMATE_PLANET_MOVEMENTS) {
             if (!dragStartEvt && planetsMoving) { // not dragging?
-                console.log('tweening planet movement');
                 // move along the orbital curve
                 let newpos = getOrbitTweenPos(planet,step,sun);
                 planet.animationX = newpos.x;
