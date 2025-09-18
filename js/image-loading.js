@@ -1,5 +1,9 @@
 var fleetSelectionOutlinePic = document.createElement('img');
-var fleetIconPic = document.createElement('img');
+//var fleetIconPic = document.createElement('img');
+var fleetPic1 = document.createElement('img');
+var fleetPic2 = document.createElement('img');
+var fleetPic3 = document.createElement('img');
+var fleetPic4 = document.createElement('img');
 var player1IconPic = document.createElement('img');
 var player2IconPic = document.createElement('img');
 var player3IconPic = document.createElement('img');
@@ -85,7 +89,11 @@ function loadImages() {
         {varName: canMoveHerePic, theFile: "canMoveHere.png"},
 
         {varName: fleetSelectionOutlinePic, theFile: "fleetSelectionOutline.png"},
-        {varName: fleetIconPic, theFile: "fleetIcon.png"},
+        //{varName: fleetIconPic, theFile: "fleetIcon.png"},
+        {varName: fleetPic1, theFile: "fleetIcon1.png"},
+        {varName: fleetPic2, theFile: "fleetIcon2.png"},
+        {varName: fleetPic3, theFile: "fleetIcon3.png"},
+        {varName: fleetPic4, theFile: "fleetIcon4.png"},
         {varName: player1IconPic, theFile: "player1Icon.png"}, 
         {varName: player2IconPic, theFile: "player2Icon.png"}, 
         {varName: player3IconPic, theFile: "player3Icon.png"}, 

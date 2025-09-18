@@ -6,7 +6,7 @@ const SHIP_PRODUCTION_FACTOR = 1;
 
 // like on google maps, where pin icons don't change size as you zoom
 // if set to 0, icons will scale with game zoom
-const FLEET_ICON_CONSTANT_SIZE = 42; 
+const FLEET_ICON_CONSTANT_SIZE = 40; 
 const PLAYER_ICON_CONSTANT_SIZE = 32; 
 
 var selectedFleetAvailableMoves = [];
@@ -55,11 +55,10 @@ function drawFleetSelectionOutline(x,y,w,h,whichSprite) {
 }
 
 function drawFleetIcon(x,y,w,h,whichSprite) {
-    // colorRect(x,y,w,h,whichSprite);
     let angleRad = 0;
-    let spriteScale = w*(1/fleetIconPic.width);
-    if (FLEET_ICON_CONSTANT_SIZE) spriteScale = FLEET_ICON_CONSTANT_SIZE*(1/fleetIconPic.width);
-    drawBitmapCenteredWithRotationAndScale(fleetIconPic,x,y,angleRad,spriteScale);
+    let spriteScale = w*(1/whichSprite.width);
+    if (FLEET_ICON_CONSTANT_SIZE) spriteScale = FLEET_ICON_CONSTANT_SIZE*(1/whichSprite.width);
+    drawBitmapCenteredWithRotationAndScale(whichSprite,x,y,angleRad,spriteScale);
 }
 
 function drawPlayerIcon(x,y,w,h,whichSprite=player1IconPic) {
@@ -120,26 +119,25 @@ function drawFleets() {
         if(selectedEntity && selectedEntity == fleet){
             drawFleetSelectionOutline(fleetX,fleetY);
         }
-        drawFleetIcon(drawX,drawY,drawWidth,drawWidth,'yellow');
-
-        let iconOffset = 6 * scaleFactor;
+        
+        let iconOffset = 32; //6 * scaleFactor;
         let iconWidth = 15 * scaleFactor;
         switch(fleet.ownedByPlayer) {
             case 1:
-                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
-                    iconWidth,iconWidth, player1IconPic);
+                drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth,player1IconPic);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic1);
                 break;
             case 2:
-                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
-                    iconWidth,iconWidth, player2IconPic);
+                drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth, player2IconPic);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic2);
                 break;
             case 3:
-                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
-                    iconWidth,iconWidth, player3IconPic);
+                drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth,player3IconPic);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic3);
                 break;
             case 4:
-                drawPlayerIcon(drawX - iconOffset,drawY - iconOffset, 
-                    iconWidth,iconWidth, player4IconPic);
+                drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth,player4IconPic);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic4);
                 break;
 
         } // end switch
