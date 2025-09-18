@@ -223,7 +223,7 @@ function getOrbitTweenPos(planet,step,sun) {
     let start = { x:planet.animationX, y:planet.animationY };
     // measure distance and angle to the sun
     let orbit = orbits[planet.orbitIdx];
-    let sundist = orbit.radius; //distBetween(start,sun);
+    let sundist = orbit.radius * scaleFactor; //distBetween(start,sun);
     let currentAngle = Math.atan2(start.y-sun.y,start.x-sun.x);
     // determine target angle from sun
     let targetAngle = Math.atan2(step.y-sun.y,step.x-sun.x);

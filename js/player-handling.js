@@ -45,6 +45,17 @@ async function runComputerTurn() {
     );
 
     for(const fleet of playerFleets) {
+        if(fleet.planetIdx || fleet.planetIdx === 0) {
+            // check if the planet we are on is capture-able
+            let planet = planets[fleet.planetIdx];
+
+            if(planet && planet.ownedByPlayer !== fleet.ownedByPlayer) {
+                let fleetIdx = allFleets.indexOf(fleet);
+                capture_planet(fleetIdx);
+                continue; // skip to next fleet
+            }
+        }
+
         let availableMoves = getAvailableMoves(fleet);
 
         if(availableMoves.length > 0) {
@@ -58,7 +69,6 @@ async function runComputerTurn() {
 
         //await let foo = setTimeout(() => {return 'foo';}, 500);
         await delay(500);
-
     }
 
     endTurn();
