@@ -1,9 +1,9 @@
 var testLevel = {
     playerCount: 2,
     sun: {
-        isBinaryStar: false,
-        imageVar: sunDefault,
-        sunspotsEnabled: true,
+        isBinaryStar: true,
+        imageVar: sunNeutron,
+        sunspotsEnabled: false,
         radius: 42,
     },
     orbits: [
