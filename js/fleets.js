@@ -6,7 +6,7 @@ const SHIP_PRODUCTION_FACTOR = 1;
 
 // like on google maps, where pin icons don't change size as you zoom
 // if set to 0, icons will scale with game zoom
-const FLEET_ICON_CONSTANT_SIZE = 40; 
+const FLEET_ICON_CONSTANT_SIZE = 48; 
 const PLAYER_ICON_CONSTANT_SIZE = 32; 
 
 var selectedFleetAvailableMoves = [];
@@ -120,7 +120,7 @@ function drawFleets() {
             drawFleetSelectionOutline(fleetX,fleetY);
         }
         
-        let iconOffset = 32; //6 * scaleFactor;
+        let iconOffset = 38; //6 * scaleFactor;
         let iconWidth = 15 * scaleFactor;
         switch(fleet.ownedByPlayer) {
             case 1:
