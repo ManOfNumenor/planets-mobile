@@ -351,7 +351,7 @@ function drawPlanetTooltip(line1,line2,line3,textX,textY) {
 }
 
 function drawPlanetExplosions(centerX,centerY) {
-    console.log('drawPlanetExplosions', centerX, centerY);
+    // console.log('drawPlanetExplosions', centerX, centerY);
     const LOOP_LENGTH = 2000;
     const TIME_VALUE = performance.now() % LOOP_LENGTH;
     const MAX_SCALE = 0.3;

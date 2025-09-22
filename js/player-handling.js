@@ -1,6 +1,7 @@
 var currentPlayerNumber = 0;
 var playerCount = 0;
 var computerPlayerNumbers = [2];
+var eliminatedPlayerNumbers = [];
 
 function endTurn() {
     let endTurnButton = document.getElementById('endTurnButton');
@@ -10,15 +11,23 @@ function endTurn() {
 
     advancePlayerNumber();
 
+    console.log('before', currentPlayerNumber);
+    skipAnyEliminatedPlayers();
+    console.log('after', currentPlayerNumber);
+
     if(currentPlayerNumber === 0) {
         turnNumber++;
         movePlanetsAndProduceShips();
+        eliminateLostPlayers();
+        let isGameOver = checkForEndOfGame();
 
-        for(const fleet of allFleets) {
-            fleet.movedThisTurn = false;
+        if(!isGameOver) {
+            for(const fleet of allFleets) {
+                fleet.movedThisTurn = false;
+            }
+
+            advancePlayerNumber();
         }
-
-        advancePlayerNumber();
     }
 
     //window.alert(`player ${currentPlayerNumber}'s turn`);
@@ -41,6 +50,22 @@ function advancePlayerNumber() {
         currentPlayerNumber = 0;
     }
 }
+
+function skipAnyEliminatedPlayers() {
+    let tries = 0;
+    let limit = 10;
+    while(eliminatedPlayerNumbers.includes(currentPlayerNumber) &&
+        tries < limit) {
+
+        advancePlayerNumber();
+
+        if(tries === limit - 1) {
+            console.error('Hit while loop limit in skipAnyEliminatedPlayers');
+        } // end if
+
+    } // end while
+
+} // end function skipAnyEliminatedPlayers()
 
 async function runComputerTurn() {
     let playerFleets = allFleets.filter(
@@ -94,4 +119,34 @@ function togglePlayerType(playerNumber) {
     }
 
     renderPlayersList();
+}
+
+function eliminateLostPlayers() {
+    for(let i=0;i<playerCount;i++) {
+        let playerNumber = i + 1;
+
+        let playerPlanets = planets.filter(planet => { 
+            return planet.ownedByPlayer === playerNumber;
+        });
+
+        if(playerPlanets.length < 1 && 
+            !eliminatedPlayerNumbers.includes(playerNumber)) {
+
+            console.log('eliminated player: ', playerNumber);
+            eliminatedPlayerNumbers.push(playerNumber);
+            allFleets = allFleets.filter(
+                fleet => fleet.ownedByPlayer !== playerNumber
+            );
+
+            // TODO: implement alert queueing or other player 
+            // notification system. Currently attempting to show an 
+            // alert when one is already up throws an error. Here
+            // that error disabled the endTurn button permanently...
+            //alertDialog('Player '+playerNumber+' has been defeated!');
+        }
+    }
+}
+
+function checkForEndOfGame() {
+    //
 }

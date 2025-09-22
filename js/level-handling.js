@@ -9,6 +9,7 @@ function loadLevel(levelObj) {
     // console.log('loading level', levelObj);
     playerCount = levelObj.playerCount;
     currentPlayerNumber = 1;
+    eliminatedPlayerNumbers = [];
 
     // sun
     setupSun(levelObj.sun);

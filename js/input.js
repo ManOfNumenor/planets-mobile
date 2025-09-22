@@ -47,8 +47,8 @@ function setupInput() {
 
 function pointerdownHandler(evt) {
     evt.preventDefault();
-    console.log('pointerdown');
-    console.log('pointerdown evt', evt);
+    // console.log('pointerdown');
+    // console.log('pointerdown evt', evt);
 
     // browsers block autoplay so we wait for 1st interaction
     if (!soundInitialized) soundInitialize();
