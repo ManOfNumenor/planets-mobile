@@ -26,6 +26,17 @@ function imageLoadingDoneSoStartGame() {
     showMenu('main');
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    
+    // attempt to fix performance degradation on chromebook
+    // when switching tabs which is fixed by forcing a resize
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === 'visible') { 
+                console.log("game just became visible - jiggling canvas size to fix chromebook performance");
+                canvas.height += 0.1;
+                canvas.height -= 0.1;
+                //resizeCanvas(); // might be all we need instead?
+        }
+    });
 
     let framesPerSecond = 30;
     setInterval(updateEverything, 1000/framesPerSecond);
@@ -74,7 +85,6 @@ function resizeCanvas() {
     canvas.height = canvasRect.height;
     canvas.width = canvasRect.width;
     debug('height updated: ' + canvas.height);
-
 }
 
 function distAngAndOriginToXY(dist, angRadiants,
