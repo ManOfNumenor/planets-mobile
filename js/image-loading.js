@@ -34,6 +34,7 @@ var sunRedGiant = document.createElement('img');
 var sunWhiteDwarf = document.createElement('img');
 
 var flagIcon = document.createElement('img');
+var orbitStopPic = document.createElement('img');
 
 var worldPics = [];
 
@@ -100,6 +101,7 @@ function loadImages() {
         {varName: player4IconPic, theFile: "player4Icon.png"}, 
 
         {varName: flagIcon, theFile: "flagIcon.png"}, 
+        {varName: orbitStopPic, theFile: "orbit-stop.png"}, 
 
 		];
 

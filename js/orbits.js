@@ -72,9 +72,15 @@ function drawOrbits() {
                 //     center,
                 // );
 
-                colorCircle(step.x,step.y,
-                    STEP_INDICATOR_RADIUS * scaleFactor,
-                    ORBIT_DRAW_COLOR);
+                // colorCircle(step.x,step.y,
+                //     STEP_INDICATOR_RADIUS * scaleFactor,
+                //     ORBIT_DRAW_COLOR);
+                drawBitmapCenteredWithRotationAndScale(orbitStopPic,
+                    step.x,step.y, 0,
+                    // image is 20x20, scaled down by half to still look good at 2x zoom
+                    0.5 * scaleFactor);
+
+
                 
                 if(selectedFleetCanMoveTo({ orbitIdx: orbitIdx, stepIdx: i})) {
                     drawCanMoveHereIndicator(step);
