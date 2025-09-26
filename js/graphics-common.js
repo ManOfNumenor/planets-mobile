@@ -130,7 +130,9 @@ function gradientAtSunAngle(x,y,radius, radial=false) {
     }
 }
 
-function shadeCircle(centerX, centerY, radius) {
+function shadeCircle(centerX, centerY, radius, gradientVar) {
+    // test: disable gradients for now
+    return;
     let extraShadowWidth = 3 * scaleFactor; 
         // for hiding atmo, 1px line, etc
 

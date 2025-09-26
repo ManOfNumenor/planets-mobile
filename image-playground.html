@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>image-playground</title>
+    </head>
+    <body>
+    <canvas id="gameCanvas" width="256" height="256"></canvas>
+    <button onclick="setPlanetSize(1)"> 1 </button>
+    <button onclick="setPlanetSize(2)"> 2 </button>
+    <button onclick="setPlanetSize(3)"> 3 </button>
+    </body>
+
+        <script src="js/error-handling.js"></script>
+        <script src="js/graphics-common.js"></script>
+        <script src="js/utilities.js"></script>
+        <script src="js/image-loading.js"></script>
+        <script src="js/level-handling.js"></script>
+        <script src="js/player-handling.js"></script>
+        <script src="js/menus.js"></script>
+
+        <script src="js/planets.js"></script>
+
+    <script>
+var canvas, canvasContext;
+
+window.onload = function() {
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+}
+
+function setPlanetSize(idx) {
+    const extraShadowWidth = 3;
+
+    let radius = PLANET_SIZE_RADIAI[idx];
+    // doubling for diameter + padding, then doubling again so it still
+    // works at 2x zoom. will need to multiply scaleFactor by 0.5 in-game
+    canvas.width = 4 * (radius + extraShadowWidth);
+    canvas.height = 4 * (radius + extraShadowWidth);
+
+    let centerX = canvas.width / 2;
+    let centerY = canvas.height / 2;
+
+    let shadowGradient = canvasContext.createLinearGradient(
+        centerX,0, // top middle
+        centerX,canvas.height, // bottom middle
+    );
+
+    shadowGradient.addColorStop(0, 'transparent');
+    shadowGradient.addColorStop(0.4, 'rgba(0,0,0, 0.4)');
+    shadowGradient.addColorStop(0.6, 'black');
+
+    canvasContext.fillStyle = shadowGradient;
+    canvasContext.beginPath();
+    canvasContext.arc(centerX, centerY, radius + extraShadowWidth, 0, Math.PI*2, true);
+    canvasContext.fill();
+}
+    </script>
+
+    </html>
+
