@@ -23,6 +23,7 @@
         <script src="js/planets.js"></script>
 
     <script>
+const showReferencePlanet = true;
 var canvas, canvasContext;
 
 window.onload = function() {
@@ -41,6 +42,12 @@ function setPlanetSize(idx) {
 
     let centerX = canvas.width / 2;
     let centerY = canvas.height / 2;
+
+    if(showReferencePlanet) {
+        colorCircle(centerX,centerY, 
+            radius - (2 * extraShadowWidth),
+            '#00ff00');
+    }
 
     let shadowGradient = canvasContext.createLinearGradient(
         centerX,0, // top middle

@@ -119,8 +119,9 @@ function drawPlanets() {
         }
 
         // draw planet shadow
-        shadeCircle(drawX, drawY,
-                planet.radius * scaleFactor);
+        // shadeCircle(drawX, drawY,
+        //         planet.radius * scaleFactor);
+        drawPlanetShadow(drawX, drawY, planet.size);
 
         if (planet.rings) { // draw rings front side
             drawBitmapCenteredWithRotationAndScale(ringsFrontPic,
@@ -406,3 +407,34 @@ function drawPlanetExplosions(centerX,centerY) {
         }
     }
 }
+
+function drawPlanetShadow(centerX, centerY, planetSize) {
+    const ang = Math.atan2(centerY-sun.y,centerX-sun.x) -
+        Math.PI / 2;
+    const planetRadius = PLANET_SIZE_RADIAI[planetSize];
+    let imgVar = null;
+
+    switch(planetSize) {
+        case 1:
+            imgVar = planetSize1Shadow;
+            break;
+        case 2:
+            imgVar = planetSize2Shadow;
+            break;
+        case 3:
+            imgVar = planetSize3Shadow;
+            break;
+    }
+
+    // console.log('planetSize', planetSize, 'planetRadius', planetRadius, 'imgVar', imgVar.src);
+
+    if(imgVar) {
+        drawBitmapCenteredWithRotationAndScale(
+            imgVar,
+            centerX,centerY,
+            ang,
+            scaleFactor,
+        );
+    }
+}
+

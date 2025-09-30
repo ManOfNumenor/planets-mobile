@@ -35,6 +35,9 @@ var sunWhiteDwarf = document.createElement('img');
 
 var flagIcon = document.createElement('img');
 var orbitStopPic = document.createElement('img');
+var planetSize1Shadow = document.createElement('img');
+var planetSize2Shadow = document.createElement('img');
+var planetSize3Shadow = document.createElement('img');
 
 var worldPics = [];
 
@@ -103,6 +106,9 @@ function loadImages() {
         {varName: flagIcon, theFile: "flagIcon.png"}, 
         {varName: orbitStopPic, theFile: "orbit-stop.png"}, 
 
+        {varName: planetSize1Shadow, theFile: "planet-size-1-shadow.png"}, 
+        {varName: planetSize2Shadow, theFile: "planet-size-2-shadow.png"}, 
+        {varName: planetSize3Shadow, theFile: "planet-size-3-shadow.png"}, 
 		];
 
 	picsToLoad = imageList.length;
