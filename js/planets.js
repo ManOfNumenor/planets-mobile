@@ -63,6 +63,45 @@ function drawPlanets() {
 
         canvasContext.save();
 
+        if(planet.ownedByPlayer) {
+            // draw planet ownership indicator(s)
+
+            canvasContext.globalAlpha = Math.max(0.2, 1 - (scaleFactor * 0.5));
+            switch(planet.ownedByPlayer) {
+                case 1:
+                    // a red rectangle below the planet
+                    //colorRect(drawX - (iconWidth / 2),
+                    //    drawY + iconOffset, 
+                    //    iconWidth,iconWidth, 'red');
+
+                    // a red dotted circle around planet
+                    // drawBitmapCenteredWithRotationAndScale(ownedByPlayer1Pic,
+                    //     Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
+                    drawPlayerPlanetIcon(drawX,drawY, player1IconPic);
+                    break;
+                
+                case 2:
+                    // a green circle below planet
+                    //colorCircle(drawX, drawY + iconOffset, 
+                    //    (iconWidth / 2 ) * 1.1 , '#00ff00');
+
+                    // a green dashed circle around planet
+                    // drawBitmapCenteredWithRotationAndScale(ownedByPlayer2Pic,
+                    //     Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
+
+                    drawPlayerPlanetIcon(drawX,drawY, player2IconPic);
+                    break;
+                case 3:
+                    drawPlayerPlanetIcon(drawX,drawY, player3IconPic);
+                    break;
+                case 4:
+                    drawPlayerPlanetIcon(drawX,drawY, player4IconPic);
+                    break;
+            } // end switch
+
+            canvasContext.globalAlpha = 1;
+        }
+
         if(planet.atmosphereColor) {
             drawAtmoHaze(drawX, drawY, planet);
         }
@@ -131,30 +170,11 @@ function drawPlanets() {
 
         if (MOONS_ENABLED) drawAllMoons(planet.moons,drawX,drawY);
 
-        // TODO: draw player icons instead of colored squares
-        let iconOffset = 30 * scaleFactor;
-        let iconWidth = 18 * scaleFactor;
+        // // TODO: draw player icons instead of colored squares
+        // let iconOffset = 30 * scaleFactor;
+        // let iconWidth = 18 * scaleFactor;
 
         if(planet.ownedByPlayer) {
-            switch(planet.ownedByPlayer) {
-                case 1:
-                    // a red rectangle below the planet
-                    //colorRect(drawX - (iconWidth / 2),
-                    //    drawY + iconOffset, 
-                    //    iconWidth,iconWidth, 'red');
-                    // a red dotted circle around planet
-                    drawBitmapCenteredWithRotationAndScale(ownedByPlayer1Pic,
-                        Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
-                    break;
-                
-                case 2:
-                    //colorCircle(drawX, drawY + iconOffset, 
-                    //    (iconWidth / 2 ) * 1.1 , '#00ff00');
-                    // a green dashed circle around planet
-                    drawBitmapCenteredWithRotationAndScale(ownedByPlayer2Pic,
-                        Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
-                    break;
-            } // end switch
 
             let fleetAtPlanet = allFleets.find(fleet => {
                 return fleet.planetIdx === i;
@@ -438,3 +458,8 @@ function drawPlanetShadow(centerX, centerY, planetSize) {
     }
 }
 
+function drawPlayerPlanetIcon(x,y, whichSprite=player1IconPic) {
+    //canvasContext.globalAlpha = 0.5 * scaleFactor
+    const imgScale = (scaleFactor * 2) + 2;
+    drawBitmapCenteredWithRotationAndScale(whichSprite, x,y, 0, imgScale);
+}
