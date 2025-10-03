@@ -77,7 +77,7 @@ function drawPlanets() {
                     // a red dotted circle around planet
                     // drawBitmapCenteredWithRotationAndScale(ownedByPlayer1Pic,
                     //     Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
-                    drawPlayerPlanetIcon(drawX,drawY, player1IconPic);
+                    drawPlayerPlanetIcon(drawX,drawY,player1PlanetIconPic,planet);
                     break;
                 
                 case 2:
@@ -89,13 +89,13 @@ function drawPlanets() {
                     // drawBitmapCenteredWithRotationAndScale(ownedByPlayer2Pic,
                     //     Math.round(drawX),Math.round(drawY),0,planet.radius*scaleFactor*2.75/ownedByPlayer2Pic.width);
 
-                    drawPlayerPlanetIcon(drawX,drawY, player2IconPic);
+                    drawPlayerPlanetIcon(drawX,drawY,player2PlanetIconPic,planet);
                     break;
                 case 3:
-                    drawPlayerPlanetIcon(drawX,drawY, player3IconPic);
+                    drawPlayerPlanetIcon(drawX,drawY,player3PlanetIconPic,planet);
                     break;
                 case 4:
-                    drawPlayerPlanetIcon(drawX,drawY, player4IconPic);
+                    drawPlayerPlanetIcon(drawX,drawY,player4PlanetIconPic,planet);
                     break;
             } // end switch
 
@@ -458,8 +458,11 @@ function drawPlanetShadow(centerX, centerY, planetSize) {
     }
 }
 
-function drawPlayerPlanetIcon(x,y, whichSprite=player1IconPic) {
-    //canvasContext.globalAlpha = 0.5 * scaleFactor
-    const imgScale = (scaleFactor * 2) + 2;
+function drawPlayerPlanetIcon(x,y,whichSprite,whichPlanet) {
+    // alpha is handled in before this func is run
+    // canvasContext.globalAlpha = 0.5 * scaleFactor
+    // const imgScale = (scaleFactor * 2) + 2;
+    // sized to fit planet plus a bit more
+    const imgScale = ((1/whichSprite.width) * whichPlanet.radius*2 * scaleFactor) + (0.15*scaleFactor); 
     drawBitmapCenteredWithRotationAndScale(whichSprite, x,y, 0, imgScale);
 }

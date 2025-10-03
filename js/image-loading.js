@@ -8,6 +8,10 @@ var player1IconPic = document.createElement('img');
 var player2IconPic = document.createElement('img');
 var player3IconPic = document.createElement('img');
 var player4IconPic = document.createElement('img');
+var player1PlanetIconPic = document.createElement('img');
+var player2PlanetIconPic = document.createElement('img');
+var player3PlanetIconPic = document.createElement('img');
+var player4PlanetIconPic = document.createElement('img');
 var ownedByPlayer1Pic = document.createElement('img');
 var ownedByPlayer2Pic = document.createElement('img');
 var canMoveHerePic = document.createElement('img');
@@ -102,6 +106,11 @@ function loadImages() {
         {varName: player2IconPic, theFile: "player2Icon.png"}, 
         {varName: player3IconPic, theFile: "player3Icon.png"}, 
         {varName: player4IconPic, theFile: "player4Icon.png"}, 
+
+        {varName: player1PlanetIconPic, theFile: "player1PlanetIcon.png"}, 
+        {varName: player2PlanetIconPic, theFile: "player2PlanetIcon.png"}, 
+        {varName: player3PlanetIconPic, theFile: "player3PlanetIcon.png"}, 
+        {varName: player4PlanetIconPic, theFile: "player4PlanetIcon.png"}, 
 
         {varName: flagIcon, theFile: "flagIcon.png"}, 
         {varName: orbitStopPic, theFile: "orbit-stop.png"}, 
