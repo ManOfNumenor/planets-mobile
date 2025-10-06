@@ -63,6 +63,7 @@ function drawEverything() {
     drawOrbits();
     drawPlanets();
     drawFleets();
+    drawScoreboard();
 
 }
 

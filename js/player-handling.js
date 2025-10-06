@@ -1,3 +1,4 @@
+var isGameOver = false;
 var currentPlayerNumber = 0;
 var playerCount = 0;
 var computerPlayerNumbers = [2];
@@ -19,7 +20,7 @@ function endTurn() {
         turnNumber++;
         movePlanetsAndProduceShips();
         eliminateLostPlayers();
-        let isGameOver = checkForEndOfGame();
+        isGameOver = checkForEndOfGame();
 
         if(!isGameOver) {
             for(const fleet of allFleets) {
@@ -148,5 +149,60 @@ function eliminateLostPlayers() {
 }
 
 function checkForEndOfGame() {
-    //
+/*
+    // FIXME - untested pseudocode - WIP
+    let stillAlive = [];
+    for (let f of allFleets) {
+        if (f.ownedByPlayer != undefined) {
+            stillAlive[f.ownedByPlayer] = true;
+        }
+    }
+    for (let f of planets) {
+        if (f.ownedByPlayer != undefined) {
+            stillAlive[f.ownedByPlayer] = true;
+        }
+    }
+    let pcount = 0;
+    let thewinner;
+    for (let p in stillAlive) { pcount++; thewinner = p; }
+    
+    if (pcount == 1) {
+        console.log("GAME OVER - only one player with planets or fleets");
+        if (computerPlayerNumbers.includes(thewinner)) {
+            console.log("the last remaining player was a computer");
+        } else {
+            console.log("the last remaining player was a human");
+        }
+    }
+*/
+}
+
+function drawScoreboard() {
+    let totalShips = [0,0,0,0];
+    let totalPlanets = [0,0,0,0];
+    let totalFleets = [0,0,0,0];
+
+    for (let f of allFleets) {
+        totalShips[f.ownedByPlayer] += f.ships;
+        totalFleets[f.ownedByPlayer]++;
+    }
+
+    for (let p of planets) {
+        totalPlanets[p.ownedByPlayer]++;
+    }
+
+    let str = "";
+
+    for (let i=0; i<playerCount; i++) {
+        str += "Player "+i+": "
+            +totalFleets[i]+" fleets, "
+            +totalShips[i]+" ships, "
+            +totalPlanets[i]+" planets ";
+    }
+
+    canvasContext.font = "8px sans-serif";
+    canvasContext.fillStyle = "cyan";
+    canvasContext.textAlign = "center";
+    canvasContext.fillText(str,400,12);
+
 }
