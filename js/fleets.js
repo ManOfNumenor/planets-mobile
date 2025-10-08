@@ -496,4 +496,10 @@ function capture_planet(fleetIdx) {
     if(selectedEntity === fleet) {
         selectedFleetAvailableMoves = [];
     }
+
+    // deselect automatically so player
+    // can select something else
+    selectedEntity = null;
+    selectedFleetAvailableMoves = [];
+    clearFleetInfoDiv();
 }
