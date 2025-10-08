@@ -43,6 +43,8 @@ var planetSize1Shadow = document.createElement('img');
 var planetSize2Shadow = document.createElement('img');
 var planetSize3Shadow = document.createElement('img');
 
+var notificationBG = document.createElement('img');
+
 var worldPics = [];
 
 var picsToLoad = 0; //set automatically based on number of imageList in loadImages()
@@ -118,6 +120,8 @@ function loadImages() {
         {varName: planetSize1Shadow, theFile: "planet-size-1-shadow.png"}, 
         {varName: planetSize2Shadow, theFile: "planet-size-2-shadow.png"}, 
         {varName: planetSize3Shadow, theFile: "planet-size-3-shadow.png"}, 
+
+        {varName: notificationBG, theFile: "notificationBG.png"}, 
 		];
 
 	picsToLoad = imageList.length;

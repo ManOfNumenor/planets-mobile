@@ -144,6 +144,8 @@ function eliminateLostPlayers() {
             // alert when one is already up throws an error. Here
             // that error disabled the endTurn button permanently...
             //alertDialog('Player '+playerNumber+' has been defeated!');
+
+            startNotification('Player '+playerNumber+' has been defeated!');
         }
     }
 }
@@ -200,9 +202,9 @@ function drawScoreboard() {
             +totalPlanets[i]+" planets ";
     }
 
-    canvasContext.font = "8px sans-serif";
+    canvasContext.font = "9px sans-serif";
     canvasContext.fillStyle = "cyan";
     canvasContext.textAlign = "center";
-    canvasContext.fillText(str,400,12);
+    canvasContext.fillText(str,canvas.width/2,12);
 
 }

@@ -64,6 +64,7 @@ function drawEverything() {
     drawPlanets();
     drawFleets();
     drawScoreboard();
+    drawNotifications();
 
 }
 
