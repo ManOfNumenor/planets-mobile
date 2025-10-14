@@ -151,32 +151,49 @@ function eliminateLostPlayers() {
 }
 
 function checkForEndOfGame() {
-/*
-    // FIXME - untested pseudocode - WIP
-    let stillAlive = [];
+
+    let stillAlive = []; // a list of players found alive
+
+    // look for any fleets
     for (let f of allFleets) {
         if (f.ownedByPlayer != undefined) {
             stillAlive[f.ownedByPlayer] = true;
         }
     }
+
+    // or owned planets
     for (let f of planets) {
         if (f.ownedByPlayer != undefined) {
             stillAlive[f.ownedByPlayer] = true;
         }
     }
+    
+    // see if there's only one player (cpu or human) left
+    let gameResultText = "";
     let pcount = 0;
-    let thewinner;
+    let thewinner; // remember the last seen alive player number
     for (let p in stillAlive) { pcount++; thewinner = p; }
     
+    // finally, we can detect gameover
     if (pcount == 1) {
         console.log("GAME OVER - only one player with planets or fleets");
+        // FIXME: the cpu player (player #2)
+        // is not in this array?!?! huh????? -----v
         if (computerPlayerNumbers.includes(thewinner)) {
             console.log("the last remaining player was a computer");
+            startNotification("YOU HAVE BEEN DEFEATED. GAME OVER.");
+            gameResultText = "Player "+thewinner+" was victorious.";
         } else {
             console.log("the last remaining player was a human");
+            startNotification("PLAYER "+thewinner+" WINS!");
+            gameResultText = "Player "+thewinner+" was victorious.";
         }
+        // TODO: actually stop the game from running,
+        // perhaps with a modal "return to the main menu" prompt
+        isGameOver = true;
+        document.getElementById("gameResultDiv").innerHTML = gameResultText;
+        document.getElementById("gameoverGUI").style.display='block';
     }
-*/
 }
 
 function drawScoreboard() {
@@ -207,4 +224,22 @@ function drawScoreboard() {
     canvasContext.textAlign = "center";
     canvasContext.fillText(str,canvas.width/2,12);
 
+}
+
+// DEBUG ONLY: force an instant gameover condition
+function instantWin() {
+    console.log("forcing player 1 to win!");
+    for (let f of allFleets) { f.ownedByPlayer = 1; }
+    for (let p of planets) { p.ownedByPlayer = 1; }
+    checkForEndOfGame();
+}
+function instantLose() {
+    console.log("forcing player 2 to win!");
+    for (let f of allFleets) { f.ownedByPlayer = 2; }
+    for (let p of planets) { p.ownedByPlayer = 2; }
+    checkForEndOfGame();
+}
+
+function restartGame() {
+    window.location.reload();
 }

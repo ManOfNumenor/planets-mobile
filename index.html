@@ -30,11 +30,10 @@
                 End Turn
             </button>
 
-            <!-- temp debug button -->
-            <button id="warpButton"
-                    onclick="randomizeLevel()">
-                Warp!
-            </button>
+            <!-- temp debug buttons: comment out upon release-->
+            <button id="winButton" onclick="instantWin()">Win!</button>
+            <button id="loseButton" onclick="instantLose()">Lose!</button>
+            <button id="warpButton" onclick="randomizeLevel()">Warp!</button>
 
             <div id="selectedFleetInfoDiv"></div>
 
@@ -102,7 +101,15 @@
                 the `<dialog>` element
             -->
             <button onclick="closeConfirmDialog()">Confirm</button>
+
         </dialog>
+
+        <div id="gameoverGUI">
+            <h1>GAME OVER</h1>
+            <div id="gameResultDiv">Player 1 was victorious.</div>
+            <div>Thank you for playing!</div>
+            <div><button onclick="restartGame()">Main Menu</button></div>
+        </div>
 
         <!-- <p id="pointerDebug"></p> -->
 

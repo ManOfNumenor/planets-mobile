@@ -137,7 +137,7 @@ div.menu-div button {
 }
 
 /* change to look like default used by existing "End Turn" button. */
-#endTurnButton, #pauseButton, #warpButton {
+#endTurnButton, #pauseButton, #warpButton, #winButton, #loseButton {
 
     /* margin-left: 1rem; */
     position: absolute;
@@ -212,6 +212,14 @@ dialog::backdrop {
     top:2px;
     right:2px;
 }
+#loseButton {
+    top:2px;
+    right:102px;
+}
+#winButton {
+    top:2px;
+    right:202px;
+}
 
 div.player-select-box {
     text-align: center;
@@ -223,3 +231,34 @@ div.player-select-box > img {
     max-width: 50px;
 }
 
+#gameoverGUI {
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:400px;
+    height:300px;
+    padding:0;
+    margin:0;
+    margin-left:-216px;
+    margin-top:-168px;
+    background:rgb(0, 59, 59);
+    border:1px solid cyan;
+}
+
+#gameoverGUI h1 {
+    text-align:center;
+    background:rgba(255,0,0,0.5);
+    padding:16px;
+    margin:16px;
+    color:black;
+    border:1px solid red;
+    text-shadow:0 0 16px #fff, 0 0 8px #fff;
+}
+
+#gameoverGUI div {
+    text-align:center;
+    color:cyan;
+    font-size:24px;
+    padding:16px;
+}
