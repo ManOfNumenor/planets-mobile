@@ -142,6 +142,28 @@ function drawFleets() {
 
         } // end switch
 
+        let shipIndicatorXOffset = 20;
+        let shipIndicatorYOffset = -100;
+        let shipIndicatorVerticalSpacing = 10 * scaleFactor;
+        if(fleet.ships > 10) {
+            shipIndicatorVerticalSpacing = 8 * scaleFactor;
+        }
+
+        for(let i=0;i<fleet.ships;i++) {
+            drawBitmapCenteredWithRotationAndScale(
+                shipIndicatorSegment,
+                drawX + shipIndicatorXOffset,
+                drawY + shipIndicatorYOffset,
+                0,
+                scaleFactor);
+
+            shipIndicatorYOffset -= shipIndicatorVerticalSpacing;
+            if(i > 0 && i % 10 === 0) {
+                shipIndicatorXOffset += 15;
+            }
+
+        }
+
     } // end for
 
 } // end function

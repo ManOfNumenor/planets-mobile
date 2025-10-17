@@ -45,6 +45,8 @@ var planetSize3Shadow = document.createElement('img');
 
 var notificationBG = document.createElement('img');
 
+var shipIndicatorSegment = document.createElement('img');
+
 var worldPics = [];
 
 var picsToLoad = 0; //set automatically based on number of imageList in loadImages()
@@ -122,6 +124,8 @@ function loadImages() {
         {varName: planetSize3Shadow, theFile: "planet-size-3-shadow.png"}, 
 
         {varName: notificationBG, theFile: "notificationBG.png"}, 
+
+        {varName: shipIndicatorSegment, theFile: "ships-indicator-segment.png"}, 
 		];
 
 	picsToLoad = imageList.length;
