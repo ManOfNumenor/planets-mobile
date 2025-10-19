@@ -142,11 +142,17 @@ function drawFleets() {
 
         } // end switch
 
-        let shipIndicatorXOffset = 20;
-        let shipIndicatorYOffset = -100;
-        let shipIndicatorVerticalSpacing = 10 * scaleFactor;
+        // draw little green icons to visually indicate number of ships 
+        // in the fleet
+        let shipIndicatorScale = FLEET_ICON_CONSTANT_SIZE * 
+            (1/shipIndicatorSegment.width);
+        let shipIndicatorXOffset = 10 * shipIndicatorScale;
+        let shipIndicatorYOffset = 5 * shipIndicatorScale;
+        let shipIndicatorYOffsetDefault = shipIndicatorYOffset; // save for reverting to later
+
+        let shipIndicatorVerticalSpacing = 5;
         if(fleet.ships > 10) {
-            shipIndicatorVerticalSpacing = 8 * scaleFactor;
+            shipIndicatorVerticalSpacing = 3;
         }
 
         for(let i=0;i<fleet.ships;i++) {
@@ -155,11 +161,13 @@ function drawFleets() {
                 drawX + shipIndicatorXOffset,
                 drawY + shipIndicatorYOffset,
                 0,
-                scaleFactor);
+                0.5);
 
             shipIndicatorYOffset -= shipIndicatorVerticalSpacing;
             if(i > 0 && i % 10 === 0) {
-                shipIndicatorXOffset += 15;
+                // swap to new column
+                shipIndicatorXOffset += 5;
+                shipIndicatorYOffset = shipIndicatorYOffsetDefault;
             }
 
         }
