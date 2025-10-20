@@ -12,15 +12,15 @@ function endTurn() {
 
     advancePlayerNumber();
 
-    console.log('before', currentPlayerNumber);
+    console.log('before skip', currentPlayerNumber);
     skipAnyEliminatedPlayers();
-    console.log('after', currentPlayerNumber);
+    console.log('after skip', currentPlayerNumber);
 
     if(currentPlayerNumber === 0) {
         turnNumber++;
         movePlanetsAndProduceShips();
         eliminateLostPlayers();
-        isGameOver = checkForEndOfGame();
+        checkForEndOfGame();
 
         if(!isGameOver) {
             for(const fleet of allFleets) {
@@ -28,15 +28,18 @@ function endTurn() {
             }
 
             advancePlayerNumber();
+            skipAnyEliminatedPlayers();
         }
     }
 
-    //window.alert(`player ${currentPlayerNumber}'s turn`);
-    if(!computerPlayerNumbers.includes(currentPlayerNumber)) {
-        alertDialog(`player ${currentPlayerNumber}'s turn`);
-        endTurnButton.removeAttribute('disabled');
-    } else {
-        runComputerTurn();
+    if(!isGameOver) {
+        //window.alert(`player ${currentPlayerNumber}'s turn`);
+        if(!computerPlayerNumbers.includes(currentPlayerNumber)) {
+            alertDialog(`player ${currentPlayerNumber}'s turn`);
+            endTurnButton.removeAttribute('disabled');
+        } else {
+            runComputerTurn();
+        }
     }
 
     // debug("turn "+turnNumber);
@@ -139,34 +142,31 @@ function eliminateLostPlayers() {
                 fleet => fleet.ownedByPlayer !== playerNumber
             );
 
-            // TODO: implement alert queueing or other player 
-            // notification system. Currently attempting to show an 
-            // alert when one is already up throws an error. Here
-            // that error disabled the endTurn button permanently...
-            //alertDialog('Player '+playerNumber+' has been defeated!');
-
             startNotification('Player '+playerNumber+' has been defeated!');
         }
     }
 }
 
 function checkForEndOfGame() {
+    // console.log('checkForEndOfGame');
 
     let stillAlive = []; // a list of players found alive
 
     // look for any fleets
     for (let f of allFleets) {
-        if (f.ownedByPlayer != undefined) {
+        if (f.ownedByPlayer != undefined && f.ownedByPlayer !== 0) {
             stillAlive[f.ownedByPlayer] = true;
         }
     }
 
     // or owned planets
     for (let f of planets) {
-        if (f.ownedByPlayer != undefined) {
+        if (f.ownedByPlayer != undefined && f.ownedByPlayer !== 0) {
             stillAlive[f.ownedByPlayer] = true;
-        }
+        } 
     }
+
+    // console.log('stillAlive', stillAlive);
     
     // see if there's only one player (cpu or human) left
     let gameResultText = "";
@@ -174,6 +174,7 @@ function checkForEndOfGame() {
     let thewinner; // remember the last seen alive player number
     for (let p in stillAlive) { pcount++; thewinner = p; }
     
+    // console.log('pcount', pcount);
     // finally, we can detect gameover
     if (pcount == 1) {
         console.log("GAME OVER - only one player with planets or fleets");
@@ -194,6 +195,8 @@ function checkForEndOfGame() {
         document.getElementById("gameResultDiv").innerHTML = gameResultText;
         document.getElementById("gameoverGUI").style.display='block';
     }
+
+    // console.log('done with checkForEndOfGame():', isGameOver);
 }
 
 function drawScoreboard() {
