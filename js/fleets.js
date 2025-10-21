@@ -237,6 +237,12 @@ function getAvailableMoves(fleet) {
         orbitIdx: currentOrbitIdx,
         stepIdx: clockwiseStepIdx
     });
+   
+    let secondClockwiseStepIdx = (currentStepIdx + 2) % currentOrbit.steps.length;
+    availableMoves.push({
+        orbitIdx: currentOrbitIdx,
+        stepIdx: secondClockwiseStepIdx
+    });
     
     let counterClockwiseStepIdx = currentStepIdx - 1;
     if(counterClockwiseStepIdx < 0) {
@@ -245,6 +251,15 @@ function getAvailableMoves(fleet) {
     availableMoves.push({
         orbitIdx: currentOrbitIdx,
         stepIdx: counterClockwiseStepIdx
+    });
+
+    let secondCounterClockwiseStepIdx = currentStepIdx - 2;
+    if(secondCounterClockwiseStepIdx < 0) {
+        secondCounterClockwiseStepIdx = currentOrbit.steps.length - 1;
+    }
+    availableMoves.push({
+        orbitIdx: currentOrbitIdx,
+        stepIdx: secondCounterClockwiseStepIdx
     });
     
     let connectionMovements = connections.filter(conn => {

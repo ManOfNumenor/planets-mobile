@@ -607,13 +607,23 @@ function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, t
     if (currentOrbitIdx === targetOrbitIdx) {
       let orbit = orbits[currentOrbitIdx];
       let nextStepIdx = (currentStepIdx + 1) % orbit.steps.length;
+      let nextNextStepIdx = (currentStepIdx + 2) % orbit.steps.length;
 
       let prevStepIdx = currentStepIdx - 1;
       if (prevStepIdx < 0) {
          prevStepIdx = orbit.steps.length - 1;
       }
+      let prevPrevStepIdx = currentStepIdx - 2;
+      if (prevPrevStepIdx === -1) {
+         prevprevStepIdx = orbit.steps.length - 1;
+      } else if (prevPrevStepIdx === -2) {
+         prevprevStepIdx = orbit.steps.length - 2;
+      }
 
-      if (targetStepIdx === nextStepIdx || targetStepIdx === prevStepIdx) {
+      if (targetStepIdx === nextStepIdx || 
+          targetStepIdx === nextNextStepIdx || 
+          targetStepIdx === prevStepIdx ||
+          targetStepIdx === prevPrevStepIdx) {
          return { valid: true };
       } else {
          return {valid: false, error: "Fleet can only move one step clockwise or counter-clockwise"};
