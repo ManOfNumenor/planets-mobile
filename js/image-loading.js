@@ -27,6 +27,7 @@ var cratersPic = document.createElement('img');
 var polarIcePic = document.createElement('img');
 var icePic = document.createElement('img');
 var lavaPic = document.createElement('img');
+var orbitDirectionArrowsPic = document.createElement('img');
 
 var starsPic = document.createElement('img');
 var nebulaePic = document.createElement('img');
@@ -86,6 +87,7 @@ function loadImages() {
         {varName: polarIcePic, theFile: "polarIce.png"},
         {varName: icePic, theFile: "ice.png"},
         {varName: lavaPic, theFile: "lava.png"},
+        {varName: orbitDirectionArrowsPic, theFile: "orbitDirectionArrows.png"},
 
         {varName: nebulaePic, theFile: "nebulae.jpg"},
         {varName: starsPic, theFile: "stars.png"},

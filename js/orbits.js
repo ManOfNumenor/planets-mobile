@@ -50,7 +50,6 @@ function drawOrbits() {
                 orbit.radius * scaleFactor, 
                 ORBIT_DRAW_COLOR);
 
-
             // draw steps
             let arcLength = (2 * Math.PI)/
                 orbit.steps.length;
