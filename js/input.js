@@ -615,18 +615,24 @@ function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, t
       }
       let prevPrevStepIdx = currentStepIdx - 2;
       if (prevPrevStepIdx === -1) {
-         prevprevStepIdx = orbit.steps.length - 1;
+         prevPrevStepIdx = orbit.steps.length - 1;
       } else if (prevPrevStepIdx === -2) {
-         prevprevStepIdx = orbit.steps.length - 2;
+         prevPrevStepIdx = orbit.steps.length - 2;
       }
 
+        console.log('targetStepIdx', targetStepIdx,
+            'nextStepIdx', nextStepIdx,
+            'nextNextStepIdx', nextNextStepIdx,
+            'prevStepIdx', prevStepIdx,
+            'prevPrevStepIdx', prevPrevStepIdx,
+        );
       if (targetStepIdx === nextStepIdx || 
           targetStepIdx === nextNextStepIdx || 
           targetStepIdx === prevStepIdx ||
           targetStepIdx === prevPrevStepIdx) {
          return { valid: true };
       } else {
-         return {valid: false, error: "Fleet can only move one step clockwise or counter-clockwise"};
+         return {valid: false, error: "Fleet can only move one step clockwise or counter-clockwise. Target: orbit "+targetOrbitIdx+", step "+targetStepIdx};
       }
     }
 

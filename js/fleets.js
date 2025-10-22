@@ -254,9 +254,12 @@ function getAvailableMoves(fleet) {
     });
 
     let secondCounterClockwiseStepIdx = currentStepIdx - 2;
-    if(secondCounterClockwiseStepIdx < 0) {
+    if(secondCounterClockwiseStepIdx === -1) {
         secondCounterClockwiseStepIdx = currentOrbit.steps.length - 1;
+    } else if(secondCounterClockwiseStepIdx === -2) {
+        secondCounterClockwiseStepIdx = currentOrbit.steps.length - 2;
     }
+
     availableMoves.push({
         orbitIdx: currentOrbitIdx,
         stepIdx: secondCounterClockwiseStepIdx
