@@ -6,7 +6,7 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound, choiceSound; // add more here
+var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound; // add more here
 
 const MUSIC_SOUND_VOLUME = 0.125; // very quiet
 const SFX_VOLUME = 1; // max volume, as recorded
@@ -34,6 +34,9 @@ function soundInitialize() { // called by first user input
     
     confirmSound = new Audio("../audio/deep-confirm.wav");
     confirmSound.volume = SFX_VOLUME;
+
+    explosionSound = new Audio("../audio/explosion.ogg");
+    explosionSound.volume = SFX_VOLUME;
 
     choiceSound = makeChoiceSound;
     
