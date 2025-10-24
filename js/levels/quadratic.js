@@ -1,9 +1,9 @@
-var testLevel = {
-    playerCount: 2,
+var quadraticLevel = {
+    playerCount: 4,
     sun: {
-        isBinaryStar: true,
-        imageVar: sunNeutron,
-        sunspotsEnabled: false,
+        isBinaryStar: false,
+        imageVar: sunRedGiant,
+        sunspotsEnabled: true,
         radius: 42,
     },
     orbits: [
@@ -32,6 +32,11 @@ var testLevel = {
             stepCount: 16,
             rotation: 0,
         },
+        {
+            radius: 600,
+            stepCount: 20,
+            rotation: 0,
+        },
     ],
     connections: [
         // coordinate format
@@ -51,9 +56,19 @@ var testLevel = {
         [1, 1, 2, 2],
         [1, 1, 2, 3],
 
-        [2, 0, 3, 10],
-        [2, 0, 3, 11],
-        [2, 1, 3, 1],
+        // [2, 0, 3, 10],
+        // [2, 0, 3, 11],
+        [2, 1, 3, 0],
+        [2, 1, 3, 11],
+        [2, 7, 3, 9],
+        [2, 7, 3, 8],
+        [2, 7, 3, 9],
+        [2, 7, 3, 8],
+        [2, 5, 3, 6],
+        [2, 5, 3, 5],
+        [2, 7, 3, 9],
+        [2, 7, 3, 8],
+
         [2, 2, 3, 3],
         [2, 3, 3, 4],
         [2, 4, 3, 6],
@@ -80,7 +95,6 @@ var testLevel = {
             startingStepIdx: 0,
             color: 'red',
             size:1,
-            moons:[[22,6,2]], // [distance,speed,radius]
             ownedByPlayer: 0,
             hasClouds: false,
             //imageVar: planet16x16,
@@ -93,7 +107,6 @@ var testLevel = {
             startingStepIdx: 0,
             color: '#ff00ff',
             size:1,
-            moons:[[26,-0.6,3],[20,-1.2,1]], // [distance,speed,radius]
             ownedByPlayer: 2,
             hasClouds: true,
             cloudStretchScale: 10, // >1 for long jupiter style clouds
@@ -107,8 +120,7 @@ var testLevel = {
             startingStepIdx: 1,
             color: 'lime',
             size:2,
-            moons:[[26,1.5,2]], // [distance,speed,radius]
-            ownedByPlayer: 0,
+            ownedByPlayer: 3,
             hasClouds: true,
             atmosphereColor: 'rgba(0, 255, 255, 0.5)',
             //imageVar: planet32x32,
@@ -124,7 +136,6 @@ var testLevel = {
             size: 3,
             ownedByPlayer: 1,
             hasClouds: false,
-            //moons:[[32,1,1]], // [distance,speed,radius]
             //imageVar: planet64x64
             craters:1.0, // the opacity of the craters overlay
         },
@@ -135,8 +146,7 @@ var testLevel = {
             startingStepIdx: 1,
             color: 'darkgreen',
             size: 3,
-            moons:[[36,2,1],[40,1.5,1],[44,1,1],[48,0.5,2]], // [distance,speed,radius]
-            ownedByPlayer: 0,
+            ownedByPlayer: 4,
             hasClouds: true,
             cloudStretchScale:16,
             rings:true, // TODO: could be [angle,radius,opacity]
