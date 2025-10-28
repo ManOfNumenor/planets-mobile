@@ -174,16 +174,24 @@ function drawPlanets() {
         if (DRAW_ORBIT_DIRECTION_ARROWS) {
             let angleToOrbitDir = Math.atan2(drawY-sun.y,drawX-sun.x);
             let arrowScale = (1/orbitDirectionArrowsPic.width) * planet.radius*4*scaleFactor;
+            let rad = orbits[planet.orbitIdx].radius;
             if (orbits[planet.orbitIdx].rotation==0) { // clockwise
                 // point towards curve ahead which depends on orbit radius
                 angleToOrbitDir += 0.0825; // FIXME 0.25 * (1/orbits[planet.orbitIdx].radius);//*scaleFactor);
+                // these magic numbers fix the slight offset
+                if (rad<100) angleToOrbitDir += 0.125;
+                else if (rad<150) angleToOrbitDir += 0.025;
             } else { // counterclockwise
                 // flip 180
                 angleToOrbitDir += Math.PI;
                 // point towards curve ahead which depends on orbit radius
                 angleToOrbitDir -= 0.0825; // FIXME 0.25 * (1/orbits[planet.orbitIdx].radius);//*scaleFactor);
+                // these magic numbers fix the slight offset
+                if (rad<100) angleToOrbitDir -= 0.125;
+                else if (rad<150) angleToOrbitDir -= 0.025;
             }
             //console.log("orbit arrows at "+drawX+","+drawY+" ang:"+angleToOrbitDir+" planet radius:"+planet.radius+" scaleFactor:"+scaleFactor+" imgW:"+orbitDirectionArrowsPic.width+" imgScale:"+arrowScale);
+            //console.log("Orbit radius:"+rad.toFixed(1)+" Arrow angle:"+angleToOrbitDir);
             drawBitmapCenteredWithRotationAndScale(orbitDirectionArrowsPic,
                 drawX, drawY, angleToOrbitDir, arrowScale);
         }
