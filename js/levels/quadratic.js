@@ -188,10 +188,10 @@ var quadraticLevel = {
             name:"Objectus",
             description:"Super-dense gas giant",
             orbitIdx: 1,
-            startingStepIdx: 0,
+            startingStepIdx: 1,
             color: '#ff00ff',
-            size:1,
-            ownedByPlayer: 2,
+            size:2,
+            ownedByPlayer: 1,
             hasClouds: true,
             cloudStretchScale: 10, // >1 for long jupiter style clouds
             atmosphereColor: 'rgba(0, 255, 0, 0.5)',
@@ -201,10 +201,10 @@ var quadraticLevel = {
             name:"Ganth II",
             description:"It's icy core creates huge storms.",
             orbitIdx: 2,
-            startingStepIdx: 1,
+            startingStepIdx: 7,
             color: 'lime',
             size:2,
-            ownedByPlayer: 3,
+            ownedByPlayer: 2,
             hasClouds: true,
             atmosphereColor: 'rgba(0, 255, 255, 0.5)',
             //imageVar: planet32x32,
@@ -217,8 +217,8 @@ var quadraticLevel = {
             orbitIdx: 3,
             startingStepIdx: 1,
             color: 'grey',
-            size: 3,
-            ownedByPlayer: 1,
+            size: 2,
+            ownedByPlayer: 3,
             hasClouds: false,
             //imageVar: planet64x64
             craters:1.0, // the opacity of the craters overlay
@@ -226,17 +226,164 @@ var quadraticLevel = {
         {
             name:"Vasturia",
             description:"A lush, dense, jungle-planet.",
-            orbitIdx: 4,
-            startingStepIdx: 1,
+            orbitIdx: 3,
+            startingStepIdx: 9,
             color: 'darkgreen',
-            size: 3,
+            size: 2,
             ownedByPlayer: 4,
             hasClouds: true,
             cloudStretchScale:16,
             rings:true, // TODO: could be [angle,radius,opacity]
-            ringAngle: 30, // degrees (0 = horizontal)
+            ringAngle: -30, // degrees (0 = horizontal)
             //imageVar: planet128x128,
             polarIce:1.0, // albedo %
+        },
+        {
+            name:"Vasturia",
+            description:"A lush, dense, jungle-planet.",
+            orbitIdx: 4,
+            startingStepIdx: 9,
+            color: 'brown',
+            size: 3,
+            ownedByPlayer: 0,
+            hasClouds: true,
+            cloudStretchScale:16,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            ringAngle: 30, // degrees (0 = horizontal)
+            //imageVar: planet128x128,
+            polarIce:1.5, // albedo %
+        },
+
+        // "asteroids"
+        {
+            name:"asterioid1",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 0,
+            color: 'lightgrey',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            cloudStretchScale:16,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            ringAngle: 30, // degrees (0 = horizontal)
+            //imageVar: planet128x128,
+            //polarIce:1.0, // albedo %
+            craters:1.0, // the opacity of the craters overlay
+        },
+        {
+            name:"asterioid2",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 7,
+            color: 'darkgrey',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            cloudStretchScale:16,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            ringAngle: 30, // degrees (0 = horizontal)
+            //imageVar: planet128x128,
+            //polarIce:1.0, // albedo %
+            craters:1.0, // the opacity of the craters overlay
+        },
+        {
+            name:"asterioid3",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 15,
+            color: '#f0f0f0',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            cloudStretchScale:16,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            ringAngle: 30, // degrees (0 = horizontal)
+            //imageVar: planet128x128,
+            //polarIce:1.0, // albedo %
+            craters:1.0, // the opacity of the craters overlay
+        },
+        {
+            name:"asterioid4",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 15,
+            color: '#3f3f3f',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            //imageVar: planet128x128,
+            craters:0.5, // the opacity of the craters overlay
+            ice: 0.8,
+        },
+        {
+            name:"asterioid5",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 23,
+            color: '#3f3f3f',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            //imageVar: planet128x128,
+            craters:0.2, // the opacity of the craters overlay
+            ice: 0.3,
+        },
+        {
+            name:"asterioid5",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 31,
+            color: '#3f3f3f',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            //imageVar: planet128x128,
+            craters: 0.8, // the opacity of the craters overlay
+            ice: 0,
+        },
+        {
+            name:"asterioid6",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 39,
+            color: '#3f3f3f',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            //imageVar: planet128x128,
+            craters: 0.3, // the opacity of the craters overlay
+            ice: 0.8,
+        },
+        {
+            name:"asterioid7",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 47,
+            color: '#3f3f3f',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            //imageVar: planet128x128,
+            craters:1.0, // the opacity of the craters overlay
+        },
+        {
+            name:"asterioid8",
+            description:"",
+            orbitIdx: 5,
+            startingStepIdx: 55,
+            color: '#3f3f3f',
+            size: 1,
+            ownedByPlayer: 0,
+            hasClouds: false,
+            rings:false, // TODO: could be [angle,radius,opacity]
+            //imageVar: planet128x128,
+            craters:1.0, // the opacity of the craters overlay
         },
     ],
 };
