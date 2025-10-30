@@ -6,6 +6,8 @@ var gameOptions = {
     starfieldWidth: 3000,
     starfieldHeight: 3000,
     radialPlanetShadows: false,
+    soundEffectsEnabled: true,
+    musicEnabled: true,
 };
 
 function resetGameOptions() {
@@ -16,6 +18,8 @@ function resetGameOptions() {
     starfieldWidth = 3000;
     starfieldHeight = 3000;
     radialPlanetShadows =  false;
+    //soundEffectsEnabled = true;
+    //musicEnabled = true;
 }
 
 function alertDialog(message) {
@@ -73,4 +77,16 @@ function toggleOrbitCoords() {
 
     orbitCoordsButton.innerText = "Orbit Coordinates: " +
         ( gameOptions.showOrbitDebugInfo ? 'On' : 'Off' );
+}
+
+function toggleSoundEffects() {
+    gameOptions.soundEffectsEnabled = !gameOptions.soundEffectsEnabled;
+    document.getElementById('soundEffectsButton').innerText = 
+        "Sound Effects: " + ( gameOptions.soundEffectsEnabled ? 'On' : 'Off' );
+}
+
+function toggleMusic() {
+    gameOptions.musicEnabled = !gameOptions.musicEnabled;
+    document.getElementById('musicButton').innerText = 
+        "Music: " + ( gameOptions.musicEnabled ? 'On' : 'Off' );
 }
