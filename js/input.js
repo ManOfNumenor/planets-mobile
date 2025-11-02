@@ -3,9 +3,10 @@ const SUN_MAX_DIST_OFF_SCREEN_FACTOR = 150; // set to 0 to always keep sun on sc
 const TWO_TOUCH_ZOOM_FACTOR = 0.01;
 const MAX_ENTITY_TAP_RADIUS = 25;
 const MIN_DIST_TO_COUNT_DRAG = 10;
-const MIN_SCALE_FACTOR = 0.5;
-const MAX_SCALE_FACTOR = 2.5;
-const MOUSEWHEEL_ZOOM_INCREMENT = 0.5;
+const MIN_SCALE_FACTOR = 0.25; // we need a bit more room to see all of quadratic
+const MAX_SCALE_FACTOR = 3;
+const MOUSEWHEEL_ZOOM_INCREMENT = 0.25;
+const MOUSEWHEEL_ZOOM_INCREMENT_FINE = 0.05; // so the jumps aren't too huge when very zoomed out
 
 // var draggingTouchId = null;
 var dragStartEvt = null;
@@ -147,6 +148,9 @@ function pointermoveHandler(evt) {
             );
 
             scaleFactor = newScaleFactor;
+
+            //console.log("pointermove changed scaleFactor to "+newScaleFactor);
+
         }
 
         // update prevZoomDiff for next move event
@@ -551,9 +555,17 @@ function mouseWheelHandler(evt) {
     let newScaleFactor = scaleFactor;
 
     if (evt.deltaY < 0) { // scroll up
-        newScaleFactor += MOUSEWHEEL_ZOOM_INCREMENT;
+        if (scaleFactor <= 0.5) {
+            newScaleFactor += MOUSEWHEEL_ZOOM_INCREMENT_FINE;
+        } else {
+            newScaleFactor += MOUSEWHEEL_ZOOM_INCREMENT;
+        }
     } else if (evt.deltaY > 0) { // scroll down
-        newScaleFactor -= MOUSEWHEEL_ZOOM_INCREMENT;
+        if (scaleFactor <= 0.5) {
+            newScaleFactor -= MOUSEWHEEL_ZOOM_INCREMENT_FINE;
+        } else {
+            newScaleFactor -= MOUSEWHEEL_ZOOM_INCREMENT;
+        }
     }
 
     // apply min/max constraints
@@ -568,6 +580,8 @@ function mouseWheelHandler(evt) {
     );
 
     scaleFactor = newScaleFactor;
+
+    //console.log("mousewheel changed scaleFactor to "+newScaleFactor);
 
 }
 

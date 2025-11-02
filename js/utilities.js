@@ -6,16 +6,21 @@ var gameOptions = {
     starfieldWidth: 3000,
     starfieldHeight: 3000,
     radialPlanetShadows: false,
+    soundEffectsEnabled: true,
+    musicEnabled: true,
 };
 
+// note: this function is never used
 function resetGameOptions() {
-    showOrbitDebugInfo = true;
-    showPointerDebugInfo = false;
-    starfieldStarsPerLayer = 10000;
-    starfieldLayerCount = 3;
-    starfieldWidth = 3000;
-    starfieldHeight = 3000;
-    radialPlanetShadows =  false;
+    gameOptions.showOrbitDebugInfo = true;
+    gameOptions.showPointerDebugInfo = false;
+    gameOptions.starfieldStarsPerLayer = 10000;
+    gameOptions.starfieldLayerCount = 3;
+    gameOptions.starfieldWidth = 3000;
+    gameOptions.starfieldHeight = 3000;
+    gameOptions.radialPlanetShadows =  false;
+    gameOptions.soundEffectsEnabled = true;
+    gameOptions.musicEnabled = true;
 }
 
 function alertDialog(message) {
@@ -73,4 +78,27 @@ function toggleOrbitCoords() {
 
     orbitCoordsButton.innerText = "Orbit Coordinates: " +
         ( gameOptions.showOrbitDebugInfo ? 'On' : 'Off' );
+}
+
+function toggleSoundEffects() {
+    gameOptions.soundEffectsEnabled = !gameOptions.soundEffectsEnabled;
+    document.getElementById('soundEffectsButton').innerText = 
+        "Sound Effects: " + ( gameOptions.soundEffectsEnabled ? 'On' : 'Off' );
+
+    let vol = gameOptions.soundEffectsEnabled ? SFX_VOLUME : 0;
+    if (pauseSound) pauseSound.volume = vol;
+    if (endTurnSound) endTurnSound.volume = vol;
+    if (confirmSound) confirmSound.volume = vol;
+    if (choiceSound) choiceSound.volume = vol;
+    if (explosionSound) explosionSound.volume = vol;
+    console.log("sound effects volume is now "+vol);
+}
+
+function toggleMusic() {
+    gameOptions.musicEnabled = !gameOptions.musicEnabled;
+    document.getElementById('musicButton').innerText = 
+        "Music: " + ( gameOptions.musicEnabled ? 'On' : 'Off' );
+    let vol = gameOptions.musicEnabled ? MUSIC_SOUND_VOLUME : 0;
+    if (music) music.volume = vol;
+    console.log("music volume is now "+vol);
 }
