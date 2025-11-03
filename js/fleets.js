@@ -495,7 +495,7 @@ function setupFleetInfoDiv(fleet) {
             disableSplitButton = true;
         }
 
-        template += `<button ${disableSplitButton ? 'disabled' : ""}> Split </button>`;
+        template += `<button onclick="split_fleet(${fleetIdx})" ${disableSplitButton ? 'disabled' : ""}> Split </button>`;
 
         template +=`</div>`;
     }
@@ -550,4 +550,36 @@ function capture_planet(fleetIdx) {
     selectedEntity = null;
     selectedFleetAvailableMoves = [];
     clearFleetInfoDiv();
+}
+
+function split_fleet(fleetIdx) {
+    console.log("SPLIT FLEET button pressed for fleet index "+fleetIdx);
+    if (confirmSound) confirmSound.play(); // fixme: make a new sound effect
+    
+    let oldFleet = allFleets[fleetIdx];
+    if (!oldFleet) { console.log("ERROR: unknown fleet!"); }
+    console.log("- original fleet has "+oldFleet.ships+" ships in it.");
+    if (oldFleet.ships<2) { console.log("cannot split this fleet - not enough ships."); return; }
+    
+    // split in half
+    let newFleet = {
+        ships: Math.floor(oldFleet.ships/2),
+        ownedByPlayer: oldFleet.ownedByPlayer,
+        planetIdx: oldFleet.planetIdx,
+        orbitIdx: oldFleet.orbitIdx,
+        stepIdx: oldFleet.stepIdx,
+        movedThisTurn: oldFleet.movedThisTurn // ?? maybe let new fleet move?
+    };
+    oldFleet.ships -= newFleet.ships;
+
+    // add the new fleet to the game
+    allFleets.push(newFleet);
+
+    console.log("- split into two fleets of "+newFleet.ships+" ships and "+oldFleet.ships+" ships.");
+
+    // FIXME: can fleets exist onthe same spot?
+    // will they auto-merge if left together?
+    // do we need to auto-move the new fleet to one side?
+    // game seems to work fine and you can select and move all
+
 }
