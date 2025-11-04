@@ -23,16 +23,27 @@ function resetGameOptions() {
     gameOptions.musicEnabled = true;
 }
 
-function alertDialog(message) {
+function alertDialog(message, okFunction) {
     let dialog = document.getElementById('alertDialog');
 
     dialog.firstElementChild.innerHTML = message;
+
+    if (okFunction)
+    {
+        dialog.lastElementChild.onclick = () => {
+            okFunction();
+            closeAlertDialog();
+        };
+    }
 
     dialog.showModal();
 }
 
 function closeAlertDialog() {
     let dialog = document.getElementById('alertDialog');
+     dialog.lastElementChild.onclick = () => {
+        closeAlertDialog();
+    };
     dialog.close();
 }
 
@@ -101,4 +112,9 @@ function toggleMusic() {
     let vol = gameOptions.musicEnabled ? MUSIC_SOUND_VOLUME : 0;
     if (music) music.volume = vol;
     console.log("music volume is now "+vol);
+}
+
+function isComputerPlayerCurrentPlayer()
+{
+    return computerPlayerNumbers.includes(currentPlayerNumber);
 }

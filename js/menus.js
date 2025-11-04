@@ -38,7 +38,14 @@ function hideMenu(menuKey) {
 // case-insensitive template logic, so this function gets a snake_case name
 function start_first_turn() {
     hideAllMenus();
-    alertDialog("<b>Player 1: Prepare for Battle!</b><br><br>Take control of the solar system<br>by moving units to capture planets."); // TODO intro blurb here
+    if (isComputerPlayerCurrentPlayer()) 
+    {
+        alertDialog("<b>Computer Player 1 Prepares for Battle!", () =>  runComputerTurn());
+    } 
+    else
+    {
+        alertDialog("<b>Player 1: Prepare for Battle!</b><br><br>Take control of the solar system<br>by moving units to capture planets."); // TODO intro blurb here
+    }
 }
 
 function renderPlayersList() {
