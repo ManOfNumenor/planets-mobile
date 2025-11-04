@@ -8,6 +8,8 @@ function endTurn() {
     let endTurnButton = document.getElementById('endTurnButton');
     endTurnButton.setAttribute('disabled', true);
     
+    deselectEntities();
+    
     if (endTurnSound) endTurnSound.play();
 
     advancePlayerNumber();

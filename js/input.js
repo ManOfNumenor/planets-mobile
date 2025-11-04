@@ -660,3 +660,13 @@ function isValidClockwiseMove(currentOrbitIdx, currentStepIdx, targetOrbitIdx, t
         return {valid: false, error: "Need adjacency line clockwise to move between orbits"};
     }
 }
+
+function deselectEntities()
+{
+    if (selectedEntity)
+    {
+        selectedEntity = null;
+        selectedFleetAvailableMoves = [];
+        clearFleetInfoDiv();
+    }
+}
