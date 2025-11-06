@@ -16,11 +16,11 @@ function getMenuDiv(menuKey) {
 }
 
 function showMenu(menuKey) {
+    console.log("SHOWING MENU: "+menuKey);
     hideAllMenus();
-
     let menuDiv = getMenuDiv(menuKey);
-
     menuDiv.style.display = 'flex';
+    wormholeEffectEnabled = (menuKey=="main");
 }
 
 function hideAllMenus() {

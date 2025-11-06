@@ -65,7 +65,7 @@ function drawEverything() {
     drawFleets();
     drawScoreboard();
     drawNotifications();
-
+    drawWormhole();
 }
 
 function radiantsToDegrees(angRadiants) {
