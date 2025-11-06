@@ -564,6 +564,15 @@ function split_fleet(fleetIdx) {
     console.log("- original fleet has "+oldFleet.ships+" ships in it.");
     if (oldFleet.ships<2) { console.log("cannot split this fleet - not enough ships."); return; }
     
+    // fleets that just moved are not allowed to split
+    // this also prevents multiple splits per fleet in a single turn
+    if (oldFleet.movedThisTurn) { console.log("cannot split this fleet - already moved this fleet this turn!"); return; }
+
+    // splitting a fleet costs their move
+    // this is a "fix" for clicking split then trying to select the new fleet: 
+    // the old one would move to that space and merge with it unintentionally
+    oldFleet.movedThisTurn = true;
+
     // split in half
     let newFleet = {
         ships: Math.floor(oldFleet.ships/2),
