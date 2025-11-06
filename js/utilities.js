@@ -28,10 +28,14 @@ function alertDialog(message, okFunction) {
 
     dialog.firstElementChild.innerHTML = message;
 
-    if (okFunction)
-    {
+    if (okFunction){
         dialog.lastElementChild.onclick = () => {
             okFunction();
+            closeAlertDialog();
+        };
+    } 
+    else {
+        dialog.lastElementChild.onclick = () => {
             closeAlertDialog();
         };
     }
