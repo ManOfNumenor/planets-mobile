@@ -192,7 +192,7 @@ function getFleetStep(fleet) {
     return fleetStep;
 }
 
-function getAvailableMoves(fleet) {
+function getAvailableMoves(fleet, twoStepsAllowed=true) {
     console.log('getAvailableMoves', fleet);
     // calculates all possible destinations where 
     // the given fleet can move to this turn and return 
@@ -238,12 +238,14 @@ function getAvailableMoves(fleet) {
         stepIdx: clockwiseStepIdx
     });
    
-    let secondClockwiseStepIdx = (currentStepIdx + 2) % currentOrbit.steps.length;
-    availableMoves.push({
-        orbitIdx: currentOrbitIdx,
-        stepIdx: secondClockwiseStepIdx
-    });
-    
+    if (twoStepsAllowed) {
+        let secondClockwiseStepIdx = (currentStepIdx + 2) % currentOrbit.steps.length;
+        availableMoves.push({
+            orbitIdx: currentOrbitIdx,
+            stepIdx: secondClockwiseStepIdx
+        });
+    }
+
     let counterClockwiseStepIdx = currentStepIdx - 1;
     if(counterClockwiseStepIdx < 0) {
         counterClockwiseStepIdx = currentOrbit.steps.length - 1;
@@ -253,18 +255,19 @@ function getAvailableMoves(fleet) {
         stepIdx: counterClockwiseStepIdx
     });
 
-    let secondCounterClockwiseStepIdx = currentStepIdx - 2;
-    if(secondCounterClockwiseStepIdx === -1) {
-        secondCounterClockwiseStepIdx = currentOrbit.steps.length - 1;
-    } else if(secondCounterClockwiseStepIdx === -2) {
-        secondCounterClockwiseStepIdx = currentOrbit.steps.length - 2;
+    if (twoStepsAllowed) {
+        let secondCounterClockwiseStepIdx = currentStepIdx - 2;
+        if(secondCounterClockwiseStepIdx === -1) {
+            secondCounterClockwiseStepIdx = currentOrbit.steps.length - 1;
+        } else if(secondCounterClockwiseStepIdx === -2) {
+            secondCounterClockwiseStepIdx = currentOrbit.steps.length - 2;
+        }
+        availableMoves.push({
+            orbitIdx: currentOrbitIdx,
+            stepIdx: secondCounterClockwiseStepIdx
+        });
     }
 
-    availableMoves.push({
-        orbitIdx: currentOrbitIdx,
-        stepIdx: secondCounterClockwiseStepIdx
-    });
-    
     let connectionMovements = connections.filter(conn => {
         return (conn.innerOrbitIdx === currentOrbitIdx && conn.innerStepIdx === currentStepIdx) ||
                (conn.outerOrbitIdx === currentOrbitIdx && conn.outerStepIdx === currentStepIdx);
@@ -577,9 +580,16 @@ function split_fleet(fleetIdx) {
 
     console.log("- split into two fleets of "+newFleet.ships+" ships and "+oldFleet.ships+" ships.");
 
-    // FIXME: can fleets exist onthe same spot?
-    // will they auto-merge if left together?
-    // do we need to auto-move the new fleet to one side?
-    // game seems to work fine and you can select and move all
+    // move the new fleet somewhere nearby
+    let availableMoves = getAvailableMoves(newFleet, false); // one space away only
+    if(availableMoves.length > 0) {
+        // move the fleet to a random available space
+        let randomIdx = Math.floor(Math.random() * availableMoves.length);
+        console.log("- new fleet is moving to to a space nearby",availableMoves[randomIdx].orbitIdx);
+        moveFleetToTarget(newFleet, availableMoves[randomIdx]);
+    } else {
+        console.log("- new fleet has no available moves!");
+    }
+
 
 }
