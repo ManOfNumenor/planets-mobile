@@ -35,6 +35,14 @@ function hideMenu(menuKey) {
     menuDiv.style.display = 'none';
 }
 
+function navigateBackFromOptionsMenu() {
+    if (playerCount > 0) {
+        showMenu('pause');
+    } else {
+        showMenu('main');
+    }
+}
+
 // case-insensitive template logic, so this function gets a snake_case name
 function start_first_turn() {
     hideAllMenus();
