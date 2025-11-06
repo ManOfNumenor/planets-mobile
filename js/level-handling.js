@@ -94,6 +94,11 @@ function loadLevel(levelObj) {
             stepIdx: null,
         });
     }
+	
+	if(levelObj.randomize_on_load) {
+		console.log('Level is randomized...', levelObj);
+		randomizeLevel()
+	}
 
     renderPlayersList();
     // hideAllMenus();
