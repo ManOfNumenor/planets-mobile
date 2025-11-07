@@ -224,17 +224,19 @@ function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
 
 // used in drawPlanets() to tween from turn to turn using a curve
 function getOrbitTweenPos(planet,step,sun) {
+	let orbit = orbits[planet.orbitIdx];
+	let center = {x: (sun.x + orbit.offset.x), y: (sun.y + orbit.offset.y)};
+	
     // put planet at target if it has never moved before
     if (planet.animationX==undefined) planet.animationX = step.x;
     if (planet.animationY==undefined) planet.animationY = step.y;
     // where are we NOW? (distBetween needs an object with this shape)
     let start = { x:planet.animationX, y:planet.animationY };
-    // measure distance and angle to the sun
-    let orbit = orbits[planet.orbitIdx];
-    let sundist = orbit.radius * scaleFactor; //distBetween(start,sun);
-    let currentAngle = Math.atan2(start.y-sun.y,start.x-sun.x);
-    // determine target angle from sun
-    let targetAngle = Math.atan2(step.y-sun.y,step.x-sun.x);
+    // measure distance and angle to the center
+    let centerDist = orbit.radius * scaleFactor; //distBetween(start,sun);
+    let currentAngle = Math.atan2(start.y-center.y,start.x-center.x);
+    // determine target angle from center
+    let targetAngle = Math.atan2(step.y-center.y,step.x-center.x);
     let angleDifference = Math.abs(currentAngle - targetAngle);
     // stay put when close enough to avoid float imprecision infinite drift
     if (angleDifference < 0.005) return { x:step.x, y:step.y };
@@ -243,9 +245,9 @@ function getOrbitTweenPos(planet,step,sun) {
     // step (lerp) the angle from current to target
     let newAngle = lerp(currentAngle,targetAngle,PLANET_ANIM_SPEED);
     //console.log("dist:"+sundist.toFixed(1)+" angle:"+currentAngle.toFixed(1));
-    // generate new coordinates using new angle and prev sun dist
-    let newX = sun.x + (Math.cos(newAngle) * sundist);
-    let newY = sun.y + (Math.sin(newAngle) * sundist);
+    // generate new coordinates using new angle and prev center dist
+    let newX = center.x + (Math.cos(newAngle) * centerDist);
+    let newY = center.y + (Math.sin(newAngle) * centerDist);
     //console.log("orbiting result:"+newX.toFixed(1)+","+newY.toFixed(1));
     return { x:newX, y:newY };
 }
