@@ -15,6 +15,8 @@ function moveOrbits() {
     for(const orbit of orbits) {
         let arcLength = (2 * Math.PI)/
             orbit.steps.length;
+			
+		let orbitCenter = {x: sun.x + orbit.offset.x, y: sun.y + orbit.offset.y};
 
         for(let i=0;i<orbit.steps.length;i++) {
             let step = orbit.steps[i];
@@ -28,7 +30,7 @@ function moveOrbits() {
             let newCoords = distAngAndOriginToXY(
                 orbit.radius * scaleFactor,
                 stepAng,
-                sun,
+                orbitCenter,
             );
 
             step.x = newCoords.x;
@@ -46,7 +48,7 @@ function drawOrbits() {
         // draw orbit
         let center = orbit.centerObj;
         if(center) {
-            outlineCircle(center.x,center.y,
+            outlineCircle((center.x + orbit.offset.x), (center.y + orbit.offset.y),
                 orbit.radius * scaleFactor, 
                 ORBIT_DRAW_COLOR);
 
@@ -75,7 +77,7 @@ function drawOrbits() {
                 //     STEP_INDICATOR_RADIUS * scaleFactor,
                 //     ORBIT_DRAW_COLOR);
                 drawBitmapCenteredWithRotationAndScale(orbitStopPic,
-                    step.x,step.y, 0,
+                    step.x, step.y, 0,
                     // image is 20x20, scaled down by half to still look good at 2x zoom
                     0.5 * scaleFactor);
 
@@ -136,7 +138,8 @@ function drawOrbits() {
 function drawCanMoveHereIndicator(step) {
     // extracted to function because it's called from 
     // both drawOrbits() & drawPlanets()
-    colorCircle(step.x,step.y,
+	
+    colorCircle(step.x, step.y,
         (STEP_INDICATOR_RADIUS + 3) * scaleFactor,
         'yellow');
 
