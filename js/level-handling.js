@@ -19,7 +19,7 @@ function loadLevel(levelObj) {
     for(const levelOrbit of levelObj.orbits) {
         let tmpOrbit = {
             radius: levelOrbit.radius,
-            rotation: levelOrbit.rotation,
+            rotation: levelOrbit.rotation != 'half' ? (levelOrbit.rotation) : (Math.PI / levelOrbit.stepCount),
             centerObj: sun,
             steps: [],
         };
