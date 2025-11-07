@@ -230,7 +230,10 @@ function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
 // used in drawPlanets() to tween from turn to turn using a curve
 function getOrbitTweenPos(planet,step,sun) {
 	let orbit = orbits[planet.orbitIdx];
-	let center = {x: (sun.x + orbit.offset.x), y: (sun.y + orbit.offset.y)};
+	let center = {
+		x: (sun.x + (orbit.offset.x * scaleFactor)),
+		y: (sun.y + (orbit.offset.y * scaleFactor))
+	};
 	
     // put planet at target if it has never moved before
     if (planet.animationX==undefined) planet.animationX = step.x;
