@@ -92,6 +92,36 @@ var bowtie = {
 			polarIce:1.0, // very distinct ice poles
 		},
 		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 0,
+			startingStepIdx: 9,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:0.0, // albedo %
+		},
+		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 0,
+			startingStepIdx: 10,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:1.0, // albedo %
+		},
+		{
 			name:"Derelictus",
 			description:"A wasteland of ancient craters.",
 			orbitIdx: 0,
@@ -115,6 +145,36 @@ var bowtie = {
 			cloudStretchScale:16,
 			rings:true, // TODO: could be [angle,radius,opacity]
 			ringAngle: -30, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:1.0, // albedo %
+		},
+		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 0,
+			startingStepIdx: 21,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:0.0, // albedo %
+		},
+		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 0,
+			startingStepIdx: 24,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
 			//imageVar: planet128x128,
 			polarIce:1.0, // albedo %
 		},
@@ -161,6 +221,21 @@ var bowtie = {
 			// imageVar: planet24x24,
 		},
 		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 1,
+			startingStepIdx: 4,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:0.0, // albedo %
+		},
+		{
 			name:"Ganth II",
 			description:"It's icy core creates huge storms.",
 			orbitIdx: 1,
@@ -185,6 +260,36 @@ var bowtie = {
 			hasClouds: false,
 			//imageVar: planet64x64
 			craters:1.0, // the opacity of the craters overlay
+		},
+		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 1,
+			startingStepIdx: 15,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:0.0, // albedo %
+		},
+		{
+			name:"Asteroid",
+			description:"A hunk of rock.",
+			orbitIdx: 1,
+			startingStepIdx: 19,
+			color: '#FFFFFF',
+			size: 1,
+			ownedByPlayer: 0,
+			hasClouds: false,
+			cloudStretchScale:16,
+			rings: false,
+			ringAngle: -8, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:1.0, // albedo %
 		},
 		{
 			name:"Vasturia",
