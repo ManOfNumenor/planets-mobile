@@ -37,8 +37,8 @@ var bowtie = {
 	connections: [
 		// coordinate format
 		// [ innerOrbitIdx, innerStepIdx, outerOrbitIdx, outerStepIdx ],
-		[0, 2, 1, 14],
-		[0, 30, 1, 18],
+		[0, 2, 1, 18],
+		[0, 30, 1, 14],
 		
 		[0, 8, 2, 2],
 		[0, 14, 2, 2],
