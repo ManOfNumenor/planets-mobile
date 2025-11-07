@@ -15,7 +15,7 @@ var quadraticLevel = {
         {
             radius: 130,
             stepCount: 4,
-            rotation: Math.PI / 4,
+            rotation: 'half', // Math.PI / stepCount,
         },
         {
             radius: 210,
@@ -25,7 +25,7 @@ var quadraticLevel = {
         {
             radius: 320,
             stepCount: 16,
-            rotation: 0, // Math.PI / 4,
+            rotation: 0,
         },
         {
             radius: 450,

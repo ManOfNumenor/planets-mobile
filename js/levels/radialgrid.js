@@ -1,33 +1,33 @@
 var radialgrid = {
-    playerCount: 4,
+	playerCount: 4,
 	//randomize_on_load: true,
-    sun: {
-        isBinaryStar: false,
-        imageVar: sunRedGiant,
-        sunspotsEnabled: true,
-        radius: 50,
-    },
-    orbits: [
-        {
-            radius: 120,
-            stepCount: 6,
-            rotation: 0,
-        },
-        {
-            radius: 340,
-            stepCount: 12,
-            rotation: Math.PI / 12,
-        },
-        {
-            radius: 680,
-            stepCount: 18,
-            rotation: 0, //Math.PI / 4,
-        },
-    ],
-    connections: [
-        // coordinate format
-        // [ innerOrbitIdx, innerStepIdx, outerOrbitIdx, outerStepIdx ],
-        [0, 0, 1, 11],
+	sun: {
+		isBinaryStar: false,
+		imageVar: sunRedGiant,
+		sunspotsEnabled: true,
+		radius: 50,
+	},
+	orbits: [
+		{
+			radius: 120,
+			stepCount: 6,
+			rotation: 0,
+		},
+		{
+			radius: 340,
+			stepCount: 12,
+			rotation: 'half',
+		},
+		{
+			radius: 680,
+			stepCount: 18,
+			rotation: 0,
+		},
+	],
+	connections: [
+		// coordinate format
+		// [ innerOrbitIdx, innerStepIdx, outerOrbitIdx, outerStepIdx ],
+		[0, 0, 1, 11],
 		[0, 0, 1, 0],
 		[0, 1, 1, 1],
 		[0, 1, 1, 2],
@@ -65,9 +65,9 @@ var radialgrid = {
 		[1, 10, 2, 16],
 		[1, 11, 2, 17],
 		[1, 11, 2, 0],
-    ],
+	],
 
-    planets: [
+	planets: [
 		{
 			name:"Koraxian Prime",
 			description:"Super-heated lava planet.",
@@ -296,5 +296,5 @@ var radialgrid = {
 			//imageVar: planet128x128,
 			craters:1.0, // the opacity of the craters overlay
 		},
-    ],
+	],
 };

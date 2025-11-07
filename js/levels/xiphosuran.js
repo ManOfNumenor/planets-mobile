@@ -21,17 +21,17 @@ var xiphosuran = {
 		{
 			radius: 325,
 			stepCount: 3,
-			rotation: 0, //Math.PI / 4,
+			rotation: 0,
 		},
 		{
 			radius: 400,
 			stepCount: 6,
-			rotation: Math.PI / 6,
+			rotation: 'half',
 		},
 		{
 			radius: 475,
 			stepCount: 12,
-			rotation: 0, //Math.PI / 4,
+			rotation: 0,
 		},
 		{
 			radius: 635,
@@ -41,7 +41,7 @@ var xiphosuran = {
 		{
 			radius: 755,
 			stepCount: 8,
-			rotation: 0, //Math.PI / 4,
+			rotation: 0,
 		},
 	],
 	connections: [
