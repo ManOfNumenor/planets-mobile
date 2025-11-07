@@ -22,6 +22,7 @@ function loadLevel(levelObj) {
             rotation: levelOrbit.rotation != 'half' ? (levelOrbit.rotation) : (Math.PI / levelOrbit.stepCount),
             centerObj: sun,
 			offset: levelOrbit.offset ? levelOrbit.offset : {x: 0, y:0},
+			is_retrograde: levelOrbit.is_retrograde ? true : false,
             steps: [],
         };
         

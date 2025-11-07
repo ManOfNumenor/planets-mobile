@@ -23,8 +23,9 @@ function moveOrbits() {
 
         for(let i=0;i<orbit.steps.length;i++) {
             let step = orbit.steps[i];
-
-            let stepAng = (i * arcLength) + 
+			
+			let direction = orbit.is_retrograde ? -1 : 1;
+            let stepAng = (i * arcLength * direction) + 
                 orbit.rotation; 
             // - (Math.PI/2);
             // subtract PI/2 to start at 'North'
@@ -245,11 +246,25 @@ function getOrbitTweenPos(planet,step,sun) {
     let currentAngle = Math.atan2(start.y-center.y,start.x-center.x);
     // determine target angle from center
     let targetAngle = Math.atan2(step.y-center.y,step.x-center.x);
-    let angleDifference = Math.abs(currentAngle - targetAngle);
+	
+    let angleDifference = currentAngle - targetAngle;
+	// normalize angle difference
+	if (angleDifference > Math.PI) {
+		angleDifference -= Math.PI * 2;
+	} else if (angleDifference < -Math.PI) {
+		angleDifference += Math.PI * 2;
+	}
     // stay put when close enough to avoid float imprecision infinite drift
-    if (angleDifference < 0.005) return { x:step.x, y:step.y };
+    if (Math.abs(angleDifference) < 0.005) return { x:step.x, y:step.y };
+	
     // make sure we go "the short way around"
     if (currentAngle > targetAngle) currentAngle -= 360*DEG_TO_RAD;
+	
+	// reverse direction if retrograde
+	if (orbit.is_retrograde) {
+		targetAngle = currentAngle - angleDifference;
+	}
+	
     // step (lerp) the angle from current to target
     let newAngle = lerp(currentAngle,targetAngle,PLANET_ANIM_SPEED);
     //console.log("dist:"+sundist.toFixed(1)+" angle:"+currentAngle.toFixed(1));
