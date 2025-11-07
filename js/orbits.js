@@ -16,7 +16,10 @@ function moveOrbits() {
         let arcLength = (2 * Math.PI)/
             orbit.steps.length;
 			
-		let orbitCenter = {x: sun.x + orbit.offset.x, y: sun.y + orbit.offset.y};
+		let orbitCenter = {
+			x: sun.x + (orbit.offset.x * scaleFactor),
+			y: sun.y + (orbit.offset.y * scaleFactor),
+		};
 
         for(let i=0;i<orbit.steps.length;i++) {
             let step = orbit.steps[i];
@@ -48,7 +51,9 @@ function drawOrbits() {
         // draw orbit
         let center = orbit.centerObj;
         if(center) {
-            outlineCircle((center.x + orbit.offset.x), (center.y + orbit.offset.y),
+            outlineCircle(
+				(center.x + (orbit.offset.x * scaleFactor)),
+				(center.y + (orbit.offset.y * scaleFactor)),
                 orbit.radius * scaleFactor, 
                 ORBIT_DRAW_COLOR);
 
