@@ -6,7 +6,7 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound; // add more here
+var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound; // add more here
 
 // Add more music tracks here, one is chosen randomly
 const musicTracks = [
@@ -45,6 +45,9 @@ function soundInitialize() { // called by first user input
 
     explosionSound = new Audio("../audio/explosion.ogg");
     explosionSound.volume = SFX_VOLUME;
+
+    muffledExplosionSound = new Audio("../audio/muffled_explosion.wav");
+    muffledExplosionSound.volume = SFX_VOLUME;
 
     choiceSound = makeChoiceSound;
     

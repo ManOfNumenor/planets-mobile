@@ -355,6 +355,7 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
             );
         } else {
             // initiate combat
+            if (muffledExplosionSound) muffledExplosionSound.play();
 
             if(existingFleetAtStep.ships > fleet.ships) {
                 // existing fleet (defender) wins

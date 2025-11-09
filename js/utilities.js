@@ -106,6 +106,7 @@ function toggleSoundEffects() {
     if (confirmSound) confirmSound.volume = vol;
     if (choiceSound) choiceSound.volume = vol;
     if (explosionSound) explosionSound.volume = vol;
+    if (muffledExplosionSound) muffledExplosionSound.volume = vol;
     console.log("sound effects volume is now "+vol);
 }
 
