@@ -109,8 +109,9 @@ function loadLevel(levelObj) {
     }
 	
 	if(levelObj.randomize_on_load) {
-		console.log('Level is randomized...', levelObj);
-		randomizeLevel()
+        console.log('Level is randomized...', levelObj);
+        randomizePlanets() // Currently this is all that's implemented well, and probably all that's desired.
+		//randomizeLevel()
 	}
 
     renderPlayersList();
@@ -135,34 +136,62 @@ function randomizeLevel() {
         // complex multidimensional array - tricky
     }
 
-    for (let i=0; i<planets.length; i++) {
-            planets[i].color = randomPlanetColor();
-            planets[i].size = randomPlanetSize();
-            planets[i].radius = randomPlanetRadius();
-            
-            // leave it be for now
-            // planets[i].orbitIdx = levelPlanet.orbitIdx;
-            
-            // could pick from 0-orbits[i].steps.length;
-            // stored initially in levelPlanet.startingStepIdx;
-            planets[i].stepIdx = Math.floor(Math.random()*orbits[planets[i].orbitIdx].steps.length);
-            
-            // pick from random array of special sprites?
-            // planets[i].imageVar = levelPlanet.imageVar;
-
-            planets[i].hasClouds = Math.random()<0.5;
-            planets[i].rings = Math.random()<0.15;
-            planets[i].ringAngle = Math.random()*360;
-            planets[i].atmosphereColor = randomPlanetColor();
-
-            // reset ownership
-            planets[i].ownedByPlayer = 0; 
-
-    }
+    randomizePlanets()
 
     // todo: reset fleets? 
     // if so, also change ownedByPlayer above
 
+}
+
+function randomizePlanets() {
+    let planetLocations = [];
+    for (let i=0; i<planets.length; i++) {
+        planets[i].color = randomPlanetColor();
+        planets[i].size = randomPlanetSize();
+        planets[i].radius = randomPlanetRadius();
+        
+        // leave it be for now
+        // planets[i].orbitIdx = levelPlanet.orbitIdx;
+        
+        // could pick from 0-orbits[i].steps.length;
+        // stored initially in levelPlanet.startingStepIdx;
+        //planets[i].stepIdx = Math.floor(Math.random()*orbits[planets[i].orbitIdx].steps.length);
+        while (!planetLocations[i]) {
+            let tmpStepIdx = Math.floor(Math.random() * orbits[planets[i].orbitIdx].steps.length);
+
+            let tmpPlanetLocation = [planets[i].orbitIdx, tmpStepIdx];
+
+            let exists = false;
+            for( let i = 0; i < planetLocations.length; i++ ) {
+                if( JSON.stringify(planetLocations[i]) === JSON.stringify(tmpPlanetLocation) ) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (exists) {
+                console.log("Random location already exists, looping again...", planetLocations.length, "of", planets.length);
+                continue;
+            } else {
+                planets[i].stepIdx = tmpStepIdx;
+                planetLocations[i] = tmpPlanetLocation;
+                break;
+            }
+        }
+        
+        // pick from random array of special sprites?
+        // planets[i].imageVar = levelPlanet.imageVar;
+
+        planets[i].hasClouds = Math.random()<0.5;
+        planets[i].rings = Math.random()<0.15;
+        planets[i].ringAngle = Math.random()*360;
+        planets[i].atmosphereColor = randomPlanetColor();
+
+        // reset ownership
+        planets[i].ownedByPlayer = 0; 
+    }
+
+    console.log("Random planet locations:", planetLocations);
 }
 
 function randomPlanetColor() {
