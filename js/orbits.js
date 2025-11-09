@@ -6,6 +6,9 @@ const ROUTE_LINES_WIDTH = 16;
 const STEP_INDICATOR_RADIUS = 5;
 //const ORBIT_DRAW_COLOR = "cyan";
 const ORBIT_DRAW_COLOR = "#c0c0c0";
+const ORBIT_DRAW_HIGHLIGHT = "#dddda0ff";
+const ORBIT_DRAW_THICKNESS = 1.0;
+const ORBIT_DRAW_HIGHLIGHT_THICKNESS = 4.0;
 
 var orbits = [];
 
@@ -51,12 +54,23 @@ function drawOrbits() {
         let orbit = orbits[orbitIdx];
         // draw orbit
         let center = orbit.centerObj;
-        if(center) {
+        if (center) {
+            let selected_entity_this_orbit = false;
+            if (selectedEntity) {
+                if (selectedEntity.planetIdx !== null) {
+                    if (planets[selectedEntity.planetIdx].orbitIdx === orbitIdx) {
+                        selected_entity_this_orbit = true;
+                    }
+                }
+            }
+
             outlineCircle(
-				(center.x + (orbit.offset.x * scaleFactor)),
-				(center.y + (orbit.offset.y * scaleFactor)),
-                orbit.radius * scaleFactor, 
-                ORBIT_DRAW_COLOR);
+                (center.x + (orbit.offset.x * scaleFactor)),
+                (center.y + (orbit.offset.y * scaleFactor)),
+                orbit.radius * scaleFactor,
+                selected_entity_this_orbit ? ORBIT_DRAW_HIGHLIGHT : ORBIT_DRAW_COLOR,
+                selected_entity_this_orbit ? ORBIT_DRAW_HIGHLIGHT_THICKNESS : ORBIT_DRAW_THICKNESS
+            );
 
             // draw steps
             let arcLength = (2 * Math.PI)/
