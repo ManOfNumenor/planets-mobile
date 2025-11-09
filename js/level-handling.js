@@ -187,8 +187,10 @@ function randomizePlanets() {
         planets[i].ringAngle = Math.random()*360;
         planets[i].atmosphereColor = randomPlanetColor();
 
-        // reset ownership
-        planets[i].ownedByPlayer = 0; 
+        // DO NOT reset ownership so that players start with a home planet,
+        // & it's the same size planet as configured in the level defaults.
+        // Simpler solution than randomizing ownership...
+        //planets[i].ownedByPlayer = 0; 
     }
 
     console.log("Random planet locations:", planetLocations);
