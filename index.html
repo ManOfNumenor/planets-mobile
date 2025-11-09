@@ -54,17 +54,16 @@
             <div id="levelMenuDiv"
                  class="menu-div"
                  style="display: none">
-                TODO: add level thumbnails to the buttons
-                <button onclick="loadLevel(testLevel)"> Test Level </button>
-                <button onclick="loadLevel(blackhole)"> Black Hole </button>
-                <button onclick="loadLevel(quadraticLevel)"> Quadratic </button>
-				<button onclick="loadLevel(oculus)"> Oculus </button>
-				<button onclick="loadLevel(trilane)"> Tri-lane </button>
-				<button onclick="loadLevel(radialgrid)"> Radial Grid </button>
-				<button onclick="loadLevel(xiphosuran)"> Xiphosuran </button>
-				<button onclick="loadLevel(bowtie)"> Cosmic Bowtie </button>
-				<button onclick="loadLevel(hanaous)"> Hanaous </button>
-                <button onclick="showMenu('main')"> Back </button>
+                <img id="levelSelectImage">
+                <h1 id="levelSelectDisplay"> Selected Level </h1>
+                <button onclick="levelSelect(selectedLevelIdx-1)"> &#8592 </button>
+                <button onclick="levelSelect(selectedLevelIdx+1)"> &#8594 </button>
+                <button onclick="loadLevel(getLevel(selectedLevelIdx).uid)"> Play! </button>
+
+                <!-- Replaced with 'const LEVELS' in menus.js-->
+                <!-- <button onclick="loadLevel(testLevel)"> Test Level </button>-->
+
+                <button onclick="showMenu('main')"> Main Menu </button>
             </div>
             <div id="playersMenuDiv"
                  class="menu-div"
@@ -142,7 +141,6 @@
         <script src="js/level-handling.js"></script>
         <script src="js/player-handling.js"></script>
         <script src="js/wormhole-effect.js"></script>
-        <script src="js/menus.js"></script>
 
         <!-- level definitions -->
         <script src="js/levels/test-level.js"></script>
@@ -156,6 +154,7 @@
         <script src="js/levels/blackhole.js"></script>
 
         <!-- game logic -->
+         <script src="js/menus.js"></script>
         <script src="js/notifications.js"></script>
         <script src="js/sound.js"></script>
         <script src="js/input.js"></script>

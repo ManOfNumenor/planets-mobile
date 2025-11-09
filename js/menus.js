@@ -7,6 +7,61 @@ const MENU_KEYS = [
     'pause', // kind of a special case, see pause.js
 ];
 
+// Add new levels here!
+// These definitions are in this file rather than level-handling.js due to load order!
+const LEVELS = [
+    {
+        uid: testLevel,
+        display: "Test Level",
+        img: "",
+    },
+    {
+        uid: blackhole,
+        display: "Black Hole",
+        img: "",
+    },
+    {
+        uid: quadraticLevel,
+        display: "Quadratic",
+        img: "",
+    },
+    {
+        uid: oculus,
+        display: "Oculus",
+        img: "",
+    },
+    {
+        uid: trilane,
+        display: "Tri-lane",
+        img: "",
+    },
+    {
+        uid: radialgrid,
+        display: "Radial Grid",
+        img: "",
+    },
+    {
+        uid: xiphosuran,
+        display: "Xiphosuran",
+        img: "",
+    },
+    {
+        uid: bowtie,
+        display: "Cosmic Bowtie",
+        img: "",
+    },
+    {
+        uid: hanaous,
+        display: "Hanaous",
+        img: "",
+    },
+];
+
+const levelSelectImage = document.getElementById("levelSelectImage");
+const levelSelectDisplay = document.getElementById("levelSelectDisplay");
+var selectedLevelIdx = 0; //  int for LEVEL_KEYS item, used in level select screen
+
+
 function getMenuDiv(menuKey) {
     let menuDivId = menuKey + 'MenuDiv';
 
@@ -20,7 +75,11 @@ function showMenu(menuKey) {
     hideAllMenus();
     let menuDiv = getMenuDiv(menuKey);
     menuDiv.style.display = 'flex';
-    wormholeEffectEnabled = (menuKey=="main");
+    wormholeEffectEnabled = (menuKey == "main");
+    
+    if (menuKey === 'level') {
+        levelSelect(selectedLevelIdx)
+    }
 }
 
 function hideAllMenus() {
@@ -79,4 +138,37 @@ function renderPlayersList() {
     playerMenuDiv.innerHTML = template;
 
     showMenu('players');
+}
+
+// This method just allows for default fallback values
+function getLevel(index) {
+    let tmpLevel = {
+        uid: "testLevel", // Object name
+        display: "EMPTY", // Display name for level select menu
+        img: "images/canMoveHere.png", // Image preview source
+    };
+
+    if (LEVELS[index]) {
+        tmpLevel.uid = LEVELS[index].uid ? LEVELS[index].uid : tmpLevel.uid;
+        tmpLevel.display = LEVELS[index].display ? LEVELS[index].display : tmpLevel.display;
+        tmpLevel.img = LEVELS[index].img ? LEVELS[index].img : tmpLevel.img;
+    };
+
+    return tmpLevel;
+}
+
+function levelSelect(index) {
+    // Display for levels in level select menu
+
+    // Wrap the index
+    if (index < 0) {
+        index = LEVELS.length - 1;
+    } else if (index >= LEVELS.length) {
+        index = 0;
+    }
+    selectedLevelIdx = index;
+
+    //console.log("Level select:", LEVELS[selectedLevelIdx].display);
+    levelSelectImage.src = getLevel(selectedLevelIdx).img;
+    levelSelectDisplay.innerHTML = getLevel(selectedLevelIdx).display; //LEVELS[selectedLevelIdx].display;
 }
