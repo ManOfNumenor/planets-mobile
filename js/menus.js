@@ -158,7 +158,7 @@ function renderPlayersList() {
 // This method just allows for default fallback values
 function getLevel(index) {
     let tmpLevel = {
-        uid: "testLevel", // Object name
+        uid: testLevel, // Object name
         display: "EMPTY", // Display name for level select menu
         img: "images/canMoveHere.png", // Image preview source
     };
