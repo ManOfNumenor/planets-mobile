@@ -370,7 +370,7 @@ function maybeDrawTooltip(planet,thisXY) {
             let line2 = planet.description;
             let line3 = "Unclaimed by any player";
             if (planet.ownedByPlayer) line3 = "Owned by player "+planet.ownedByPlayer;
-            drawPlanetTooltip(line1,line2,line3,thisXY.x,thisXY.y-planet.radius-36);
+            drawPlanetTooltip(line1,line2,line3,thisXY.x,thisXY.y-(planet.radius * 2 * scaleFactor));
         }
 }
 
