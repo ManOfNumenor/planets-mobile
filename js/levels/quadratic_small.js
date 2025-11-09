@@ -184,6 +184,18 @@ var quadraticSmall = {
             //imageVar: planet128x128,
             polarIce:1.5, // albedo %
         },
+        {
+            name:"Tutorialis",
+            description:"A gentle wonder.",
+            orbitIdx: 3,
+            startingStepIdx: 13,
+            color: 'blue',
+            size: 3,
+            ownedByPlayer: 0,
+            hasClouds: true,
+            //imageVar: planet64x64
+            craters:1.0, // the opacity of the craters overlay
+        },
 
         // "asteroids"
         {
