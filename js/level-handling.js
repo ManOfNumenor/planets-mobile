@@ -22,7 +22,9 @@ function loadLevel(levelObj) {
             rotation: levelOrbit.rotation != 'half' ? (levelOrbit.rotation) : (Math.PI / levelOrbit.stepCount),
             centerObj: sun,
 			offset: levelOrbit.offset ? levelOrbit.offset : {x: 0, y:0},
-			is_retrograde: levelOrbit.is_retrograde ? true : false,
+            is_retrograde: levelOrbit.is_retrograde ? true : false,
+            // Pruning is calculated on the outer ring when making connections.
+            prune_chance: (levelOrbit.prune_chance > 0) ? levelOrbit.prune_chance : 0,
             steps: [],
         };
         
@@ -38,7 +40,16 @@ function loadLevel(levelObj) {
 
     // connections
     //connections = levelObj.connections;
-    for(const connArray of levelObj.connections) {
+    for (const connArray of levelObj.connections) {
+        // Check if this outer orbit has pruning chance
+        let this_orbit_prune = orbits[connArray[2]].prune_chance;
+        if (this_orbit_prune > 0) {
+            if (Math.random() < this_orbit_prune) {
+                continue;
+            }
+        }
+
+        // Make the connection
         connections.push({
             innerOrbitIdx: connArray[0],
             innerStepIdx: connArray[1],

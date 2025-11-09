@@ -7,7 +7,7 @@ const MENU_KEYS = [
     'pause', // kind of a special case, see pause.js
 ];
 
-// Add new levels here!
+// Add new levels here and to the scripts in index.html!
 // These definitions are in this file rather than level-handling.js due to load order!
 const LEVELS = [
     {
@@ -23,6 +23,11 @@ const LEVELS = [
     {
         uid: quadraticLevel,
         display: "Quadratic",
+        img: "",
+    },
+    {
+        uid: quadraticPruned,
+        display: "Pruned Quadratic",
         img: "",
     },
     {
