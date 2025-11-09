@@ -10,24 +10,29 @@ const MENU_KEYS = [
 // Add new levels here and to the scripts in index.html!
 // These definitions are in this file rather than level-handling.js due to load order!
 const LEVELS = [
+    //{
+    //    uid: testLevel,
+    //    display: "Test Level",
+    //    img: "",
+    //},
     {
-        uid: testLevel,
-        display: "Test Level",
+        uid: quadraticSmall,
+        display: "Quadratic Small",
         img: "",
     },
     {
-        uid: blackhole,
-        display: "Black Hole",
+        uid: quadraticLarge,
+        display: "Quadratic Large",
         img: "",
     },
     {
-        uid: quadraticLevel,
-        display: "Quadratic",
+        uid: quadraticSmallPruned,
+        display: "Pruned Quadratic Sm",
         img: "",
     },
     {
-        uid: quadraticPruned,
-        display: "Pruned Quadratic",
+        uid: quadraticLargePruned,
+        display: "Pruned Quadratic Lg",
         img: "",
     },
     {
@@ -48,6 +53,11 @@ const LEVELS = [
     {
         uid: xiphosuran,
         display: "Xiphosuran",
+        img: "",
+    },
+    {
+        uid: blackhole,
+        display: "Black Hole",
         img: "",
     },
     {

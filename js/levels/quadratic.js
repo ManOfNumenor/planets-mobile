@@ -1,5 +1,6 @@
-var quadraticLevel = {
+var quadraticLarge = {
     playerCount: 4,
+    randomize_on_load: true,
     sun: {
         isBinaryStar: false,
         imageVar: sunRedGiant,
