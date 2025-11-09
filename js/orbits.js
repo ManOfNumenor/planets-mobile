@@ -6,6 +6,9 @@ const ROUTE_LINES_WIDTH = 16;
 const STEP_INDICATOR_RADIUS = 5;
 //const ORBIT_DRAW_COLOR = "cyan";
 const ORBIT_DRAW_COLOR = "#c0c0c0";
+const ORBIT_DRAW_HIGHLIGHT = "#dddda0ff";
+const ORBIT_DRAW_THICKNESS = 1.0;
+const ORBIT_DRAW_HIGHLIGHT_THICKNESS = 4.0;
 
 var orbits = [];
 
@@ -15,11 +18,17 @@ function moveOrbits() {
     for(const orbit of orbits) {
         let arcLength = (2 * Math.PI)/
             orbit.steps.length;
+			
+		let orbitCenter = {
+			x: sun.x + (orbit.offset.x * scaleFactor),
+			y: sun.y + (orbit.offset.y * scaleFactor),
+		};
 
         for(let i=0;i<orbit.steps.length;i++) {
             let step = orbit.steps[i];
-
-            let stepAng = (i * arcLength) + 
+			
+			let direction = orbit.is_retrograde ? -1 : 1;
+            let stepAng = (i * arcLength * direction) + 
                 orbit.rotation; 
             // - (Math.PI/2);
             // subtract PI/2 to start at 'North'
@@ -28,7 +37,7 @@ function moveOrbits() {
             let newCoords = distAngAndOriginToXY(
                 orbit.radius * scaleFactor,
                 stepAng,
-                sun,
+                orbitCenter,
             );
 
             step.x = newCoords.x;
@@ -45,10 +54,23 @@ function drawOrbits() {
         let orbit = orbits[orbitIdx];
         // draw orbit
         let center = orbit.centerObj;
-        if(center) {
-            outlineCircle(center.x,center.y,
-                orbit.radius * scaleFactor, 
-                ORBIT_DRAW_COLOR);
+        if (center) {
+            let selected_entity_this_orbit = false;
+            if (selectedEntity) {
+                if (selectedEntity.planetIdx !== null) {
+                    if (planets[selectedEntity.planetIdx].orbitIdx === orbitIdx) {
+                        selected_entity_this_orbit = true;
+                    }
+                }
+            }
+
+            outlineCircle(
+                (center.x + (orbit.offset.x * scaleFactor)),
+                (center.y + (orbit.offset.y * scaleFactor)),
+                orbit.radius * scaleFactor,
+                selected_entity_this_orbit ? ORBIT_DRAW_HIGHLIGHT : ORBIT_DRAW_COLOR,
+                selected_entity_this_orbit ? ORBIT_DRAW_HIGHLIGHT_THICKNESS : ORBIT_DRAW_THICKNESS
+            );
 
             // draw steps
             let arcLength = (2 * Math.PI)/
@@ -75,7 +97,7 @@ function drawOrbits() {
                 //     STEP_INDICATOR_RADIUS * scaleFactor,
                 //     ORBIT_DRAW_COLOR);
                 drawBitmapCenteredWithRotationAndScale(orbitStopPic,
-                    step.x,step.y, 0,
+                    step.x, step.y, 0,
                     // image is 20x20, scaled down by half to still look good at 2x zoom
                     0.5 * scaleFactor);
 
@@ -136,7 +158,8 @@ function drawOrbits() {
 function drawCanMoveHereIndicator(step) {
     // extracted to function because it's called from 
     // both drawOrbits() & drawPlanets()
-    colorCircle(step.x,step.y,
+	
+    colorCircle(step.x, step.y,
         (STEP_INDICATOR_RADIUS + 3) * scaleFactor,
         'yellow');
 
@@ -221,28 +244,47 @@ function updateConnectionLines(orbitIdx, stepIdx, drawCoords) {
 
 // used in drawPlanets() to tween from turn to turn using a curve
 function getOrbitTweenPos(planet,step,sun) {
+	let orbit = orbits[planet.orbitIdx];
+	let center = {
+		x: (sun.x + (orbit.offset.x * scaleFactor)),
+		y: (sun.y + (orbit.offset.y * scaleFactor))
+	};
+	
     // put planet at target if it has never moved before
     if (planet.animationX==undefined) planet.animationX = step.x;
     if (planet.animationY==undefined) planet.animationY = step.y;
     // where are we NOW? (distBetween needs an object with this shape)
     let start = { x:planet.animationX, y:planet.animationY };
-    // measure distance and angle to the sun
-    let orbit = orbits[planet.orbitIdx];
-    let sundist = orbit.radius * scaleFactor; //distBetween(start,sun);
-    let currentAngle = Math.atan2(start.y-sun.y,start.x-sun.x);
-    // determine target angle from sun
-    let targetAngle = Math.atan2(step.y-sun.y,step.x-sun.x);
-    let angleDifference = Math.abs(currentAngle - targetAngle);
+    // measure distance and angle to the center
+    let centerDist = orbit.radius * scaleFactor; //distBetween(start,sun);
+    let currentAngle = Math.atan2(start.y-center.y,start.x-center.x);
+    // determine target angle from center
+    let targetAngle = Math.atan2(step.y-center.y,step.x-center.x);
+	
+    let angleDifference = currentAngle - targetAngle;
+	// normalize angle difference
+	if (angleDifference > Math.PI) {
+		angleDifference -= Math.PI * 2;
+	} else if (angleDifference < -Math.PI) {
+		angleDifference += Math.PI * 2;
+	}
     // stay put when close enough to avoid float imprecision infinite drift
-    if (angleDifference < 0.005) return { x:step.x, y:step.y };
+    if (Math.abs(angleDifference) < 0.005) return { x:step.x, y:step.y };
+	
     // make sure we go "the short way around"
     if (currentAngle > targetAngle) currentAngle -= 360*DEG_TO_RAD;
+	
+	// reverse direction if retrograde
+	if (orbit.is_retrograde) {
+		targetAngle = currentAngle - angleDifference;
+	}
+	
     // step (lerp) the angle from current to target
     let newAngle = lerp(currentAngle,targetAngle,PLANET_ANIM_SPEED);
     //console.log("dist:"+sundist.toFixed(1)+" angle:"+currentAngle.toFixed(1));
-    // generate new coordinates using new angle and prev sun dist
-    let newX = sun.x + (Math.cos(newAngle) * sundist);
-    let newY = sun.y + (Math.sin(newAngle) * sundist);
+    // generate new coordinates using new angle and prev center dist
+    let newX = center.x + (Math.cos(newAngle) * centerDist);
+    let newY = center.y + (Math.sin(newAngle) * centerDist);
     //console.log("orbiting result:"+newX.toFixed(1)+","+newY.toFixed(1));
     return { x:newX, y:newY };
 }

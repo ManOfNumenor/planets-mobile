@@ -32,6 +32,7 @@ var orbitDirectionArrowsPic = document.createElement('img');
 var starsPic = document.createElement('img');
 var nebulaePic = document.createElement('img');
 var wormholePic = document.createElement('img');
+var blackholePic = document.createElement('img');
 
 var sunDefault = document.createElement('img');
 var sunDark = document.createElement('img');
@@ -92,7 +93,8 @@ function loadImages() {
 
         {varName: nebulaePic, theFile: "nebulae.jpg"},
         {varName: starsPic, theFile: "stars.png"},
-        {varName: wormholePic, theFile: "wormhole-effect.png"},
+        {varName: wormholePic, theFile: "wormhole-effect.png" },
+        {varName: blackholePic, theFile: "blackhole.png"},
 
         {varName: sunDefault, theFile: "sun.png"},
         {varName: sunDark, theFile: "sun-dark.png"},

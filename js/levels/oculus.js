@@ -16,7 +16,7 @@ var oculus = {
 		{
 			radius: 130,
 			stepCount: 4,
-			rotation: Math.PI / 4,
+			rotation: 'half',
 		},
 		{
 			radius: 210,
@@ -26,7 +26,7 @@ var oculus = {
 		{
 			radius: 320,
 			stepCount: 16,
-			rotation: 0, // Math.PI / 4,
+			rotation: 0,
 		},
 		{
 			radius: 450,

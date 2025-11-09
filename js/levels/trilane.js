@@ -16,12 +16,12 @@ var trilane = {
         {
             radius: 350,
             stepCount: 9,
-            rotation: Math.PI / 9,
+            rotation: 'half',
         },
         {
             radius: 650,
             stepCount: 12,
-            rotation: 0, //Math.PI / 4,
+            rotation: 0,
         },
     ],
     connections: [

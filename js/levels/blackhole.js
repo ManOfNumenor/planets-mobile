@@ -1,20 +1,21 @@
-var radialgrid = {
+var blackhole = {
 	playerCount: 4,
 	//randomize_on_load: true,
 	sun: {
 		isBinaryStar: false,
-		imageVar: sunRedGiant,
-		sunspotsEnabled: true,
+		imageVar: blackholePic,
+		sunspotsEnabled: false,
 		radius: 50,
 	},
 	orbits: [
 		{
-			radius: 120,
-			stepCount: 6,
+			radius: 380,
+			stepCount: 12,
 			rotation: 0,
+			is_retrograde: true,
 		},
 		{
-			radius: 340,
+			radius: 580,
 			stepCount: 12,
 			rotation: 'half',
 		},
@@ -29,16 +30,16 @@ var radialgrid = {
 		// [ innerOrbitIdx, innerStepIdx, outerOrbitIdx, outerStepIdx ],
 		[0, 0, 1, 11],
 		[0, 0, 1, 0],
-		[0, 1, 1, 1],
-		[0, 1, 1, 2],
-		[0, 2, 1, 3],
-		[0, 2, 1, 4],
-		[0, 3, 1, 5],
-		[0, 3, 1, 6],
+		[0, 10, 1, 1],
+		[0, 10, 1, 2],
+		[0, 8, 1, 3],
+		[0, 8, 1, 4],
+		[0, 6, 1, 5],
+		[0, 6, 1, 6],
 		[0, 4, 1, 7],
 		[0, 4, 1, 8],
-		[0, 5, 1, 9],
-		[0, 5, 1, 10],
+		[0, 2, 1, 9],
+		[0, 2, 1, 10],
 		
 		[1, 0, 2, 0],
 		[1, 0, 2, 1],
@@ -71,7 +72,7 @@ var radialgrid = {
 		{
 			name:"Koraxian Prime",
 			description:"Super-heated lava planet.",
-			orbitIdx: 0,
+			orbitIdx: 1,
 			startingStepIdx: 0,
 			color: 'red',
 			size:1,
@@ -83,7 +84,7 @@ var radialgrid = {
 		{
 			name:"Objectus",
 			description:"Super-dense gas giant",
-			orbitIdx: 0,
+			orbitIdx: 1,
 			startingStepIdx: 3,
 			color: '#ff00ff',
 			size:2,
@@ -94,10 +95,25 @@ var radialgrid = {
 			// imageVar: planet24x24,
 		},
 		{
+			name:"Vasturia IV",
+			description:"A lush, dense, jungle-planet.",
+			orbitIdx: 1,
+			startingStepIdx: 6,
+			color: 'brown',
+			size: 2,
+			ownedByPlayer: 0,
+			hasClouds: true,
+			cloudStretchScale:16,
+			rings:false, // TODO: could be [angle,radius,opacity]
+			ringAngle: 30, // degrees (0 = horizontal)
+			//imageVar: planet128x128,
+			polarIce:1.5, // albedo %
+		},
+		{
 			name:"Ganth II",
 			description:"It's icy core creates huge storms.",
 			orbitIdx: 1,
-			startingStepIdx: 0,
+			startingStepIdx: 9,
 			color: 'lime',
 			size:2,
 			ownedByPlayer: 1,
@@ -107,11 +123,12 @@ var radialgrid = {
 			ice:0.6, // alpha of ice overlay, 0 is default none
 			polarIce:1.0, // very distinct ice poles
 		},
+
 		{
 			name:"Derelictus",
 			description:"A wasteland of ancient craters.",
-			orbitIdx: 1,
-			startingStepIdx: 6,
+			orbitIdx: 2,
+			startingStepIdx: 1,
 			color: 'grey',
 			size: 2,
 			ownedByPlayer: 2,
@@ -138,10 +155,10 @@ var radialgrid = {
 			name:"Vasturia II",
 			description:"A lush, dense, jungle-planet.",
 			orbitIdx: 2,
-			startingStepIdx: 8,
+			startingStepIdx: 10,
 			color: 'brown',
-			size: 3,
-			ownedByPlayer: 0,
+			size: 2,
+			ownedByPlayer: 4,
 			hasClouds: true,
 			cloudStretchScale:16,
 			rings:false, // TODO: could be [angle,radius,opacity]
@@ -156,7 +173,7 @@ var radialgrid = {
 			startingStepIdx: 15,
 			color: 'brown',
 			size: 3,
-			ownedByPlayer: 4,
+			ownedByPlayer: 0,
 			hasClouds: true,
 			cloudStretchScale:16,
 			rings:false, // TODO: could be [angle,radius,opacity]
@@ -167,26 +184,10 @@ var radialgrid = {
 
 		// "asteroids"
 		{
-			name:"asterioid1",
-			description:"",
-			orbitIdx: 1,
-			startingStepIdx: 1,
-			color: 'lightgrey',
-			size: 1,
-			ownedByPlayer: 0,
-			hasClouds: false,
-			cloudStretchScale:16,
-			rings:false, // TODO: could be [angle,radius,opacity]
-			ringAngle: 30, // degrees (0 = horizontal)
-			//imageVar: planet128x128,
-			//polarIce:1.0, // albedo %
-			craters:1.0, // the opacity of the craters overlay
-		},
-		{
 			name:"asterioid2",
 			description:"",
-			orbitIdx: 1,
-			startingStepIdx: 4,
+			orbitIdx: 0,
+			startingStepIdx: 1,
 			color: 'darkgrey',
 			size: 1,
 			ownedByPlayer: 0,
@@ -201,8 +202,8 @@ var radialgrid = {
 		{
 			name:"asterioid3",
 			description:"",
-			orbitIdx: 1,
-			startingStepIdx: 7,
+			orbitIdx: 0,
+			startingStepIdx: 3,
 			color: '#f0f0f0',
 			size: 1,
 			ownedByPlayer: 0,
@@ -217,8 +218,8 @@ var radialgrid = {
 		{
 			name:"asterioid4",
 			description:"",
-			orbitIdx: 1,
-			startingStepIdx: 9,
+			orbitIdx: 0,
+			startingStepIdx: 4,
 			color: '#3f3f3f',
 			size: 1,
 			ownedByPlayer: 0,
@@ -231,8 +232,8 @@ var radialgrid = {
 		{
 			name:"asterioid5",
 			description:"",
-			orbitIdx: 2,
-			startingStepIdx: 0,
+			orbitIdx: 0,
+			startingStepIdx: 7,
 			color: '#3f3f3f',
 			size: 1,
 			ownedByPlayer: 0,
@@ -245,8 +246,8 @@ var radialgrid = {
 		{
 			name:"asterioid5",
 			description:"",
-			orbitIdx: 2,
-			startingStepIdx: 2,
+			orbitIdx: 0,
+			startingStepIdx: 9,
 			color: '#3f3f3f',
 			size: 1,
 			ownedByPlayer: 0,
@@ -257,24 +258,24 @@ var radialgrid = {
 			ice: 0,
 		},
 		{
-			name:"asterioid6",
+			name:"asterioid7",
 			description:"",
-			orbitIdx: 2,
-			startingStepIdx: 7,
+			orbitIdx: 0,
+			startingStepIdx: 12,
 			color: '#3f3f3f',
 			size: 1,
 			ownedByPlayer: 0,
 			hasClouds: false,
 			rings:false, // TODO: could be [angle,radius,opacity]
 			//imageVar: planet128x128,
-			craters: 0.3, // the opacity of the craters overlay
-			ice: 0.8,
+			craters:1.0, // the opacity of the craters overlay
 		},
+
 		{
-			name:"asterioid7",
+			name:"asterioid8",
 			description:"",
-			orbitIdx: 2,
-			startingStepIdx: 8,
+			orbitIdx: 1,
+			startingStepIdx: 5,
 			color: '#3f3f3f',
 			size: 1,
 			ownedByPlayer: 0,
@@ -287,7 +288,7 @@ var radialgrid = {
 			name:"asterioid8",
 			description:"",
 			orbitIdx: 2,
-			startingStepIdx: 12,
+			startingStepIdx: 5,
 			color: '#3f3f3f',
 			size: 1,
 			ownedByPlayer: 0,

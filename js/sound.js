@@ -6,7 +6,13 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound; // add more here
+var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound; // add more here
+
+// Add more music tracks here, one is chosen randomly
+const musicTracks = [
+    "../audio/music_10_minute_ambience.mp3",
+    "../audio/music-track-2.mp3"
+];
 
 const MUSIC_SOUND_VOLUME = 0.125; // very quiet
 const SFX_VOLUME = 1; // max volume, as recorded
@@ -21,7 +27,9 @@ function soundInitialize() { // called by first user input
     console.log("Initializing sound and STARTING MUSIC");
     
     // music by Michael Avrie - @tarnishedmoth
-    music = new Audio("../audio/music_10_minute_ambience.mp3");
+    //music = new Audio("../audio/music_10_minute_ambience.mp3");
+    // Choose random music track
+    music = new Audio(musicTracks[Math.floor(Math.random() * musicTracks.length)]);
     music.volume = MUSIC_SOUND_VOLUME;
     music.loop = true; // continue forever
     music.play();
@@ -37,6 +45,9 @@ function soundInitialize() { // called by first user input
 
     explosionSound = new Audio("../audio/explosion.ogg");
     explosionSound.volume = SFX_VOLUME;
+
+    muffledExplosionSound = new Audio("../audio/muffled_explosion.wav");
+    muffledExplosionSound.volume = SFX_VOLUME;
 
     choiceSound = makeChoiceSound;
     
