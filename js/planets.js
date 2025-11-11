@@ -30,8 +30,9 @@ function drawPlanets() {
     //for(const planet, idx of planets) {
     for(let i=0;i<planets.length;i++) {
         let planet = planets[i];
+        let this_orbit = orbits[planet.orbitIdx];
         
-        let step = orbits[planet.orbitIdx].steps[planet.stepIdx];
+        let step = this_orbit.steps[planet.stepIdx];
         let drawX = step.x;
         let drawY = step.y;
 
@@ -172,10 +173,18 @@ function drawPlanets() {
         if (MOONS_ENABLED) drawAllMoons(planet.moons,drawX,drawY);
 
         if (DRAW_ORBIT_DIRECTION_ARROWS) {
-            let angleToOrbitDir = Math.atan2(drawY-sun.y,drawX-sun.x);
+            //let angleToOrbitDir = Math.atan2(drawY-sun.y,drawX-sun.x);
+            // fix for orbit center offset from sun
+            let orbitCenter = {
+                x: (sun.x + (this_orbit.offset.x * scaleFactor)),
+                y: (sun.y + (this_orbit.offset.y * scaleFactor))
+            };
+            let angleToOrbitDir = Math.atan2(drawY-orbitCenter.y,drawX-orbitCenter.x);
             let arrowScale = (1/orbitDirectionArrowsPic.width) * planet.radius*4*scaleFactor;
-            let rad = orbits[planet.orbitIdx].radius;
-            if (orbits[planet.orbitIdx].rotation==0) { // clockwise
+            let rad = this_orbit.radius;
+            
+            //if (orbits[planet.orbitIdx].rotation==0) { // clockwise
+            if (!this_orbit.is_retrograde) { // clockwise
                 // point towards curve ahead which depends on orbit radius
                 angleToOrbitDir += 0.0825; // FIXME 0.25 * (1/orbits[planet.orbitIdx].radius);//*scaleFactor);
                 // these magic numbers fix the slight offset
