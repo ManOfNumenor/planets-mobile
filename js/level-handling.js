@@ -40,15 +40,18 @@ function loadLevel(levelObj) {
 
     // connections
     //connections = levelObj.connections;
+    let orbits_with_connections = []
     for (const connArray of levelObj.connections) {
         // Check if this outer orbit has pruning chance
         let this_orbit_prune = orbits[connArray[2]].prune_chance;
         if (this_orbit_prune > 0) {
             if (Math.random() < this_orbit_prune) {
-                continue;
+                // Ensure at least one connection is made before pruning
+                if (orbits_with_connections.includes(connArray[0])) continue;
             }
         }
 
+        orbits_with_connections.push(connArray[0]);
         // Make the connection
         connections.push({
             innerOrbitIdx: connArray[0],
