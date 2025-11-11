@@ -56,8 +56,10 @@
                  style="display: none">
                 <img id="levelSelectImage">
                 <h1 id="levelSelectDisplay"> Selected Level </h1>
-                <button onclick="levelSelect(selectedLevelIdx-1)"> &#8592 </button>
-                <button onclick="levelSelect(selectedLevelIdx+1)"> &#8594 </button>
+                <div style="text-align: center;">
+                    <button onclick="levelSelect(selectedLevelIdx-1)"> &#8592 </button>
+                    <button onclick="levelSelect(selectedLevelIdx+1)"> &#8594 </button>
+                </div>
                 <button onclick="loadLevel(getLevel(selectedLevelIdx).uid)"> Play! </button>
 
                 <!-- Replaced with 'const LEVELS' in menus.js-->
