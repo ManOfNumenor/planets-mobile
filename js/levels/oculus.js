@@ -203,7 +203,7 @@ var oculus = {
 			name:"asterioid3",
 			description:"",
 			orbitIdx: 5,
-			startingStepIdx: 15,
+			startingStepIdx: 12,
 			color: '#f0f0f0',
 			size: 1,
 			ownedByPlayer: 0,
@@ -242,60 +242,6 @@ var oculus = {
 			//imageVar: planet128x128,
 			craters:0.2, // the opacity of the craters overlay
 			ice: 0.3,
-		},
-		{
-			name:"asterioid5",
-			description:"",
-			orbitIdx: 5,
-			startingStepIdx: 31,
-			color: '#3f3f3f',
-			size: 1,
-			ownedByPlayer: 0,
-			hasClouds: false,
-			rings:false, // TODO: could be [angle,radius,opacity]
-			//imageVar: planet128x128,
-			craters: 0.8, // the opacity of the craters overlay
-			ice: 0,
-		},
-		{
-			name:"asterioid6",
-			description:"",
-			orbitIdx: 5,
-			startingStepIdx: 39,
-			color: '#3f3f3f',
-			size: 1,
-			ownedByPlayer: 0,
-			hasClouds: false,
-			rings:false, // TODO: could be [angle,radius,opacity]
-			//imageVar: planet128x128,
-			craters: 0.3, // the opacity of the craters overlay
-			ice: 0.8,
-		},
-		{
-			name:"asterioid7",
-			description:"",
-			orbitIdx: 5,
-			startingStepIdx: 47,
-			color: '#3f3f3f',
-			size: 1,
-			ownedByPlayer: 0,
-			hasClouds: false,
-			rings:false, // TODO: could be [angle,radius,opacity]
-			//imageVar: planet128x128,
-			craters:1.0, // the opacity of the craters overlay
-		},
-		{
-			name:"asterioid8",
-			description:"",
-			orbitIdx: 5,
-			startingStepIdx: 55,
-			color: '#3f3f3f',
-			size: 1,
-			ownedByPlayer: 0,
-			hasClouds: false,
-			rings:false, // TODO: could be [angle,radius,opacity]
-			//imageVar: planet128x128,
-			craters:1.0, // the opacity of the craters overlay
 		},
 	],
 };
