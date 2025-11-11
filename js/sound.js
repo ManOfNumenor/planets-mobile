@@ -30,24 +30,24 @@ function soundInitialize() { // called by first user input
     //music = new Audio("../audio/music_10_minute_ambience.mp3");
     // Choose random music track
     music = new Audio(musicTracks[Math.floor(Math.random() * musicTracks.length)]);
-    music.volume = MUSIC_SOUND_VOLUME;
+    music.volume = getMusicSoundVolume();
     music.loop = true; // continue forever
     music.play();
 
     pauseSound = new Audio("../audio/pause.wav");
-    pauseSound.volume = SFX_VOLUME;
+    pauseSound.volume = getSFXVolume();
     
     endTurnSound = new Audio("../audio/end-turn.wav");
-    endTurnSound.volume = SFX_VOLUME;
+    endTurnSound.volume = getSFXVolume();
     
     confirmSound = new Audio("../audio/deep-confirm.wav");
-    confirmSound.volume = SFX_VOLUME;
+    confirmSound.volume = getSFXVolume();
 
     explosionSound = new Audio("../audio/explosion.ogg");
-    explosionSound.volume = SFX_VOLUME;
+    explosionSound.volume = getSFXVolume();
 
     muffledExplosionSound = new Audio("../audio/muffled_explosion.wav");
-    muffledExplosionSound.volume = SFX_VOLUME;
+    muffledExplosionSound.volume = getSFXVolume();
 
     choiceSound = makeChoiceSound;
     
@@ -73,7 +73,7 @@ function makeChoiceSound() {
 
          const startTime = baseTime + delays[i];
          gainNode.gain.setValueAtTime(0, startTime);
-         gainNode.gain.linearRampToValueAtTime(0.3 * SFX_VOLUME, startTime + 0.005);
+         gainNode.gain.linearRampToValueAtTime(0.3 * getSFXVolume(), startTime + 0.005);
          gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + 0.03);
 
          oscillator.connect(gainNode);
@@ -82,4 +82,14 @@ function makeChoiceSound() {
          oscillator.start(startTime);
          oscillator.stop(startTime + 0.03);
     });
+}
+
+function getSFXVolume()
+{
+    return gameOptions.soundEffectsEnabled ? SFX_VOLUME : 0;
+}
+
+function getMusicSoundVolume()
+{
+    return gameOptions.musicEnabled ? MUSIC_SOUND_VOLUME: 0;
 }
