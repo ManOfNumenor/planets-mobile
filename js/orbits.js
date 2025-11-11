@@ -8,7 +8,7 @@ const STEP_INDICATOR_RADIUS = 5;
 const ORBIT_DRAW_COLOR = "#c0c0c0";
 const ORBIT_DRAW_HIGHLIGHT = "#dddda0ff";
 const ORBIT_DRAW_THICKNESS = 1.0;
-const ORBIT_DRAW_HIGHLIGHT_THICKNESS = 4.0;
+const ORBIT_DRAW_HIGHLIGHT_THICKNESS = 2.0;
 
 var orbits = [];
 
