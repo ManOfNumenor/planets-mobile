@@ -255,6 +255,7 @@ function getAvailableMoves(fleet, twoStepsAllowed=true) {
         stepIdx: counterClockwiseStepIdx
     });
 
+    console.log('about to check twoStepsAllowed');
     if (twoStepsAllowed) {
         let secondCounterClockwiseStepIdx = currentStepIdx - 2;
         if(secondCounterClockwiseStepIdx === -1) {
@@ -293,6 +294,7 @@ function getAvailableMoves(fleet, twoStepsAllowed=true) {
       console.log(`Connection ${index}:`, conn);
     });
     return availableMoves;
+
 }
 
 function selectedFleetCanMoveTo(target) {
@@ -581,7 +583,7 @@ function split_fleet(fleetIdx) {
         planetIdx: oldFleet.planetIdx,
         orbitIdx: oldFleet.orbitIdx,
         stepIdx: oldFleet.stepIdx,
-        movedThisTurn: oldFleet.movedThisTurn // ?? maybe let new fleet move?
+        movedThisTurn: false, // needs to be `false` here so getAvailableMoves() doesn't come back empty
     };
     oldFleet.ships -= newFleet.ships;
 
@@ -597,9 +599,13 @@ function split_fleet(fleetIdx) {
         let randomIdx = Math.floor(Math.random() * availableMoves.length);
         console.log("- new fleet is moving to to a space nearby",availableMoves[randomIdx].orbitIdx);
         moveFleetToTarget(newFleet, availableMoves[randomIdx]);
+
     } else {
         console.log("- new fleet has no available moves!");
     }
 
-
+    // deselect fleet and clear info div
+    clearFleetInfoDiv();
+    selectedEntity = null;
+    availableMoves = [];
 }
