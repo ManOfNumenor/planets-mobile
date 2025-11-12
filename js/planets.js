@@ -103,6 +103,7 @@ function drawPlanets() {
 
             canvasContext.globalAlpha = 1;
         }
+        canvasContext.restore();
 
         if(planet.atmosphereColor) {
             drawAtmoHaze(drawX, drawY, planet);
