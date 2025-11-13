@@ -6,7 +6,7 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound; // add more here
+var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound, fleetSplitSound; // add more here
 
 // Add more music tracks here, one is chosen randomly
 const musicTracks = [
@@ -48,6 +48,10 @@ function soundInitialize() { // called by first user input
 
     muffledExplosionSound = new Audio("../audio/muffled_explosion.wav");
     muffledExplosionSound.volume = getSFXVolume();
+
+    // alternate sounding version: teleportation.wav
+    fleetSplitSound = new Audio("../audio/warp-drive.wav");
+    fleetSplitSound.volume = getSFXVolume();
 
     choiceSound = makeChoiceSound;
     
@@ -93,3 +97,30 @@ function getMusicSoundVolume()
 {
     return gameOptions.musicEnabled ? MUSIC_SOUND_VOLUME: 0;
 }
+
+// mutes and unmutes sound volumes
+function toggleSoundEffects() {
+    gameOptions.soundEffectsEnabled = !gameOptions.soundEffectsEnabled;
+    document.getElementById('soundEffectsButton').innerText = 
+        "Sound Effects: " + ( gameOptions.soundEffectsEnabled ? 'On' : 'Off' );
+
+    let vol = gameOptions.soundEffectsEnabled ? SFX_VOLUME : 0;
+    if (pauseSound) pauseSound.volume = vol;
+    if (endTurnSound) endTurnSound.volume = vol;
+    if (confirmSound) confirmSound.volume = vol;
+    if (choiceSound) choiceSound.volume = vol;
+    if (explosionSound) explosionSound.volume = vol;
+    if (muffledExplosionSound) muffledExplosionSound.volume = vol;
+    if (fleetSplitSound) fleetSplitSound.volume = vol;
+    console.log("sound effects volume is now "+vol);
+}
+
+function toggleMusic() {
+    gameOptions.musicEnabled = !gameOptions.musicEnabled;
+    document.getElementById('musicButton').innerText = 
+        "Music: " + ( gameOptions.musicEnabled ? 'On' : 'Off' );
+    let vol = gameOptions.musicEnabled ? MUSIC_SOUND_VOLUME : 0;
+    if (music) music.volume = vol;
+    console.log("music volume is now "+vol);
+}
+
