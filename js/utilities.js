@@ -95,30 +95,6 @@ function toggleOrbitCoords() {
         ( gameOptions.showOrbitDebugInfo ? 'On' : 'Off' );
 }
 
-function toggleSoundEffects() {
-    gameOptions.soundEffectsEnabled = !gameOptions.soundEffectsEnabled;
-    document.getElementById('soundEffectsButton').innerText = 
-        "Sound Effects: " + ( gameOptions.soundEffectsEnabled ? 'On' : 'Off' );
-
-    let vol = gameOptions.soundEffectsEnabled ? SFX_VOLUME : 0;
-    if (pauseSound) pauseSound.volume = vol;
-    if (endTurnSound) endTurnSound.volume = vol;
-    if (confirmSound) confirmSound.volume = vol;
-    if (choiceSound) choiceSound.volume = vol;
-    if (explosionSound) explosionSound.volume = vol;
-    if (muffledExplosionSound) muffledExplosionSound.volume = vol;
-    console.log("sound effects volume is now "+vol);
-}
-
-function toggleMusic() {
-    gameOptions.musicEnabled = !gameOptions.musicEnabled;
-    document.getElementById('musicButton').innerText = 
-        "Music: " + ( gameOptions.musicEnabled ? 'On' : 'Off' );
-    let vol = gameOptions.musicEnabled ? MUSIC_SOUND_VOLUME : 0;
-    if (music) music.volume = vol;
-    console.log("music volume is now "+vol);
-}
-
 function isComputerPlayerCurrentPlayer()
 {
     return computerPlayerNumbers.includes(currentPlayerNumber);

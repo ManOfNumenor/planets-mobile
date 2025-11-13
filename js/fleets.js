@@ -560,7 +560,7 @@ function capture_planet(fleetIdx) {
 
 function split_fleet(fleetIdx) {
     console.log("SPLIT FLEET button pressed for fleet index "+fleetIdx);
-    if (confirmSound) confirmSound.play(); // fixme: make a new sound effect
+    if (fleetSplitSound) fleetSplitSound.play(); // fixme: make a new sound effect
     
     let oldFleet = allFleets[fleetIdx];
     if (!oldFleet) { console.log("ERROR: unknown fleet!"); }
