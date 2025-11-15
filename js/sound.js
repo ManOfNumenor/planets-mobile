@@ -6,7 +6,7 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound, fleetSplitSound; // add more here
+var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound, fleetSplitSound, fleetArriveSound; // add more here
 
 // Add more music tracks here, one is chosen randomly
 const musicTracks = [
@@ -52,6 +52,9 @@ function soundInitialize() { // called by first user input
     // alternate sounding version: teleportation.wav
     fleetSplitSound = new Audio("../audio/warp-drive.wav");
     fleetSplitSound.volume = getSFXVolume();
+
+    fleetArriveSound = new Audio("../audio/warp-drive-reverse.wav");
+    fleetArriveSound.volume = getSFXVolume();
 
     choiceSound = makeChoiceSound;
     
@@ -112,6 +115,7 @@ function toggleSoundEffects() {
     if (explosionSound) explosionSound.volume = vol;
     if (muffledExplosionSound) muffledExplosionSound.volume = vol;
     if (fleetSplitSound) fleetSplitSound.volume = vol;
+    if (fleetArriveSound) fleetArriveSound.volume = vol;
     console.log("sound effects volume is now "+vol);
 }
 

@@ -344,6 +344,7 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
         if(existingFleetAtStep.ownedByPlayer === fleet.ownedByPlayer) {
             // merge the two fleets
             existingFleetAtStep.ships += fleet.ships;
+            if (fleetArriveSound) fleetArriveSound.play();
 
             // make sure dest fleet can't move again this turn,
             // otherwise a player can move a big fleet really far 
@@ -560,7 +561,7 @@ function capture_planet(fleetIdx) {
 
 function split_fleet(fleetIdx) {
     console.log("SPLIT FLEET button pressed for fleet index "+fleetIdx);
-    if (fleetSplitSound) fleetSplitSound.play(); // fixme: make a new sound effect
+    if (fleetSplitSound) fleetSplitSound.play();
     
     let oldFleet = allFleets[fleetIdx];
     if (!oldFleet) { console.log("ERROR: unknown fleet!"); }
