@@ -472,11 +472,20 @@ function movePlanetsAndProduceShips() {
 
 function setupFleetInfoDiv(fleet) {
     let fleetIdx = allFleets.indexOf(fleet);
-    let template = `Player: ${selectedEntity.ownedByPlayer} Ships: ${selectedEntity.ships}`;
-
+    let typeOfFleet = fleet.ownedByPlayer==currentPlayerNumber ? "Friendly" : "Enemy";
+    
+    //let template = `${typeOfFleet} fleet selected. Player: ${selectedEntity.ownedByPlayer} Ships: ${selectedEntity.ships}`;
+    let template = `${typeOfFleet} fleet selected. Ships: ${selectedEntity.ships}`;
+    
     if(fleet.ownedByPlayer == currentPlayerNumber) {
+
+        if (fleet.movedThisTurn) {
+            template += "<br>ALREADY MOVED THIS TURN";
+        } else {
+            template += "<br>CLICK A YELLOW DOT TO MOVE";
+        }
+
         template +=`<div>`;
-                
         let occupyingHostilePlanet = false;
         if(fleet.planetIdx || fleet.planetIdx === 0) {
             let foundPlanet = planets[fleet.planetIdx];
