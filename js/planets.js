@@ -1,3 +1,4 @@
+const PLANET_TOOLTIPS_ENABLED = false;
 const DRAW_ORBIT_DIRECTION_ARROWS = true;
 const ANIMATE_PLANET_MOVEMENTS = true; // work in progress
 const PLANET_ANIM_SPEED = 0.1; // percent per frame
@@ -243,7 +244,7 @@ function drawPlanets() {
         }
 
         // display a tooltip with planet info
-        maybeDrawTooltip(planet,step);
+        if (PLANET_TOOLTIPS_ENABLED) maybeDrawTooltip(planet,step);
 
     } // end for
 
@@ -366,25 +367,28 @@ function drawAtmoHaze(x,y, planet) {
 var hoveringXY = {x:999999999,y:999999999};
 
 function updateTooltips(x,y) {
+    if (!PLANET_TOOLTIPS_ENABLED) return;
     hoveringXY.x = x;
     hoveringXY.y = y;
 }
 
 function maybeDrawTooltip(planet,thisXY) {
-        // only if the pointer is nearby
-        // added an extra 20 pixels around planet for ease
-        const CLOSE_ENOUGH = planet.radius+20; 
-        if (distBetween(hoveringXY,thisXY)<=CLOSE_ENOUGH) {
-            //console.log("hovering this planet: "+planet.name);
-            let line1 = "Planet Name: "+planet.name;
-            let line2 = planet.description;
-            let line3 = "Unclaimed by any player";
-            if (planet.ownedByPlayer) line3 = "Owned by player "+planet.ownedByPlayer;
-            drawPlanetTooltip(line1,line2,line3,thisXY.x,thisXY.y-(planet.radius * 2 * scaleFactor));
-        }
+    if (!PLANET_TOOLTIPS_ENABLED) return;
+    // only if the pointer is nearby
+    // added an extra 20 pixels around planet for ease
+    const CLOSE_ENOUGH = planet.radius+20; 
+    if (distBetween(hoveringXY,thisXY)<=CLOSE_ENOUGH) {
+        //console.log("hovering this planet: "+planet.name);
+        let line1 = "Planet Name: "+planet.name;
+        let line2 = planet.description;
+        let line3 = "Unclaimed by any player";
+        if (planet.ownedByPlayer) line3 = "Owned by player "+planet.ownedByPlayer;
+        drawPlanetTooltip(line1,line2,line3,thisXY.x,thisXY.y-(planet.radius * 2 * scaleFactor));
+    }
 }
 
 function drawPlanetTooltip(line1,line2,line3,textX,textY) {
+    if (!PLANET_TOOLTIPS_ENABLED) return;
     const ofsX = 75-12;
     const pad = 12;
     const boxW = 150;
