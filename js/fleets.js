@@ -1,4 +1,4 @@
-const FLEETS_CAN_BE_SPLIT = false;
+const FLEETS_CAN_BE_SPLIT = true;
 const ANIMATE_FLEET_MOVEMENTS = true; // tween from prev to current pos
 const FLEET_ANIM_SPEED = 0.1; // percent to move each frame
 
@@ -608,19 +608,24 @@ function split_fleet(fleetIdx) {
     console.log("- split into two fleets of "+newFleet.ships+" ships and "+oldFleet.ships+" ships.");
 
     // move the new fleet somewhere nearby
-    let availableMoves = getAvailableMoves(newFleet, false); // one space away only
-    if(availableMoves.length > 0) {
-        // move the fleet to a random available space
-        let randomIdx = Math.floor(Math.random() * availableMoves.length);
-        console.log("- new fleet is moving to to a space nearby",availableMoves[randomIdx].orbitIdx);
-        moveFleetToTarget(newFleet, availableMoves[randomIdx]);
+    // let availableMoves = getAvailableMoves(newFleet, false); // one space away only
+    // if(availableMoves.length > 0) {
+    //     // move the fleet to a random available space
+    //     let randomIdx = Math.floor(Math.random() * availableMoves.length);
+    //     console.log("- new fleet is moving to to a space nearby",availableMoves[randomIdx].orbitIdx);
+    //     moveFleetToTarget(newFleet, availableMoves[randomIdx]);
 
-    } else {
-        console.log("- new fleet has no available moves!");
-    }
+    // } else {
+    //     console.log("- new fleet has no available moves!");
+    // }
+    //
+
+    // select new fleet so it can be moved
+    selectedEntity = newFleet;
+    selectedFleetInfoDiv.innerText = "Choose a space to move half this fleet to";
 
     // deselect fleet and clear info div
-    clearFleetInfoDiv();
-    selectedEntity = null;
-    availableMoves = [];
+    // clearFleetInfoDiv();
+    // selectedEntity = null;
+    // availableMoves = [];
 }
