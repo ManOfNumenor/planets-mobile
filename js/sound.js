@@ -6,7 +6,10 @@ const ALL_SOUND_MUTED = false; // true for pure silence
 
 var soundInitialized = false;
 
-var music, pauseSound, endTurnSound, confirmSound, choiceSound, explosionSound, muffledExplosionSound, fleetSplitSound, fleetArriveSound; // add more here
+var music, pauseSound, endTurnSound, 
+    confirmSound, choiceSound, explosionSound, 
+    muffledExplosionSound, fleetSplitSound, 
+    fleetArriveSound, captureSound; // add more here
 
 // Add more music tracks here, one is chosen randomly
 const musicTracks = [
@@ -55,6 +58,9 @@ function soundInitialize() { // called by first user input
 
     fleetArriveSound = new Audio("../audio/warp-drive-reverse.wav");
     fleetArriveSound.volume = getSFXVolume();
+
+    captureSound = new Audio("../audio/capture-planet.wav");
+    captureSound.volume = getSFXVolume();
 
     choiceSound = makeChoiceSound;
     
@@ -116,6 +122,7 @@ function toggleSoundEffects() {
     if (muffledExplosionSound) muffledExplosionSound.volume = vol;
     if (fleetSplitSound) fleetSplitSound.volume = vol;
     if (fleetArriveSound) fleetArriveSound.volume = vol;
+    if (captureSound) captureSound.volume = vol;
     console.log("sound effects volume is now "+vol);
 }
 

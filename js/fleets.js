@@ -568,6 +568,8 @@ function capture_planet(fleetIdx) {
     selectedEntity = null;
     selectedFleetAvailableMoves = [];
     clearFleetInfoDiv();
+
+    captureSound.play();
 }
 
 function split_fleet(fleetIdx) {
