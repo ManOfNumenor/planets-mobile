@@ -150,8 +150,9 @@ function randomizePlanets() {
     let planetLocations = [];
     for (let i=0; i<planets.length; i++) {
         planets[i].color = randomPlanetColor();
+        
         planets[i].size = randomPlanetSize();
-        planets[i].radius = randomPlanetRadius();
+        planets[i].radius = PLANET_SIZE_RADIAI[planets[i].size];
         
         // leave it be for now
         // planets[i].orbitIdx = levelPlanet.orbitIdx;
