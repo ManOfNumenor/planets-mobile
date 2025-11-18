@@ -1,3 +1,4 @@
+const FLEETS_CAN_BE_SPLIT = false;
 const ANIMATE_FLEET_MOVEMENTS = true; // tween from prev to current pos
 const FLEET_ANIM_SPEED = 0.1; // percent to move each frame
 
@@ -497,12 +498,13 @@ function setupFleetInfoDiv(fleet) {
                 </button>`;
         }
 
-        let disableSplitButton = false;
-        if(occupyingHostilePlanet || fleet.movedThisTurn) {
-            disableSplitButton = true;
+        if (FLEETS_CAN_BE_SPLIT) {
+            let disableSplitButton = false;
+            if(occupyingHostilePlanet || fleet.movedThisTurn) {
+                disableSplitButton = true;
+            }
+            template += `<button onclick="split_fleet(${fleetIdx})" ${disableSplitButton ? 'disabled' : ""}> Split </button>`;
         }
-
-        template += `<button onclick="split_fleet(${fleetIdx})" ${disableSplitButton ? 'disabled' : ""}> Split </button>`;
 
         template +=`</div>`;
     }
@@ -560,6 +562,7 @@ function capture_planet(fleetIdx) {
 }
 
 function split_fleet(fleetIdx) {
+    if (!FLEETS_CAN_BE_SPLIT) return;
     console.log("SPLIT FLEET button pressed for fleet index "+fleetIdx);
     if (fleetSplitSound) fleetSplitSound.play();
     
