@@ -78,7 +78,11 @@ async function runComputerTurn() {
         fleet => fleet.ownedByPlayer === currentPlayerNumber
     );
 
-    for(const fleet of playerFleets) {
+    for (const fleet of playerFleets) {
+        while (fleetsAnimating) {
+            await delay(100);
+        }
+
         if(fleet.planetIdx || fleet.planetIdx === 0) {
             // check if the planet we are on is capture-able
             let planet = planets[fleet.planetIdx];
@@ -103,6 +107,10 @@ async function runComputerTurn() {
 
         //await let foo = setTimeout(() => {return 'foo';}, 500);
         await delay(500);
+    }
+
+    while (fleetsAnimating) {
+        await delay(100);
     }
 
     endTurn();

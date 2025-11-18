@@ -1,6 +1,6 @@
 const FLEETS_CAN_BE_SPLIT = true;
 const ANIMATE_FLEET_MOVEMENTS = true; // tween from prev to current pos
-const FLEET_ANIM_SPEED = 0.1; // percent to move each frame
+const FLEET_ANIM_SPEED = 0.16; // percent to move each frame
 
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
 const SHIP_PRODUCTION_FACTOR = 1;
@@ -9,6 +9,8 @@ const SHIP_PRODUCTION_FACTOR = 1;
 // if set to 0, icons will scale with game zoom
 const FLEET_ICON_CONSTANT_SIZE = 48; 
 const PLAYER_ICON_CONSTANT_SIZE = 32; 
+
+var fleetsAnimating = false
 
 var selectedFleetAvailableMoves = [];
 var currentlySelectedFleet = null;
@@ -305,24 +307,26 @@ function selectedFleetCanMoveTo(target) {
     );
 }
 
-function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
-    if(!target) {
+function moveFleetToTarget(fleet, target, ignoreMoveLimit = false) {
+    if (!target) {
         console.error('Cannot move fleet without a target', target);
         return;
     }
 
-    if(fleet.movedThisTurn && !ignoreMoveLimit) {
+    if (fleet.movedThisTurn && !ignoreMoveLimit) {
         console.log('cannot move fleet, has already moved this turn:',
             fleet);
         return;
     }
+
+    fleetsAnimating = true;
 
     let foundPlanetIdx = planets.findIndex((planet) => {
         return planet.orbitIdx == target.orbitIdx &&
             planet.stepIdx == target.stepIdx;
     });
 
-    if(foundPlanetIdx !== -1) {
+    if (foundPlanetIdx !== -1) {
         fleet.planetIdx = foundPlanetIdx;
         fleet.orbitIdx = null;
         fleet.stepIdx = null;
@@ -334,6 +338,14 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
 
     fleet.movedThisTurn = true;
 
+    // Wait for the movement tween animation
+    let fleetMoveTimeoutLengthSeconds = 0.7;
+    setTimeout(() => handleFleetMovementResult(fleet, target, foundPlanetIdx),
+        fleetMoveTimeoutLengthSeconds * 1000)
+    
+}
+
+function handleFleetMovementResult(fleet, target, foundPlanetIdx) {
     let existingFleetAtStep = allFleets.find(foundFleet => {
         return ( 
             (foundFleet.stepIdx == target.stepIdx && foundFleet.orbitIdx == target.orbitIdx) ||
@@ -412,6 +424,8 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit=false) {
         }
 
     } // end if(fleet && fleet.planetIdx)
+
+    fleetsAnimating = false;
 
 } // end function
 
