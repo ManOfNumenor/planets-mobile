@@ -631,6 +631,7 @@ function split_fleet(fleetIdx) {
     // select new fleet so it can be moved
     selectedEntity = newFleet;
     selectedFleetInfoDiv.innerText = "Choose a space to move half this fleet to";
+    splittingFromFleet = oldFleet;
 
     // deselect fleet and clear info div
     // clearFleetInfoDiv();
