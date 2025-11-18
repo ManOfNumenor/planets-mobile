@@ -1,7 +1,7 @@
 var isGameOver = false;
 var currentPlayerNumber = 0;
 var playerCount = 0;
-var computerPlayerNumbers = [2];
+var computerPlayerNumbers = [2,3,4]; // default is a single player game
 var eliminatedPlayerNumbers = [];
 
 function endTurn() {
