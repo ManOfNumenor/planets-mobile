@@ -14,6 +14,7 @@ var startingSunCoords = null;
 var prevZoomDiff = -1;
 // var zooming = false;
 var currentPointerEvents = [];
+var splittingFromFleet = false;
 
 function setupInput() {
     canvas.addEventListener('wheel', mouseWheelHandler);
@@ -371,9 +372,28 @@ function handleTap(evt) {
 
         // deselect automatically so player
         // can select something else
+
+        if(splittingFromFleet) {
+            if(!selectedEntity.movedThisTurn) {
+                // we didn't move, so cancel the fleet split
+
+                // re-merge ships into the original fleet
+                splittingFromFleet.ships += selectedEntity.ships;
+                splittingFromFleet.movedThisTurn = false;
+
+                // delete the new fleet
+                allFleets = allFleets.filter(fleet => fleet !== selectedEntity);
+                selectedEntity = null;
+            }
+
+            // stop split check either way
+            splittingFromFleet = null;
+        }
+
         selectedEntity = null;
         selectedFleetAvailableMoves = [];
         clearFleetInfoDiv();
+
 
     } // end else (ie: we have a selected entity
 
