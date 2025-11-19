@@ -57,11 +57,23 @@ function drawFleetSelectionOutline(x,y,w,h,whichSprite) {
     drawBitmapCenteredWithRotationAndScale(fleetSelectionOutlinePic,x,y,angleRad,spriteScale);
 }
 
-function drawFleetIcon(x,y,w,h,whichSprite) {
+function drawFleetIcon(x,y,w,h,whichSprite,whichFleet) {
     let angleRad = 0;
     let spriteScale = w*(1/whichSprite.width);
     if (FLEET_ICON_CONSTANT_SIZE) spriteScale = FLEET_ICON_CONSTANT_SIZE*(1/whichSprite.width);
     drawBitmapCenteredWithRotationAndScale(whichSprite,x,y,angleRad,spriteScale);
+
+    // draw attention to fleets that have not moved this turn
+    // pulse the transparent outline by drawing a second copy with wobbly alpha
+    if (whichFleet && !whichFleet.movedThisTurn) {
+        if (!isComputerPlayerCurrentPlayer()) {
+            if (whichFleet.ownedByPlayer == currentPlayerNumber) {
+                if ((performance.now()/1000)%1<0.5) { // on/off
+                    drawBitmapCenteredWithRotationAndScale(whichSprite,x,y,angleRad,spriteScale);
+                }
+            }
+        }
+    }
 }
 
 function drawPlayerIcon(x,y,w,h,whichSprite=player1IconPic) {
@@ -128,19 +140,19 @@ function drawFleets() {
         switch(fleet.ownedByPlayer) {
             case 1:
                 drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth,player1IconPic);
-                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic1);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic1,fleet);
                 break;
             case 2:
                 drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth, player2IconPic);
-                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic2);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic2,fleet);
                 break;
             case 3:
                 drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth,player3IconPic);
-                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic3);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic3,fleet);
                 break;
             case 4:
                 drawPlayerIcon(drawX,drawY-iconOffset,iconWidth,iconWidth,player4IconPic);
-                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic4);
+                drawFleetIcon(drawX,drawY,drawWidth,drawWidth,fleetPic4,fleet);
                 break;
 
         } // end switch
