@@ -656,3 +656,16 @@ function split_fleet(fleetIdx) {
     // selectedEntity = null;
     // availableMoves = [];
 }
+
+function numFleetsAwaitingOrders() {
+    // count current player fleets
+    let num = 0;
+    for (let f of allFleets) {
+        if ((f.ownedByPlayer == currentPlayerNumber)
+            && (!f.movedThisTurn))
+             num++;
+    }
+    if (num==0) return "No fleets";
+    if (num==1) return "1 fleet";
+    return num + " fleets";
+}

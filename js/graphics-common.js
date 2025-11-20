@@ -65,6 +65,14 @@ function colorText(showWords, textX,textY, fillColor) {
     canvasContext.fillText(showWords, textX,textY);
 }
 
+function colorTextDropShadow(showWords, textX,textY, fillColor) {
+    canvasContext.font = "16px sans-serif";
+    canvasContext.fillStyle = "black";
+    canvasContext.fillText(showWords, textX+1,textY+1);
+    canvasContext.fillStyle = fillColor;
+    canvasContext.fillText(showWords, textX,textY);
+}
+
 /*
 function drawText(fontSize, color, textAlign, text, x, y){
   canvasContext.save();

@@ -269,6 +269,12 @@ function drawCurrentPlayerLogo() {
         return;
     }
 
+    // text above the turn indicator
+    colorTextDropShadow("Turn #"+turnNumber+" - Player "+currentPlayerNumber,
+        6, drawY-48, "cyan");
+    colorTextDropShadow(numFleetsAwaitingOrders()+" awaiting orders",
+        6, drawY-32, "cyan");
+
     switch(currentPlayerNumber) {
         case 1:
             drawBitmapCenteredWithRotationAndScale(player1IconPic,
