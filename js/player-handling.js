@@ -256,3 +256,41 @@ function instantLose() {
 function restartGame() {
     window.location.reload();
 }
+
+function drawCurrentPlayerLogo() {
+    const margin = 30;
+    // bottom right corner
+    const drawX = 0 + margin;
+    const drawY = canvas.height - margin;
+
+    const drawScale = 2.0;
+
+    if(!currentPlayerNumber) {
+        return;
+    }
+
+    switch(currentPlayerNumber) {
+        case 1:
+            drawBitmapCenteredWithRotationAndScale(player1IconPic,
+                drawX,drawY,
+                0, drawScale);
+            break;
+        case 2:
+            drawBitmapCenteredWithRotationAndScale(player2IconPic,
+                drawX,drawY,
+                0, drawScale);
+            break;
+        case 3:
+            drawBitmapCenteredWithRotationAndScale(player3IconPic,
+                drawX,drawY,
+                0, drawScale);
+            break;
+        case 4:
+            drawBitmapCenteredWithRotationAndScale(player4IconPic,
+                drawX,drawY,
+                0, drawScale);
+            break;
+        default: 
+            return;
+    }
+}

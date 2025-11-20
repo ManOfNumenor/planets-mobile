@@ -66,6 +66,7 @@ function drawEverything() {
     // drawScoreboard();
     drawNotifications();
     drawWormhole();
+    drawCurrentPlayerLogo();
 }
 
 function radiantsToDegrees(angRadiants) {
