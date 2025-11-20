@@ -32,5 +32,6 @@ function resumeGame() {
 
 function mainMenu() {
     if (confirmSound) confirmSound.play();
-    debug('Main menu will appear later');
+    // debug('Main menu will appear later');
+    window.location.reload();
 }
