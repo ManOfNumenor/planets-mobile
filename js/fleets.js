@@ -1,6 +1,7 @@
 const FLEETS_CAN_BE_SPLIT = true;
 const ANIMATE_FLEET_MOVEMENTS = true; // tween from prev to current pos
 const FLEET_ANIM_SPEED = 0.16; // percent to move each frame
+const COMBAT_EXPLOSION_DURATION = 350.0; // this is not in seconds, it's sorta relative to FLEET_ANIM_SPEED
 
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
 const SHIP_PRODUCTION_FACTOR = 1;
@@ -41,6 +42,8 @@ var allFleets = [
     }
     */
 ];
+
+var combatExplosions = []
 
 function moveFleets() {
     // for(const fleet of allFleets) {
@@ -188,6 +191,21 @@ function drawFleets() {
         }
 
     } // end for
+
+    // Draw any ongoing combat explosions
+    for (const explosion of combatExplosions) {
+        if (explosion.time < 0.0) {
+            combatExplosions = combatExplosions.filter(
+                check => check !== explosion
+            );
+            //console.log("Explosion ended and deleted.")
+        } else {
+            // Decrease the time remaining.
+            // I bet there's a way to use real time, or a coroutine, instead of this arbitrary tween.
+            explosion.time = lerp(explosion.time, -1.0, FLEET_ANIM_SPEED)
+            drawPlanetExplosions(explosion.orbitStep.x, explosion.orbitStep.y)
+        }
+    }
 
 } // end function
 
@@ -397,6 +415,7 @@ function handleFleetMovementResult(fleet, target) {
         } else {
             // initiate combat
             if (muffledExplosionSound) muffledExplosionSound.play();
+            startCombatExplosions(existingFleetAtStep, COMBAT_EXPLOSION_DURATION)
 
             if(existingFleetAtStep.ships > fleet.ships) {
                 // existing fleet (defender) wins
@@ -681,4 +700,13 @@ function numFleetsAwaitingOrders() {
     if (num==0) return "No fleets";
     if (num==1) return "1 fleet";
     return num + " fleets";
+}
+
+function startCombatExplosions(targetFleet, duration) { // Alias
+
+    let newExplosion = {
+        orbitStep: getFleetStep(targetFleet), // reference to orbits[x].step
+        time: duration,
+    }
+    combatExplosions.push(newExplosion)
 }
