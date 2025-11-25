@@ -4,7 +4,13 @@ const MENU_KEYS = [
     'players',
     'credits',
     'options',
-    'pause', // kind of a special case, see pause.js
+    'pause',      // kind of a special case, see pause.js
+    'help',
+    'help2',
+    'help3',
+    'help4',
+    'help5',
+    'help6',
 ];
 
 // Add new levels here and to the scripts in index.html!

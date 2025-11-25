@@ -276,3 +276,28 @@ div.player-select-box > img {
     border:0;
     outline:0;
 }
+
+#helpMenuDiv p, 
+#help2MenuDiv p,
+#help3MenuDiv p,
+#help4MenuDiv p, 
+#help5MenuDiv p,
+#help6MenuDiv p {
+    margin:0; 
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0.1rem;
+    font-family: sans-serif;
+    color:cyan;
+    max-width:75%;
+    clear:both;
+}
+
+#helpMenuDiv button, 
+#help2MenuDiv button,
+#help3MenuDiv button,
+#help4MenuDiv button, 
+#help5MenuDiv button,
+#help6MenuDiv button {
+    display: inline-block;
+}
