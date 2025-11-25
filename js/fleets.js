@@ -320,6 +320,7 @@ function selectedFleetCanMoveTo(target) {
 }
 
 function moveFleetToTarget(fleet, target, ignoreMoveLimit = false) {
+    // Prevent movement conditions
     if (!target) {
         console.error('Cannot move fleet without a target', target);
         return;
@@ -331,8 +332,28 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit = false) {
         return;
     }
 
-    fleetsAnimating = true;
+    // Successful movement
 
+    // This property is NOT used to trigger the animation system, it is just used to make some events wait until the animation is done.
+    fleetsAnimating = true;
+    // Wait for the movement tween animation
+    let fleetMoveTimeoutLengthSeconds = 0.7;
+    setTimeout(() => handleFleetMovementResult(fleet, target),
+        fleetMoveTimeoutLengthSeconds * 1000)
+    
+}
+
+function handleFleetMovementResult(fleet, target) {
+    // Check if planet at starting location
+    if (fleet.planetIdx) {
+        let exitingPlanet = planets[fleet.planetIdx];
+        if (exitingPlanet.underSiege) {
+            // Reset under-siege planet status
+            exitingPlanet.underSiege = false;
+        }
+    }
+
+    // Check if planet at target location
     let foundPlanetIdx = planets.findIndex((planet) => {
         return planet.orbitIdx == target.orbitIdx &&
             planet.stepIdx == target.stepIdx;
@@ -350,14 +371,6 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit = false) {
 
     fleet.movedThisTurn = true;
 
-    // Wait for the movement tween animation
-    let fleetMoveTimeoutLengthSeconds = 0.7;
-    setTimeout(() => handleFleetMovementResult(fleet, target, foundPlanetIdx),
-        fleetMoveTimeoutLengthSeconds * 1000)
-    
-}
-
-function handleFleetMovementResult(fleet, target, foundPlanetIdx) {
     let existingFleetAtStep = allFleets.find(foundFleet => {
         return ( 
             (foundFleet.stepIdx == target.stepIdx && foundFleet.orbitIdx == target.orbitIdx) ||
