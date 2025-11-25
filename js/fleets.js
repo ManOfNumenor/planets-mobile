@@ -354,23 +354,8 @@ function moveFleetToTarget(fleet, target, ignoreMoveLimit = false) {
 
     // This property is NOT used to trigger the animation system, it is just used to make some events wait until the animation is done.
     fleetsAnimating = true;
-    // Wait for the movement tween animation
-    let fleetMoveTimeoutLengthSeconds = 0.7;
-    setTimeout(() => handleFleetMovementResult(fleet, target),
-        fleetMoveTimeoutLengthSeconds * 1000)
-    
-}
 
-function handleFleetMovementResult(fleet, target) {
-    // Check if planet at starting location
-    if (fleet.planetIdx) {
-        let exitingPlanet = planets[fleet.planetIdx];
-        if (exitingPlanet.underSiege) {
-            // Reset under-siege planet status
-            exitingPlanet.underSiege = false;
-        }
-    }
-
+    // This logic has to happen here to start the move tween animation...
     // Check if planet at target location
     let foundPlanetIdx = planets.findIndex((planet) => {
         return planet.orbitIdx == target.orbitIdx &&
@@ -388,6 +373,23 @@ function handleFleetMovementResult(fleet, target) {
     }
 
     fleet.movedThisTurn = true;
+
+    // Wait for the movement tween animation
+    let fleetMoveTimeoutLengthSeconds = 0.7;
+    setTimeout(() => handleFleetMovementResult(fleet, target, foundPlanetIdx),
+        fleetMoveTimeoutLengthSeconds * 1000)
+    
+}
+
+function handleFleetMovementResult(fleet, target, foundPlanetIdx) {
+    // Check if planet at starting location
+    if (fleet.planetIdx) {
+        let exitingPlanet = planets[fleet.planetIdx];
+        if (exitingPlanet.underSiege) {
+            // Reset under-siege planet status
+            exitingPlanet.underSiege = false;
+        }
+    }
 
     let existingFleetAtStep = allFleets.find(foundFleet => {
         return ( 
