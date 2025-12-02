@@ -21,7 +21,7 @@ function movePlanets() {
 }
 
 function drawPlanetMoveHereIcons() {
-    console.log("drawPlanetMoveHereIcons"); 
+    //console.log("drawPlanetMoveHereIcons"); 
     for(let i=0;i<planets.length;i++) {
         let planet = planets[i];
         let this_orbit = orbits[planet.orbitIdx];
