@@ -1,13 +1,11 @@
-Expand your empire until you are the only faction left.
+Your goal is to capture all enemy planets.
 
-Each planet you capture will build ships each turn.
+Look for the emblem surrounding a planet to see which faction has captured it. A captured planet builds ships for that faction each turn. Each player starts with one planet captured.
 
-Be the only faction with a ship on that planet, and you will have the option to capture that planet the following turn. Capture a planet, and your emblem will appear around the planet, and the next turn it will begin producing ships.
+Move more ships onto a planet than your enemy, and that planet surrenders. On the start of your turn, you may capture the surrendered planet. Neutral planets surrender without a fight. (Capture neutral planets near your starting planet for an advantage.)
 
-The planets near your starting world will likely be uncontested by any other faction. When you land a ship on those planets, they will raise the white flag, without a fight.
+Planets move in a consistent direction along their orbits. Look for the blue arrows telling you which direction an orbit moves. Ships on a planet will move with that planet. Ships in space stay stationary.
 
-Merging and splitting your fleet will be strategically important. Every time one fleet merges into a second fleet, they are done moving for that turn.
+Ships can move two spaces within an orbit, or one space if they are jumping into a different orbit.
 
-Fleets are stationary while in space, but move with a planet they are on. There will be times where your plans can be thwarted by the planets traveling along their orbits, bringing two of your fleets into contact, merging them and preventing their movement on that turn. Position your fleets wisely, and learn to pay attention to the directions the planets are moving (planets don't always orbit in the same direction).
-
-Each opposing faction ship will instantly destroy one another when they are brought onto the same node. Send enough ships (generated from your many planets) to overwhelm your opponents' planets until you have wiped them out.
+Learn to navigate each map, and overwhelm your opponents' planets until you have wiped them out.
