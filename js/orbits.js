@@ -48,6 +48,20 @@ function moveOrbits() {
     } // end for orbit
 } // end function moveOrbits()
 
+// gets drawn above other fleets this way
+function drawOrbitMoveHereIcons() {
+    //console.log("drawOrbitMoveHereIcons"); 
+    for(let orbitIdx=0;orbitIdx<orbits.length;orbitIdx++) {
+        let orbit = orbits[orbitIdx];
+        for(let i=0;i<orbit.steps.length;i++) {
+            let step = orbit.steps[i];
+            if(selectedFleetCanMoveTo({ orbitIdx: orbitIdx, stepIdx: i})) {
+                drawCanMoveHereIndicator(step);
+            }
+        }
+    }
+}
+
 function drawOrbits() {
     let orbitIdx = 0;
     while(orbitIdx < orbits.length) {

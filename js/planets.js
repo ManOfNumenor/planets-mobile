@@ -20,6 +20,18 @@ function movePlanets() {
     //
 }
 
+function drawPlanetMoveHereIcons() {
+    //console.log("drawPlanetMoveHereIcons"); 
+    for(let i=0;i<planets.length;i++) {
+        let planet = planets[i];
+        let this_orbit = orbits[planet.orbitIdx];
+        let step = this_orbit.steps[planet.stepIdx];
+        if(selectedFleetCanMoveTo({orbitIdx:planet.orbitIdx,stepIdx: planet.stepIdx})) {
+            drawCanMoveHereIndicator(step);
+        }        
+    }
+}
+
 function drawPlanets() {
     if(!orbits || orbits.length < 1) {
         return; // no orbits, don't draw planets

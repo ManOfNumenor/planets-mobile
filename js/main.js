@@ -67,6 +67,11 @@ function drawEverything() {
     drawNotifications();
     drawWormhole();
     drawCurrentPlayerLogo();
+
+    // to ensure these get drawn above fleet icons etc
+    drawOrbitMoveHereIcons();
+    drawPlanetMoveHereIcons();
+
 }
 
 function radiantsToDegrees(angRadiants) {
