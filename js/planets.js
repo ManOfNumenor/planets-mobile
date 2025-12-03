@@ -233,6 +233,10 @@ function drawPlanets() {
             //if(i == 3) {
             if(planet.underSiege) {
                 drawPlanetExplosions(drawX,drawY);
+                drawBitmapCenteredWithRotationAndScale(flagIcon, 
+                    drawX,drawY, 0,
+                    0.2
+                ); 
             }
 
 
