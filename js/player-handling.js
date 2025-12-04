@@ -102,7 +102,7 @@ async function runComputerTurn() {
 
             // console.log('chosenMove', availableMoves[randomIdx]);
 
-            moveFleetToTarget(fleet, availableMoves[randomIdx], false, MOVE_AFTER_MERGE_NOT_ALLOWED);
+            moveFleetToTarget(fleet, availableMoves[randomIdx], false);
         }
 
         //await let foo = setTimeout(() => {return 'foo';}, 500);

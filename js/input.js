@@ -359,7 +359,7 @@ function handleTap(evt) {
 
                 if (moveValidation.valid) {
                     if (choiceSound) choiceSound();
-                    moveFleetToTarget(selectedEntity, target);
+                    moveFleetToTarget(selectedEntity, target, false);
 
                     selectedFleetAvailableMoves = [];
                     currentlySelectedFleet = null; // FIXME: perhaps it could stay selected? if so comment out this line
