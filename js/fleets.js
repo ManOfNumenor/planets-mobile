@@ -171,7 +171,9 @@ function drawFleets() {
         let shipIndicatorYOffset = 32;
         let shipIndicatorYOffsetDefault = shipIndicatorYOffset;
         let shipIndicatorVerticalSpacing = 8;
-
+        // text with the number of ships
+        colorTextDropShadow("x"+fleet.ships,drawX+8,drawY-25,"white","8px sans-serif");
+        // draw each little ship icon
         for(let i=0;i<fleet.ships;i++) {
             let icon = shipIndicators[fleet.ownedByPlayer];
             drawBitmapCenteredWithRotationAndScale(
