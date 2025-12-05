@@ -48,7 +48,10 @@ var planetSize3Shadow = document.createElement('img');
 
 var notificationBG = document.createElement('img');
 
-var shipIndicatorSegment = document.createElement('img');
+var shipIndicatorSegment1 = document.createElement('img');
+var shipIndicatorSegment2 = document.createElement('img');
+var shipIndicatorSegment3 = document.createElement('img');
+var shipIndicatorSegment4 = document.createElement('img');
 
 var worldPics = [];
 
@@ -131,7 +134,10 @@ function loadImages() {
 
         {varName: notificationBG, theFile: "notificationBG.png"}, 
 
-        {varName: shipIndicatorSegment, theFile: "ship-indicator-alt-2.png"}, 
+        {varName: shipIndicatorSegment1, theFile: "ship-indicator-team1.png"}, 
+        {varName: shipIndicatorSegment2, theFile: "ship-indicator-team2.png"}, 
+        {varName: shipIndicatorSegment3, theFile: "ship-indicator-team3.png"}, 
+        {varName: shipIndicatorSegment4, theFile: "ship-indicator-team4.png"}, 
 		];
 
 	picsToLoad = imageList.length;

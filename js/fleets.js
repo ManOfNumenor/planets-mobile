@@ -5,6 +5,9 @@ const ANIMATE_FLEET_MOVEMENTS = true; // tween from prev to current pos
 const FLEET_ANIM_SPEED = 0.16; // percent to move each frame
 const COMBAT_EXPLOSION_DURATION = 350.0; // this is not in seconds, it's sorta relative to FLEET_ANIM_SPEED
 
+// ship sprites with team color variants
+var shipIndicators = [null,shipIndicatorSegment1,shipIndicatorSegment2,shipIndicatorSegment3,shipIndicatorSegment4];
+
 const UNIT_SQUARE_DEFAULT_SIZE = 18;
 const SHIP_PRODUCTION_FACTOR = 1;
 
@@ -162,31 +165,26 @@ function drawFleets() {
 
         } // end switch
 
-        // draw little green icons to visually indicate number of ships 
-        // in the fleet
-        let shipIndicatorScale = FLEET_ICON_CONSTANT_SIZE * 
-            (1/shipIndicatorSegment.width);
-        let shipIndicatorXOffset = 10 * shipIndicatorScale;
-        let shipIndicatorYOffset = 5 * shipIndicatorScale;
-        let shipIndicatorYOffsetDefault = shipIndicatorYOffset; // save for reverting to later
-
-        let shipIndicatorVerticalSpacing = 5;
-        if(fleet.ships > 10) {
-            shipIndicatorVerticalSpacing = 3;
-        }
+        // icons to visually indicate number of ships 
+        let shipIndicatorScale = 1;
+        let shipIndicatorXOffset = 32;
+        let shipIndicatorYOffset = 32;
+        let shipIndicatorYOffsetDefault = shipIndicatorYOffset;
+        let shipIndicatorVerticalSpacing = 8;
 
         for(let i=0;i<fleet.ships;i++) {
+            let icon = shipIndicators[fleet.ownedByPlayer];
             drawBitmapCenteredWithRotationAndScale(
-                shipIndicatorSegment,
-                drawX + shipIndicatorXOffset,
-                drawY + shipIndicatorYOffset,
+                icon,
+                Math.round(drawX + shipIndicatorXOffset),
+                Math.round(drawY + shipIndicatorYOffset),
                 0,
-                0.5);
+                shipIndicatorScale);
 
             shipIndicatorYOffset -= shipIndicatorVerticalSpacing;
             if(i > 0 && i % 10 === 0) {
                 // swap to new column
-                shipIndicatorXOffset += 5;
+                shipIndicatorXOffset += 12;
                 shipIndicatorYOffset = shipIndicatorYOffsetDefault;
             }
 
