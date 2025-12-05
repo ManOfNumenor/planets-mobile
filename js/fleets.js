@@ -168,13 +168,18 @@ function drawFleets() {
         // icons to visually indicate number of ships 
         let shipIndicatorScale = 1;
         let shipIndicatorXOffset = 32;
-        let shipIndicatorYOffset = 32;
+        let shipIndicatorYOffset = 16;
         let shipIndicatorYOffsetDefault = shipIndicatorYOffset;
         let shipIndicatorVerticalSpacing = 8;
+        let shipIndicatorHorizontalSpacing = 12;
         // text with the number of ships
         colorTextDropShadow("x"+fleet.ships,drawX+8,drawY-25,"white","8px sans-serif");
         // draw each little ship icon
         for(let i=0;i<fleet.ships;i++) {
+            if(i > 0 && i % 5 === 0) { // next column
+                shipIndicatorXOffset += shipIndicatorHorizontalSpacing;
+                shipIndicatorYOffset = shipIndicatorYOffsetDefault;
+            }
             let icon = shipIndicators[fleet.ownedByPlayer];
             drawBitmapCenteredWithRotationAndScale(
                 icon,
@@ -184,11 +189,6 @@ function drawFleets() {
                 shipIndicatorScale);
 
             shipIndicatorYOffset -= shipIndicatorVerticalSpacing;
-            if(i > 0 && i % 10 === 0) {
-                // swap to new column
-                shipIndicatorXOffset += 12;
-                shipIndicatorYOffset = shipIndicatorYOffsetDefault;
-            }
 
         }
 
