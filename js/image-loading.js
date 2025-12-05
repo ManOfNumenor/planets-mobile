@@ -131,7 +131,7 @@ function loadImages() {
 
         {varName: notificationBG, theFile: "notificationBG.png"}, 
 
-        {varName: shipIndicatorSegment, theFile: "ships-indicator-segment.png"}, 
+        {varName: shipIndicatorSegment, theFile: "ship-indicator-alt-2.png"}, 
 		];
 
 	picsToLoad = imageList.length;
