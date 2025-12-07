@@ -109,6 +109,9 @@ function showMenu(menuKey) {
     if (menuKey === 'level') {
         levelSelect(selectedLevelIdx)
     }
+    if (menuKey === 'help') {
+        levelSelect(selectedLevelIdx)
+    }
 }
 
 function hideAllMenus() {
@@ -121,6 +124,10 @@ function hideMenu(menuKey) {
     let menuDiv = getMenuDiv(menuKey);
 
     menuDiv.style.display = 'none';
+}
+
+function navigateBackFromHelpMenu() { // Alias
+    navigateBackFromOptionsMenu()
 }
 
 function navigateBackFromOptionsMenu() {
