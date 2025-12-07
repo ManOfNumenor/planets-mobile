@@ -91,7 +91,7 @@ div.menu-div {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 2em;
+    gap: 1em;
     z-index: 1000;
 
     overflow: none;
@@ -146,6 +146,20 @@ div.menu-div button {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+div.menu-div h3 {
+    font-family: sans-serif;
+    font-size: 1.25rem;
+    color:cyan;
+    padding: 0.1rem;
+    margin: 0;
+}
+
+div.menu-div p {
+    max-width:75%;
+    font-size: 1.1rem;
+    font-family: sans-serif;
+    clear:both;
+}
 
 #pauseButton {
     top: 2px;

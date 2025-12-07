@@ -54,6 +54,7 @@
                 <button onclick="showMenu('level')"> Play </button>
                 <button onclick="showMenu('options')"> Options </button>
                 <button onclick="showMenu('help')"> Help </button>
+                <button onclick="showMenu('credits')"> Credits </button>
             </div>
             <div id="levelMenuDiv"
                  class="menu-div"
@@ -77,11 +78,107 @@
                 <!-- filled in setupPlayersList() -->
                 <button onclick="showMenu('level')"> Back </button>
             </div>
+
             <div id="creditsMenuDiv"
                  class="menu-div"
                  style="display: none">
-                TODO: credits screen here
-                <button onclick="showMenu('main')"> Back </button>
+                <h3> Jonathan P </h3>
+                <p>
+ Project lead, core gameplay, computer players, gameplay UI and related indicators, tap controls, selection and orders, view scaling, main system for orbits and fleets, planet shadows, button styling, main menus, tuning, planet siege and capture, flag icon, optimizations, assorted bug fixing
+                </p> 
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits2')"> Next (1/9) </button>
+            </div>
+            <div id="credits2MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Michael Avrie (Part 1) </h3>
+                <p>
+ Level design (Oculus, Tri-Lane, Radial Grid, Xiphosuran, Cosmic Bowtie, Hanaous, Black Hole, variants of Quadratic levels), music, level select paging and preview images, planet and fleet tweening, random song selection, level and orbit randomization,... 
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits')"> Prev </button>
+                <button onclick="showMenu('credits3')"> Next (2/9) </button>
+            </div>
+            <div id="credits3MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Michael Avrie (Part 2) </h3>
+                <p>
+  ... orbit offset support, populating asteroids, retrograde orbits, distant sounds (explosion, fleet merging), combat explosions, orbit bug fixes, siege resets if fleet leaves, ship count sprite contributions
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits2')"> Prev </button>
+                <button onclick="showMenu('credits4')"> Next (3/9) </button>
+            </div>
+
+            <div id="credits4MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Christer "McFunkypants" Kaitila (Part 1) </h3>
+                <p>
+ Fleet splitting, star field, nebulae, mouse zoom, sun rendering with variants, fleet sprites, player icon, planet rings, sounds (menu, explosion, capture), ownership icons, planet effects,... 
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits3')"> Prev </button>
+                <button onclick="showMenu('credits5')"> Next (4/9) </button>
+            </div>
+            <div id="credits5MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Christer "McFunkypants" Kaitila (Part 2) </h3>
+                <p>
+... music variant, logo, performance improvements, scoreboard, turns UI, help screen coding, title screen decoration, volume settings, ship count sprite contributions
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits4')"> Prev </button>
+                <button onclick="showMenu('credits6')"> Next (5/9) </button>
+            </div>
+            <div id="credits6MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Patrick McKeown </h3>
+                <p>
+ Orbital fleet movement constrained, orbit adjacency connection changes, orbit change parameter, web audio integration for planet choice sound, pause button, button styling, pause menu layout fix, audio timing correction
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits5')"> Prev </button>
+                <button onclick="showMenu('credits7')"> Next (6/9) </button>
+            </div>
+
+            <div id="credits7MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Fahad Muntaz </h3>
+                <p>
+ Main menu options button, bug fixes (related to the the start of game turn, entity deselection, alert dialog, sound volume adjustment)
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits6')"> Prev </button>
+                <button onclick="showMenu('credits8')"> Next (7/9) </button>
+            </div>
+            <div id="credits8MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Noah Wizard </h3>
+                <p>
+ Playtest Feedback, Help tutorial text, ship altered design and faction glow variations, ship count sprite contributions
+                </p>
+                <button onclick="showMenu('main')"> Main Menu </button>
+                <button onclick="showMenu('credits7')"> Prev </button>
+                <button onclick="showMenu('credits9')"> Next (8/9) </button>
+            </div>
+            <div id="credits9MenuDiv"
+                 class="menu-div"
+                 style="display: none">
+                <h3> Vince McKeown </h3>
+                <p> Camera size adjusts to screen size </p>
+
+                <h3> Chris DeLeon </h3>
+                <p> Compiled credits </p>
+
+                <button onclick="showMenu('credits8')"> Prev </button>
+                <button onclick="showMenu('main')"> Ok (9/9)</button>
             </div>
 
             <div id="helpMenuDiv"
