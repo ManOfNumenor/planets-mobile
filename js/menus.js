@@ -109,9 +109,6 @@ function showMenu(menuKey) {
     if (menuKey === 'level') {
         levelSelect(selectedLevelIdx)
     }
-    if (menuKey === 'help') {
-        levelSelect(selectedLevelIdx)
-    }
 }
 
 function hideAllMenus() {
