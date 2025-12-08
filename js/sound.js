@@ -1,5 +1,7 @@
 const ALL_SOUND_MUTED = false; // true for pure silence
 
+const soundDir = "audio/"
+
 // all sound and music must be deferred
 // until after 1st user interaction (see input.js)
 // because browsers don't permit sound to "autoplay" anymore
@@ -13,8 +15,8 @@ var music, pauseSound, endTurnSound,
 
 // Add more music tracks here, one is chosen randomly
 const musicTracks = [
-    "../audio/music_10_minute_ambience.mp3",
-    "../audio/music-track-2.mp3"
+    "music_10_minute_ambience.mp3",
+    "music-track-2.mp3"
 ];
 
 const MUSIC_SOUND_VOLUME = 0.125; // very quiet
@@ -32,34 +34,34 @@ function soundInitialize() { // called by first user input
     // music by Michael Avrie - @tarnishedmoth
     //music = new Audio("../audio/music_10_minute_ambience.mp3");
     // Choose random music track
-    music = new Audio(musicTracks[Math.floor(Math.random() * musicTracks.length)]);
+    music = new Audio(soundDir + musicTracks[Math.floor(Math.random() * musicTracks.length)]);
     music.volume = getMusicSoundVolume();
     music.loop = true; // continue forever
     music.play();
 
-    pauseSound = new Audio("../audio/pause.wav");
+    pauseSound = new Audio(soundDir + "pause.wav");
     pauseSound.volume = getSFXVolume();
     
-    endTurnSound = new Audio("../audio/end-turn.wav");
+    endTurnSound = new Audio(soundDir + "end-turn.wav");
     endTurnSound.volume = getSFXVolume();
     
-    confirmSound = new Audio("../audio/deep-confirm.wav");
+    confirmSound = new Audio(soundDir + "deep-confirm.wav");
     confirmSound.volume = getSFXVolume();
 
-    explosionSound = new Audio("../audio/explosion.wav"); // Swapped to WAV for compatability
+    explosionSound = new Audio(soundDir + "explosion.wav"); // Swapped to WAV for compatability
     explosionSound.volume = getSFXVolume();
 
-    muffledExplosionSound = new Audio("../audio/muffled_explosion.wav");
+    muffledExplosionSound = new Audio(soundDir + "muffled_explosion.wav");
     muffledExplosionSound.volume = getSFXVolume();
 
     // alternate sounding version: teleportation.wav
-    fleetSplitSound = new Audio("../audio/warp-drive.wav");
+    fleetSplitSound = new Audio(soundDir + "warp-drive.wav");
     fleetSplitSound.volume = getSFXVolume();
 
-    fleetArriveSound = new Audio("../audio/warp-drive-reverse.wav");
+    fleetArriveSound = new Audio(soundDir + "warp-drive-reverse.wav");
     fleetArriveSound.volume = getSFXVolume();
 
-    captureSound = new Audio("../audio/capture-planet.wav");
+    captureSound = new Audio(soundDir + "capture-planet.wav");
     captureSound.volume = getSFXVolume();
 
     choiceSound = makeChoiceSound;
