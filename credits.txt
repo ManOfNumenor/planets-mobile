@@ -2,10 +2,10 @@ Jonathan P:
  Project lead, core gameplay, computer players, gameplay UI and related indicators, tap controls, selection and orders, view scaling, main system for orbits and fleets, planet shadows, button styling, main menus, tuning, planet siege and capture, flag icon, optimizations, assorted bug fixing
 
 Michael Avrie:
- Level design (Oculus, Tri-Lane, Radial Grid, Xiphosuran, Cosmic Bowtie, Hanaous, Black Hole, variants of Quadratic levels), music, level select paging and preview images, planet and fleet tweening, random song selection, level and orbit randomization, orbit offset support, populating asteroids, retrograde orbits, distant sounds (explosion, fleet merging), combat explosions, orbit bug fixes, siege resets if fleet leaves, ship count sprite contributions
+ Level design (Oculus, Tri-Lane, Radial Grid, Xiphosuran, Cosmic Bowtie, Hanaous, Black Hole, variants of Quadratic levels), music, level select paging and preview images, planet and fleet tweening, random song selection, level and orbit randomization, orbit offset support, populating asteroids, retrograde orbits, distant sounds (explosion, fleet merging), combat explosions, orbit bug fixes, siege resets if fleet leaves, ship count sprite contributions, post-release bugfixes
 
 Christer "McFunkypants" Kaitila:
- Fleet splitting, star field, nebulae, mouse zoom, sun rendering with variants, fleet sprites, player icon, planet rings, sounds (menu, explosion, capture), ownership icons, planet effects, music variant, logo, performance improvements, scoreboard, turns UI, help screen coding, title screen decoration, volume settings, ship count sprite contributions
+ Fleet splitting, star field, nebulae, mouse zoom, sun rendering with variants, fleet sprites, player icon, planet rings, sounds (menu, explosion, capture), ownership icons, planet effects, music variant, logo, performance improvements, scoreboard, turns UI, help screen coding, title screen decoration, volume settings, ship count sprite contributions, post-release bugfixes
 
 Patrick McKeown:
  Orbital fleet movement constrained, orbit adjacency connection changes, orbit change parameter, web audio integration for planet choice sound, pause button, button styling, pause menu layout fix, audio timing correction
