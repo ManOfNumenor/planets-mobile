@@ -46,7 +46,7 @@ function soundInitialize() { // called by first user input
     confirmSound = new Audio("../audio/deep-confirm.wav");
     confirmSound.volume = getSFXVolume();
 
-    explosionSound = new Audio("../audio/explosion.ogg");
+    explosionSound = new Audio("../audio/explosion.wav"); // Swapped to WAV for compatability
     explosionSound.volume = getSFXVolume();
 
     muffledExplosionSound = new Audio("../audio/muffled_explosion.wav");
